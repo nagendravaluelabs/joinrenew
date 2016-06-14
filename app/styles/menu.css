@@ -1,0 +1,61 @@
+.navbar-custom {
+  background: #ef4135;
+  font: 16px/1 'Architype-light',sans-serif;
+  color: #FFF;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 0px;
+}
+.navbar-custom .no-padding-right {
+  padding-right: 0;
+}
+.navbar-custom.navbar > .container .navbar-brand {
+  height: auto;
+  padding: 0 0 3px 0;
+  margin-left: 0px;
+}
+.navbar-custom .navbar-toggle {
+  border: 1px solid #FFF;
+  border-radius: 0;
+}
+.navbar-custom .navbar-toggle .icon-bar {
+  background: #FFF;
+}
+.navbar-custom .navbar-brand img {
+  height: 71px;
+}
+.navbar-custom.navbar .navbar-nav > li > a {
+  color: #FFF;
+  padding: 28px 10px 26px 10px;
+  text-decoration: none;
+  position: relative;
+}
+.navbar-custom.navbar .navbar-nav > li > a:hover,
+.navbar-custom.navbar .navbar-nav > li > a:focus,
+.navbar-custom.navbar .navbar-nav > li.active > a,
+.navbar-custom.navbar .navbar-nav > li.active > a:hover,
+.navbar-custom.navbar .navbar-nav > li.active > a:focus {
+  background: rgba(0,0,0,0);
+}
+
+@media (max-width: 767px) {
+  .navbar-custom .navbar-brand img {
+    height: 51px;
+    margin-left: 5px;
+  }
+  .navbar-custom.navbar .navbar-nav {
+    padding-right: 10px;
+  }
+  .navbar-custom.navbar .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 1px;
+  }
+  .navbar-custom.navbar .navbar-nav > li > a:hover,
+  .navbar-custom.navbar .navbar-nav > li > a:focus,
+  .navbar-custom.navbar .navbar-nav > li.active > a,
+  .navbar-custom.navbar .navbar-nav > li.active > a:hover,
+  .navbar-custom.navbar .navbar-nav > li.active > a:focus {
+    background: rgba(0,0,0,0.1);
+  }
+}

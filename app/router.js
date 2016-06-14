@@ -12,7 +12,7 @@ Router.map(function() {
     this.route('payment-information');
   });
 
-  this.route('renew'function(){
+  this.route('renew',function(){
     this.route('personal-information');
     this.route('background-information');
     this.route('payment-information');
