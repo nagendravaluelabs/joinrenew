@@ -1,0 +1,378 @@
+\/* Reset
+================================================== */
+body.not-logged-in .messages.error{
+	display: none;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+ /* font-size: 100%;
+  font: inherit;*/
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/* Body & Main
+================================================== */
+body {
+  nowhitespace: afterproperty;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+ /* font: 14px/1.6 'Architype-Light',sans-serif;*/
+  color: #000;
+}
+
+/* Links */
+a {
+  color: #ef4135;
+
+}
+a:visited {
+  color: #f4473a;
+}
+a:hover,
+a:focus,
+a:active {
+  color:#000;
+  text-decoration: none;
+}
+
+/*set max img width*/
+img {
+  max-width: 100%;
+}
+
+/* Commons
+================================================== */
+
+/*clear floats*/
+.remove-margin {
+  margin-right: 0 !important;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/*blockquote*/
+blockquote {
+  position: relative;
+  margin: 30px 20px;
+  padding-left: 25px;
+  font-style: italic;
+  /*font-weight: bold;*/
+  color: #000;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color: #000;
+  content: open-quote;
+  font-size: 3em;
+  line-height: .1em;
+  position: absolute;
+  top: 20px;
+  left: -10px;
+}
+
+blockquote p:last-child {
+  margin: 0;
+}
+
+
+/*preformatted text*/
+pre {
+  background: #fff url("images/pre-bg.png") repeat;
+  margin: 40px 0px;
+  padding: 25px 20px;
+  line-height: 25px;
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+ul, ol {
+  margin: 0 0 1em 1.5em;
+}
+ul {
+  list-style: disc;
+}
+ol {
+  list-style-type: decimal;
+}
+ol ol {
+  list-style: upper-alpha;
+}
+ol ol ol {
+  list-style: lower-roman;
+}
+ol ol ol ol {
+  list-style: lower-alpha;
+}
+ul ul, ol ol, ul ol, ol ul {
+  margin-bottom: 0;
+}
+
+table {
+  margin: 0 0 1.5em;
+  width: 100%;
+}
+th {
+  /*font-weight: bold;*/
+  padding:10px 10px;
+}
+
+tr{
+  padding:5px 5px;
+}
+/*edited by m.t.n. on 7//6 - changed spacing */
+td{
+  padding: 10px 0;
+  /*padding:5px 10px; */
+}
+
+p{
+    line-height: 1.25;
+}
+
+ul.li,ol.li{
+    line-height: 1.5;
+}
+
+/* Typography
+================================================== */
+/* edited by m.t.n */
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  clear: both;
+  line-height: 1.4em;
+  word-spacing: -1px;
+}
+h5 {
+	font-weight:bold;
+}
+
+h3 {margin: 20px 0; }
+
+p {
+  margin: 0 0 10px;
+}
+
+p img {
+  margin: 0;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+small {
+  font-size: 80%;
+}
+
+hr {
+  border: solid rgba(0, 0, 0, 0.2);
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 10px 0 30px;
+  height: 0;
+}
+
+p a, p a:visited {
+  line-height: inherit;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+}
+
+a {
+  outline: 0;
+}
+
+p a, p a:visited {
+  line-height: inherit;
+}
+
+a:focus {
+  outline: 0;
+}
+
+.no-style {
+  list-style: none;
+}
+.list-horizontal li {
+  display: inline-block;
+}
+
+#main-content {
+  padding: 35px 0 20px 0;
+}
+
+#main-content .page-title {
+  color: #ef4135;
+  font-size: 6.4rem;
+  margin-bottom: 12px;
+  margin-top: 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+button,
+input[type="submit"], 
+input[type="reset"], 
+input[type="button"],
+.link-to-button a  {
+	background: #ef4135 url("../images/arrow-right.png") no-repeat right 0;
+	border: 0 none;
+	border-radius: 0;
+	color: #fff !important;
+	font-family: "Architype-Light", Helvetica, sans-serif;
+	font-size: 2.4rem;
+	margin-bottom: 3px;
+	padding: 10px 40px 10px 18px;
+	position: relative;
+	text-align: left;
+	transition: all 0.25s ease-in-out 0s;
+}
+button:hover, 
+input[type="submit"]:hover, 
+input[type="reset"]:hover, 
+input[type="button"]:hover,
+.link-to-button a:hover  {
+	background-color: #cc0000;
+	border: 0 none;
+	border-radius: 0;
+	color: #fff;
+	cursor: pointer;
+}
+button.full-width,
+input[type="submit"].full-width,
+input[type="reset"].full-width,
+input[type="button"].full-width {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	text-align: center;
+	width: 100%;
+}
+
+textarea.form-textarea, select.form-select {
+  padding: 4px;
+}
+
+.ui-widget-header{
+  border:none;
+  background: none;
+}
+.ui-corner-all{
+  border-radius:0px;
+}
+
+.ui-widget-content{
+  border:none;
+}
+.ui-dialog-titlebar-close{
+  background: #ffffff url("../images/close_button.png") no-repeat right 0;
+  top:5%;
+  right:0%;
+  border: 0;
+}
+.ui-dialog-titlebar-close .ui-button-icon-primary {
+  display: none;
+}
+.ui-dialog-buttonset button{
+  background: #ffffff;
+  color:#de322e !important;
+  height: auto;
+}
+
+.ui-dialog-buttonset button:hover{
+  background: #ffffff;
+}
+
+.ui-dialog .ui-dialog-title {
+    margin-bottom: 10px;
+}
+
+button.ui-dialog-titlebar-close:hover{
+  background-color:#ffffff;
+}
+.ui-dialog .ui-dialog-title{
+ /* font-size: 2.4rem !important;
+  font-size: 6.4rem !important; */
+}
+
+
+
+.ui-dialog{
+/*  width: 22.5% !important;
+  min-height: 242px!important; */
+}
+
+.ui-dialog-titlebar{
+  padding-top: 39px !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane{
+    margin-top: 0em;
+    padding-top: 0em;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{
+  float : left; 
+  padding: 0 0 0 0.7em;
+  margin: 0;
+}
+
+.ui-dialog .ui-dialog-buttonpane button{
+   padding: 0;
+   margin: 1.1em 1.7em .5em 0;
+}

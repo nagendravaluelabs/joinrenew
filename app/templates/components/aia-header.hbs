@@ -1,1 +1,34 @@
-<p> hello world </p> 
+<header id="header-block">
+  <nav class="navbar navbar-custom">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 no-padding-right">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-menu" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <img src="../images/logo.png" alt="the American Institute of Architects">
+            </a>
+          </div>          
+          <div class="collapse navbar-collapse" id="primary-menu">
+            <ul class="nav navbar-nav navbar-right">
+              {{#if isLoggedin}}
+                {{#each afterLogin as |page|}}
+                  <li> <a href="{{page.route}}">{{page.name}}</a> </li>
+                {{/each}}
+              {{else}}
+                {{#each beforeLogin as |page|}}
+                  <li> <a href="{{page.route}}">{{page.name}}</a> </li>
+                {{/each}}
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

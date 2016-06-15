@@ -1,1 +1,19 @@
-<p> hi this is footer </p>
+<footer id="footer-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="list-horizontal no-style">
+          {{#each list as |item|}}
+            <li>
+              {{#if item.route}}
+                <a href="{{item.route}}" target="_top">{{{item.text}}}</a>
+              {{else}}
+                {{{item.text}}}
+              {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,374 @@
+.page-sign-up-home .estimate-dues-popup .ui-widget-overlay {
+  background: #222222;
+  opacity: 0.7;
+}
+.page-sign-up-home .estimate-dues-popup .ui-dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .2em;
+  outline: 0;
+}
+.page-sign-up-home .estimate-dues-popup .ui-widget-content {
+  background: #fff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
+  color: #222;
+}
+.page-sign-up-home .estimate-dues-popup .ui-widget {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 1.1em;
+}
+.page-sign-up-home .estimate-dues-popup .ui-front {
+  z-index: 100;
+}
+.page-sign-up-home .estimate-dues-popup .ui-dialog-titlebar {
+  padding-top: 39px !important;
+}
+.page-sign-up-home  #ui-id-1 {
+  color: #ef4135;
+  font-size: 22px !important;
+  white-space: normal !important;
+  font-family: Architype-Light;
+  font-weight: normal;
+  margin-left:85px;
+}
+.page-sign-up-home .ui-dialog {
+  overflow: visible;
+}
+.page-sign-up-home .ui-dialog .ui-dialog-content {
+  margin-left:85px;
+  margin-right:85px;
+  padding-top:17px;
+  overflow: visible;
+}
+.page-sign-up-home  #dues_wrapper {
+  display: inline-block;
+  margin-bottom: 40px;
+}
+.page-sign-up-home  #dues_wrapper label {
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+.page-sign-up-home  .required-field {
+  color: #cecece;
+} 
+.page-sign-up-home .form-required {
+  color: #f00;
+}
+.page-sign-up-home .estimate-dues-popup #membertype {
+  overflow: hidden;
+  padding-left: 15px;
+  padding-right: 80px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper .form-group  select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: #fff url("../images/drop-down-arrow.png") no-repeat right center !important;
+  border: solid 1px #e1e1e1;
+  line-height: 45px;
+}
+.page-sign-up-home .estimate-dues-popup .errormsg {
+  color: #ef4135;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #countryoption {
+  display: block;
+  width: 50%;
+  float: left;
+  margin-top: 10px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper  #countryoption .chosen-container-single .chosen-single {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+  height: 50px;
+  padding: 13px 0 0 17px;
+  white-space: normal;
+  width: 290px;
+  max-width: 100%;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: #444;
+  text-decoration: none;
+  line-height: 24px;
+}
+
+.chosen-container a {
+  cursor: pointer;
+}
+
+.page-sign-up-home .estimate-dues-popup #dues_wrapper  #countryoption .chosen-container-single .chosen-single div b {
+background: rgba(0, 0, 0, 0) url("../images/drop-down-arrow.png") no-repeat scroll 0 0 !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+  
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #zipcodeoption {
+  display: block;
+  width: 50%;
+  float: left;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper .zipbox {
+  margin-left: 18px;
+  margin-top: 10px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #zipcodeoption input[type="text"], 
+.page-sign-up-home .estimate-dues-popup #dues_wrapper select {
+  height: 50px;
+  margin-top: 0px;
+  width: 100%;
+  text-align: center;
+  border: solid 1px #e1e1e1;
+  outline: none;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #chinacities {
+  display: inline-block;
+  position: relative;
+  float: left;
+  margin-top: 35px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #chinacities .form-radios .form-type-radio {
+  display: block;
+  width: 150px;
+  float: left;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #subbuttons {
+  display: inline-block;
+  position: relative;
+  width: 47%;
+  float: right;
+}
+.page-sign-up-home .estimate-dues-popup button:hover, 
+.page-sign-up-home .estimate-dues-popup input[type="submit"]:hover, 
+.page-sign-up-home .estimate-dues-popup input[type="reset"]:hover, 
+.page-sign-up-home .estimate-dues-popup input[type="button"]:hover, 
+.page-sign-up-home .estimate-dues-popup .link-to-button a:hover {
+  background-color: #cc0000;
+  border: 0 none;
+  border-radius: 0;
+  color: #fff;
+  cursor: pointer;
+}
+.page-sign-up-home .estimate-dues-popup button, 
+.page-sign-up-home .estimate-dues-popup input[type="submit"], 
+.page-sign-up-home .estimate-dues-popup input[type="reset"], 
+.page-sign-up-home .estimate-dues-popup input[type="button"], 
+.page-sign-up-home .estimate-dues-popup .link-to-button a {
+  background: #ef4135 url("../images/arrow-right.png") no-repeat right 0;
+  border: 0 none;
+  border-radius: 0;
+  color: #fff !important;
+  font-family: "Architype-Light", Helvetica, sans-serif;
+  font-size: 2.4rem;
+  margin-bottom: 3px;
+  padding: 10px 40px 10px 18px;
+  position: relative;
+  text-align: left;
+  transition: all 0.25s ease-in-out 0s;
+  margin-top:0px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #subbuttons input {
+  width: 100%;
+  margin-bottom: 15px;
+  margin-top: 33px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #displaytotal #thetotal {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  width: 100%;
+  border-bottom: #ccc 1px solid;
+  border-top: #ccc 1px solid;
+  padding: 20px 0 40px 0;
+}
+
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #displaytotal .titletxt {
+  float: left;
+  /*padding-top: 10px;*/
+  display: inline-block;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #displaytotal .lrgtotal {
+  float: right;
+  font-weight: bold;
+  font-size: 30px;
+  display: inline-block;
+  padding-top: 5px;
+  padding-botttom: 10px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #displaytotal .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+  position: absolute;
+  left: .5em;
+  top: 50%;
+  margin-top: -8px;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #displaytotal .defaultIcon {
+  background-image: url(../images/plus-sign.png) !important;
+  width: 20px;
+  height: 20px;
+}
+.page-sign-up-home .estimate-dues-popup .ui-dialog-titlebar-close {
+  background: #ffffff url("../images/close_button.png") no-repeat right 0 !important;
+  top: 20px !important;
+  border: 0;
+}
+.page-sign-up-home .estimate-dues-popup .ui-dialog .ui-dialog-titlebar-close {
+  position: absolute;
+  right: .3em;
+  top: 50%;
+  width: 21px;
+  margin: -10px 0 0 0;
+  padding: 1px;
+  height: 20px;
+}
+.page-sign-up-home .estimate-dues-popup .form-select {
+  padding: 4px 4px 4px 15px;
+  line-height: 40px;
+}
+#processingmodal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba( 255, 255, 255, .8 ) url('../images/loader.gif') 50% 50% no-repeat;
+  z-index: 2147483647;
+}
+
+.page-sign-up-home .estimate-dues-popup #dues-accordion h3 {
+  color: #000;
+} 
+.page-sign-up-home .estimate-dues-popup #dues-accordion.ui-helper-reset{
+  font-size: 100%;
+  line-height: 1.3;
+  list-style: outside none none;
+  margin: 0;
+  outline: 0 none;
+  padding: 0;
+  text-decoration: none;
+} 
+.page-sign-up-home .estimate-dues-popup #dues-accordion.ui-helper-reset.ui-state-default {
+  padding: 22px 0 24px 39px;
+} 
+.page-sign-up-home .estimate-dues-popup #dues-accordion.ui-state-active .ui-accordion-header-icon {
+  background-image: url(../images/minus-sign.png) !important;
+  width: 20px;
+  height: 20px;
+}
+.page-sign-up-home .estimate-dues-popup #dues-accordion h3 {
+  background: #FFFFFF;
+  margin-top: 0px;
+  width: 100%;
+  padding:0px 0 0px 35px;
+  margin-top: 5px;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 1.5rem;
+  line-height:20px;
+  border: none;
+  outline: none;
+}
+.page-sign-up-home .estimate-dues-popup #dues-accordion h3 span:last-child {
+  text-align: right;
+  float: right;
+} 
+
+.estimate-table-rows { 
+  border-bottom: 1px solid #ccc;
+ }
+.dues-annual {
+  text-align:right !important; 
+  padding-bottom:0px;
+}
+.dues-price {
+  text-align:right !important; 
+  padding-bottom:0px;
+}
+.disclaimer-text { 
+  margin-top:40px; 
+  font-size:13px; 
+}
+.ui-accordion .ui-accordion-content { 
+  padding-right:0px;
+}
+.dues_list_container { 
+  padding: 1em 0 20px 2.2em;
+  border-bottom: #ccc 1px solid;
+}
+.order_summary.ui-accordion .ui-accordion-content { 
+  padding: 0; 
+}
+
+.duestotal {
+  margin-top: 40px;
+}
+
+.final_total_label {
+  float: left;
+  margin-left: 35px;
+}
+.final_total_num {
+  float: right;
+}
+.page-sign-up-home .estimate-dues-popup .labeltxt {
+  color: #ccc;
+}
+.page-sign-up-home .estimate-dues-popup #dues_wrapper #chinacities .form-radios {
+  margin-top: 15px;
+}
+@media (max-width: 767px) {
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper  #countryoption .chosen-container-single .chosen-single {
+    width: 100% !important;
+  }
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper #subbuttons {
+    width: 100%;
+    float: none;
+  }
+  #chinacities .form-item {
+    margin-bottom: 0;
+  }
+  .page-sign-up-home  #dues_wrapper #chinacities .form-radio + label {
+    margin-bottom: 0;
+  }
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper #subbuttons input {
+    margin-top: 35px;
+  }
+  .page-sign-up-home .ui-dialog .ui-dialog-content {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .page-sign-up-home .estimate-dues-popup .labeltxt {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .page-sign-up-home  #ui-id-1 {
+    margin-left: 20px;
+  }
+  .calculate-dues input {
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    background-position: right center !important;
+  }
+  .page-sign-up-home  #dues_wrapper {
+    width: 100%;
+  }
+}
+@media (max-width: 570px) {
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper #countryoption,
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper #zipcodeoption {
+    width: 100%;
+    float: none;
+  }
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper .zipbox {
+    margin-left: 0;
+  }
+  .page-sign-up-home .estimate-dues-popup #dues_wrapper #zipcodeoption input[type="text"] {
+    text-align: left;
+  }
+}
