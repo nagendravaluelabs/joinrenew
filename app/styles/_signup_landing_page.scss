@@ -1,18 +1,20 @@
 /*
   Maintains all the css for Signup Landing Page form.
 */
-#main-content.page-sign-up-home {
-  padding-bottom: 0;
-  padding-top: 36px;
-}
-#main-content.page-sign-up-home .container {
-  width: auto;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-#main-content.page-sign-up-home .row  {
-  margin-left: 0;
-  margin-right: 0;
+#main-content {
+  &.page-sign-up-home {
+    padding-bottom: 0;
+    padding-top: 36px;
+    .container {
+      width: auto;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .row  {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 }
 
 #main-content.page-sign-up-home .renew-container {

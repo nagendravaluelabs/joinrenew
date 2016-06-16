@@ -1,0 +1,25 @@
+<div class="renew-page">
+  <div class="renew-container">
+    
+    <div class="hidden-xs{{ternary (isEqualTo model.page.title 'Join') ' col-lg-8' ' col-lg-7'}} col-md-7">
+      <div class="landing-page-image">
+        <img src="{{{model.page.field_aia_image}}}" alt="{{model.page.title}}" class="img-responsive" />
+      </div>
+    </div>
+    <div class="right-view{{ternary (isEqualTo model.page.title 'Join') ' col-lg-4' ' col-lg-5'}} col-md-5">
+      <div id="landingPage-body">
+        {{{model.page.body}}}
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="hidden-xs link-to-button edit-next">
+        {{#if (isEqualTo model.page.title 'Join')}}
+          <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
+        {{else}}
+          <a href="select-member-type.html" id="edit-next" class="sign_in capture_modal_open">Sign in to renew</a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
