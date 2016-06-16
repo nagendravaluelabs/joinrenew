@@ -8,7 +8,7 @@ model(){
   return Ember.RSVP.hash({
     page: {
         "body": "<h1>Join us at<br> the AIA <br></h1><p>No matter where you live, where you practice, or where you are in your career, your AIA membership connects you to top-quality education, critical business and career resources, and a community deeply engaged in promoting the value of architecture.</p>",
-        "field_aia_image": "http://localhost/aia-dev2/sites/dev/files/banner.jpg",
+        "field_aia_image": "http://aiadev2.prod.acquia-sites.com/sites/dev/files/styles/aia_renew_landing/public/banner.jpg",
         "title": "Join"
       },
     benefits: [
