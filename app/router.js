@@ -13,10 +13,10 @@ Router.map(function() {
   });
 
   this.route('renew');
+   this.route('renew-verify-membership',{ path: '/renew/renew-verify-membership' });
   this.route('primary-information', {path: '/renew/primary-information' });
   this.route('membership-dues', {path: '/renew/membership-dues' });
-  this.route('payment-information', {path: '/renew/payment-information' });
-  this.route('membership-dues', {path: '/renew/membership-dues' });
+  this.route('payment-information', {path: '/renew/payment-information' }); 
 });
 
 export default Router;
