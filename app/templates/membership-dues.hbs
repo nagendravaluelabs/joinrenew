@@ -1,0 +1,389 @@
+  <!-- Page Specific Content -->
+  <div class="row"> 
+	<div class="col-sm-9">
+	  <!-- Page Specific Content -->
+	  <h1 class="page-title">Your membership invoice</h1>
+	  <div class="mobile-header clearfix">
+		<h3>You are joining as an:
+		  <br>Architect Member</h3>
+		<p>
+		  <a href="select-member-type">Change member type &gt; </a>
+		</p>
+		<p>
+		  <a href="" target="_blank">Offline member application &gt; </a>
+		</p>
+		<span class="block-pane"></span>
+	  </div>
+	  <div class="clearfix"></div>
+	  <!-- 2016 dues table content start here -->
+	  <div class="membership-dues-container">
+		<form class="common-form membership-dues-pages" action="#" method="post"
+		id="profile2-edit-personal-contact-info-form" accept-charset="UTF-8" style="display:block">
+		  <div class="renew-suppdue">
+			<h3 class="sign-up-subheading">2016 dues</h3>
+			<p>Summary of dues</p>
+			<table class="duestable">
+			{{#each model.data as |dues|}}
+			  <tbody>
+				<tr class="{{dues.class}}">
+				  <td>{{dues.title}}</td>
+				  <td id="{{dues.id}}" class="value">{{dues.value}}</td>
+				</tr>
+			  </tbody>
+			 {{/each}}
+			</table>
+		  </div>
+		</form>
+		<div class="clearfix"></div>
+		<!-- 2016 dues table content end here -->
+		<div class="renew-questionnaire hidden membership-dues-pages">
+		  <h3>Supplemental dues</h3>
+		  <div>Some chapters assess supplemental dues for membership. Please select the
+			option that best applies to you.</div>
+		  
+		  <div id="questionnaire-wrapper">
+			<div id="edit-questionnaire" class="form-radios">
+			  <div class="form-item form-type-radio form-item-questionnaire">
+				<input type="radio" id="edit-questionnaire-1" name="questionnaire" value="1"
+				class="form-radio" aria-required="true" checked>
+				<label class="option" for="edit-questionnaire-1">I am not a sole practitioner, and I do not own or manage an architecture
+				  firm.</label>
+			  </div>
+			  <div class="form-item form-type-radio form-item-questionnaire">
+				<input type="radio" id="edit-questionnaire-2" name="questionnaire" value="2"
+				class="form-radio">
+				<label class="option" for="edit-questionnaire-2">I own or manage an architecture firm and designate another AIA member
+				  to pay the supplemental dues my firm owes.</label>
+				<div class="questionnaire-userform owner-detail hidden">
+				  <span>AIA member responsible for dues</span><span class="form-required" title="This field is required.">*</span>
+				  <div class="clearfix"></div>
+				  <div class="form-item form-type-textfield form-item-membername">
+					<label for="edit-membername">Member name
+					  <span class="form-required" title="This field is required.">*</span>
+					</label>
+					<input id="membername" type="text" name="membername" value="" size="60"
+					maxlength="128" class="form-text required" aria-required="true">
+				  </div>
+				  <div class="clearfix"></div>
+				  <div class="form-item form-type-textfield form-item-memberid">
+					<label for="edit-memberid">Member ID number
+					  <span class="form-required" title="This field is required.">*</span>
+					</label>
+					<input id="memberid" type="text" name="memberid" value="" size="60" maxlength="128"
+					class="form-text required" aria-required="true">
+				  </div>
+				</div>
+			  </div>
+			  <div class="form-item form-type-radio form-item-questionnaire">
+				<input type="radio" id="edit-questionnaire-3" name="questionnaire" value="3"
+				class="form-radio">
+				<label class="option" for="edit-questionnaire-3">I own or manage an architectural firm.</label>
+			  </div>
+			  <div class="form-item form-type-radio form-item-questionnaire">
+				<input type="radio" id="edit-questionnaire-4" name="questionnaire" value="4"
+				class="form-radio">
+				<label class="option" for="edit-questionnaire-4">I am a sole practitioner.</label>
+			  </div>
+			</div>
+		  </div>
+		  <div class="clearfix"></div>
+		  
+		</div>
+		<!-- First radio button content start here -->
+		<div class="total-no-renew-suppdue renew-container membership-dues-pages hidden">
+		  <h3 class="sign-up-subheading">2016 dues</h3>
+		  <div class="clearfix"></div>
+		  <p>Summary of dues</p>
+		  <table class="duestable">
+			<tbody>
+			  <tr>
+				<td>AIA National</td>
+				<td id="nationaldues" class="value">$ 260.00</td>
+			  </tr>
+			  <tr>
+				<td>AIA California Council</td>
+				<td id="statedues" class="value">$ 210.00</td>
+			  </tr>
+			  <tr>
+				<td>AIA Los Angeles</td>
+				<td id="localdues" class="value">$ 235.00</td>
+			  </tr>
+			  <tr>
+				<td class="membership-dues-total">2016 dues total</td>
+				<td id="indivdualdues" class="value">$ 705.00</td>
+			  </tr>
+			</tbody>
+		  </table>
+		  <div class="form-item form-type-checkbox form-item-licensed-architect"
+		  style="display:block;">
+			<input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
+			value="1" class="form-checkbox">
+			<label class="option" for="edit-licensed-architect">I attest that I am currently licensed to practice architecture in the
+			  U.S.</label>
+		  </div>
+		  <div class="clearfix"></div>
+		</div>
+		<!-- First radio button content end here -->
+		<!-- Third radio button funcationality start -->
+		<div class="hidden renew-calculator membership-dues-pages renew-container">
+		  <h3>Supplemental dues calculator</h3>
+		  <!--dropdown moved above description
+		  for renew membership cahnges-->
+		  <p>Enter the total number of staff members for each category, including yourself.<span
+			class="form-required">*</span>
+			  <br>You should have at least one person in the U.S. Architect membership level.</p>
+		  <!--
+		  /////////// -->
+		  <div id="accordion">
+			<!-- Non AIA Member Architects -->
+			<h3>
+			  <div class="titlelabel">Non AIA Member architects</div>
+			  <div class="inputpersons">
+				<div class="form-item form-type-textfield form-item-non-aia-member-persons">
+				  <label for="edit-non-aia-member-persons">#persons:</label>
+				  <input min="0" id="non_aia_member_persons" type="text"
+				  name="non_aia_member_persons" value="" size="2" maxlength="3" class="form-text"
+				  />
+				</div>
+				<div class="totals padding-total-top">Total:
+				  <div class="totalnum" id="non_member_total" data-state-amount="0.00"
+				  data-local-amount="115.00">$ 0.00</div>
+				</div>
+			  </div>
+			</h3>
+			<div>State:
+			  <span class="membership-value">$ 0.00</span>
+			  <span class="mobile-break"></span>Local:
+			  <span class="membership-value">$ 115.00</span>
+			  <div class="totals">Total:
+				<div class="totalnum" id="non_member_total" data-state-amount="0.00"
+				data-local-amount="115.00">$ 0.00</div>
+			  </div>
+			</div>
+			<!-- AIA Member Architects -->
+			<h3>
+			  <div class="titlelabel">AIA Member architects
+				<span class="form-required">*</span>
+				<br/>
+				<span class="architect-sublabel">(include yourself)</span>
+			  </div>
+			  <div class="inputpersons">
+				<div class="form-item form-type-textfield form-item-aia-member-persons">
+				  <label for="edit-aia-member-persons">#persons:</label>
+				  <input min="0" id="aia_member_persons" type="text" name="aia_member_persons"
+				  value="" size="2" maxlength="3" class="form-text" />
+				</div>
+				<div class="totals padding-total-top">Total:
+				  <div class="totalnum" id="member_total" data-state-amount="0.00"
+				  data-local-amount="115.00">$ 0.00</div>
+				</div>
+			  </div>
+			</h3>
+			<div>State:
+			  <span class="membership-value">$ 0.00</span>
+			  <span class="mobile-break"></span>Local:
+			  <span class="membership-value">$ 115.00</span>
+			  <div class="totals">Total:
+				<div class="totalnum" id="member_total" data-state-amount="0.00"
+				data-local-amount="115.00">$ 0.00</div>
+			  </div>
+			</div>
+			<!-- AIA Associate -->
+			<h3>
+			  <div class="titlelabel">AIA Associates</div>
+			  <div class="inputpersons">
+				<div class="form-item form-type-textfield form-item-associates-persons">
+				  <label for="edit-associates-persons">#persons:</label>
+				  <input min="0" id="associates_persons" type="text" name="associates_persons"
+				  value="" size="2" maxlength="3" class="form-text" />
+				</div>
+				<div class="totals padding-total-top">Total:
+				  <div class="totalnum" id="associates_total" data-state-amount="0.00"
+				  data-local-amount="0.00">$ 0.00</div>
+				</div>
+			  </div>
+			</h3>
+			<div>State:
+			  <span class="membership-value">$ 0.00</span>
+			  <span class="mobile-break"></span>Local:
+			  <span class="membership-value">$ 0.00</span>
+			  <div class="totals">Total:
+				<div class="totalnum" id="associates_total" data-state-amount="0.00"
+				data-local-amount="0.00">$ 0.00</div>
+			  </div>
+			</div>
+			<!-- AIA technical staff -->
+			<h3>
+			  <div class="titlelabel">Technical staff</div>
+			  <div class="inputpersons">
+				<div class="form-item form-type-textfield form-item-techstaff-persons">
+				  <label for="edit-techstaff-persons">#persons:</label>
+				  <input min="0" id="techstaff_persons" type="text" name="techstaff_persons"
+				  value="" size="2" maxlength="3" class="form-text" />
+				</div>
+				<div class="totals padding-total-top">Total:
+				  <div class="totalnum" id="techstaff_total" data-state-amount="0.00"
+				  data-local-amount="0.00">$ 0.00</div>
+				</div>
+			  </div>
+			</h3>
+			<div>State:
+			  <span class="membership-value">$ 0.00</span>
+			  <span class="mobile-break"></span>Local:
+			  <span class="membership-value">$ 0.00</span>
+			  <div class="totals">Total:
+				<div class="totalnum" id="techstaff_total" data-state-amount="0.00"
+				data-local-amount="0.00">$ 0.00</div>
+			  </div>
+			</div>
+			<!-- AIA technical staff -->
+			<h3>
+			  <div class="titlelabel">Other staff</div>
+			  <div class="inputpersons">
+				<div class="form-item form-type-textfield form-item-otherstaff-persons">
+				  <label for="edit-otherstaff-persons">#persons:</label>
+				  <input min="0" id="otherstaff_persons" type="text" name="otherstaff_persons"
+				  value="" size="2" maxlength="3" class="form-text" />
+				</div>
+				<div class="totals padding-total-top">Total:
+				  <div class="totalnum" id="otherstaff_total" data-state-amount="0.00"
+				  data-local-amount="0.00">$ 0.00</div>
+				</div>
+			  </div>
+			</h3>
+			<div>State:
+			  <span class="membership-value">$ 0.00</span>
+			  <span class="mobile-break"></span>Local:
+			  <span class="membership-value">$ 0.00</span>
+			  <div class="totals">Total:
+				<div class="totalnum" id="otherstaff_total" data-state-amount="0.00"
+				data-local-amount="0.00">$ 0.00</div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="totaldues">Supplemental dues total
+			<div id="suppdues_totalamount">$ 0.00</div>
+			<div class="clearfix"></div>
+		  </div>
+		</div>
+		<div class="button-container membership-button-container hidden-xs">
+		  <div class="renew-btn-container r-btn-container">
+			<input type="button" value="Continue" class="next membershipdues_next" >
+			<div class="read-only-block-previous-link">
+			  <a class="previous-link" href="verify-personal-contact-info.html">&lt; Go back to previous page</a>
+			</div>
+		  </div>
+		  <div class="questionnare-btn-container hidden r-btn-container">
+			<input type="button" value="Continue" class="next membershipdues_next">
+			<div id="goback-link-questionnare-section">
+			  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
+			</div>
+		  </div>
+		  <div class="pay-now-container hidden r-btn-container">
+			<input type="button" id="edit-next" name="op" value="Pay now" class="next form-submit"
+			 onclick="window.location.href='payment.html'">
+			<div class="clearfix"></div>
+			<div id="startoverbtn">
+			  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!--  Third radio button functionality end -->
+	<!--- sidebar -->
+	<aside id="sidebar" class="col-sm-3" role="complementary">
+	  <!-- Member Details -->
+	  <div class="member-details">
+		<h2>Your info</h2>
+		<div class="member-align">
+		  <p>Member ID</p>
+		  <p>30442072</p>
+		</div>
+		<div class="member-align">
+		  <p>Membership year</p>
+		  <p>2016</p>
+		</div>
+		<div class="member-align">
+		  <p>Membership type</p>
+		  <p>Architect</p>
+		</div>
+		<div class="member-align">
+		  <p>Payment due date</p>
+		  <p>01/15/2016</p>
+		</div>
+		<div class="member-align">
+		  <p>Invoice number</p>
+		  <p>2009088960</p>
+		</div>
+	  </div>
+	  <div class="clearfix"></div>
+	  <!-- Tax Deductible Block -->
+	  <div class="tax-deductibles-block block-pane">
+		<h3>Tax deductible percentage</h3>
+		<div class="result-wrapper">
+		  <div class="result">
+			<div>
+			  <label>National:</label>
+			  <span>90%</span>
+			</div>
+			<div>
+			  <label>State:</label>
+			  <span>79%</span>
+			</div>
+			<div>
+			  <label>Local:</label>
+			  <span>95%</span>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="clearfix"></div>
+	  <div class="need-help block-pane">
+		<h3 class="title">Need help</h3>
+		<div class="clearfix"></div>
+		<div class="body">
+		  <p>800-242-3837 (option 2)</p>
+		  <p><a href="mailto:infocentral@aia.org">infocentral@aia.org</a></p>
+		</div>
+	  </div>
+	  <div class="disclosures block-pane">
+		<h3 class="title">Disclosures</h3>
+		<div class="clearfix"></div>
+		<div class="body">
+		  <p>
+			<a href="http://www.aia.org/about_privacy/index.htm" target="_blank">Privacy ›</a>
+		  </p>
+		  <p>
+			<a href="http://www.aia.org/about/ethicsandbylaws/AIAS077625" target="_blank">Ethics statement ›</a>
+		  </p>
+		  <p>
+			<a href="http://www.aia.org/members/memberresources/AIAB099486" target="_blank">Terms of service ›</a>
+		  </p>
+		</div>
+	  </div>
+	</aside>
+	<div class="button-container footer-btn-container membership-button-container visible-xs">
+	  <div class="renew-btn-container r-btn-container">
+		<input type="button" value="Continue" class="next membershipdues_next" >
+		<div class="read-only-block-previous-link">
+		  <a class="previous-link" href="verify-personal-contact-info.html">&lt; Go back to previous page</a>
+		</div>
+	  </div>
+	  <div class="questionnare-btn-container hidden r-btn-container">
+		<input type="button" value="Continue" class="next membershipdues_next">
+		<div id="goback-link-questionnare-section">
+		  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
+		</div>
+	  </div>
+	  <div class="pay-now-container hidden r-btn-container">
+		<input type="button" id="edit-next" name="op" value="Pay now" class="next form-submit"
+		 onclick="window.location.href='payment.html'">
+		<div class="clearfix"></div>
+		<div id="startoverbtn">
+		  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
+		</div>
+	  </div>
+	</div>
+  </div>
+<div class="clearfix"></div>

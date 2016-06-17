@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('primary-information', {path: '/renew/primary-information' });
   this.route('membership-dues', {path: '/renew/membership-dues' });
   this.route('payment-information', {path: '/renew/payment-information' });
+  this.route('membership-dues', {path: '/renew/membership-dues' });
 });
 
 export default Router;
