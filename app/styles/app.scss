@@ -1,13 +1,17 @@
 @import "bootstrap";
 @import "bootstrap-grid";
+@import "slick_theme";
 @import "fonts";
 @import "mixins";
 @import "common";
 @import "menu";
 @import "footer";
-@import "slick_theme";
+@import "form";
 @import "signup_landing_page";
 @import "renew_landing_page";
+@import "steps";
+@import "personal_contact_info";
+@import "primary_information";
 .slick-slide {
   outline: none;
 }

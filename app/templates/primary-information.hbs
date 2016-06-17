@@ -1,0 +1,47 @@
+{{renew-steps steps=model.steps}}
+<div class="row">
+  <div class="col-sm-9">
+    <h1 class="page-title">Personal and contact info</h1>
+
+    <h3 class="verify-subheading">Please verify your information</h3>
+    <div class="read-only-block" id="read-only">
+      {{#each model.page.information as |info|}}
+        {{#if (isNotEqual info.title 'address')}}
+          <div class="read-only-block-{{info.class}}">
+            {{#if info.title}}
+            <span class="read-only-block-{{info.class}}-label">{{info.title}}:</span>
+            {{/if}}
+            <span class="{{info.class}}">{{info.value}}</span>
+            {{#if info.isPrimary}}
+            <span>[Primary]</span>
+            {{/if}}
+          </div>
+        {{else}}
+          <div class="read-only-block-address">
+            {{#each info.value as |address key|}}
+            <div class="read-only-block-address{{key}}">
+              <span class="address{{key}}">{{address}}</span>
+            </div>
+            {{/each}}
+          </div>
+        {{/if}}
+      {{/each}}
+      <div class="read-only-block-links actions">
+        <div class="read-only-block-edit-link">
+          <a class="edit-link" id="hide-info" href="#">Edit contact information &gt;</a>
+        </div>
+      </div>
+    </div>
+    
+    {{personal-information info=model.page.primaryInformation}}
+    
+    <div class="actions-btn">
+      <div class="edit-next">
+         <input type="submit" id="edit-next" name="op" value="Continue" class="form-submit">      
+      </div>
+      <div class="edit-prev" id="go-back">
+         <span class="button-to-link"><a href="renew-verify-membership.html">&lt; Go back to previous page</a></span>
+      </div>
+   </div>
+  </div>
+</div>

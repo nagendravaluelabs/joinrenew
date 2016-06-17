@@ -1,0 +1,65 @@
+<div class="common-form personal-contact locate-chapter-dues" id="personal-contact">
+  <!--Personal contact information-->
+  <div class="all-info separator clearfix">
+    <ul class="clearfix">
+      <label class="required-field">Required
+        <span class="form-required">*</span>
+      </label>
+      <li>
+        <label for="prefix">Prefix
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        <select id="#" name="prefix" class="form-select required">
+          <option value="">Select</option>
+          <option value="Dr.">Dr.</option>
+          <option value="Hon.">Hon.</option>
+          <option value="Miss">Miss</option>
+          <option value="Mr." selected="selected">Mr.</option>
+          <option value="Mrs.">Mrs.</option>
+          <option value="Ms.">Ms.</option>
+          <option value="Rev.">Rev.</option>
+        </select>
+      </li>
+      <li>
+        <label for="first-name">First name
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        {{#if info.personalInfo.firstName}}
+          <input class="text-full form-text required" type="text" id="#" name="first_name" value="{{info.personalInfo.firstName}}" size="60" maxlength="255" disabled  />
+        {{else}}
+          <input class="text-full form-text required" type="text" id="#" name="first_name" size="60" maxlength="255"  />
+        {{/if}}
+      </li>
+      <li>
+        <label for="middle-name">Middle initial</label>
+        {{#if info.personalInfo.middleName}}
+          <input class="text-full form-text input-middle-name" type="text" id="#" name="middle_name" value="{{info.personalInfo.middleName}}" size="1" maxlength="255" disabled />
+        {{else}}
+          <input class="text-full form-text required" type="text" id="#" name="first_name" size="60" maxlength="255"  />
+        {{/if}}
+        
+      </li>
+      <li>
+        <label for="last-name">Last name
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        <input class="text-full form-text required" type="text" id="#" name="last_name"
+        value="{{info.personalInfo.lastName}}" size="60" maxlength="255" />
+      </li>
+      <li>
+        <label for="suffix">Suffix</label>
+        <select id="#" name="field_suffix" class="form-select">
+          <option value="">Select</option>
+          <option value="Esq.">Esq.</option>
+          <option value="II">II</option>
+          <option value="III">III</option>
+          <option value="IV">IV</option>
+          <option value="Jr.">Jr.</option>
+          <option value="Sr.">Sr.</option>
+          <option value="V">V</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="clearfix"></div>

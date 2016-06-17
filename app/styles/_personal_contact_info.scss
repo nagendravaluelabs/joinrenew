@@ -1,0 +1,446 @@
+#main-content.page-personal-info {
+	padding-top:0;
+}
+#main-content.page-personal-info .page-title {
+  margin-bottom: 0 !important;
+  margin-top: 40px;
+  padding-bottom: 4px;
+}
+
+.page-personal-info h3.sign-up-subheading{
+	margin-bottom:48px;
+	margin-top:53px;
+}
+
+#mobile-sidebar-top, .mobile-header {
+    display: none;
+}
+.common-form{
+	display:block;
+}
+.common-form ul{
+	margin:0;
+	list-style:none;
+}
+.common-form ul li {
+    margin-bottom: 1em;
+    margin-top: 2px;
+	position: relative;
+	display:block;
+}
+/*.common-form ul li:last-child{
+	margin-bottom:0;
+}*/
+
+.common-form ul li.inline-bl{
+	display:inline-block;
+  width:65%;
+}
+
+.common-form ul li.inline-bl input[type="text"]{
+	display:inline-block;
+	float:left;
+}
+
+.common-form .required-field{
+    color: #a7a7a7;
+    padding: 11px 0 20px 0;
+    font-weight: normal;
+	margin-bottom:0;
+    line-height: 20px;
+}
+.common-form .all-info {
+    padding-left: 20px;
+	padding-right:20px;
+}
+
+.separator {
+    border-bottom: 1px solid #cccccc;
+    clear: both;
+    height: auto;
+    padding: 0 0 33px;
+	zoom: 1;
+}
+
+.common-form label {
+	color: #000;
+    font: 1.6rem 'Architype-Light',sans-serif normal;
+    margin-bottom: 18px;
+	max-width: 100%;
+	display:block;
+    font-weight: 700;
+}
+
+.common-form input[type="text"], select {
+    height: 50px;
+}
+.common-form input.form-text, textarea.form-textarea, select.form-select{
+	border: 1px solid #d1d2d3;
+	color:#000;
+	margin-bottom: 10px;
+}
+
+.common-form .description {
+    display: none !important;
+}
+.common-form label span.form-required,  span.form-required {
+    color: #f00;
+}
+
+.common-form select.form-select {
+	width: 55%;
+	padding: 4px 4px 4px 15px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
+    line-height: 24px;
+    padding-right: 48px;
+}
+.common-form input[type="text"]:not(.date-clear) {
+    padding: 0 0 0 15px;
+    width: 55%;
+}
+.common-form input[type="text"]:not(.date-clear).input-middle-name {
+  width: 50px;
+}
+.common-form #field-middle-name{
+    width: 50px;
+}
+
+.common-form input[type="radio"] {
+    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat scroll 0 0;
+}
+.common-form input.form-checkbox, input.form-radio {
+    vertical-align: middle;
+}
+
+.common-form input[type="radio"]:not(old) {
+    border: 0 none;
+    height: 22px;
+    left: 5px;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    width: 28px;
+}
+.common-form input[type="radio"]:checked:not(old) + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 4px;
+    cursor: default;
+}
+
+.common-form input[type="radio"]:not(old) + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 4px;
+    display: inline-block;
+    line-height: 28px;
+    padding-left: 40px;
+}
+.common-form input[type="checkbox"]:not(:checked) + label, .common-form input[type="checkbox"]:checked + label {
+    cursor: pointer;
+    padding:3px 0 0 25px;
+    position: relative;
+	margin:5px 0 25px 0;
+}
+
+.common-form input[type="checkbox"]:not(:checked), .common-form input[type="checkbox"]:checked {
+    border: none;
+    opacity: 0;
+    position: absolute;
+}
+
+.common-form input.form-checkbox, input.form-radio {
+    vertical-align: middle;
+}
+.common-form input[type="checkbox"]:not(:checked) + label:after, .common-form input[type="checkbox"]:checked + label:after {
+    color: #fa4132;
+    content: '✔';
+    font-size: 1.9rem;
+    left: 0px;
+    position: absolute;
+    top: -3px;
+}
+
+.common-form input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+.common-form input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+.common-form input[type="checkbox"]:not(:checked) + label:before, .common-form input[type="checkbox"]:checked + label:before {
+    background-color: #fff;
+    border: 1px solid #d1d2d3;
+    content: '';
+    height: 17px;
+    left: 0;
+    position: absolute;
+    top: 2px;
+    width: 17px;
+}
+
+.common-form .form-type-radios{
+	overflow:hidden;
+}
+.common-form .form-type-radio{
+	margin: 15px 59px 9px 0;
+	display:inline-block;
+}
+.common-form label.option {
+  font-weight: normal;
+}
+
+ul.field-options-select{
+  display:block;
+  clear:both;
+}
+ul.field-options-select > li{
+  display: inline-block;
+  float:left;
+  margin-right:20px;
+}
+ul.field-options-select > li > select.form-select, ul.field-options-select > li > select.form-select, ul.field-options-select > li > input[type="text"]{
+  width:360px !important;
+}
+.address-block-container .chosen-container{
+  margin-bottom:10px;
+  width:55% !important;
+}
+
+.calc-button {
+    float: left;
+    margin-left: 30px;
+}
+
+.back-grey {
+    background-color: #f2f2f3;
+	padding:20px 20px 0 20px;
+	margin-bottom:30px;
+}
+
+.button-to-link input[type="submit"], .button-to-link input[type="submit"][disabled="disabled"] {
+    background: transparent !important;
+    color: #fa4132 !important;
+    font-size: 1.6rem;
+    margin: 0;
+    padding-top: 18px;
+}
+
+
+.common-form  .due-add-my-work-address label,
+.common-form  .due-add-my-home-address label{
+  background: transparent url("../images/plus-sign.png") left center no-repeat;
+  cursor: pointer;
+  color: #de322e;
+  padding-left: 40px;
+  padding:25px 0 25px 40px;
+}
+.due-add-my-work-address input[type="checkbox"] + label:after,
+.due-add-my-work-address input[type="checkbox"] + label:before,
+.due-add-my-home-address input[type="checkbox"] + label:after,
+.due-add-my-home-address input[type="checkbox"] + label:before {
+  display: none;
+}
+.due-add-my-work-address input[type="checkbox"]:checked + label,
+.due-add-my-home-address input[type="checkbox"]:checked + label {
+  background: transparent url("../images/minus-sign.png") left center no-repeat;
+}
+
+.form-autocomplete {
+  background-image: url(../images/throbber-inactive.png);
+  background-position: 100% center;
+  background-repeat: no-repeat;
+}
+
+.actions-btn{
+    margin-bottom: 95px;
+}
+.actions-btn .edit-prev{
+    padding-top: 24px;
+}
+
+.actions-btn  input[type="submit"] {
+    width: 32%;
+}
+
+.mode-workAddress .due-add-my-home-address, .mode-add-company  .due-add-my-home-address {
+  display: none;
+}
+
+.mode-homeAddress .due-add-my-work-address {
+  display: none;
+}
+
+.mode-add-company:not(.mode-workAddress) .homeAddress-container {
+  display: none;
+}
+.referral-block{
+	margin-bottom:32px;
+}
+.add-clear-btn{
+  float:right;
+  font-weight:normal;
+  margin-right:20%;
+  cursor:pointer;
+  color: #ef4135;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+.common-form ul li.inline-bl > select.form-select, .common-form ul li.inline-bl input[type="text"].year-txt{
+	width:44%;
+	float:left;
+	margin-right:15px;
+}
+.common-form ul li.inline-bl input[type="text"].year-txt{
+	width:25%;
+}
+
+#work-address.back-grey.block .info-left div {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    min-height: 110px;
+    margin: 7px 0 56px 0px;
+    padding: 14px 20px;
+    width: 55%;
+    line-height: 20px;
+    clear: both;
+}
+.mobile-bottom{
+	display:none;
+}
+
+@media (min-width: 320px) and (max-width: 767px){
+	.common-form .form-type-radio{
+		margin: 15px 45px 9px 0;
+	}
+
+  .common-form select.form-select, .common-form input[type="text"]:not(.date-clear) {
+    width: 100%;
+  }
+
+  ul.field-options-select li{
+    margin-right:0;
+    float:none;
+	display:block;
+  }
+  
+  ul.field-options-select > li > select.form-select, ul.field-options-select > li > select.form-select, ul.field-options-select > li > input[type="text"] {
+    width: 100% !important;
+  }
+
+  #sidebar {
+    margin-top: 0 !important;
+  }
+  .common-form ul li.inline-bl {
+    display:block;
+  }
+
+  .address-block-container .chosen-container {
+    width: 100% !important;
+  }
+  
+  .desk-bottom{
+	  display:none;
+  }
+  .mobile-bottom{
+	  display:block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px){
+	#work-address.back-grey.block .info-left div{
+		width:100%;
+		font-size:13px;
+	}
+  #sidebar {
+    margin-top: 256px !important;
+  }
+  ul.field-options-select > li > select.form-select, ul.field-options-select > li > select.form-select, ul.field-options-select > li > input[type="text"] {
+    width: 100% !important;
+  }
+  .common-form select.form-select, .common-form input[type="text"]:not(.date-clear) {
+    width: 100% !important;
+  }
+  .common-form ul li{
+	  width:100%;
+  }
+  
+  ul.form-radios li{
+    width:auto !important;  
+  }
+  .address-block-container .chosen-container{
+	  width:100% !important;
+  }
+
+}
+@media (min-width: 320px) and (max-width: 1023px){
+  .common-form ul li.inline-bl{
+    display:inline-block;
+    width:100%;
+  }
+  .calc-button {
+      margin-left: 0;
+      display: block;
+      width: 100% !important;
+      text-align: center;
+  }
+}
+
+
+@media (max-width: 567px){
+.actions-btn input[type="submit"], .actions-btn input[type="button"], .magazine-radios input[type="submit"] .magazine-radios input[type="button"]{
+    width: 100% !important;
+}
+}
+
+@media (max-width: 767px){
+	#work-address.back-grey.block .info-left div{
+		width:100%
+	}
+	.common-form input[type="checkbox"]:not(:checked) + label:before, .common-form input[type="checkbox"]:checked + label:before{
+		top:10px;
+	}
+	
+	#primary, #sidebar {
+    padding: 20px;
+}
+	body, body .ui-widget, input[type="text"], select, label, legend, span {
+    font-size: 1.8rem;
+    line-height: 30px;
+}
+
+	.block-pane, .tax-deductibles-block {
+    padding-bottom: 32px;
+    padding-top: 27px;
+}
+h3 {
+    font-size: 3rem;
+    line-height: 30px;
+}
+}
+/* 10-06-2016 */
+.address-container h3{
+	margin:0;
+}
+.due-add-my-work-address, .due-add-my-home-address{
+	margin-bottom:46px;
+}
+ul.personalinfo_third_party{
+	margin-bottom:54px;
+}
+
+#main-content.page-personal-info .info-link{
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 1024px) and (max-width: 1199px){
+	ul.field-options-select > li{
+		width:40%;
+	}
+	.chosen-container{
+		width:100% !important;
+	}
+}
