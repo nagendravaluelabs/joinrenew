@@ -89,7 +89,7 @@
           {{select-country idPrefix=(concat 'contact_' type) namePrefix=type selected=(lookupProp info.contactInfo type "Country")}}
         </li>
         <li>
-          <label for="{{type}}-number">Home phone
+          <label for="{{type}}-number" class="text-capitalize">{{type}} phone
             <span class="form-required" title="This field is required.">*</span>
           </label>
           <input class="form-text required" type="text" id="{{type}}-number" name="{{text}}_number" value="{{lookupProp info.contactInfo type 'Phone'}}" size="60" maxlength="255" />
@@ -146,7 +146,7 @@
               </li>
             {{/if}}
             <li>
-              <label for="country">Country
+              <label for="primary_home_address_country">Country
                 <span class="form-required" title="This field is required.">*</span>
               </label>
               {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=info.primaryAddress.home.country class="counrty required"}}
@@ -282,7 +282,7 @@
             {{/ember-chosen}}
           </li>
           <li>
-            <label for="company-address">Country
+            <label for="create_org_country">Country
               <span class="form-required" title="This field is required.">*</span>
             </label>
             {{select-country idPrefix='create_org_' namePrefix='create_org_' selected="" class="counrty required"}}
