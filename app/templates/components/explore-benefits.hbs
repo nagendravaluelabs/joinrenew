@@ -1,0 +1,9 @@
+<div id="benefits-wrapper">
+  {{#slick-slider arrows=true dots=true accessibility=false adaptiveHeight=true afterChange='exploreBenefits' slickInit='initExploreBenefits'}}
+    {{#each benefits as |benefit|}}
+      <div id="benefits-{{benefit.nid}}" data-nid="{{benefit.nid}}" data-title="{{benefit.title}}" class="benefits-body">
+        {{{benefit.body}}}
+      </div>
+    {{/each}}
+  {{/slick-slider}}
+</div>

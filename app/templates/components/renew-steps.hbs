@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-9">
+    <div class="aia-progress-bar">
+      <ol class="aia-progress">
+        {{#each steps as |step|}}
+          <li class="steps {{step.status}}">
+            {{#link-to step.route}}
+               <p class="step-text">{{step.title}}</p>
+               <div class="progress-line">
+                  <div class="progress-circle"><span class="tick"></span></div>
+               </div>
+            {{/link-to}}
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+    <div class="aia-progress-bar-one-step hidden-lg hidden-md hidden-sm">
+      <ol class="aia-progress-one-step">
+        <li class="steps">
+          <p class="step-text">
+            {{#each steps as |step|}}
+              {{#if (isEqualTo step.status 'step-active')}}
+                {{step.title}}
+              {{/if}}
+            {{/each}}
+          </p>
+          <div class="progress-line">
+            <div class="progress-circle">
+              <span class="tick"></span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-12"></div>
+</div>

@@ -1,0 +1,38 @@
+{{home-page model=model}}
+
+<div class="renew-page-benefits">
+  <div class="renew-container">
+    <div class="col-xs-12 explore-benefits">
+      <h2>Explore the benefits</h2>
+      <div class="custom-explore-benefits">
+        <h3 class="status">I'm</h3>
+        <div class="actions">
+          <div class="viewport">Select your status</div>                  
+          <select id="select-explore-benefits" class="form-select" onchange={{action "changeExploreBenefits" value="target.value"}}>
+            {{#each model.benefits as |option key|}}
+              {{#if key}}
+                <option value="{{option.nid}}">{{option.title}}</option>
+              {{else}}
+                <option value="{{option.nid}}" selected>{{option.title}}</option>
+              {{/if}}
+            {{/each}}
+          </select>                  
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 explore-benefits right-view">
+      {{explore-benefits benefits=model.benefits}}
+      <div class="clearfix"></div>
+      <div class="renew-footer-links">
+        <div id="edit-next-footer" class="link-to-button">
+          <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="infolinks">
+          <div id="edit-benefits-eligibility"><a href="eligibility.html" target="_blank">Check eligibility &gt;</a></div>
+          <a id="edit-benefits-dues" href="#dues_est">Estimate dues &gt;</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

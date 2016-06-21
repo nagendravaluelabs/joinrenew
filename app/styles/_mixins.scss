@@ -1,0 +1,90 @@
+/// @params: $breakpoint
+
+@mixin mq($breakpoint) {
+
+    @if $breakpoint == lg {
+        @media #{"(min-width:#{$screen-lg-min})"}  { @content; }
+    }
+    @else if $breakpoint == md {
+        @media #{"(max-width:#{$screen-md-max})"}  { @content; }
+    }
+    @else if $breakpoint == sm {
+        @media #{"(max-width:#{$screen-sm-max})"} { @content; }
+    }
+    @else if $breakpoint == xs {
+        @media #{"(max-width:#{$screen-xs-max})"} { @content; }
+    }
+}
+
+/// @method: font-face
+/// @usage: Given the location of a webfont, will generate a font-face declaration with multiple file formats.
+/// @param {String} $font-name - Font family name
+/// @param {String} $file-name - File name (no extension)
+/// @param {String | Number} $weight [normal] - Font weight
+/// @param {String} $style [normal] - Font style
+
+
+@mixin font-face($font-name, $file-name, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($file-name + ".otf") format("opentype");
+    ///src: url($file-name + '.eot');
+    ///src: url($file-name + '.eot?#iefix')  format('embedded-opentype'),
+    ///     url($file-name + '.woff') format('woff'),
+    ///     url($file-name + '.ttf')  format('truetype'),
+    ///     url($file-name + '.svg##{$font-name}')  format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@function parseInt($n) {
+  @return $n / ($n * 0 + 1);
+}
+
+/// @method: rem
+/// @usage: Creates Rem and Fallback PX CSS Properties
+/// @params: $property, $value
+
+@mixin rem($property, $values) {
+  $px : ();
+  $rem: ();
+
+  @each $value in $values {
+
+    @if $value == 0 or $value == auto {
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);
+      $val: parseInt($value);
+
+      @if $unit == "px" {
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" {
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {
+    #{$property}: $px;
+  } @else {
+    #{$property}: $px;
+    #{$property}: $rem;
+  }
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}

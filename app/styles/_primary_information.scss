@@ -1,0 +1,179 @@
+#main-content.page-primary-info {
+  padding-top: 0;
+  .page-title {
+    margin-bottom: 0 !important;
+    margin-top: 39px;
+    padding-bottom: 4px;
+  }
+  .actions-btn {
+    margin-top: 0px;
+  }
+  .common-form {
+      .required-field {
+        color: #a7a7a7;
+        padding: 0 0 20px 0;
+        font-weight: normal;
+        margin-bottom: 0;
+        line-height: 20px;
+      }
+      label {
+        color: #000;
+        margin-bottom: 15px;
+        max-width: 100%;
+        display: block;
+      }
+  }
+  #work-address.back-grey {
+    margin-bottom: 50px;
+  }
+}
+.page-primary-info {
+  h3.sign-up-subheading {
+    margin-bottom: 48px;
+    margin-top: 53px;
+  }
+  .aia-progress-bar {
+    margin-top: 30px;
+    padding-bottom: 40px;
+    .aia-progress .steps p {
+      padding-bottom: 35px;
+    }
+  }
+}
+.verify-subheading {
+  margin-bottom: 16px;
+  display: block;
+  margin-top: 53px;
+}
+.read-only-block {
+  padding: 28px 0 0 20px;
+  .read-only-block-home-phone {
+    padding-top: 20px;
+    margin-bottom: 5px;
+  }
+  .read-only-block-mobile-phone {
+      margin-bottom: 5px;
+      .mobile-phone + span {
+          padding-left: 5px;
+      }
+  }
+  .read-only-block-work-phone {
+      padding-bottom: 19px;
+  }
+  .read-only-block-edit-link {
+      padding-bottom: 54px;
+  }
+  .read-only-block-address {
+      line-height: 24px;
+  }
+  .home-phone {
+      padding-left: 21px;
+  }
+  .mobile-phone {
+      padding-left: 16px;
+  }
+  .work-phone {
+      padding-left: 26px;
+  }
+  .read-only-block-links.actions {
+      margin: 25px 0 0 0;
+  }
+  .read-only-block-previous-link {
+      margin: 0 0 94px -19px;
+  }
+}
+.read-only-block-continue-link {
+  .link-to-button {
+      a {
+          display: block;
+          width: 280px;
+          margin: 0 0 26px -17px;
+      }
+  }
+}
+.creative-info {
+  .chosen-container {
+      width: 75% !important;
+  }
+}
+.common-form {
+  .creative-zip {
+      width: 50% !important;
+      margin-bottom: 5px;
+  }
+  .state {
+      float: left;
+      width: 27%;
+      .chosen-container {
+          width: 95% !important;
+      }
+  }
+  .zip {
+      width: 50%;
+      margin-bottom: 20px;
+  }
+}
+.info-left-company {
+  .company-lookup-address-block {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 56px;
+      padding: 20px;
+      width: 55%;
+      padding-top: 15px;
+  }
+}
+form.common-form {
+  ul {
+      li.clearfix {
+          margin-bottom: 0px;
+          margin-top: 0px;
+          clear: both;
+          visibility: hidden;
+          line-height: 0;
+          height: 0;
+      }
+  }
+}
+
+.page-primary-info {
+
+  h3.your-contact-heading {
+      margin-bottom: 16px;
+      margin-top: 51px;
+  }
+  .common-form {
+      .form-type-radio {
+          margin: 8px 59px 27px 0;
+          display: inline-block;
+      }
+  }
+  .separator {
+      padding: 0 0 32px;
+  }
+  ul.address-tab {
+      margin-top: 24px;
+      margin-bottom: 0 !important;
+      display: inline-block;
+      li {
+          margin-bottom: 5px !important;
+      }
+  }
+  .address-container {
+      h3 {
+          margin: 4px 0 14px 0;
+      }
+      .info-link {
+          display: inline-block;
+          margin-bottom: 25px;
+      }
+  }
+  #personal-contact {
+    display: block;
+    padding-left: 20px;
+  }
+}
+
+.page-primary-info .primary-action-btn {
+  padding-left: 20px;
+}

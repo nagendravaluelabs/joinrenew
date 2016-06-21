@@ -1,0 +1,338 @@
+<div class="common-form personal-contact locate-chapter-dues" id="personal-contact">
+  <!--Personal contact information-->
+  <div class="all-info separator clearfix">
+    <ul class="clearfix">
+      <label class="required-field">Required
+        <span class="form-required">*</span>
+      </label>
+      <li>
+        <label for="prefix">Prefix
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        <select id="#" name="prefix" class="form-select required">
+          <option value="">Select</option>
+          {{#each prefixes as |prefix|}}
+            {{#if (isEqualTo prefix info.personalInfo.prefix)}}
+              <option value="{{prefix}}" selected>{{prefix}}</option>
+            {{else}}
+              <option value="{{prefix}}">{{prefix}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
+      </li>
+      <li>
+        <label for="first-name">First name
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        {{#if info.personalInfo.firstName}}
+          <input class="form-text required" type="text" id="#" name="first_name" value="{{info.personalInfo.firstName}}" size="60" maxlength="255" disabled  />
+        {{else}}
+          <input class="form-text required" type="text" id="#" name="first_name" size="60" maxlength="255"  />
+        {{/if}}
+      </li>
+      <li>
+        <label for="middle-name">Middle initial</label>
+        {{#if info.personalInfo.middleName}}
+          <input class="form-text input-middle-name" type="text" id="#" name="middle_name" value="{{info.personalInfo.middleName}}" size="1" maxlength="255" disabled />
+        {{else}}
+          <input class="form-text required" type="text" id="#" name="first_name" size="60" maxlength="255"  />
+        {{/if}}
+        
+      </li>
+      <li>
+        <label for="last-name">Last name
+          <span class="form-required" title="This field is required.">*</span>
+        </label>
+        <input class="form-text required" type="text" id="#" name="last_name"
+        value="{{info.personalInfo.lastName}}" size="60" maxlength="255" />
+      </li>
+      <li>
+        <label for="suffix">Suffix</label>
+        <select id="#" name="field_suffix" class="form-select">
+          <option value="">Select</option>
+          {{#each suffixes as |suffix|}}
+            {{#if (isEqualTo suffix info.personalInfo.suffix)}}
+              <option value="{{suffix}}" selected>{{suffix}}</option>
+            {{else}}
+              <option value="{{suffix}}">{{suffix}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
+      </li>
+    </ul>
+  </div>
+  <div class="clearfix"></div>
+  <!--User best way Contact information-->
+  <h3 class="sign-up-subheading">Your contact information</h3>
+  <div class="all-info separator clearfix">
+    <div class="form-type-radios">
+      <label for="primary-number">Primary number
+        <span class="form-required" title="This field is required.">*</span>
+      </label>
+      <ul class="form-radios clearfix">
+        {{#each addressType as |type|}}
+        <li class="form-type-radio text-capitalize">
+          {{#if (isEqualTo type info.contactInfo.addressType)}}
+          <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" class="form-radio" checked />
+          {{else}}
+            <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" class="form-radio" />
+          {{/if}}
+          <label class="option" for="primary_number_{{type}}">{{type}}</label>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <ul class="field-options-select clearfix">
+      {{#each addressType as |type|}}
+        <li>
+          <label for="contact_{{type}}_country">Country</label>
+          {{select-country idPrefix=(concat 'contact_' type) namePrefix=type selected=(lookupProp info.contactInfo type "Country")}}
+        </li>
+        <li>
+          <label for="{{type}}-number" class="text-capitalize">{{type}} phone
+            <span class="form-required" title="This field is required.">*</span>
+          </label>
+          <input class="form-text required" type="text" id="{{type}}-number" name="{{text}}_number" value="{{lookupProp info.contactInfo type 'Phone'}}" size="60" maxlength="255" />
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="clearfix"></div>
+  <!-- Choose chapter information -->
+  {{#if (isEqualTo type 'join')}}
+    <h3 class="sign-up-subheading">Choose your chapter
+      <span class="form-r equired">*</span>
+    </h3>
+  {{else}}
+    <h3 class="sign-up-subheading">Your primary address</h3>
+  {{/if}}
+  <div class="all-info">
+    {{#if (isEqualTo type 'join')}}
+      <span>We calculate chapter dues based on your location. Select your location below.</span>
+    {{/if}}
+    <!--Choose chapter-->
+    <ul class="form-radios clearfix">
+      {{#each chaptersType as |type|}}
+        <li class="form-type-radio text-capitalize">
+          {{#if (isEqualTo type info.primaryAddress.chaptersType)}}
+          <input type="radio" id="choose_chapter_{{type}}" name="choose_chapter" value="{{type}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} checked />
+          {{else}}
+            <input type="radio" id="choose_chapter_{{type}}" name="choose_chapter" value="{{type}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} />
+          {{/if}}
+          <label class="option" for="choose_chapter_{{type}}">{{type}}</label>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="address-block-container">
+    <!-- Home Address -->
+    <div class="homeAddress-container address-container hidden">
+      <div id="home-address" class="back-grey block">
+        {{#if (isEqualTo type 'join')}}
+          <h3>Home address</h3>
+        {{else}}
+          <h3>Your home address</h3>
+        {{/if}}
+        <fieldset id="#">
+          <label class="required-field">Required
+            <span class="form-required">*</span>
+          </label>
+          <ul>
+            {{#if (isEqualTo type 'join')}}
+              <li>
+                <input type="checkbox" id="home-address-primary" name="home_address" value="1"
+                checked="checked" class="form-checkbox" />
+                <label class="option" for="home-address-primary">This is my primary mailing address.</label>
+              </li>
+            {{/if}}
+            <li>
+              <label for="primary_home_address_country">Country
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+              {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=info.primaryAddress.home.country class="counrty required"}}
+            </li>
+            <li>
+              <label for="primary_home_address1">Address line 1
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+              <input class="form-text required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{info.primaryAddress.home.address1}}" size="30" maxlength="255"
+              />
+            </li>
+            <li>
+              <label for="primary_home_address2">Address line 2</label>
+              <input class="form-text" type="text" id="primary_home_address2" name="primary_home_address2" value="{{info.primaryAddress.home.address2}}" size="30" maxlength="255"
+              />
+            </li>
+            <li>
+              <label for="primary_home_city">City
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+              <input class="form-text required" type="text" id="primary_home_city" name="primary_home_city" value="{{info.primaryAddress.home.city}}" size="30" maxlength="255"
+              />
+            </li>
+            <li class="state" id="state">
+              <label for="administrative_area_state">State
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+              {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=info.primaryAddress.home.state class="state required"}}
+            </li>
+            <li class="inline-bl">
+              <label for="primary_home_zipcode">Zip code
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+              <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{info.primaryAddress.home.postalcode}}" size="30" maxlength="255" />
+              {{#if (isEqualTo type 'join')}}
+                <div class="calc-button">
+                  <span class="button-to-link">
+                    <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"
+                    />
+                  </span>
+                </div>
+              {{/if}}
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="clearfix"></div>
+      {{#if (isEqualTo type 'join')}}
+      <div class="common-form">
+        <div class="due-add-my-work-address">
+          <input type="checkbox" id="add-my-work-address" name="add_my_work_address"
+          value="1" class="form-checkbox" data-value="work" />
+          <label class="option" for="add-my-work-address">Add my work address</label>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+    <div class="workAddress-container address-container hidden">
+      <div id="work-address" class="back-grey block">
+        <h3>Work address</h3>
+        <fieldset id="home-address" class="form-wrapper required">
+          <label class="required required-field">Required
+            <span class="form-required">*</span>
+          </label>
+          <ul class="work-address" id="work-address">
+            {{#if (isEqualTo type 'join')}}
+              <li>
+                <input type="checkbox" id="work-address-primary" name="" value="1" class="form-checkbox" />
+                <label class="option" for="work-address-primary">This is my primary mailing address.</label>
+              </li>
+            {{/if}}
+            <li>
+              {{#if (isEqualTo type 'join')}}
+                <label for="company-search">Enter your work address, we&#039;ll help you find your company/organization</label>
+              {{else}}
+                <label for="company-search">If you need to change your work address, we&#039;ll help you find your company/organization.</label>
+              {{/if}}
+              <input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />
+            </li>
+          </ul>
+            <div class="auto-address clearfix">
+              <span class="info-left">
+                <div id="company-lookup-address-block">
+                    {{{nl2br info.primaryAddress.work.address}}}
+                </div>
+              </span>
+              <span class="info-link">Can’t find your work address?
+                <a class="create-org" href="javascript:void(0)" {{action 'createNewOrganization'}}>Create a new organization</a>
+              </span>
+            </div>
+        </fieldset>
+      </div>
+      <div class="clearfix"></div>
+      {{#if (isEqualTo type 'join')}}
+        <div class="common-form">
+          <div class="due-add-my-home-address">
+            <input type="checkbox" id="add-my-home-address" name="add_my_home_address"
+            value="1" class="form-checkbox" data-value="home" />
+            <label class="option" for="add-my-home-address">Add my home address</label>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    
+    <div id="company-organization" class="back-grey block hidden">
+      <h3>Create a new company/organization</h3>
+      <fieldset id="#" class="form-wrapper required">
+        <label class="required required-field">Required
+          <span class="form-required">*</span>
+        </label>
+        <ul>
+          <li>
+            <label for="organization-name">Company/organization name
+              <span class="form-required" title="This field is required.">*</span>
+            </label>
+            <input class="text-full form-text required" type="text" id="#" name="organization_name"
+            value="" size="60" maxlength="255" />
+          </li>
+          <li>
+            <label for="website">Website</label>
+            <input class="text-full form-text" type="text" id="#" name="website"
+            value="" size="60" maxlength="255" />
+          </li>
+          <li>
+            <label for="label">Company type
+              <span class="form-required" title="This field is required.">*</span>
+            </label>
+            {{#ember-chosen id='company_type' name="company_type" class='form-select required'}}
+              <option value="">Select</option>
+              {{#each companyType as |type|}}
+                <option value="{{type}}">{{type}}</option>                
+              {{/each}}
+            {{/ember-chosen}}
+          </li>
+          <li>
+            <label for="create_org_country">Country
+              <span class="form-required" title="This field is required.">*</span>
+            </label>
+            {{select-country idPrefix='create_org_' namePrefix='create_org_' selected="" class="counrty required"}}
+          </li>
+          <li>
+            <label for="company-address">Address line 1
+              <span class="form-required" title="This field is required.">*</span>
+            </label>
+            <input class="thoroughfare form-text required" autocomplete="address-line1"
+            type="text" id="edit-profile-personal-contact-info-field-company-address-und-0-thoroughfare"
+            name="profile_personal_contact_info[field_company_address][und][0][thoroughfare]"
+            value="" size="30" maxlength="255" />
+          </li>
+          <li>
+            <label for="company-address">Address line 2</label>
+            <input class="premise form-text" autocomplete="address-line2"
+            type="text" id="#" name="premise" value="" size="30" maxlength="255" />
+          </li>
+          <li>
+            <label for="locality">City
+              <span class="form-required" title="This field is required.">*</span>
+            </label>
+            <input class="locality form-text required" autocomplete="&quot;address-level2"
+            type="text" id="locality" name="locality" value="" size="30" maxlength="255"
+            />
+          </li>
+          <li>
+            <label for="postal-code">Zip code</label>
+            <input class="postal-code form-text" autocomplete="postal-code"
+            type="text" id="#" name="postal_code" value="" size="30" maxlength="255"
+            />
+          </li>
+          <li>
+            <label for="create_org_code_code">Country code</label>
+            {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=""}}
+          </li>
+          <li>
+            <label for="company-phone">Company phone</label>
+            <input class="text-full form-text" type="text" id="company-phone"
+            name="company_phone" value="" size="60" maxlength="255" />
+          </li>
+          
+        </ul>
+        <div class="create-org-action">
+          <div class="edit-next">
+             <input type="button" name="op" value="Save" class="form-submit save-company-info">      
+          </div>
+       </div>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>

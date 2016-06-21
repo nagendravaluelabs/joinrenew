@@ -1,0 +1,10 @@
+{{#ember-chosen id=(concat idPrefix '_country') name="{{namePrefix}}_country" class=(concat class ' form-select select-chosen')}}
+  <option value="">Select</option>
+  {{#each countries as |country|}}
+    {{#if (isEqualTo country selected)}}
+      <option value="{{country}}" selected>{{country}}</option>
+    {{else}}
+      <option value="{{country}}">{{country}}</option>
+    {{/if}}
+  {{/each}}
+{{/ember-chosen}}
