@@ -68,7 +68,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-non-aia-member-persons",
 			"id"   : "non_aia_member_persons",
 			"name" : "non_aia_member_persons",
-			"stateAmount" : "0.00",
+			"stateAmount" : "40.00",
 			"localAmount" :"115.00"
 		},
 		{
@@ -78,7 +78,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-aia-member-persons",
 			"id"   : "aia_member_persons",
 			"name" : "aia_member_persons",
-			"stateAmount" : "0.00",
+			"stateAmount" : "30.00",
 			"localAmount" :"115.00",
 			"isRequired" : true
 		},
@@ -90,8 +90,8 @@ return Ember.RSVP.hash({
 			"for"  : "edit-associates-persons",
 			"id"   : "associates_persons",
 			"name" : "associates_persons",
-			"stateamount" : "0.00",
-			"localamount" :"0.00"
+			"stateAmount" : "20.00",
+			"localAmount" :"20.00"
 		},
 		{
 			"title": "Technical staff",
@@ -100,7 +100,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-techstaff-persons",
 			"id"   : "techstaff_persons",
 			"name" : "techstaff_persons",
-			"stateAmount" : "0.00",
+			"stateAmount" : "20.00",
 			"localAmount" :"115.00"
 		},
 		
@@ -111,8 +111,8 @@ return Ember.RSVP.hash({
 			"for"  : "edit-otherstaff-persons",
 			"id"   : "otherstaff_persons",
 			"name" : "otherstaff_persons",
-			"stateAmount" : "0.00",
-			"localAmount" :"0.00"
+			"stateAmount" : "10.00",
+			"localAmount" :"10.00"
 		},
 		
 	]   		

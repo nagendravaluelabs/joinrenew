@@ -1,6 +1,9 @@
 @import "bootstrap";
 @import "bootstrap-grid";
 @import "variables";
+@import "jquery-ui.min";
+@import "jquery-ui.structure.min";
+@import "jquery-ui.theme.min";
 @import "slick_theme";
 @import "fonts";
 @import "mixins";
@@ -14,6 +17,8 @@
 @import "personal_contact_info";
 @import "primary_information";
 @import "renew_verify_membership";
+@import "membership_dues_page";
+@import "payment";
 .slick-slide {
   outline: none;
 }
