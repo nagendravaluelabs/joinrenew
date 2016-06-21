@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "bootstrap-grid";
+@import "variables";
 @import "slick_theme";
 @import "fonts";
 @import "mixins";
@@ -12,7 +13,7 @@
 @import "steps";
 @import "personal_contact_info";
 @import "primary_information";
-@import "renew-verify-membership";
+@import "renew_verify_membership";
 .slick-slide {
   outline: none;
 }

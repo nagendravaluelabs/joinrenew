@@ -28,14 +28,15 @@
       {{/each}}
       <div class="read-only-block-links actions">
         <div class="read-only-block-edit-link">
-          <a class="edit-link" id="hide-info" href="#">Edit contact information &gt;</a>
+          <a class="edit-link" id="hide-info" href="#" {{action 'showPersonalInfo'}}>Edit contact information &gt;</a>
         </div>
       </div>
     </div>
+    <div id="personal-contact-container" class="hidden">
+      {{personal-information info=model.page.primaryInformation type='renew'}}
+    </div>
     
-    {{personal-information info=model.page.primaryInformation}}
-    
-    <div class="actions-btn">
+    <div class="actions-btn primary-action-btn">
       <div class="edit-next">
          <input type="submit" id="edit-next" name="op" value="Continue" class="form-submit">      
       </div>

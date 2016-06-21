@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   activate() {
-    this.modelFor("application").class = "no-sidebars page-renew-verify-personal-contact-info";
+    this.modelFor("application").class = "no-sidebars page-primary-info";
   },
   model() {
     return Ember.RSVP.hash({
@@ -24,7 +24,6 @@ export default Ember.Route.extend({
         }
       ],
       page: {
-        "test": "hello world",
         "information":[
           {
             "title": "",
@@ -64,6 +63,29 @@ export default Ember.Route.extend({
             "middleName": "Y",
             "lastName": "Sda",
             "suffix": "II"
+          },
+          "contactInfo" : {
+            "addressType": "mobile",
+            "homeCountry": "AFGHANISTAN",
+            "homePhone": "31243245325",
+            "mobileCountry": "ALBANIA",
+            "mobilePhone": "1243455453",
+            "workCountry": "UNITED STATES",
+            "workPhone": "2133273876"
+          },
+          "primaryAddress" : {
+            "chaptersType": "work",
+            "home": {
+              "country": "AFGHANISTAN",
+              "address1": "39 Argoswerq",
+              "address2": "ewr",
+              "city": "Newyork",
+              "state": "6915afa2-c832-4ea3-a88b-1504a238816b",
+              "postalcode": "92677-9002"
+            },
+            "work": {
+              "address": "AIANY Interiors Committee\nAIA New York Chapter\n536 LaGuardia Place\nNew York,NY 10012"
+            }
           }
         }
       }
