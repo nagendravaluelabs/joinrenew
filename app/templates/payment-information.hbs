@@ -1,0 +1,398 @@
+        {{renew-steps steps=model.steps}}
+        <section id="content" role="main" class="clearfix">
+        <h1 class="page-title">Payment information</h1>
+          <div>
+            <!-- Start payment join html -->
+            <!-- user info -->
+           <div id="userprofileinfo">
+                    <address>  
+                          Test  Test <br>
+                          AIA New York Chapter<br>
+                          536 LaGuardia Place<br>
+                          New York, NY 10012 
+                    </address> 
+            </div> 
+            <!--  For all users, whose dues are not wiaved -->
+            <!-- Payment info --> 
+            <div class="payment_information"> 
+              <h3 id="ordersummaryinfo">Invoice summary</h3>
+              <div id="accordion" class="payment-accordion" role="tablist">
+                <h3> 
+                New AIA membership: 
+                <span class="membership-type"><strong>Architect</strong></span><span>$333.00</span>
+                </h3>
+                
+                
+                <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display:none;">
+                    <div class="setTablepanel">
+                                  <div class="result">
+										<table>
+										<tbody>
+										{{#each model.payment as |pay|}}
+											<tr>
+												<td>{{pay.title}}</td>
+												<td>
+													<span>Annual:</span>
+													<span>${{pay.annual}}</span>
+												</td>
+												<td>
+													<span>Pro-rated:</span>
+													<span>${{pay.Pro-rated}}</span>
+												</td>
+											</tr>
+											{{/each}}
+											{{#each model.subTotal as |sub|}}
+											<tr class="sum">
+												<td class="title">{{sub.title}}</td>
+												<td></td>
+												<td>${{sub.value}}</td>
+											</tr>
+											{{/each}}
+										</tbody>
+									</table>
+						 			</div>
+                        <!-- <div id="dataholder">
+                            <div id="totalpaymentdue">$351.75</div>
+                        </div> -->
+                    </div>
+                </div>
+              </div>
+			  {{#each model.Total as |total|}}
+              <div id="accordion_bottom">
+                  <div class="total_label">{{total.title}}</div>
+                  <div id="paymentdue">${{total.value}}</div>
+                  <!-- =======  Store data hidden feilds ====================== -->
+                  <!-- <div id="dataholder">
+                      <div id="totalpaymentdue">200</div>
+                      <div id="renewpaymentdue">200</div>
+                      <div id="supplementalpaymentdue">200</div>
+                  </div> -->
+              </div>
+			  {{/each}}
+            </div>
+            <!-- Payment form -->
+            <div class="formgroup">
+              <!-- payment options  -->
+              <h3>How do you want to pay?<span class="required" aria-required="true">*</span></h3>
+                <div id="paymentoptions">
+                    <div id="paymentmethod">
+                      <div id="edit-pro-payment">
+                          <div class="form-item form-pay-opt">
+                              <div id="edit-prof-pay" class="form-radios">
+                                  <div class="form-item form-pay-opt">
+                                      <input type="radio" id="debitcredit-card" name="payment_method" value="Debit/Credit Card" checked class="form-radio" data-id="#dc_cardinfo">
+                                      <label class="option" for="debitcredit-card">Debit or credit card </label>
+                                      <div id="paymentmethodinfo" class="clearfix">
+                                          <!-- payment method card or check -->
+                                         <div class="creditcardimag">
+                                              <div class="amexicon creditcardicon"></div>
+                                              <div class="visaicon creditcardicon"></div>
+                                              <div class="mastercardicon creditcardicon"></div>
+                                              <div class="discovericon creditcardicon"></div>
+                                          </div> 
+                                          <!-- Installments and fees open -->
+                                          <!-- hide this installment section based on date -->
+                                      </div>
+                                  </div>
+                                  <div class="form-item form-pay-opt">
+                                      <input type="radio" id="electronic-check" name="payment_method" value="Electronic Check" class="form-radio" data-id="#electronic_check_info" >
+                                      <label class="option" for="electronic-check">Electronic check </label>
+                                  </div>
+                                  <div class="form-item form-pay-opt">
+                                      <input type="radio" id="pay-in-installments" name="payment_method" value="Pay in installments" class="form-radio" data-id="#installments, #dc_cardinfo">
+                                      <label class="option" for="pay-in-installments">Pay in installments </label>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                    </div> 
+                </div>
+                <!-- fees  -->
+                <div id="installments" class="payment_method_container hidden">
+                    <div id="installmentsform">
+                        <div id="installmentnumber"> 
+                            Pay my dues in 
+                            <div id="edit-profile-payment-information-field-installments">
+                                <div class="form-item form-type-select form-inst-und">
+                                    <label for="edit-profile-payment-information-field-installments-und">Installments </label>
+                                    <select class="chosen-disable form-select" id="" name="profile_payment_information[field_installments][und]">
+                                        <option value="3" selected="selected">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                         <div id="firstinstallment">Total for first installment: $130.58</div>
+                        <div id="paymentplan_info_but">
+                            <div class="extrainfo_icon"></div>
+                        </div>
+                    </div>
+                    <div class="servicefee_info">
+                        A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments.
+                    </div>
+                    
+                     <div class="leftblock" style="display:none;">
+                      <!-- <span class="plan_heading"> Payment Plan</span> -->
+                          <table border="1" id="payment_plan_info_table">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Member dues</th>
+                                <td class="price">$351.75</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Administrative fee</th>
+                                <td class="price">$40.00</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Total</th>
+                                <td class="price">$391.75</td>
+                              </tr>
+                              <tr>
+                                <th class="hidden-xs hidden-sm" scope="row">Number of payments</th>
+                                <td class="hidden-xs hidden-sm"><div id="num_installments_selected">3</div></td>
+                                <th class="hidden-lg hidden-md" scope="row"><span id="num_installments_selected_mobile">3 Installments</span> </th>
+                                <td class="hidden-lg hidden-md" id="single_installment_amount">$130.58</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+
+                    <!-- payment plan extra information -->
+                    <div class="payment-plan" style="display:none">
+                      <div class="ui-widget-overlay ui-front"></div>
+                      <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front front-pos" tabindex="-1" role="dialog" aria-describedby="paymentplan_extrainfo" aria-labelledby="ui-id-1">
+                        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                          <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
+                          <button class="ui-dialog-titlebar-close"></button>
+                        </div>
+                            <div id="paymentplan_extrainfo" class="ui-dialog-content ui-widget-content">
+                                  <!-- payment plan info place holder -->
+                                  <div class="extrainfo_box">
+                                    <!-- create tables here-->
+                                    <div class="leftblock" style="display: block;">
+                                        <span class="plan_heading"> Payment Plan</span>
+                                      <table id="payment_plan_info_table" border="1">
+                                        <tbody>
+                                          <tr> 
+                                            <th scope="row">Member dues</th>
+                                            <td class="price">$351.75</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Administrative fee</th>
+                                            <td class="price">$40.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Total</th>
+                                            <td class="price">$391.75</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row" class="hidden-xs hidden-sm">Number of payments</th>
+                                            <td class="hidden-xs hidden-sm"><div id="num_installments_selected">3</div></td>
+                                            <th scope="row" class="hidden-lg hidden-md"><span id="num_installments_selected_mobile"></span> Installments</th>
+                                            <td id="single_installment_amount" class="hidden-lg hidden-md"></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <!-- /////////////////////////// -->
+                                     <div class="rightblock">Installments
+                                      <div id="payment_tbl"><table id="installment_payment_sum_list"><tbody><tr class="installments_tbl_tr"><td class="install_num">1 </td><td class="install_payment">$130.58</td></tr><tr class="installments_tbl_tr"><td class="install_num">2 </td><td class="install_payment">$130.58</td></tr><tr class="installments_tbl_tr"><td class="install_num">3 </td><td class="install_payment">$130.58</td></tr></tbody></table></div>
+                                    </div> 
+                                    <!-- payment plan info place holder end -->
+                                  </div>
+                                </div>
+                            </div>
+                    </div>
+                    
+
+                    <!-- payment plan extra information end -->
+                    <div id="servicefee">
+                            <div class="form-item">
+                                <!-- <label for="edit-profile-payment-information-field-agree-installments-und">agree installments</label> -->
+                                <div id="edit-profile-payment-information-field-agree-installments-und" class="form-checkboxes">
+                                    <div class="form-item">
+                                        <input type="checkbox" id="edit-profile-payment-information" name="profile_payment_information[field_agree_installments][und][I agree to pay all installments until membership is paid in full]" value="I agree to pay all installments until membership is paid in full" class="form-checkbox">
+                                        <label class="option" for="edit-profile-payment-information">I agree to pay all installments until membership is paid in full <span class="form-required">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- installments and fees end -->
+            </div>
+            <!-- payment options end -->
+            <!-- card info -->
+            
+            
+              <div id="dc_cardinfo" class="payment_method_container cardinfo">
+                <h3>Enter your credit or debit card information<span class="required" aria-required="true">*</span></h3>
+                
+                <div class="">
+                    <div id="profile-name-wrapper">
+                        <div class="form-item form-type-textfield">
+                            <label for="edit-name-value">Name on card <span class="form-required">*</span></label>
+                            <input class="text-full form-text" type="text" id="edit-name-value" name="edit_name_value" value="" size="60" maxlength="255">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field-name-field-card-number" id="edit-field-card-number">
+                    <div id="profile-card-wrapper">
+                        <div class="form-item form-type-textfield field-card0-value">
+                            <label for="edit-card-value">Card number <span class="form-required">*</span>
+                            </label>
+                            <input class="text-full form-text" type="text" id="edit-card-value" name="field-card-num" value="" size="60" maxlength="19">
+                        </div>
+                    </div> 
+                </div>
+                
+                <div class="field-type-datetime field-widget-date-select" id="field-expiration-date">
+                    <div id="profile-expiration-wrapper">
+                        <fieldset class="date-combo date-processed">
+                            <label>
+                                <span class="fieldset-legend">Expiration date <span class="form-required">*</span> </span>
+                            </label>
+                            
+                            <div class="fieldset-wrapper">
+                                <div class="date-no-float container-inline-date">
+                                    <div class="form-item form-type-date-select">
+                                        <div id="edit-date-und-0-value" class="date-padding clearfix">
+                                            <div class="form-item form-type-select form-date-month">
+                                                
+                                                <div class="date-month">
+                                                    <select class="date-clear form-select" id="edit-date-month" name="date-month">
+                                                        <option value="" selected="selected">Month</option>
+                                                        <option value="1">Jan</option>
+                                                        <option value="2">Feb</option>
+                                                        <option value="3">Mar</option>
+                                                        <option value="4">Apr</option>
+                                                        <option value="5">May</option>
+                                                        <option value="6">Jun</option>
+                                                        <option value="7">Jul</option>
+                                                        <option value="8">Aug</option>
+                                                        <option value="9">Sep</option>
+                                                        <option value="10">Oct</option>
+                                                        <option value="11">Nov</option>
+                                                        <option value="12">Dec</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-item form-type-select form-date-year">
+                                              
+                                                <div class="date-year">
+                                                    <select class="date-clear form-select" id="edit-date-year" name="date-year">
+                                                        <option value="" selected="selected">Year</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2024">2024</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2026">2026</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div> 
+                
+                <div class="security-block clearfix">
+                     <div class="securitycode">
+                            <div id="profile-payment-information-field-ccv-add-more-wrapper">
+                              <div class="form-item form-type-textfield cc-val">
+                                    <label for="ccv-0-value">Security code 
+                                    <span class="form-required">*</span>
+                                    </label>
+                                    <input min="100" max="9999" minlength="3" maxlength="4" type="text" id="ccv-0-value" name="ccv_0_value" value="" size="12" class="form-text">
+                                </div>
+                                <div class="security-paypal"> </div>
+                                <div class="securitycodeimg"> </div>
+                            </div>
+                    </div>  
+                </div>
+                
+            </div> 
+            <div class="clearfix"> </div>
+            <!-- electronic cheque info -->
+            <div id="electronic_check_info" class="payment_method_container hidden">
+              <h3 class="elect-header">Enter your ACH information<span class="required" aria-required="true">*</span></h3>
+                <div class="security-block clearfix ">
+                   <div class="checkacounttype">
+                      <div  id="field-acc-type">
+                         <div class="form-item form-type-radios account-type">
+                            <div id="field-acc-type-und" class="form-radios">
+                               <div class="form-item form-type-radio account-type">
+                                  <input type="radio" id="type-und-checking" name="acTypeCheck" value="Checking" checked="checked" class="form-radio" aria-required="true">  <label class="option" for="type-und-checking">Checking </label>
+                               </div>
+                               <div class="form-item form-type-radio account-type">
+                                  <input type="radio" id="type-und-savings" name="acTypeCheck" value="Savings" class="form-radio">  
+                                  <label class="option" for="type-und-savings">Savings </label>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                          <div class="security-paypal"> </div>
+                            <div class="checkacounttypeimg"> </div>
+                            
+                </div>
+                <div class="accountNum field-textfield " id="name-on-account">
+                        <div class="form-item form-type-textfield name-acc-0-value">
+                            <label for="name-acc-0-value">Name on account <span class="form-required">*</span></label>
+                            <input class="text-full form-text" type="text" id="name-acc-0-value" name="nam_0_val" value="" size="60" maxlength="255">
+                        </div>
+                </div>
+                <div class="bankNum field-textfield " id="bank-routing-number">
+                        <div class="form-item form-type-textfield bank-routing-0-value">
+                            <label for="bank-routing-0-value">Bank routing number <span class="form-required">*</span></label>
+                            <input class="text-full form-text" type="text" id="bank-routing-0-value" name="bank_0_val" value="" size="60" maxlength="255">
+                        </div>
+                </div> 
+                <div class="field-ac-num field-textfield" id="field-account-number">
+                        <div class="form-item form-type-textfield account-0-value">
+                            <label for="account-num-0-value">Account number <span class="form-required">*</span></label>
+                            <input class="text-full form-text" type="text" id="account-num-0-value" name="acc_0_val" value="" size="60" maxlength="255">
+                        </div>
+                </div>
+            </div> 
+    
+            <div class="clearfix"></div>
+            <!-- Agree terms and conditions -->
+            <div class="payment-page-terms installment-terms">
+                <div class="term-cond" id="">
+                    <div class="form-item">
+                       <!--  <label for="edit-profile-payment-information-field-agree-terms-and-conditions-und">agree terms and conditions </label> -->
+                        <div class="form-checkboxes">
+                            <div class="form-item form-type-checkbox terms-and-cond-yes">
+                                <input type="checkbox" id="tick-ter-cond-yes" name="tick_ter_cond_yes" value="yes" class="form-checkbox">
+                                <label class="option" for="tick-ter-cond-yes">I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="processingmodal" class="hidden"> </div>
+            <div class="actions">
+                <div class="form-actions" id="edit-actions">
+                   
+                    <input type="submit" id="edit-next" name="op" value="Submit payment" class="form-submit">
+                </div>
+               <!--  <div class="hide-display">
+                    <input type="hidden" name="form_build_id" value="form-NjuIlsAWF2-YL80ycW6NjO-tpImjCE7INF4ZKmqSBAE">
+                    <input type="hidden" name="form_token" value="APdrhKVDa12BGBagQvZChOYnoeChuJQg-Y64CZiEx64">
+                    <input type="hidden" name="form_id" value="profile2_edit_payment_information_form">
+                </div> -->
+            </div>
+        </div>
+      </section>
