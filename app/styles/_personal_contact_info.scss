@@ -101,8 +101,8 @@
     padding: 0 0 0 15px;
     width: 55%;
 }
-.common-form input[type="text"]:not(.date-clear).input-middle-name {
-  width: 50px;
+.personal-contact.common-form input[type="text"]:not(.date-clear).input-middle-name {
+  width: 80px !important;
 }
 .common-form #field-middle-name{
     width: 50px;
@@ -205,18 +205,29 @@ ul.field-options-select > li > select.form-select, ul.field-options-select > li 
 }
 .address-block-container .chosen-container{
   margin-bottom:10px;
-  width:55% !important;
+  width:67% !important;
 }
-
+.personal-contact.common-form input[type="text"]#primary_home_zipcode:not(.date-clear) {
+  width: 49%;
+}
+.personal-contact.common-form .state {
+  width: 35%;
+}
+#company-organization  .state {
+  width: 33.5%;
+}
+.common-form ul li.clearfix {
+  clear: both;
+}
 .calc-button {
     float: left;
     margin-left: 30px;
 }
 
 .back-grey {
-    background-color: #f2f2f3;
-	padding:20px 20px 0 20px;
-	margin-bottom:30px;
+  background-color: #f2f2f3;
+	padding: 20px;
+	margin-bottom: 50px;
 }
 
 .button-to-link input[type="submit"], .button-to-link input[type="submit"][disabled="disabled"] {
@@ -260,8 +271,10 @@ ul.field-options-select > li > select.form-select, ul.field-options-select > li 
     padding-top: 24px;
 }
 
-.actions-btn  input[type="submit"] {
+.actions-btn  input[type="submit"],
+.actions-btn .link-to-button a {
     width: 32%;
+    display: inline-block;
 }
 
 .mode-workAddress .due-add-my-home-address, .mode-add-company  .due-add-my-home-address {
@@ -310,7 +323,16 @@ ul.field-options-select > li > select.form-select, ul.field-options-select > li 
 .mobile-bottom{
 	display:none;
 }
-
+#company-organization {
+  margin-top: -50px;
+}
+input:disabled {
+  background-color: #ccc!important;
+}
+.personal-contact.common-form select.form-select,
+.personal-contact.common-form input[type="text"]:not(.date-clear) {
+  width: 67%;
+}
 @media (min-width: 320px) and (max-width: 767px){
 	.common-form .form-type-radio{
 		margin: 15px 45px 9px 0;
@@ -390,7 +412,7 @@ ul.field-options-select > li > select.form-select, ul.field-options-select > li 
 
 
 @media (max-width: 567px){
-.actions-btn input[type="submit"], .actions-btn input[type="button"], .magazine-radios input[type="submit"] .magazine-radios input[type="button"]{
+.actions-btn input[type="submit"], .actions-btn input[type="button"], .actions-btn a, .magazine-radios input[type="submit"] .magazine-radios input[type="button"]{
     width: 100% !important;
 }
 }
@@ -419,8 +441,17 @@ h3 {
     font-size: 3rem;
     line-height: 30px;
 }
+
+.personal-contact.common-form .address-block-container .chosen-container, 
+.personal-contact.common-form input[type="text"]#primary_home_zipcode:not(.date-clear),
+.personal-contact.common-form .state,
+#company-organization .state,
+.personal-contact.common-form select.form-select, 
+.personal-contact.common-form input[type="text"]:not(.date-clear) {
+  width: 100% !important;
 }
-/* 10-06-2016 */
+}
+
 .address-container h3{
 	margin:0;
 }

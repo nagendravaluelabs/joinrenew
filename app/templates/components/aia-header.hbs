@@ -10,20 +10,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">
+            
+            {{#link-to "index" class="navbar-brand"}}
               <img src="../images/logo.png" alt="the American Institute of Architects">
-            </a>
+            {{/link-to}}
           </div>          
           <div class="collapse navbar-collapse" id="primary-menu">
             <ul class="nav navbar-nav navbar-right">
               {{#if isLoggedin}}
-                {{#each afterLogin as |page|}}
-                  <li> <a href="{{page.route}}">{{page.name}}</a> </li>
-                {{/each}}
+                <li><a href="#" {{action "signOut"}}>Sign out</a></li>
               {{else}}
-                {{#each beforeLogin as |page|}}
-                  <li> <a href="{{page.route}}">{{page.name}}</a> </li>
-                {{/each}}
+                <li><a href="#" {{action "signIn"}}>Sign in</a></li>                
               {{/if}}
             </ul>
           </div>

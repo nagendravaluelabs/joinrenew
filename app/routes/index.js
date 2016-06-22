@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 activate() {
-  this.modelFor("application").class = "no-sidebars page-sign-up-home";
+  this.controllerFor("application").set("model.class","no-sidebars page-sign-up-home");
 },
 model(){
   return Ember.RSVP.hash({

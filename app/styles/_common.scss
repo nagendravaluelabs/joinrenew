@@ -51,16 +51,16 @@ body {
 }
 
 /* Links */
-a {
+a,
+a:focus,
+a:active {
   color: #ef4135;
 
 }
 a:visited {
   color: #f4473a;
 }
-a:hover,
-a:focus,
-a:active {
+a:hover {
   color:#000;
   text-decoration: none;
 }

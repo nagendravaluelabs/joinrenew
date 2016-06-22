@@ -23,9 +23,6 @@
         display: block;
       }
   }
-  #work-address.back-grey {
-    margin-bottom: 50px;
-  }
 }
 .page-primary-info {
   h3.sign-up-subheading {
@@ -172,8 +169,24 @@ form.common-form {
     display: block;
     padding-left: 20px;
   }
+  .create-org-action {
+    .save-company-info {
+      width: 280px;
+      display: inline-block;
+    }
+  }
 }
 
 .page-primary-info .primary-action-btn {
   padding-left: 20px;
+}
+@media (max-width: 767px) {
+  .read-only-block {
+    padding-left: 0;
+  }
+  #main-content.page-primary-info .actions-btn,
+  .page-primary-info #personal-contact  {
+    padding-left: 0;
+  }
+  
 }

@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   activate() {
-    this.modelFor("application").class = "no-sidebars page-primary-info";
+    this.controllerFor("application").set("model.class","no-sidebars page-primary-info");
+    /*this.set("class", "no-sidebars page-primary-info");
+    this.setMainClass();*/
   },
   model() {
     return Ember.RSVP.hash({
@@ -74,9 +76,11 @@ export default Ember.Route.extend({
             "workPhone": "2133273876"
           },
           "primaryAddress" : {
-            "chaptersType": "work",
+            "chaptersType": "home",
+            "showWorkAddress": false,
+            "showHomeAddress": false,
             "home": {
-              "country": "AFGHANISTAN",
+              "country": "UNITED STATES",
               "address1": "39 Argoswerq",
               "address2": "ewr",
               "city": "Newyork",
@@ -90,5 +94,8 @@ export default Ember.Route.extend({
         }
       }
     });
+  },
+  setMainClass: function(){
+    this.send("setMainClass");
   }
 });

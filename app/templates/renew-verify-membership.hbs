@@ -12,7 +12,10 @@
                 </div>
                 <form class="common-form" action="verify-personal-contact-info.html" method="post" accept-charset="UTF-8">
                 <div class="actions">
-                    <input type="submit" id="edit-next" name="op" value="Renew online now" class="form-submit">
+                    <div class="link-to-button ">
+                      {{#link-to 'primary-information' id="edit-next"}}Renew online now{{/link-to}}
+                    </div>
+                    <div class="clearfix"></div>
                     <p class="mail-renewal"><a target="_blank" href="#">Or mail in your renewal</a></p> 
                  </div>
        </form>

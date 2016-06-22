@@ -44,7 +44,8 @@
 .renew-now .right-view .actions {
     padding-top: 31px;
 }
-.renew-now .actions input[type="submit"] {
+.renew-now .actions .link-to-button {height: 50px;}
+.renew-now .actions #edit-next {
     margin-bottom: 20px;
     font-weight: bolder;
 }

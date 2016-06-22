@@ -1,18 +1,6 @@
 import DS from 'ember-data';
 
 export default Ember.Controller.extend({
-	init: function () {
-		this._super();
-		Ember.run.schedule("afterRender",this,function() {
-		  
-		  $("#accordion").accordion({
-			  collapsible: true,
-			  icons: {'header': 'defaultIcon', 'activeHeader': 'selectedIcon'},
-			  active: false,
-			  heightStyle: "content"
-			});
-		});
-	  },
   actions: {
     questionnaireMembershipduesNext: function() {
       $(".renew-questionnaire").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");

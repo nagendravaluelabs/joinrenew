@@ -2,10 +2,36 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 activate() {
-  this.modelFor("application").class = "one-sidebar sidebar-first page-renew-membership-dues-page";
+  this.controllerFor("application").set("model.class","one-sidebar sidebar-first page-renew-membership-dues-page");
+  this._super();
+  Ember.run.schedule("afterRender", this, function () {
+    $("#accordion").accordion({
+      collapsible: true,
+      icons: {'header': 'defaultIcon', 'activeHeader': 'selectedIcon'},
+      active: false,
+      heightStyle: "content"
+    });
+  });
 },
 model(){
 return Ember.RSVP.hash({
+  steps: [
+	{
+	  "title": "Step 1. Primary information",
+	  "status": "",
+	  "route": "primary-information"
+	},
+	{
+	  "title": "Step 2. Membership dues",
+	  "status": "step-active",
+	  "route": "membership-dues"
+	},
+	{
+	  "title": "Step 3. Payment",
+	  "status": "",
+	  "route": "payment-information"
+	}
+  ],
 	data : [
 		{
 			"title": "AIA National",
@@ -68,7 +94,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-non-aia-member-persons",
 			"id"   : "non_aia_member_persons",
 			"name" : "non_aia_member_persons",
-			"stateAmount" : "40.00",
+			"stateAmount" : "0.00",
 			"localAmount" :"115.00"
 		},
 		{
@@ -78,7 +104,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-aia-member-persons",
 			"id"   : "aia_member_persons",
 			"name" : "aia_member_persons",
-			"stateAmount" : "30.00",
+			"stateAmount" : "0.00",
 			"localAmount" :"115.00",
 			"isRequired" : true
 		},
@@ -90,8 +116,8 @@ return Ember.RSVP.hash({
 			"for"  : "edit-associates-persons",
 			"id"   : "associates_persons",
 			"name" : "associates_persons",
-			"stateAmount" : "20.00",
-			"localAmount" :"20.00"
+			"stateamount" : "0.00",
+			"localamount" :"0.00"
 		},
 		{
 			"title": "Technical staff",
@@ -100,7 +126,7 @@ return Ember.RSVP.hash({
 			"for"  : "edit-techstaff-persons",
 			"id"   : "techstaff_persons",
 			"name" : "techstaff_persons",
-			"stateAmount" : "20.00",
+			"stateAmount" : "0.00",
 			"localAmount" :"115.00"
 		},
 		
@@ -111,11 +137,23 @@ return Ember.RSVP.hash({
 			"for"  : "edit-otherstaff-persons",
 			"id"   : "otherstaff_persons",
 			"name" : "otherstaff_persons",
-			"stateAmount" : "10.00",
-			"localAmount" :"10.00"
+			"stateAmount" : "0.00",
+			"localAmount" :"0.00"
 		},
 		
-	]   		
+	],
+MembershipSide : [
+				 {
+					 "MemberID": "Non AIA Member architects",
+					 "MembershipYear": "2016",
+					 "MembershipType": "architect",
+					 "PaymentDueDate": "01/15/2016",
+					 "InvoiceNumber": "2009088960",
+					 "National": "90",
+					 "State": "79",
+					 "Local": "80"
+				 }
+              ]
 		
  });
 }
