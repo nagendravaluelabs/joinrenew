@@ -1,3 +1,4 @@
+  {{renew-steps steps=model.steps}}
   <!-- Page Specific Content -->
   <div class="row"> 
 	<div class="col-sm-9">
@@ -189,50 +190,54 @@
 	<!--- sidebar -->
 	<aside id="sidebar" class="col-sm-3" role="complementary">
 	  <!-- Member Details -->
+	  {{#each model.MembershipSide as |side|}}
 	  <div class="member-details">
 		<h2>Your info</h2>
 		<div class="member-align">
 		  <p>Member ID</p>
-		  <p>30442072</p>
+		  <p>{{side.MemberID}}</p>
 		</div>
 		<div class="member-align">
 		  <p>Membership year</p>
-		  <p>2016</p>
+		  <p>{{side.MembershipYear}}</p>
 		</div>
 		<div class="member-align">
 		  <p>Membership type</p>
-		  <p>Architect</p>
+		  <p>{{side.MembershipType}}</p>
 		</div>
 		<div class="member-align">
 		  <p>Payment due date</p>
-		  <p>01/15/2016</p>
+		  <p>{{side.PaymentDueDate}}</p>
 		</div>
 		<div class="member-align">
 		  <p>Invoice number</p>
-		  <p>2009088960</p>
+		  <p>{{side.InvoiceNumber}}</p>
 		</div>
 	  </div>
+	   {{/each}}
 	  <div class="clearfix"></div>
 	  <!-- Tax Deductible Block -->
+	   {{#each model.MembershipSide as |side|}}
 	  <div class="tax-deductibles-block block-pane">
 		<h3>Tax deductible percentage</h3>
 		<div class="result-wrapper">
 		  <div class="result">
 			<div>
 			  <label>National:</label>
-			  <span>90%</span>
+			  <span>{{side.National}}%</span>
 			</div>
 			<div>
 			  <label>State:</label>
-			  <span>79%</span>
+			  <span>{{side.State}}%</span>
 			</div>
 			<div>
 			  <label>Local:</label>
-			  <span>95%</span>
+			  <span>{{side.Local}}%</span>
 			</div>
 		  </div>
 		</div>
 	  </div>
+	  {{/each}}
 	  <div class="clearfix"></div>
 	  <div class="need-help block-pane">
 		<h3 class="title">Need help</h3>
