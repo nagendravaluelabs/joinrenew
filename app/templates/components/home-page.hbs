@@ -16,7 +16,7 @@
         {{#if (isEqualTo model.page.title 'Join')}}
           <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
         {{else}}
-          <a href="select-member-type.html" id="edit-next" class="sign_in capture_modal_open">Sign in to renew</a>
+          <a href="#" {{action "signIn"}} id="edit-next" class="sign_in capture_modal_open">Sign in to renew</a>
         {{/if}}
       </div>
     </div>

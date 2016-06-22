@@ -1,8 +1,7 @@
-  {{renew-steps steps=model.steps}}
-  <!-- Page Specific Content -->
-  <div class="row"> 
+{{renew-steps steps=model.steps}}
+
+<div class="row"> 
 	<div class="col-sm-9">
-	  <!-- Page Specific Content -->
 	  <h1 class="page-title">Your membership invoice</h1>
 	  <div class="mobile-header clearfix">
 		<h3>You are joining as an:
@@ -16,7 +15,7 @@
 		<span class="block-pane"></span>
 	  </div>
 	  <div class="clearfix"></div>
-	  <!-- 2016 dues table content start here -->
+
 	  <div class="membership-dues-container">
 		<div class="common-form membership-dues-pages" action="#" method="post"
 		id="profile2-edit-personal-contact-info-form" accept-charset="UTF-8" style="display:block">
@@ -164,24 +163,25 @@
 		</div>
 		<div class="button-container membership-button-container hidden-xs">
 		  <div class="renew-btn-container r-btn-container">
-			<input type="button" value="Continue" class="next membershipdues_next" {{action 'questionnaireMembershipduesNext'}} />
-			<div class="read-only-block-previous-link">
-			  <a class="previous-link" href="verify-personal-contact-info.html">&lt; Go back to previous page</a>
-			</div>
+        <input type="button" value="Continue" class="next membershipdues_next" {{action 'questionnaireMembershipduesNext'}} />
+        <div class="read-only-block-previous-link">
+          {{#link-to 'primary-information' class="previous-link"}} &lt; Go back to previous page {{/link-to}}
+        </div>
 		  </div>
 		  <div class="questionnare-btn-container hidden r-btn-container">
-			<input type="button" value="Continue" class="next membershipdues_next" {{action 'membershipduesNext'}}>
-			<div id="goback-link-questionnare-section">
-			  <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
-			</div>
+        <input type="button" value="Continue" class="next membershipdues_next" {{action 'membershipduesNext'}}>
+        <div id="goback-link-questionnare-section">
+          <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
+        </div>
 		  </div>
 		  <div class="pay-now-container hidden r-btn-container">
-			<input type="button" id="edit-next" name="op" value="Pay now" class="next form-submit"
-			 onclick="window.location.href='payment.html'">
-			<div class="clearfix"></div>
-			<div id="startoverbtn">
-			  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
-			</div>
+        <div class="link-to-button">
+          {{#link-to 'payment-information' class="next form-submit"}} Pay now {{/link-to}}
+        </div>
+        <div class="clearfix"></div>
+        <div id="startoverbtn">
+          <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
+        </div>
 		  </div>
 		</div>
 	  </div>
@@ -265,25 +265,26 @@
 	</aside>
 	<div class="button-container footer-btn-container membership-button-container visible-xs">
 	  <div class="renew-btn-container r-btn-container">
-		<input type="button" value="Continue" class="next membershipdues_next" {{action 'questionnaireMembershipduesNext'}} >
-		<div class="read-only-block-previous-link">
-		  <a class="previous-link" href="verify-personal-contact-info.html">&lt; Go back to previous page</a>
-		</div>
-	  </div>
-	  <div class="questionnare-btn-container hidden r-btn-container">
-		<input type="button" value="Continue" class="next membershipdues_next" {{action 'membershipduesNext'}}>
-		<div id="goback-link-questionnare-section">
-		  <a href="#" class="previous-link membership-dues-prev">&lt; Go back to previous page</a>
-		</div>
-	  </div>
-	  <div class="pay-now-container hidden r-btn-container">
-		<input type="button" id="edit-next" name="op" value="Pay now" class="next form-submit"
-		 onclick="window.location.href='payment.html'">
-		<div class="clearfix"></div>
-		<div id="startoverbtn">
-		  <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
-		</div>
-	  </div>
+      <input type="button" value="Continue" class="next membershipdues_next" {{action 'questionnaireMembershipduesNext'}} />
+      <div class="read-only-block-previous-link">
+        {{#link-to 'primary-information' class="previous-link"}} &lt; Go back to previous page {{/link-to}}
+      </div>
+    </div>
+    <div class="questionnare-btn-container hidden r-btn-container">
+      <input type="button" value="Continue" class="next membershipdues_next" {{action 'membershipduesNext'}}>
+      <div id="goback-link-questionnare-section">
+        <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
+      </div>
+    </div>
+    <div class="pay-now-container hidden r-btn-container">
+      <div class="link-to-button">
+        {{#link-to 'payment-information' class="next form-submit"}} Pay now {{/link-to}}
+      </div>
+      <div class="clearfix"></div>
+      <div id="startoverbtn">
+        <a href="#" class="previous-link membership-dues-prev" {{action 'membershipduesPrev'}}>&lt; Go back to previous page</a>
+      </div>
+    </div>
 	</div>
-  </div>
+</div>
 <div class="clearfix"></div>

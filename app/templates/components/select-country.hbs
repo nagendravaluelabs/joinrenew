@@ -1,4 +1,4 @@
-{{#ember-chosen id=(concat idPrefix '_country') name="{{namePrefix}}_country" class=(concat class ' form-select select-chosen')}}
+{{#ember-chosen id=(concat idPrefix '_country') name="{{namePrefix}}_country" class=(concat class ' form-select select-chosen') selectionDidChange=actionHooks}}
   <option value="">Select</option>
   {{#each countries as |country|}}
     {{#if (isEqualTo country selected)}}

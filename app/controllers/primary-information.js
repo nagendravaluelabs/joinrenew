@@ -3,10 +3,11 @@ import Ember from 'ember';
 const { $ } = Ember;
 
 export default Ember.Controller.extend({
+  editContactInfo: false,
   actions: {
     showPersonalInfo: function() {
-      $('#personal-contact-container').removeClass('hidden');
-      $('#read-only').addClass('hidden');
+      var value = this.get("editContactInfo");
+      this.set("editContactInfo", !value);
     }
   }
 });

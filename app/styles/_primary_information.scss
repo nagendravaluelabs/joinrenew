@@ -23,9 +23,6 @@
         display: block;
       }
   }
-  #work-address.back-grey {
-    margin-bottom: 50px;
-  }
 }
 .page-primary-info {
   h3.sign-up-subheading {
@@ -171,6 +168,12 @@ form.common-form {
   #personal-contact {
     display: block;
     padding-left: 20px;
+  }
+  .create-org-action {
+    .save-company-info {
+      width: 280px;
+      display: inline-block;
+    }
   }
 }
 

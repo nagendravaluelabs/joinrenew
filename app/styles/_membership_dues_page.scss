@@ -61,9 +61,10 @@
 .page-renew-membership-dues-page .common-form table tr td:nth-child(2), .page-renew-membership-dues-page .total-no-renew-suppdue table tr td:nth-child(2) {
   text-align:right;
 }
-.page-renew-membership-dues-page .common-form input.next, 
-.button-container input.next {
+.page-renew-membership-dues-page .common-form .next, 
+.button-container .next {
   width: 280px;
+  display: inline-block;
 }
 .page-renew-membership-dues-page .total-no-renew-suppdue table.duestable {
   margin: 21px 1.2em 44px;

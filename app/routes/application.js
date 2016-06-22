@@ -1,9 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model(){
+  model: function() {
     return {
-      class: ""    
-    };	
+      class: ""
+    };
+  },
+  actions: {
+    setMainClass: function() {
+      //this.set("model", {"class":"hello"});
+      var model = this.get('controller.model');
+      model.class = "hello";
+    }
   }
 });

@@ -2,7 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 activate() {
-  this.modelFor("application").class = "one-sidebar sidebar-first page-renew-membership-dues-page";
+  this.controllerFor("application").set("model.class","one-sidebar sidebar-first page-renew-membership-dues-page");
+  this._super();
+  Ember.run.schedule("afterRender", this, function () {
+    $("#accordion").accordion({
+      collapsible: true,
+      icons: {'header': 'defaultIcon', 'activeHeader': 'selectedIcon'},
+      active: false,
+      heightStyle: "content"
+    });
+  });
 },
 model(){
 return Ember.RSVP.hash({
