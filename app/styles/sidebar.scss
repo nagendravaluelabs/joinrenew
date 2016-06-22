@@ -1,0 +1,44 @@
+#sidebar {
+    color: #000;
+    margin-top: 166px;
+}
+
+#sidebar h3 {
+    margin-bottom: 18px;
+	
+}
+.dues-list-block{
+	padding-bottom:20px;
+}
+
+.block-pane {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+	margin-top:-1px;
+	padding-bottom:20px;
+}
+.result{
+	margin-bottom:20px;
+}
+.result td {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.result td:nth-child(even) {
+    width: 80px;
+    text-align: right;
+}
+.result  tr.sum {
+    font-weight: bold !important;
+}
+.tax-deductibles-block .result-wrapper .result div {
+    padding-bottom: 10px;
+}
+
+.tax-deductibles-block .result{
+	margin-bottom:0;
+}
+.disclosures{
+	border-bottom:none;
+}
