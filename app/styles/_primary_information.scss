@@ -180,3 +180,13 @@ form.common-form {
 .page-primary-info .primary-action-btn {
   padding-left: 20px;
 }
+@media (max-width: 767px) {
+  .read-only-block {
+    padding-left: 0;
+  }
+  #main-content.page-primary-info .actions-btn,
+  .page-primary-info #personal-contact  {
+    padding-left: 0;
+  }
+  
+}

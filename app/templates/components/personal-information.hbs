@@ -211,7 +211,11 @@
     {{#if primaryWorkAddress}}
       <div class="workAddress-container address-container">
         <div id="work-address" class="back-grey block">
+          {{#if (isEqualTo type 'join')}}
           <h3>Work address</h3>
+          {{else}}
+          <h3>Your work address</h3>
+          {{/if}}
           <fieldset id="home-address" class="form-wrapper required">
             <label class="required required-field">Required
               <span class="form-required">*</span>
