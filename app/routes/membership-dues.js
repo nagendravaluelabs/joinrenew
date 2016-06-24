@@ -18,7 +18,7 @@ return Ember.RSVP.hash({
   steps: [
 	{
 	  "title": "Step 1. Primary information",
-	  "status": "",
+	  "status": "step-done",
 	  "route": "primary-information"
 	},
 	{

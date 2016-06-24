@@ -151,6 +151,19 @@ input[type="checkbox"]:not(:checked) + label:after {
 input[type="checkbox"]:checked + label:after {
 	opacity: 1;
 }
+label.error {
+  font-size: 12px;
+  color: #FF0000 !important;
+  font-weight: normal !important;
+  cursor: pointer;
+}
+.common-form input.form-text.error, 
+textarea.form-textarea.error, 
+select.form-select.error {
+  color: #FF0000 !important;
+  border-color: #FF0000 !important;
+  outline-color: #FF0000 !important;
+}
 @media (min-width: 320px) and (max-width: 1023px){
   .chosen-container {
     width: 100% !important;

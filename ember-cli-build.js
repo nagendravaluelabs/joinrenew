@@ -21,5 +21,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
   app.import('bower_components/bootstrap/dist/js/bootstrap.js');
   app.import('bower_components/jquery-ui/jquery-ui.js');
+  app.import('bower_components/jquery-validation/dist/jquery.validate.js');
   return app.toTree();
 };

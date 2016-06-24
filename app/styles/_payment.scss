@@ -1,968 +1,487 @@
-#main-content.page-sign-up-payment {
-    padding: 0 0 20px 0; 
-}
-.page-sign-up-payment .page-title {
-    margin-bottom: 54px !important;
-    padding-bottom: 5px;
-    margin-top:37px !important;
-}
-.page-sign-up-payment #userprofileinfo {
-    display: inline-block;
-    width: 100%; 
-}
-.page-sign-up-payment #userprofileinfo  address {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px; 
-    line-height:20px; 
-    padding: 2px 0 23px 0;
-}
-.page-sign-up-payment .payment_information #ordersummaryinfo {
-    display: inline-block;
-    width: 70%;
-    margin: 20px 10px 22px 0;
-    color:#000;
-}  
-.page-sign-up-payment .payment_information .ui-helper-reset{
-    font-size: 100%;
-    line-height: 1.3;
-    list-style: outside none none;
-    margin: 0;
-    outline: 0 none;
-    padding: 0;
-    text-decoration: none;
-} 
-.page-sign-up-payment .payment_information .ui-helper-reset.ui-state-default {
-    padding: 22px 0 24px 39px;
-} 
-.page-sign-up-payment .payment_information .defaultIcon {
-    background-image: url(../images/plus-sign.png) !important;
-    width: 20px;
-    height: 20px;
-    margin-left: -7px;
-}
-.ui-state-active .ui-accordion-header-icon {
-    background-image: url(../images/minus-sign.png) !important;
-    width: 20px;
-    height: 20px;
-}
-.ui-state-default, .ui-widget-header .ui-state-default {
-    border-top: 2px solid #e1e1e1;
-    border-bottom: 0px;
-    border-left: 0px;
-    border-right: 0px;
-}
-.page-sign-up-payment .payment_information #accordion h3 {
-    background: #FFFFFF;
-    margin-top: 0px;
-    width: 70%;
-    padding:25px 0 25px 35px;
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 1.5rem;
-    line-height:20px;
-	  color: #000;
-}
-.page-sign-up-payment .payment_information #accordion h3 span:last-child {
-    text-align: right;
-    float: right;
-} 
-.page-sign-up-payment .payment_information #accordion_bottom {
-    border-top: 2px solid #e1e1e1;
-    color: #000;
-    padding: 28px 0 15px 11px!important;
-    width: 70%;
-    display: block;
-    margin-top: 2px;
-    padding: .5em .5em .5em .7em;
-    min-height: 0;
-    border-bottom-right-radius: 0px;
-    font-weight: 400;
-    color: #555;
-    font: inherit;
-    vertical-align: baseline;
-} 
-.page-sign-up-payment .payment_information #accordion_bottom .total_label {
-    margin-left: 29px;
-    float: left;
-    color: #000;
-    font-weight: normal;
-}
-.page-sign-up-payment .payment_information #accordion_bottom  #paymentdue {  
-    float: right;
-    margin-right: 3px;
-    font-weight: normal;
-}
-.page-sign-up-payment .formgroup h3 {
-    border-top: 1px solid #e1e1e1;
-    margin: 52px 0px 44px 0;
-    padding-top: 52px;
-    color:#000;
-} 
-.page-sign-up-payment .payment_information .ui-accordion-header-icon.ui-icon.defaultIcon, 
-.page-sign-up-payment .payment_information .ui-accordion-header-icon.ui-icon {
-    top: 47%;
-    display: block;
-    text-indent: -99999px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    margin-left: 0px;
-} 
-.page-sign-up-payment .payment_information .ui-accordion-header .ui-accordion-header-icon .defaultIcon {
-    position: absolute;
-    left: .5em;
-}
-.page-sign-up-payment .payment_information .ui-accordion-header .ui-accordion-header-icon {
-    position: absolute;
-    left: 0;
-    top: 47%;
-}
-.page-sign-up-payment .payment_information .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content {
-    padding: 9px 0 0px 39px;
-} 
-.page-sign-up-payment  #servicefee  input[type="checkbox"]:not(:checked) + label, input[type="checkbox"]:checked + label {
-    padding-top: 5px;
-    font-weight: normal;
-} 
-.page-sign-up-payment .payment_information table, 
-.page-sign-up-payment .payment_information .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active, 
-.page-sign-up-payment .payment_information table td {
-    border: 0 !important;
-}
-.page-sign-up-payment .payment_information .ui-accordion .ui-accordion-content {
-    padding: 1em 2.2em;
-    border-top: 0;
-    overflow: auto;
-}
-.page-sign-up-payment .payment_information table {
-    margin: 0 0 1.5em;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-right: none;
-    background: #fff;
-}
-.page-sign-up-payment .payment_information .result table {
-    margin-bottom: 0;
-}
-.page-sign-up-payment .payment_information  tr {
-    border-bottom: 2px solid #e1e1e1;
-    color: #000;
-    width:560px;
-    padding: 5px 5px;
-}
-.page-sign-up-payment .payment_information  table, .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active, 
-.page-sign-up-payment .payment_information table td {
-    border: 0 !important;
-}
-.page-sign-up-payment .payment_information .setTablepanel { width:68.5%}
-.page-sign-up-payment .payment_information.result table tr td:nth-child(odd) {
-    padding-left: 0;
-    border: 0;
-} 
-.page-sign-up-payment .payment_information .result td {
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-    text-align:left;
-}
-.page-sign-up-payment .payment_information .result table tr td span:first-child {
-    color: #a7a9ac;
-}
-.page-sign-up-payment .payment_information .result table tr td:not(:first-child) {
-    text-align: right;
-    width: 192px;
-} 
-.page-sign-up-payment .payment_information .result .sum  td:last-child {
-    text-align: right;
-    width: 192px;
-}
-.page-sign-up-payment .payment_information .result table tr td span:not(:first-child) {
-    display: inline-block;
-    width: 78px;
-}
-.page-sign-up-payment .payment_information .result tr.sum {
-    font-weight: normal !important;
-    border:0 none;
-}
-.page-sign-up-payment .payment_information .result tr.sum .title{ 
-    padding-top: 27px !important;
-    padding-bottom: 7px !important;
-}
-.page-sign-up-payment .payment-page-terms .term-cond  input[type="checkbox"]:not(:checked) + label, 
-.page-sign-up-payment .payment-page-terms .term-cond  input[type="checkbox"]:checked + label {
-     padding-top: 0px !important; 
-}
-.page-sign-up-payment .payment_information .ui-accordion-header {
-    display: block;
-    cursor: pointer;
-    position: relative;
-    margin-top: 2px;
-    padding: .5em .5em .5em .7em;
-    min-height: 0;
-}
-.page-sign-up-payment .formgroup .required, .page-sign-up-payment #electronic_check_info .required, .page-sign-up-payment #dc_cardinfo .required,
-.page-sign-up-payment #dc_cardinfo .form-required, .page-sign-up-payment .term-cond .form-required {
-    color: red;
-    vertical-align: 4px;
-}
-.page-sign-up-payment #content {
-    width: 74.6%;
-}
-.page-sign-up-payment  .formgroup #paymentoptions {
-    display: inline-block;
-    margin-left: 14px;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethod {
-    display: inline-block;
-    float: left;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethod #edit-prof-pay {
-   position:relative;
-}
-.page-sign-up-payment  .formgroup .form-item {
-    margin-bottom: 1em;
-    margin-top: 2px;
-}
-.page-sign-up-payment .form-item .form-pay-opt {
-    margin-bottom: 0;
-}
-.page-sign-up-payment.form-checkboxes .form-item, .page-sign-up-payment.form-radios .form-item {
-    margin-bottom: 1em;
-    margin-top: 0.4em;
-} 
-.page-sign-up-payment #paymentoptions #paymentmethod .form-pay-opt {
-    margin-top: 0 !important;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo {
-    margin-top: 6px;
-    float: right;
-    display: inline-block;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo .creditcardimag {  
-     float: left;
-    margin-top: -3px;
-    margin-left: 17px;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo  .creditcardicon {
-    display: block;
-    float: left;
-    width: 32px;
-    height: 20px;
-    margin-right: 18px;
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo .creditcardimag .amexicon {
-    background: url(../images/u71.png);
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo .creditcardimag .visaicon {
-    background: url(../images/u73.png);
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo .creditcardimag .mastercardicon {
-    background: url(../images/u75.png);
-}
-.page-sign-up-payment  .formgroup #paymentoptions #paymentmethodinfo .creditcardimag .discovericon {
-    background: url(../images/u77.png);
-}
-.page-sign-up-payment input[type="radio"]:not(old) + label {
-    padding-bottom: 12px;
-    font-weight: normal;
-}
-.page-sign-up-payment #dc_cardinfo {
-    margin-top: 20px;
-    border-top: 1px solid #e1e1e1;
-}
-.page-sign-up-payment #dc_cardinfo > h3 {
-    padding: 30px 0 28px 0;
-}
-.page-sign-up-payment #dc_cardinfo input[type="text"]:not(.date-clear) {
-    color: #a7a9ac;
-    padding: 0px 0px 0px 16px;
-    width: 43.5%;
-    height:50px;
-}
-.page-sign-up-payment #dc_cardinfo .date-combo {
-    margin-top:27px;
-}
-.page-sign-up-payment #dc_cardinfo .date-month .date-clear {
-    padding-left: 14px;
-} 
-.page-sign-up-payment #dc_cardinfo .fieldset-wrapper .form-type-select select.form-select {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
-    line-height: 24px;
-    padding-right: 48px;
-    font-weight:normal;
-    padding: 0px 0px 0px 10px;
-    width: 29.5%;
-    height: 50px;
-} 
-.page-sign-up-payment #dc_cardinfo label, .page-sign-up-payment #electronic_check_info label {
-    padding-bottom: 14px;
-    color:#000;
-    display: block;
-    font-weight: normal;
-}
-.page-sign-up-payment .payment-page-terms .terms-and-cond-yes label {
-  font-weight: normal;
-}
-.page-sign-up-payment .fieldset-wrapper #edit-date-und-0-value { 
-  margin-left:10px; 
-}
-.page-sign-up-payment #dc_cardinfo  select {
-    margin-bottom: 20px !important;
-}
-.page-sign-up-payment .cc-val input{ width:140px;}
-.page-sign-up-payment #dc_cardinfo .cardinfo > div {
-    padding-left: 20px;
-}
-.page-sign-up-payment #dc_cardinfo .securitycode .cc-val  input[type="text"]:not(.date-clear) {
-    width: 90%;
-    height: 50px;
-}
-.page-sign-up-payment #dc_cardinfo .security-block .securitycodeimg {
-    background: rgba(0, 0, 0, 0) url("../images/u30.png") no-repeat scroll right bottom; 
-    display: inline-block;
-    width: 200px;
-    height: 74px;
-    margin: 8px 0 0 0px;
-    float: left;
-}
-.page-sign-up-payment #dc_cardinfo .security-block  .security-paypal {
-    background: rgba(0, 0, 0, 0) url("../images/paypal-security.png") no-repeat scroll right bottom; 
-    display: inline-block;
-    width: 200px;
-    height: 74px;
-    margin-top: 17px;
-    float:right;
-    margin-right: 15px; 
-} 
-.page-sign-up-payment #dc_cardinfo .security-block .securitycode .cc-val label { 
-    width:100%;
-}
-.page-sign-up-payment #dc_cardinfo .security-block .securitycode .cc-val {   
-    width:20%;  
-    margin: 0;
-    float: left;
-}
-.page-sign-up-payment #dc_cardinfo .form-type-textfield, 
-.page-sign-up-payment #dc_cardinfo .field-name-field-card-number .form-type-textfield {
-    margin-bottom: 23px; 
-}
-.page-sign-up-payment .payment-page-terms .terms-and-cond-yes {
-    margin-bottom:50px;
-    margin-top: 138px;
-}
-.page-sign-up-payment .actions .form-actions {
-    margin-bottom:95px;
-}
-.page-sign-up-payment .actions .form-actions input[type="submit"] { width:280px;}
-.page-sign-up-payment  #electronic_check_info {
-    border-top: 1px solid #e1e1e1;
-}
-.page-sign-up-payment  #electronic_check_info .elect-header {
-    margin-top:55px;
-    margin-bottom:45px;
-}
-.page-sign-up-payment #electronic_check_info > div:first-of-type {
-    margin-bottom: 17px;
-}
-.page-sign-up-payment #electronic_check_info > div {
-    padding-left: 20px;
-} 
-.page-sign-up-payment #electronic_check_info .security-paypal {
-	  background: rgba(0, 0, 0, 0) url("../images/paypal-security.png") no-repeat scroll right top;
-    display: inline-block;
-    width: 200px;
-    height: 74px;
-    margin-top: 17px;
-    float: right;
-    margin-right: 15px;
-}
- .page-sign-up-payment #electronic_check_info  input[type="text"]:not(.date-clear) {
-     height:50px; 
-     width:45.4%;
-}
-.page-sign-up-payment #electronic_check_info .security-block .checkacounttype {
-    display: inline-block;
-    height: 115px;
-    margin-right: 12px;
-    vertical-align: top;
-    float:left;
-}
-.page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg {
-    background: rgba(0, 0, 0, 0) url("../images/u50.png") no-repeat scroll right bottom; 
-    display: inline-block;
-    width: 219px;
-    height: 142px;
-    float: left;
-}
-.page-sign-up-payment .bank-routing-0-value,
-.page-sign-up-payment .account-0-value {
-    margin-top:30px;
-}
-.page-sign-up-payment #electronic_check_info .field-textfield .form-type-textfield label { font-weight: normal;}
-.page-sign-up-payment .installment-terms .terms-and-cond-yes {
-    margin-bottom: 50px;
-    margin-top: 55px;
-}  
-.page-sign-up-payment .formgroup #installments {
-    margin-left: 18px;
-}
-.page-sign-up-payment  #installmentsform {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 8px;
-}
-.page-sign-up-payment  #installmentsform  #edit-profile-payment-information-field-installments {
-    width: 166px;
-    display: inline-block;
-}
-.page-sign-up-payment  #installmentsform .form-inst-und label {
-    float: right;
-    display: inline-block;
-    margin-top: 16px;
-}
-.page-sign-up-payment  #installmentsform .form-type-select select.form-select {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
-    line-height: 38px;
-    padding-right: 48px;
-}
-.page-sign-up-payment  #installmentsform #firstinstallment {
-    float: left;
-    display: inline-block;
-    color: #ef4135;
-    font-size: 2.4rem;
-    margin-top: 22px;
-    margin-bottom: 3px;
-}
-.page-sign-up-payment  #installmentsform #paymentplan_info_but {
-    float: left;
-    margin-top: 30px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-.page-sign-up-payment  #installmentsform .extrainfo_icon {
-    width: 26px;
-    height: 26px;
-    background: url(../images/circle-info.png) no-repeat;
-    margin-top: 11px;
-    cursor:pointer;
-}
-.page-sign-up-payment  #installments .servicefee_info {
-    font-size: 11px;
-    color: #808080;
-    margin: 12px 0px;
-}
-.page-sign-up-payment  #installmentsform #servicefee {
-    display: inline-block;
-    clear: both;
-}
-.page-sign-up-payment .formgroup #installments .ui-widget-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #222222;
-    opacity: 0.7;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .front-pos{
-    height: auto; 
-    width: 439px; 
-    top: 1129px; 
-    left: 350px; 
-    display: block;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-corner-all.ui-front.ui-widget-content {
-    border: 1px solid #e1e1e1;
-}
-.page-sign-up-payment .formgroup #installmentst .payment-plan .ui-dialog {
-    width: auto!important;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-dialog .ui-dialog-titlebar {
-    padding: .4em 1em;
-    position: relative;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-dialog .ui-dialog-titlebar-close {
-    background: url(../images/temp-remove.png) no-repeat;
+#main-content {
+  &.page-sign-up-payment {
+    .aia-progress-bar {
+      margin-top: 20px;
+    }
+    .page-title {
+      margin-bottom: 54px;
+      padding-bottom: 5px;
+      margin-top:37px;
+      @media (max-width: 767px) {
+        font-size: 48px;
+      }
+    }
+    #userprofileinfo {
+      ul {
+        line-height: 20px;
+        margin: 0;
+        li {
+          @media (max-width: 767px) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+      address {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px; 
+        line-height:20px; 
+        padding: 2px 0 23px 0;
+      }
+    }
+    .payment_information {
+      #ordersummaryinfo {
+        display: inline-block;
+        width: 70%;
+        margin: 26px 10px 0px 0;
+        color:#000;
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+      .ui-helper-reset{
+        font-size: 100%;
+        line-height: 1.3;
+        list-style: outside none none;
+        margin: 0;
+        outline: 0 none;
+        padding: 0;
+        text-decoration: none;
+        &.ui-state-default {
+          padding: 22px 0 24px 39px;
+        }
+      }
+      .ui-accordion-header {
+        outline: none;
+        border-top: 2px solid #e1e1e1;
+        border-bottom: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        background: #FFFFFF;
+        margin-top: 0px;
+        padding:25px 0 25px 40px;
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 1.5rem;
+        line-height:20px;
+        color: #000;
+        .ui-accordion-header-icon {
+          left: 0;
+          top: 47%;
+          display: block;
+          text-indent: -99999px;
+          overflow: hidden;
+          background-repeat: no-repeat;
+          margin-left: 0px;
+        }
+        .defaultIcon {
+          background-image: url(../images/plus-sign.png) !important;
+          width: 20px;
+          height: 20px;
+        }
+        &.ui-state-active {
+          .ui-accordion-header-icon {
+            background-image: url(../images/minus-sign.png) !important;
+            width: 20px;
+            height: 20px;
+          }
+        }
+        span:last-child {
+          text-align: right;
+          float: right;
+        } 
+      }
+      .ui-accordion-content {
+        padding: 9px 0 0px 40px;
+        font-size: 16px;
+        table {
+          tr {
+            border-bottom: 2px solid #e1e1e1;
+            color: #000;
+            &.sum {
+              font-weight: normal !important;
+              border:0 none;
+              .title{ 
+                padding-top: 27px !important;
+                padding-bottom: 7px !important;
+              }
+            }
+            td {
+              padding: 5px 10px !important;
+              text-align:left;
+              &:nth-child(odd) {
+                padding-left: 0;
+                border: 0;
+              }
+              &:not(:first-child) {
+                text-align: right;
+                width: 192px;
+              }
+              &:last-child {
+                text-align: right;
+                width: 192px;
+              }
+              span {
+                &:first-child {
+                  color: #a7a9ac;
+                }
+                :not(:first-child) {
+                  display: inline-block;
+                  width: 78px;
+                }
+              }
+            }
+          }
+        }
+      }
+      #accordion_bottom {
+        border-top: 2px solid #e1e1e1;
+        color: #000;
+        padding: 28px 0 15px 40px;
+        display: block;
+        margin-top: 2px;
+        min-height: 0;
+        font-weight: 400;
+        color: #555;
+        font: inherit;
+        vertical-align: baseline;
+        .total_label {
+          margin-left: 0px;
+          float: left;
+          color: #000;
+          font-weight: normal;
+        }
+        .paymentdue {  
+          float: right;
+          margin-right: 3px;
+          font-weight: normal;
+        }
+      }
+    }
+    .payment_method {
+      h3 {
+        border-top: 1px solid #e1e1e1;
+        margin: 52px 0px 44px 0;
+        padding-top: 54px;
+        color:#000;
+      }
+      ul {
+        margin-left: 16px;
+        li {
+          position: relative;
+          margin-bottom: 12px;
+          label {
+            font-weight: normal;
+          }
+          .creditcardType {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+            .creditcardicon {
+              display: block;
+              float: left;
+              width: 32px;
+              height: 20px;
+              margin-right: 18px;
+              &.amexicon {
+                background: url(../images/u71.png);
+              }
+              &.visaicon {
+                background: url(../images/u73.png);
+              }
+              &.mastercardicon {
+                background: url(../images/u75.png);
+              }
+              &.discovericon {
+                background: url(../images/u77.png);
+              }
+            }
+            @media (max-width: 767px) {
+              float: none;
+              display: block;
+              padding: 5px 0 0 32px;
+            }
+          }
+        }
+      }
+      #installmentsform {
+        display: inline-block;
+        width: 100%;
+        padding: 15px 0 8px 16px;        
+      }
+      #installmentnumber {
+        select {
+          width: 70px !important;
+          text-align: left;
+          padding-left: 5px;
+          display: inline-block;
+        }
+        label {
+          display: inline-block;
+          margin-left: 20px;
+        }
+        margin-bottom: 25px;
+      }
+      #firstinstallment {
+        float: left;
+        display: inline-block;
+        color: #ef4135;
+        font-size: 2.4rem;
+      }
+      #paymentplan_info_but {
+        float: left;
+        margin-left: 10px;
+        margin-top: -15px;
+        .extrainfo_icon {
+          width: 26px;
+          height: 26px;
+          background: url(../images/circle-info.png) no-repeat;
+          margin-top: 11px;
+          display: inline-block;
+        }
+      }
+      .servicefee_info {
+        font-size: 11px;
+        color: #808080;
+        margin: 20px 0px;
+      }
+      #servicefee {
+        margin-top: 3px;
+        label {
+          font-weight: normal;
+          padding-left: 35px;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .payments-container {
+      border-top: 1px solid #e1e1e1;
+      margin-top: 50px;
+      padding: 30px 0 25px 0;
+      ul {
+        margin: 25px 0 0 20px;  
+        @media (max-width: 767px) {
+          margin-left: 0px;
+        }
+      }
+      .terms {
+        margin-top: 45px;
+        label {
+          font-weight: normal;
+        }
+      }
+      input {
+        max-width: 370px;
+        @media (max-width: 767px) {
+          max-width: initial;
+          width: 100%;
+        }
+      }
+      .gatewayimg {
+        display: inline-block;
+        width: 198px;
+        height: 73px;
+        background-image: url(../images/paypal-security.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: 8px 0 0 30px;
+        float: right;
+        @media (max-width: 991px) {
+          width: 150px;
+        }
+        @media (max-width: 600px) {
+          width: 120px;
+        }
+      }
+      .card-payment {
+        .cardExpiration {
+          max-width: 370px;
+          .cardExpirations {
+            width: 50%;
+            float: left;
+            &:first-child {
+              padding-right: 10px;
+            }
+            &:last-child {
+              padding-left: 10px;
+            }
+            select {
+              width: 100%;
+            }
+            @media (max-width: 767px) {
+              width: 100%;
+              padding: 0 !important;
+            }
+          }
+          @media (max-width: 767px) {
+            width: 100%;
+            max-width: initial;
+          }
+        }
+        #cardSecurityCode {
+          width: 135px;
+          @media (max-width: 400px) {
+            width: 100%;
+          }
+        }
+        .securitycodeimg {
+          vertical-align: top;
+          display: inline-block;
+          width: 200px;
+          height: 74px;
+          background-image: url(../images/u30.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          margin: 8px 0 0 30px;
+          @media (max-width: 600px) {
+            margin-left: 0;
+          }
+        }
+        .gatewayimg {
+          @media (max-width: 600px) {
+            margin-top: 50px;
+          } 
+          @media (max-width: 400px) {
+            float: none;
+            width: 198px;
+            margin-left: 0;
+            margin-top: 20px;
+          }        
+        }
+      }
+      .electronic-check {
+        h3 {
+          padding-bottom: 25px;
+        }
+        .echeckMode {
+          ul {
+            margin-top: 10px;
+            li {
+              position: relative;
+              label {
+                font-weight: normal;
+              }
+            }
+          }
+        }
+        .electronicCheckImg {
+          display: inline-block;
+          width: 219px;
+          height: 142px;
+          background-image: url(../images/u50.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          margin: 8px 0 0 50px;
+          vertical-align: top;
+          @media (max-width: 991px) {
+            margin-left: 20px;
+          }
+          @media (max-width: 600px) {
+            float: none;
+          }
+        }
+        .gatewayimg {
+          @media (max-width: 600px) {
+            margin-top: 30px
+          }
+        }
+      }
+      .clear600 {
+        display: none;
+        @media (max-width: 600px) {
+          display: block;
+        }
+      }
+      .form-submit {
+        margin: 25px 0;
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+    .form-required {
+      color: #FF0000;
+    }
+    .required {
+      color: #FF0000;
+      vertical-align: 4px;
+    }
+  }
+}
+#paymentplan_modal{
+  #paymentplan_extrainfo { 
+    width: auto;
+    min-height: 94px; 
+    max-height: none; 
+    height: auto;
+    .extrainfo_box {
+      .leftblock {
+        float: left;
+        @media (max-width: 767px) {
+          float: none;
+        }
+      }
+      .rightblock {
+        float: right;
+        @media (max-width: 767px) {
+          float: none;
+        }
+      }
+      #payment_tbl {
+        table {
+          border-bottom: #e1e1e1 1px solid;
+          border-spacing: 1px;
+          td:first-child {
+            width: 30%;
+            padding-left: 10px;
+          }
+          @media (max-width: 767px) {
+            border: #0B8205 1px solid !important;
+          }
+        }
+      }
+      #installment_payment_sum_list {
+        border: #0B8205 1px solid;
+        width: 120px;
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+        tr {
+          padding: 6px 6px;
+          font-weight: normal;
+          border-bottom: #e1e1e1 1px solid;
+        }
+      }
+      #payment_plan_info_table {
+        border: #e1e1e1 1px solid;
+        width: 100%;
+        tr {
+          padding: 6px 6px;
+          font-weight: normal;
+          border-bottom: #e1e1e1 1px solid;
+          th {
+            padding: 10px 10px;
+            background: #555;
+            color: #fff;
+            font-weight: normal;
+          }
+        }
+      } 
+    }
+  }
+  .ui-dialog-titlebar {
+    padding: 0 !important
+  }
+  .ui-dialog-titlebar-close {
+    background: url(../images/temp-remove.png) no-repeat !important;
     width: 27px;
     height: 27px;
     top: 0px;
     right: 0px; 
     margin: 0 0 10px 10px;
     position: absolute;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .extrainfo_box {
-    display: inline-block;
-    width: 400px;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-dialog .ui-dialog-content {
-    position: relative;
     border: 0;
-    padding: .5em 1em;
-    background: 0;
-    overflow: auto;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-dialog .ui-dialog-title {
-    margin-bottom: 10px;
-    float: left;
-    margin: .1em 0;
-    white-space: nowrap;
-    width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #paymentplan_extrainfo { 
-    width: auto;
-    min-height: 94px; 
-    max-height: none; 
-    height: auto;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .leftblock {
-    float: left;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #payment_plan_info_table {
-    border: #e1e1e1 1px solid;
-    width: 100%;
-} 
-.page-sign-up-payment .formgroup #installments .payment-plan #payment_plan_info_table tr {
-    padding: 6px 6px;
-    font-weight: normal;
-    border-bottom: #e1e1e1 1px solid;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #payment_plan_info_table th {
-    padding: 10px 10px;
-    background: #555;
-    color: #fff;
-    font-weight: normal;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .rightblock {
-    float: right;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #payment_tbl table {
-    border-bottom: #e1e1e1 1px solid;
-    border-spacing: 1;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #payment_tbl table td:first-child {
-    width: 30%;
-    padding-left: 10px;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #installment_payment_sum_list {
-    border: #0B8205 1px solid;
-    width: 120px;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan #installment_payment_sum_list tr {
-    padding: 6px 6px;
-    font-weight: normal;
-    border-bottom: #e1e1e1 1px solid;
-}
-.page-sign-up-payment .ui-dialog-titlebar {
-    padding-top: 0px!important;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-dialog .ui-dialog-titlebar {
-    padding: .4em 1em;
-    position: relative;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-corner-all {
-    border-radius: 0px;
-}
-.page-sign-up-payment .formgroup #installments .payment-plan .ui-widget-header {
-    border: none;
-    background: none;
-}
-.page-sign-up-payment .payment_information #accordion h3:focus {
-  outline: none;
-}
-@media only screen and (min-width : 767px) and (max-width : 1023px) {
-    .page-sign-up-payment #dc_cardinfo .security-block .securitycodeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u30.png") no-repeat scroll left bottom; 
-        margin: 8px 0 0 0px !important;
-    }
-    .page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u50.png") no-repeat scroll left bottom; 
-        margin: 8px 0 0 0px !important;
-    }
-}
-@media (max-width: 767px) {
-
- 
-  .page-sign-up-payment .aia-progress-bar-one-step .aia-progress-one-step .steps .step-text { 
-    margin-top:120px; 
-    font-family: architype-light;
+    outline: none;
   }
-  .page-sign-up-payment #content {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%;
+  .ui-widget-overlay {
+    background: #222222;
+    opacity: 0.9;
   }
-  .page-sign-up-payment h2, .page-sign-up-payment h3 {
-    font-size: 3rem;
-  }
-  
-  #main-content .page-title {
-      font-size: 5.6rem;
-      padding-bottom: 18px;
-  }
-  .page-sign-up-payment .page-title {
-    margin-bottom: 48px !important; 
-    margin-top: 18px !important;
-    padding-bottom: 5px;
-    
-  }
-  .page-sign-up-payment #userprofileinfo  address {
-   font-family: architype-light;
-   font-size: 2.4rem; 
-   line-height:30px; 
-   color: #000;
-   padding: 0px 0 18px 0;
-  }
-  .page-sign-up-payment #ordersummaryinfo {
-    width: 100% !important;
-  }
-  .page-sign-up-payment .payment_information #accordion {
-    
-    font-size: 2.4rem;
-    line-height: 30px;
-    width: 100%;
-  }
-  .page-sign-up-payment .payment_information #accordion h3 {
-    font-family: architype-light;
-    font-size: 2.4rem;
-    line-height: 30px;
-    width: 100%;
-  }  
-  .page-sign-up-payment .payment_information #accordion h3 span:last-child {
-    display:none !important;
-  }
-  
- 
-  .page-sign-up-payment .payment_information .setTablepanel {
-    width: 100%;
-  }
-    
-    .page-sign-up-payment .payment_information .setTablepanel .result tr td { float:left; width:100%;}
-    .page-sign-up-payment .payment_information .setTablepanel .result .sum td:first-child { float:left; width:35%;}
-    .page-sign-up-payment .payment_information .setTablepanel .result .sum td:last-child {  
-       float: right;
-        margin-top: 22px;
-        width: 40% !important;
-        text-align: left;
-        padding-left: 43px;
-    }
-    .page-sign-up-payment .payment_information .result table tr td:not(:first-child) {
-        padding-right: 3px;
-        text-align: left;
-        width: 100% !important;
-        
-    }
-    .page-sign-up-payment .payment_information .result tr.sum .title {
-        padding-bottom: 0px !important;
-        padding-top: 0px !important;
-    }
-      .page-sign-up-payment .payment_information .result table tr td span:not(:first-child) {
-        
-        text-align: right;
-       
-    }
-      .page-sign-up-payment .payment_information .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content {
-          padding: 9px 0 0 5px;
-    }
-      .page-sign-up-payment .payment_information .result table tr td:last-child {margin-bottom:23px;}
-      .page-sign-up-payment .payment_information .result table tr td:first-child {margin-top:23px;}
-      .page-sign-up-payment .payment_information #accordion_bottom {
-        border-bottom-right-radius: 0;
-        color: #555;
-        display: block;
-        margin-top: 2px;
-        min-height: 0;
-        padding: 0.5em 0.5em 0.5em 0.7em;
-        vertical-align: baseline;
-        font-size:24px; 
-        line-height:30px;
-        width:100%;
-    } 
-    .page-sign-up-payment .payment_information #accordion_bottom .total_label {
-        color: #000;
-        float: left !important;
-        font-weight: normal;
-        margin-left:-7px !important;
-    } 
-    .page-sign-up-payment .formgroup h3 {
-        border-top: 1px solid #e1e1e1;
-        color: #000;
-        margin: 52px 0 22px;
-        padding-top: 36px;
-        width:335px;
-    }
-    .page-sign-up-payment  .formgroup #paymentoptions #edit-profile-payment-information-field-how-to-pay-und-debitcredit-card + label {
-        margin-bottom: 42px;
-        position: relative;
-        font-size:2.4rem;
-        line-height:22px;
-    }
-    .page-sign-up-payment .formgroup #paymentoptions #paymentmethodinfo {
-        left: 49px;
-        position: absolute;
-        display: inline-block;
-        float: left;
-        margin-left: 10px;
-        margin-top: 43px;
-    }
-   
-    .page-sign-up-payment input[type="radio"]:not(old) + label {
-        font-size: 2.4rem;
-        font-weight: normal;
-        padding-bottom: 28px;
-    }
-    .page-sign-up-payment .formgroup #paymentoptions {
-  
-    margin-left: 0px;
-}
-    .page-sign-up-payment .form-pay-opt:first-child { margin-bottom:50px}
-    .page-sign-up-payment .formgroup #paymentoptions #paymentmethodinfo .creditcardimag {
-        margin-left: 3px;
-        margin-top: -42px;
-        width: 240px;
-    }
-    .page-sign-up-payment .formgroup #installments {
-        margin-left: 0px;
-      }
-    .page-sign-up-payment .formgroup #installments  #installmentsform {
-        display: inline-block;
-        margin-bottom: 8px;
-        width: 100%;
-    }
-    .page-sign-up-payment .formgroup #installments #installmentsform #installmentnumber {
-      border-bottom: 1px solid #d1d2d3;
-      margin-bottom:28px;
-      padding-bottom: 21px;
-      position: relative;
-      font-size:2.4rem;
-      margin-top:3px;
-      width:350px;
-     } 
-    .page-sign-up-payment .form-inst-und label {
-      left: 0;
-      margin-top: 0;
-      position: absolute;
-      top: 28px;
-      font-weight: normal;
-    }
-    .page-sign-up-payment  #installmentsform  #firstinstallment  {
-        font-size: 3rem !important;
-    }
-    .page-sign-up-payment  #installmentsform .extrainfo_icon { display:none;}
-    .page-sign-up-payment .formgroup  #installments .leftblock {
-        width: 100%;
-        float: left;
-        font-size:2.4rem;
-    }
-    .page-sign-up-payment #installments .servicefee_info { 
-        font-size:2.4rem; 
-        color:#000;  
-        margin: 15px 0;
-    }
-    .page-sign-up-payment .leftblock  #payment_plan_info_table tr th { 
-        padding-left:0px !important
-    }
-    .page-sign-up-payment .leftblock  #payment_plan_info_table tr th, 
-    .page-sign-up-payment .leftblock  #payment_plan_info_table tr td {
-         padding: 22px 0;
-    }
-    .page-sign-up-payment .formgroup #installments.leftblock  #payment_plan_info_table tr th, 
-    .page-sign-up-payment .formgroup #installments.leftblock  #payment_plan_info_table tr td {
-        padding: 20px 0;
-    }
-    .page-sign-up-payment .formgroup #installments.leftblock table td {
-        border-right: 1px solid #ddd;
-        border-top: 1px solid #ddd;
-        padding: 5px 10px;
-    }
-   
-    .page-sign-up-payment .formgroup  #installments .leftblock  #payment_plan_info_table tr {
-        border-bottom: 1px solid #e1e1e1;
-        font-weight:normal;
-        padding: 6px;
-    }
-    .page-sign-up-payment .formgroup  #installments .leftblock  #payment_plan_info_table tr th {
-        font-weight:normal;
-    }
-    .page-sign-up-payment .formgroup  #installments .leftblock  #num_installments_selected_mobile,
-    .page-sign-up-payment .formgroup  #installments .leftblock  #single_installment_amount { font-weight:bold;}
-   
-    .page-sign-up-payment  #installments  #servicefee .form-checkboxes .form-item, .form-radios .form-item {
-        margin-bottom: 1em;
-        margin-top: 0.4em;
-    }
-    .page-sign-up-payment #dc_cardinfo .date-month .date-clear.form-select, .date-year .date-clear.form-select {
-        border-radius: 0;
-        width: 100%;
-    }
-    .page-sign-up-payment #dc_cardinfo .date-month .date-clear {
-        padding-left: 14px;
-    }
-    .form-type-select select.form-select {
-        -moz-appearance: none;
-        background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
-        line-height: 24px;
-        padding-right: 48px;
-    }
-    
-    .page-sign-up-payment  #installments  #servicefee .option {
-        margin-bottom: 57px;
-    }
-    .page-sign-up-payment  #installments  #servicefee {
-        clear: both;
-        display: inline-block;
-    } 
-    .page-sign-up-payment  #installments  #servicefee .form-checkboxes label{ font-size:2.4rem; font-weight:normal;}
-    .page-sign-up-payment  #installments  #servicefee .form-checkboxes label .option {
-        display: block;
-    }
-    .page-sign-up-payment  #installments  #servicefee input[type="checkbox"]:not(:checked) + label::before, 
-    .page-sign-up-payment  #installments  #servicefee input[type="checkbox"]:checked + label::before {
-        border: 1px solid #e1e1e1;
-        content: "";
-        height: 17px;
-        left: 0;
-        position: absolute;
-        top: 2px;
-        width: 17px; 
-    }
-    .page-sign-up-payment  #installments  #servicefee input[type="checkbox"]:not(:checked) + label, 
-    .page-sign-up-payment  #installments  #servicefee input[type="checkbox"]:checked + label {
-        cursor: pointer;
-        padding-left: 25px;
-        position: relative;
-        padding-left: 34px !important;
-    }
-   
-    .page-sign-up-payment  #installments  #servicefee input[type="text"]:not(.date-clear) {
-        color: #a7a9ac;
-        height: 80px;
-        padding: 0 0 0 16px;
-        width: 100%;
-    } 
-    .page-sign-up-payment #dc_cardinfo input.form-text, 
-    .page-sign-up-payment #dc_cardinfo select.form-select {
-        border: 1px solid #d1d2d3;
-    }
-    .page-sign-up-payment #dc_cardinfo label, .page-sign-up-payment #electronic_check_info label {
-        font-size: 2.4rem;
-        font-weight: normal;
-    }
- 
-    
-    .page-sign-up-payment #dc_cardinfo .form-item .form-type-date-select .form-exp-date-und-0-value, 
-    .page-sign-up-payment #dc_cardinfo .field-widget-date-select .fieldset-wrapper .date-padding {
-        width: 100%;
-    }
-    .page-sign-up-payment #dc_cardinfo .field-widget-date-select .fieldset-wrapper .date-padding .form-item {
-      display: inline-block;
-      width: 49.5%;
-    }
-    .page-sign-up-payment .fieldset-wrapper #edit-date-und-0-value {
-      margin-left: 0;
-    }
-    .page-sign-up-payment #dc_cardinfo .fieldset-wrapper .form-type-select select.form-select {
-        height: 80px;
-        font-size: 2.4rem;
-        padding: 0 0 0 10px;
-        width: 100%;
-        float: left;
-        margin-right:10px;
-    }
-    .page-sign-up-payment #dc_cardinfo .securitycode .cc-val input[type="text"]:not(.date-clear) {
-        width: 75%;
-        height: 80px;
-    }
-    .page-sign-up-payment #dc_cardinfo input[type="text"]:not(.date-clear) {
-      color: #a7a9ac;
-      padding: 0px 0px 0px 16px;
-      width: 100%;
-      height: 80px;
-    }
-    .page-sign-up-payment #dc_cardinfo .security-block .securitycode .cc-val {
-      width: 35%;
-    } 
-    .page-sign-up-payment #dc_cardinfo .security-block .securitycode .cc-val label {
-        width: 100%;
-    } 
-    .page-sign-up-payment #dc_cardinfo .security-block .securitycodeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u30.png") no-repeat scroll left bottom; 
-        margin:22px 0 0 0px;
-    }
-    .page-sign-up-payment .payment-page-terms label { 
-        font-family: architype-light;
-        font-size: 2.4rem;
-        font-weight: normal;
-        margin-bottom: 10px;
-    }
-    .page-sign-up-payment .actions .form-actions {
-      margin-bottom: 0px;
-    }
-  
-    .page-sign-up-payment #dc_cardinfo .security-block .security-paypal {
-      background: rgba(0, 0, 0, 0) url("../images/paypal-security.png") no-repeat scroll right 30px / 125px auto;
-      width:25%;
-      margin-top: 23px;
-    }
-    .page-sign-up-payment #electronic_check_info .elect-header {
-      margin-bottom: 20px;
-    }
-    .page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u50.png") no-repeat scroll left bottom; 
-        margin: 10px 0 0 0px !important;
-    }
-	.page-sign-up-payment #electronic_check_info .security-paypal {
-		  background: rgba(0, 0, 0, 0) url("../images/paypal-security.png") no-repeat scroll right 30px / 125px auto;
-	    width: 25%;
-	    
-	}
-   .page-sign-up-payment #electronic_check_info input[type="text"]:not(.date-clear) {
-    height: 80px;
-    width: 100%;
-	}
-    .page-sign-up-payment #electronic_check_info > div {
-      padding-left: 0px;
-    }
-    .page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg { margin-left:40px; }
-    .page-sign-up-payment #electronic_check_info .field-textfield .form-type-textfield label {
-      font-weight: normal;
-    }
-    .page-sign-up-payment #electronic_check_info > div:first-of-type {
-        margin-bottom: 25px;
-    }
-}
-
-@media (max-width:600px) {
-  .page-sign-up-payment #dc_cardinfo .security-block .securitycodeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u30.png") no-repeat scroll left bottom;
-        margin: 10px 0 0 0px;
-	 }
-  .page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg {
-        background: rgba(0, 0, 0, 0) url("../images/u50.png") no-repeat scroll left bottom; 
-        margin: 8px 0 0 0px !important;
-   }
-  .page-sign-up-payment #electronic_check_info .security-block .checkacounttypeimg {
-        float:none; 
-        width:100%;
-   }
-	.page-sign-up-payment #dc_cardinfo .security-block .security-paypal {
-        width: 50%;
-        margin-top: 65px;
-        margin-bottom: 30px;
-    }
-  .page-sign-up-payment #electronic_check_info .security-paypal {
-	      width: 42%;
-	}
-	.page-sign-up-payment #dc_cardinfo .security-block .securitycode .cc-val label,
-  .page-sign-up-payment #dc_cardinfo .fieldset-wrapper .form-type-select select.form-select  {
-        width: 100% !important;
-	}
-  .page-sign-up-payment #dc_cardinfo .field-widget-date-select .fieldset-wrapper .date-padding .form-item {
-      display: inline-block;
-      width: 100%;
-    }
 }
