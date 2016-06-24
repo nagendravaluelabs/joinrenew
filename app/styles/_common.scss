@@ -376,3 +376,7 @@ button.ui-dialog-titlebar-close:hover{
    padding: 0;
    margin: 1.1em 1.7em .5em 0;
 }
+.ui-accordion-header {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}

@@ -17,7 +17,7 @@ export default Ember.Component.extend({
         chapterType = primaryAddress.chaptersType.capitalize();
         self.chapterSelection(chapterType);
         if (primaryAddress.home.country === "UNITED STATES") {
-          self.set('homeShowState', true);
+            self.set('homeShowState', true);
         }
     },
     prefixes: function () {
@@ -105,12 +105,12 @@ export default Ember.Component.extend({
             var self, value;
             self = this;
             value = self.get('createOrganization');
-            if(value) {
-              $(".primary-action-btn").removeClass("hidden");
-              self.set('createOrganization', false);
+            if (value) {
+                $(".primary-action-btn").removeClass("hidden");
+                self.set('createOrganization', false);
             } else {
-              $(".primary-action-btn").addClass("hidden");
-              self.set('createOrganization', true);
+                $(".primary-action-btn").addClass("hidden");
+                self.set('createOrganization', true);
             }
         },
         setWorkStateStatus: function (value) {
@@ -127,6 +127,24 @@ export default Ember.Component.extend({
                 this.set("homeShowState", true);
             } else {
                 this.set("homeShowState", false);
+            }
+        },
+        validatePersonalInfo: function () {
+            var validate;
+            validate = $("#personal-contact-form").validate({
+                rules:{
+                    prefix: "required",
+                    lastname: "required",
+                    suffix: "required"
+                },
+                messages: {
+                    prefix: "Please select valid Prefix",
+                    lastname:"Please enter your Lastname",
+                    prefix: "Please select valid Suffix"
+                }
+            });
+            if(validate.form()) {
+                this.get('router').transitionTo('membership-dues');
             }
         }
     }

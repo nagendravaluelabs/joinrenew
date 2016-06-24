@@ -556,13 +556,30 @@ span.membership-value {
 
 }
 @media (max-width: 767px) {
+  .page-renew-membership-dues-page .renew-calculator {
+    width: 100%;
+  }
+  .page-renew-membership-dues-page .footer-btn-container {
+    padding: 0 15px;
+  }
+  .page-renew-membership-dues-page .footer-btn-container input[type="submit"], 
+  .page-renew-membership-dues-page .footer-btn-container input[type="button"] {
+    margin-bottom: 0px !important;
+  }
   .renew-calculator .titlelabel {
     text-align: left;
     width: 50%;
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 26px 0 0 37px;
   }
   .renew-calculator .inputpersons {
     text-align: right;
-    width: 40%;
+    width: 50%;
+    float: left;
+    display: block;
+    margin: 0;
   }
   .page-renew-membership-dues-page .renew-calculator .inputpersons label {
     display: inline-block;
@@ -638,5 +655,36 @@ span.membership-value {
   #main-content.page-renew-membership-dues-page .need-help,
   #main-content.page-renew-membership-dues-page .disclosures  {
     font-size: 20px;
+  }
+}
+@media (max-width: 550px) {
+  .renew-calculator .titlelabel {
+    width: 40%;
+  }
+  .page-renew-membership-dues-page .renew-calculator #accordion {
+    margin-left: 0;
+  }
+  #main-content.page-renew-membership-dues-page .page-title {
+    font-size: 48px;
+  }
+  .renew-calculator .inputpersons input[type="text"]:not(.date-clear){
+    float: none;
+  }
+  .page-renew-membership-dues-page .renew-calculator .inputpersons label {
+    float: none;
+    display: block;
+    margin-bottom: 0;
+  }
+  span.membership-value {
+    padding: 0 10px;
+  }
+  #membership-value {
+    float: right;
+    padding-right: 0;
+  }
+  #accordion .ui-accordion-content-active .totals {
+    display: block;
+    float: none;
+    margin-top: 15px;
   }
 }
