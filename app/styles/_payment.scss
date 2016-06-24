@@ -405,3 +405,83 @@
     }
   }
 }
+#paymentplan_modal{
+  #paymentplan_extrainfo { 
+    width: auto;
+    min-height: 94px; 
+    max-height: none; 
+    height: auto;
+    .extrainfo_box {
+      .leftblock {
+        float: left;
+        @media (max-width: 767px) {
+          float: none;
+        }
+      }
+      .rightblock {
+        float: right;
+        @media (max-width: 767px) {
+          float: none;
+        }
+      }
+      #payment_tbl {
+        table {
+          border-bottom: #e1e1e1 1px solid;
+          border-spacing: 1px;
+          td:first-child {
+            width: 30%;
+            padding-left: 10px;
+          }
+          @media (max-width: 767px) {
+            border: #0B8205 1px solid !important;
+          }
+        }
+      }
+      #installment_payment_sum_list {
+        border: #0B8205 1px solid;
+        width: 120px;
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+        tr {
+          padding: 6px 6px;
+          font-weight: normal;
+          border-bottom: #e1e1e1 1px solid;
+        }
+      }
+      #payment_plan_info_table {
+        border: #e1e1e1 1px solid;
+        width: 100%;
+        tr {
+          padding: 6px 6px;
+          font-weight: normal;
+          border-bottom: #e1e1e1 1px solid;
+          th {
+            padding: 10px 10px;
+            background: #555;
+            color: #fff;
+            font-weight: normal;
+          }
+        }
+      } 
+    }
+  }
+  .ui-dialog-titlebar {
+    padding: 0 !important
+  }
+  .ui-dialog-titlebar-close {
+    background: url(../images/temp-remove.png) no-repeat !important;
+    width: 27px;
+    height: 27px;
+    top: 0px;
+    right: 0px; 
+    margin: 0 0 10px 10px;
+    position: absolute;
+    border: 0;
+    outline: none;
+  }
+  .ui-widget-overlay {
+    background: #222222;
+    opacity: 0.9;
+  }
+}

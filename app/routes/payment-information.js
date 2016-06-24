@@ -16,12 +16,19 @@ export default Ember.Route.extend({
           autoOpen: false,
           draggable: false,
           resizable: false,
-          width: 450,
+          width: $(window).width() > 500 ? 450 : '90%',
           title: '',
           responsive: true,
           closeText: 'Close',
+          appendTo: "#main-content.page-sign-up-payment #paymentplan_modal",
           show: false,
           hide: false
+        });
+        $(window).resize(function() {
+          $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 500 ? 450 : '90%');
+        });
+        $('body').on("click", ".ui-widget-overlay", function() {
+          $("#paymentplan_extrainfo").dialog("close");
         });
       });
   },
