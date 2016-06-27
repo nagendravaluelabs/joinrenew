@@ -19,6 +19,9 @@
   width: 25px;
   z-index: 9999;
 }
+.page-renew-membership-dues-page .common-form input[type="text"]:not(.date-clear) {
+  padding-left: 7px;
+}
 #main-content.page-renew-membership-dues-page .sign-up-subheading, #main-content.page-renew-membership-dues-page .total-no-renew-suppdue .sign-up-subheading {
   margin: 8px 0;
 }

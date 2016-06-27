@@ -159,10 +159,19 @@ label.error {
 }
 .common-form input.form-text.error, 
 textarea.form-textarea.error, 
-select.form-select.error {
+select.form-select.error, 
+.chosen-container.error .chosen-single {
   color: #FF0000 !important;
   border-color: #FF0000 !important;
   outline-color: #FF0000 !important;
+}
+.chosen-container.error .chosen-single span {
+  color: #FF0000 !important;
+}
+
+.common-form select.form-select.error,
+.chosen-container-single.chosen-container.error .chosen-single div b {
+  background-image: url(../images/drop-down-arrow-error.png) !important;
 }
 @media (min-width: 320px) and (max-width: 1023px){
   .chosen-container {
