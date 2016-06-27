@@ -75,7 +75,7 @@
 }
 .page-renew-membership-dues-page .renew-questionnaire, .page-renew-membership-dues-page .renew-calculator, .page-renew-membership-dues-page .total-renew-suppdue {
   font-size: 1.6rem;
-  width: 72.5%;
+  width: 100%;
 }
 .page-renew-membership-dues-page .renew-calculator {
   width: 66.5%;
@@ -472,8 +472,9 @@ span.membership-value {
 }
 .total-no-renew-suppdue input[type="checkbox"]:not(:checked) + label, 
 .total-no-renew-suppdue input[type="checkbox"]:checked + label {
-  padding-top: 5px;
+  
   padding-left: 27px;
+   line-height:25px;
 }
 .total-no-renew-suppdue input[type="checkbox"]:not(:checked) + label:before, 
 .total-no-renew-suppdue input[type="checkbox"]:checked + label:before {
@@ -599,6 +600,7 @@ span.membership-value {
     width: 100% !important;
     height: 70px !important;
     background-size: auto 100% !important;
+    padding-top:18px;
   }
   .previous-link, .renew-questionnaire, .form-item-questionnaire>label, #goback, #startoverbtn {
     font-size: 20px;
@@ -612,7 +614,7 @@ span.membership-value {
   }
   .renew-calculator .inputpersons input[type="text"]:not(.date-clear){
     float: left;
-    width: 40px;
+    width: 52px;
     height: 40px;
   }
   .page-renew-membership-dues-page .renew-calculator .inputpersons label {
