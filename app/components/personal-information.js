@@ -1,24 +1,29 @@
 /*jslint es6, this*/
 import Ember from "ember";
 const {$} = Ember;
-
+jQuery.validator.addMethod("acceptReg", function(value, element, param) {
+  return value.match(new RegExp("." + param + "$"));
+});
 export default Ember.Component.extend({
     workShowState: false,
     homeShowState: false,
     primaryHomeAddress: false,
     primaryWorkAddress: false,
     createOrganization: false,
+    contactAddressType: "",
     init: function () {
         "use strict";
-        var self, primaryAddress, chapterType;
+        var self, primaryAddress, chapterType, contactInfo;
         self = this;
         self._super(...arguments);
+        contactInfo = self.get('info.contactInfo');
         primaryAddress = self.get('info.primaryAddress');
         chapterType = primaryAddress.chaptersType.capitalize();
         self.chapterSelection(chapterType);
         if (primaryAddress.home.country === "UNITED STATES") {
             self.set('homeShowState', true);
         }
+        self.set('contactAddressType', contactInfo.addressType);
     },
     prefixes: function () {
         "use strict";
@@ -129,18 +134,193 @@ export default Ember.Component.extend({
                 this.set("homeShowState", false);
             }
         },
+        updateContactInformation: function (value) {
+          $(".your-contact-info .chosen-container").removeClass("error");
+          $(".your-contact-info .chosen-container + label.error").hide();
+          this.set('contactAddressType', value);
+        },
         validatePersonalInfo: function () {
             var validate;
             validate = $("#personal-contact-form").validate({
                 rules:{
-                    prefix: "required",
-                    lastname: "required",
-                    suffix: "required"
+                    firstname: {
+                      required: true,
+                      lettersonly: true
+                    },
+                    middlename: {
+                      lettersonly: true
+                    },
+                    lastname: {
+                      required: true,
+                      lettersonly: true
+                    },
+                    contact_home_country: {
+                      required: function() {
+                        return $("#primary_number_home").is(":checked");
+                      }
+                    },
+                    contact_mobile_country: {
+                      required: function() {
+                        return $("#primary_number_mobile").is(":checked");
+                      }
+                    },
+                    contact_work_country: {
+                      required: function() {
+                        return $("#primary_number_work").is(":checked");
+                      }
+                    },
+                    home_number: {
+                      required: function() {
+                        return $("#primary_number_home").is(":checked");
+                      },
+                      digits: true,
+                      minlength: 6
+                    },
+                    mobile_number: {
+                      required: function() {
+                        return $("#primary_number_mobile").is(":checked");
+                      },
+                      digits: true,
+                      minlength: 6
+                    },
+                    work_number: {
+                      required: function() {
+                        return $("#primary_number_work").is(":checked");
+                      },
+                      digits: true,
+                      minlength: 6
+                    },
+                    primary_home_address_country: {
+                      required: function() {
+                        return $("#choose_chapter_home").is(":checked");
+                      }
+                    },
+                    primary_home_address1: {
+                      required: function() {
+                        return $("#choose_chapter_home").is(":checked");
+                      }
+                    },
+                    primary_home_city: {
+                      required: function() {
+                        return $("#choose_chapter_home").is(":checked");
+                      }
+                    },
+                    primary_home_zipcode: {
+                      required: function() {
+                        return $("#choose_chapter_home").is(":checked");
+                      }
+                    },
+                    administrative_area_state: {
+                      required: function() {
+                        return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "UNITED STATES";
+                      }
+                    }
                 },
                 messages: {
                     prefix: "Please select valid Prefix",
-                    lastname:"Please enter your Lastname",
-                    prefix: "Please select valid Suffix"
+                    firstname: {
+                      required: "Please enter your Firstname",
+                      lettersonly: "Special characters not allowed for Firstname"
+                    },
+                    middlename: {
+                      lettersonly: "Please enter a single letter for your middle initial"
+                    },
+                    lastname: {
+                      required: "Please enter your Lastname",
+                      lettersonly: "Special characters not allowed for Lastname"
+                    },
+                    contact_home_country: "Please select country",
+                    contact_mobile_country: "Please select country",
+                    contact_work_country: "Please select country",
+                    home_number: "Please Enter Valid Phone Number",
+                    mobile_number: "Please Enter Valid Mobile Number",
+                    work_number: "Please Enter Valid Work Number",
+                    primary_home_address_country: "Please Select Country"
+                },
+                ignore: [],
+                errorPlacement: function(error, element) {
+                  console.log(element);
+                  if (element.hasClass("chosen-select")) {
+                    error.insertAfter($(element).next(".chosen-container"));
+                  } else {
+                    error.insertAfter(element);
+                  }
+                },
+                highlight: function(element, errorClass, validClass) {
+                  if ($(element).hasClass("chosen-select")) {
+                    $(element).next(".chosen-container").addClass(errorClass).removeClass(validClass);
+                  } else {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                  }                  
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                  if ($(element).hasClass("chosen-select")) {
+                    $(element).next(".chosen-container").addClass(validClass).removeClass(errorClass);
+                  } else {
+                    $(element).addClass(validClass).removeClass(errorClass);
+                  } 
+                },
+                invalidHandler: function () {
+                  var scrollTo = $("#personal-contact-form").position().top;
+                  $("html, body").animate({"scrollTop": scrollTo+"px"},1000);
+                }
+            });
+            if(validate.form()) {
+                this.get('router').transitionTo('membership-dues');
+            }
+        },
+        addNewOrganization: function () {
+            var validate;
+            validate = $("#addNewOrganization").validate({
+                rules: {
+                  org_website: {
+                    url: true
+                  },
+                  work_administrative_state: function(){
+                    return $("#create_org_country").val() === "UNITED STATES";
+                  },
+                  org_company_phone: {
+                    digits: true,
+                    minlength: 6
+                  }
+                },
+                messages: {
+                  organization_name: "Please enter organization name",
+                  company_type: "Please select Company Type",
+                  create_org_country: "Please select country",
+                  org_company_address1: "Please enter company address",
+                  org_locality: "Please enter city",
+                  work_administrative_state: "Please select state",
+                  org_company_phone: {
+                    digits: "Pleas enter valid phone number"
+                  }
+                },
+                ignore: [],
+                errorPlacement: function(error, element) {
+                  console.log(element);
+                  if (element.hasClass("chosen-select")) {
+                    error.insertAfter($(element).next(".chosen-container"));
+                  } else {
+                    error.insertAfter(element);
+                  }
+                },
+                highlight: function(element, errorClass, validClass) {
+                  if ($(element).hasClass("chosen-select")) {
+                    $(element).next(".chosen-container").addClass(errorClass).removeClass(validClass);
+                  } else {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                  }                  
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                  if ($(element).hasClass("chosen-select")) {
+                    $(element).next(".chosen-container").addClass(validClass).removeClass(errorClass);
+                  } else {
+                    $(element).addClass(validClass).removeClass(errorClass);
+                  } 
+                },
+                invalidHandler: function () {
+                  var scrollTo = $("#addNewOrganization").position().top;
+                  $("html, body").animate({"scrollTop": scrollTo+"px"},1000);
                 }
             });
             if(validate.form()) {

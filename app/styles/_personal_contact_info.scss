@@ -200,6 +200,11 @@ ul.field-options-select > li{
   float:left;
   margin-right:20px;
 }
+ul.field-options-select > li.clearfix{
+  margin: 0;
+  float: none;
+  display: block;
+}
 ul.field-options-select > li > select.form-select, ul.field-options-select > li > select.form-select, ul.field-options-select > li > input[type="text"]{
   width:360px !important;
 }

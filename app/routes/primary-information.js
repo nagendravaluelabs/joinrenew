@@ -63,12 +63,12 @@ export default Ember.Route.extend({
             "prefix": "Mrs.",
             "firstName": "Thomas",
             "middleName": "Y",
-            "lastName": "Sda",
+            "lastName": "sds",
             "suffix": "II"
           },
           "contactInfo" : {
-            "addressType": "mobile",
-            "homeCountry": "AFGHANISTAN",
+            "addressType": "home",
+            "homeCountry": "",
             "homePhone": "31243245325",
             "mobileCountry": "ALBANIA",
             "mobilePhone": "1243455453",

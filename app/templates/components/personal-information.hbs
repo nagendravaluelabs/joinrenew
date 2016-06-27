@@ -34,9 +34,9 @@
         <li>
           <label for="middle-name">Middle initial</label>
           {{#if info.personalInfo.middleName}}
-            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" value="{{info.personalInfo.middleName}}" size="1" maxlength="255" disabled />
+            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" value="{{info.personalInfo.middleName}}" size="1" maxlength="1" disabled />
           {{else}}
-            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" size="1" maxlength="255" />
+            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" size="1" maxlength="1"  />
           {{/if}}
           
         </li>
@@ -64,7 +64,7 @@
     <div class="clearfix"></div>
     <!--User best way Contact information-->
     <h3 class="sign-up-subheading">Your contact information</h3>
-    <div class="all-info separator clearfix">
+    <div class="all-info separator clearfix your-contact-info">
       <div class="form-type-radios">
         <label for="primary-number">Primary number
           <span class="form-required" title="This field is required.">*</span>
@@ -73,9 +73,9 @@
           {{#each addressType as |type|}}
           <li class="form-type-radio text-capitalize">
             {{#if (isEqualTo type info.contactInfo.addressType)}}
-            <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" class="form-radio" checked />
+            <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action "updateContactInformation" value="target.value"}} class="form-radio" checked />
             {{else}}
-              <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" class="form-radio" />
+              <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action 'updateContactInformation' value="target.value"}} class="form-radio" />
             {{/if}}
             <label class="option" for="primary_number_{{type}}">{{type}}</label>
           </li>
@@ -86,14 +86,17 @@
         {{#each addressType as |type|}}
           <li>
             <label for="contact_{{type}}_country">Country</label>
-            {{select-country idPrefix=(concat 'contact_' type) namePrefix=type selected=(lookupProp info.contactInfo type "Country")}}
+            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(lookupProp info.contactInfo type "Country")}}
           </li>
           <li>
             <label for="{{type}}-number" class="text-capitalize">{{type}} phone
+              {{#if (isEqualTo type contactAddressType)}}
               <span class="form-required" title="This field is required.">*</span>
+              {{/if}}
             </label>
-            <input class="form-text required" type="text" id="{{type}}-number" name="{{text}}_number" value="{{lookupProp info.contactInfo type 'Phone'}}" size="60" maxlength="255" />
+            <input class="form-text required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{lookupProp info.contactInfo type 'Phone'}}" size="60" maxlength="255" />
           </li>
+          <li class="clearfix"></li>
         {{/each}}
       </ul>
     </div>
@@ -260,7 +263,11 @@
           {{/if}}
         </div>
       {{/if}}
-      {{#if createOrganization}}
+    </div>
+  </form>
+  {{#if createOrganization}}
+    <div class="address-block-container">
+      <form action="#" id="addNewOrganization" method="post">      	
         <div id="company-organization" class="back-grey block">
           <h3>Create a new company/organization</h3>
           <fieldset id="#" class="form-wrapper required">
@@ -269,16 +276,15 @@
             </label>
             <ul>
               <li>
-                <label for="organization-name">Company/organization name
+                <label for="organization_name">Company/organization name
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="text-full form-text required" type="text" id="#" name="organization_name"
+                <input class="text-full form-text required" type="text" id="organization_name" name="organization_name"
                 value="" size="60" maxlength="255" />
               </li>
               <li>
-                <label for="website">Website</label>
-                <input class="text-full form-text" type="text" id="#" name="website"
-                value="" size="60" maxlength="255" />
+                <label for="org_website">Website</label>
+                <input class="text-full form-text" type="text" id="org_website" name="org_website" value="" size="60" maxlength="255" />
               </li>
               <li>
                 <label for="label">Company type
@@ -298,25 +304,23 @@
                 {{select-country idPrefix='create_org' namePrefix='create_org' selected="" class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus'}}
               </li>
               <li>
-                <label for="company-address">Address line 1
+                <label for="org_company_address1">Address line 1
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
                 <input class="thoroughfare form-text required" autocomplete="address-line1"
-                type="text" id="edit-profile-personal-contact-info-field-company-address-und-0-thoroughfare"
-                name="profile_personal_contact_info[field_company_address][und][0][thoroughfare]"
-                value="" size="30" maxlength="255" />
+                type="text" id="org_company_address1" name="org_company_address1" value="" size="30" maxlength="255" />
               </li>
               <li>
-                <label for="company-address">Address line 2</label>
+                <label for="org_company_address2">Address line 2</label>
                 <input class="premise form-text" autocomplete="address-line2"
-                type="text" id="#" name="premise" value="" size="30" maxlength="255" />
+                type="text" id="org_company_address2" name="org_company_address2" value="" size="30" maxlength="255" />
               </li>
               <li>
-                <label for="locality">City
+                <label for="org_locality">City
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
                 <input class="locality form-text required" autocomplete="&quot;address-level2"
-                type="text" id="locality" name="locality" value="" size="30" maxlength="255"
+                type="text" id="org_locality" name="org_locality" value="" size="30" maxlength="255"
                 />
               </li>
               {{#if workShowState}}
@@ -339,22 +343,22 @@
                 {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=""}}
               </li>
               <li class="state creative-zip">
-                <label for="company-phone">Company phone</label>
-                <input class="text-full form-text" type="text" id="company-phone"
-                name="company_phone" value="" size="60" maxlength="255" />
+                <label for="org_company_phone">Company phone</label>
+                <input class="text-full form-text" type="text" id="org_company_phone"
+                name="org_company_phone" value="" size="60" maxlength="255" />
               </li>  
               <li class="clearfix"></li>
             </ul>
             <div class="create-org-action">
               <span class="link-to-button">
-                <a href="javascript:void(0)" class="save-company-info">Save</a>
+                <a href="#" {{action 'addNewOrganization'}} class="save-company-info">Save</a>
               </span>
            </div>
           </fieldset>
         </div>
-      {{/if}}
+      </form>
     </div>
-  </form>
+  {{/if}}
 </div>
 
 <div class="clearfix"></div>

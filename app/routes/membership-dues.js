@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 export default Ember.Route.extend({
 activate() {
   this.controllerFor("application").set("model.class","one-sidebar sidebar-first page-renew-membership-dues-page");
@@ -117,7 +116,7 @@ return Ember.RSVP.hash({
 			"id"   : "associates_persons",
 			"name" : "associates_persons",
 			"stateamount" : "0.00",
-			"localamount" :"0.00"
+			"localAmount" : "115.00"
 		},
 		{
 			"title": "Technical staff",
@@ -138,7 +137,7 @@ return Ember.RSVP.hash({
 			"id"   : "otherstaff_persons",
 			"name" : "otherstaff_persons",
 			"stateAmount" : "0.00",
-			"localAmount" :"0.00"
+			"localAmount" :"115.00"
 		},
 		
 	],

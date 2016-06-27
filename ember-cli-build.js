@@ -22,5 +22,6 @@ module.exports = function(defaults) {
   app.import('bower_components/bootstrap/dist/js/bootstrap.js');
   app.import('bower_components/jquery-ui/jquery-ui.js');
   app.import('bower_components/jquery-validation/dist/jquery.validate.js');
+  app.import('bower_components/jquery-validation/dist/additional-methods.js');
   return app.toTree();
 };
