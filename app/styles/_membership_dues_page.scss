@@ -605,7 +605,7 @@ span.membership-value {
     background-size: auto 100% !important;
     padding-top:18px;
   }
-  .previous-link, .renew-questionnaire, .form-item-questionnaire>label, #goback, #startoverbtn {
+  .previous-link, .renew-questionnaire, .form-item-questionnaire >label, #goback, #startoverbtn {
     font-size: 20px;
   }
   .renew-calculator .totals.padding-total-top {
@@ -692,4 +692,11 @@ span.membership-value {
     float: none;
     margin-top: 15px;
   }
+}
+#error-container {
+  display: none;
+}
+#error-container label {
+  color: #a94442 !important;
+  font-weight: bold !important;
 }

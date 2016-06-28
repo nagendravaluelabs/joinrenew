@@ -99,6 +99,9 @@ export default Ember.Component.extend({
         }
     },
     actions: {
+        showPersonalInfo: function () {
+            this.sendAction("showPersonalInfo");
+        },
         chapterSelection: function (value) {
             "use strict";
             var self;
@@ -174,21 +177,21 @@ export default Ember.Component.extend({
                         return $("#primary_number_home").is(":checked");
                       },
                       digits: true,
-                      minlength: 6
+                      minlength: 10
                     },
                     mobile_number: {
                       required: function() {
                         return $("#primary_number_mobile").is(":checked");
                       },
                       digits: true,
-                      minlength: 6
+                      minlength: 10
                     },
                     work_number: {
                       required: function() {
                         return $("#primary_number_work").is(":checked");
                       },
                       digits: true,
-                      minlength: 6
+                      minlength: 10
                     },
                     primary_home_address_country: {
                       required: function() {
@@ -236,37 +239,13 @@ export default Ember.Component.extend({
                     mobile_number: "Please Enter Valid Mobile Number",
                     work_number: "Please Enter Valid Work Number",
                     primary_home_address_country: "Please Select Country"
-                },
-                ignore: [],
-                errorPlacement: function(error, element) {
-                  console.log(element);
-                  if (element.hasClass("chosen-select")) {
-                    error.insertAfter($(element).next(".chosen-container"));
-                  } else {
-                    error.insertAfter(element);
-                  }
-                },
-                highlight: function(element, errorClass, validClass) {
-                  if ($(element).hasClass("chosen-select")) {
-                    $(element).next(".chosen-container").addClass(errorClass).removeClass(validClass);
-                  } else {
-                    $(element).addClass(errorClass).removeClass(validClass);
-                  }                  
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                  if ($(element).hasClass("chosen-select")) {
-                    $(element).next(".chosen-container").addClass(validClass).removeClass(errorClass);
-                  } else {
-                    $(element).addClass(validClass).removeClass(errorClass);
-                  } 
-                },
-                invalidHandler: function () {
-                  var scrollTo = $("#personal-contact-form").position().top;
-                  $("html, body").animate({"scrollTop": scrollTo+"px"},1000);
                 }
             });
             if(validate.form()) {
                 this.get('router').transitionTo('membership-dues');
+            } else {
+                if($("#personal-contact").hasClass("hidden"))
+                  this.sendAction("showPersonalInfo");
             }
         },
         addNewOrganization: function () {
@@ -294,37 +273,10 @@ export default Ember.Component.extend({
                   org_company_phone: {
                     digits: "Pleas enter valid phone number"
                   }
-                },
-                ignore: [],
-                errorPlacement: function(error, element) {
-                  console.log(element);
-                  if (element.hasClass("chosen-select")) {
-                    error.insertAfter($(element).next(".chosen-container"));
-                  } else {
-                    error.insertAfter(element);
-                  }
-                },
-                highlight: function(element, errorClass, validClass) {
-                  if ($(element).hasClass("chosen-select")) {
-                    $(element).next(".chosen-container").addClass(errorClass).removeClass(validClass);
-                  } else {
-                    $(element).addClass(errorClass).removeClass(validClass);
-                  }                  
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                  if ($(element).hasClass("chosen-select")) {
-                    $(element).next(".chosen-container").addClass(validClass).removeClass(errorClass);
-                  } else {
-                    $(element).addClass(validClass).removeClass(errorClass);
-                  } 
-                },
-                invalidHandler: function () {
-                  var scrollTo = $("#addNewOrganization").position().top;
-                  $("html, body").animate({"scrollTop": scrollTo+"px"},1000);
                 }
             });
             if(validate.form()) {
-                this.get('router').transitionTo('membership-dues');
+                //this.get('router').transitionTo('membership-dues');
             }
         }
     }

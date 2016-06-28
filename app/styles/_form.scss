@@ -145,6 +145,10 @@ input[type="checkbox"]:checked + label:after {
 	position: absolute;
 	top: -3px;
 }
+input[type="checkbox"].error:not(:checked) + label:before, 
+input[type="checkbox"].error:checked + label:before {
+  border-color: #FF0000;
+}
 input[type="checkbox"]:not(:checked) + label:after {
 	opacity: 0;
 }
