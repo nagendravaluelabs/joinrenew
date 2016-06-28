@@ -19,9 +19,14 @@
         <div id="payment-accordion">
           <h3>
             New AIA membership: 
-            <span class="membership-type"><strong>{{model.role}}</strong></span>
-            <span>${{subTotal}}</span>
+            <span class="membership">
+              <span class="membership-type">
+                <strong>{{model.role}}</strong>
+                <span class="membership-total">${{subTotal}}</span></span>
+              </span>
+            
           </h3>
+          
           <div class="newaiamembership">
             <div class="result">
               <table>
@@ -55,7 +60,7 @@
     </div>
     
     <div class="payment_method">
-      <h3>How do you want to pay?<span class="required" aria-required="true">*</span></h3>
+      <h3>How do you want to pay?&nbsp;<span class="required" aria-required="true">*</span></h3>
       <ul class="no-style">
       	<li>
           <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
@@ -89,10 +94,11 @@
               </select>
               <label for="select-installments">Installments</label>
             </div>
-            <div id="firstinstallment">Total for first installment: <span>$97.93</span></div>
-            <div id="paymentplan_info_but">
+            <div id="firstinstallment">Total for first installment: <span>$97.93</span>
+            <span id="paymentplan_info_but">
               <a class="extrainfo_icon" {{action "showPaymentPlan"}}></a>
-            </div>
+            </span></div>
+            
             <div class="clearfix"></div>
             <div class="servicefee_info">
               A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments.
