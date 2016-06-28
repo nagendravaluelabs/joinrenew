@@ -1,69 +1,156 @@
 import DS from 'ember-data';
-
+import Ember from "ember";
+const {$} = Ember;
 export default Ember.Controller.extend({
-  actions: {
-    questionnaireMembershipduesNext: function() {
-      $(".renew-questionnaire").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-		$(".questionnare-btn-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
-		if($(this).closest(".membership-button-container").hasClass("footer-btn-container")) {
-		  $('html, body').animate({'scrollTop': $("#main-content").position().top}, 1000);
-		}
+    isRenewSummary: true,
+    isQuestionnarie: false,
+    isTotalRenew: false,
+    isDuesCalculator: false,
+
+    updateDuesPage: function (renew, questionnaire, total, dues, event) {
+        "use strict";
+        this.set("isRenewSummary", renew);
+        this.set("isQuestionnarie", questionnaire);
+        this.set("isTotalRenew", total);
+        this.set("isDuesCalculator", dues);
+        if ($(event.currentTarget).closest(".membership-button-container").hasClass("footer-btn-container")) {
+            $('html, body').animate({'scrollTop': $("#main-content").position().top + "px"}, 1000);
+        }
     },
-	membershipduesNext: function() {
-    if(!$(".renew-questionnaire").hasClass("hidden")) {
-      var questionnaire = $('input[name="questionnaire"]:checked').val();
-      questionnaire = parseInt(questionnaire);
-      if(questionnaire == 1 || questionnaire == 2) {
-        $(".total-no-renew-suppdue").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-        $(".pay-now-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
-        //$(".pay-now-container").addClass("hidden").siblings(".r-btn-container").addClass("hidden");
-      } else {
-        $(".renew-calculator").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-        $(".questionnare-btn-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
-      }
-    } else if(!$(".renew-calculator").hasClass("hidden")) {
-      $(".total-no-renew-suppdue").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-      $(".pay-now-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
+
+    valueObserver: function () {
+        "use strict";
+        this._super();
+        Ember.run.schedule("afterRender", this, function () {
+            $("#accordion").accordion({
+                collapsible: true,
+                icons: {'header': 'defaultIcon', 'activeHeader': 'selectedIcon'},
+                active: false,
+                heightStyle: "content"
+            });
+        });
+    }.observes('isDuesCalculator'),
+
+    actions: {
+        questionnaireMembershipduesNext: function (event) {
+            "use strict";
+            this.updateDuesPage(false, true, false, false, event);
+        },
+        membershipduesNext: function (event) {
+            "use strict";
+            var isDuesCalculator, isQuestionnarie, questionnaire;
+            isDuesCalculator = this.get("isDuesCalculator");
+            isQuestionnarie = this.get("isQuestionnarie");
+            if (isQuestionnarie) {
+                questionnaire = parseInt($('input[name="questionnaire"]:checked').val());
+                if (questionnaire === 1) {
+                    this.updateDuesPage(false, false, true, false, event);
+                } else if (questionnaire === 2) {
+                      var validate;
+                      validate = $("#questionnaireUserform").validate({
+                          rules: {
+                            questionnaire_membername: {
+                              required: function () {
+                                  return $("#edit-questionnaire-2").is(":checked");
+                              },
+                              lettersonly: true
+                            },
+                            questionnaire_memberid: {
+                              required: function () {
+                                  return $("#edit-questionnaire-2").is(":checked");
+                              },
+                              digits: true
+                            }
+                          },
+                          messages: {
+                            questionnaire_membername: "Please enter Member name",
+                            questionnaire_memberid: {
+                              required: "Please enter Member ID",
+                              digits: "Please enter only numerics"
+                            }
+                          }
+                      });
+                      if(validate.form()) {
+                          this.updateDuesPage(false, false, true, false, event);
+                      }
+                } else {
+                    this.updateDuesPage(false, false, false, true, event);
+                }
+            } else if (isDuesCalculator) {
+                var validate;
+                validate = $("#dues-calculator").validate({
+                  errorLabelContainer : "#error-container"
+                });
+                if(validate.form()) {
+                    this.updateDuesPage(false, false, true, false, event);
+                }
+            }
+        },
+        membershipduesPrev: function (event) {
+            "use strict";
+            var isDuesCalculator, isQuestionnarie, isTotalRenew;
+            isDuesCalculator = this.get("isDuesCalculator");
+            isTotalRenew = this.get("isTotalRenew");
+            isQuestionnarie = this.get("isQuestionnarie");
+            if (isQuestionnarie) {
+                this.updateDuesPage(true, false, false, false, event);
+            } else if (isDuesCalculator || isTotalRenew) {
+                this.updateDuesPage(false, true, false, false, event);
+            }
+            return false;
+        },
+        calculateSum: function (e) {
+            "use strict";
+            var self, value, amount, total, suppduesTotal;
+            self = $(e.currentTarget);
+            suppduesTotal = 0;
+            value = (self.val() !== '')
+                ? parseInt(self.val())
+                : 0;
+            amount = parseInt(self.data("localAmount"));
+            total = parseFloat(value * amount).toFixed(2);
+            self.closest("h3").find(".totals").find(".totalnum").html("$ " + total);
+            self.closest("h3").find(".totals").find(".totalnum").data("total", total);
+            self.closest("h3").next("div").find(".totalnum").html("$ " + total);
+            $("#accordion").find("h3 .totalnum").each(function () {
+                suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
+            });
+            $("#suppdues_totalamount").html("$ " + parseFloat(suppduesTotal).toFixed(2));
+        },
+        payNow: function () {
+            var validate;
+            validate = $("#form-totalRenew").validate({
+              messages: {
+                licensed_architect: "You must agree to the affidavit"
+              },
+              errorLabelContainer : "#error-container"
+            });
+            if(validate.form()) {
+                this.transitionToRoute('payment-information');
+            }
+        }
     }
-    if($(this).closest(".membership-button-container").hasClass("footer-btn-container")) {
-      $('html, body').animate({'scrollTop': $("#main-content").position().top}, 1000);
-    }
-  },
-  membershipduesPrev: function() {
-    var self = $(this);
-    if(!$(".renew-questionnaire").hasClass("hidden")) {
-      $("#profile2-edit-personal-contact-info-form").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-      $(".renew-btn-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
-    } else if(!$(".total-no-renew-suppdue").hasClass("hidden") || !$(".renew-calculator").hasClass("hidden")) {
-      $(".renew-questionnaire").removeClass("hidden").siblings(".membership-dues-pages").addClass("hidden");
-      $(".questionnare-btn-container").removeClass("hidden").siblings(".r-btn-container").addClass("hidden");
-    }
-    if($(this).closest(".membership-button-container").hasClass("footer-btn-container")) {
-      $('html, body').animate({'scrollTop': $("#main-content").position().top}, 1000);
-    }
-  },
-  calculateSum: function(e){
-	var self, value, amount, total, suppduesTotal;
-	self = $(e.currentTarget);
-	suppduesTotal = 0;
-	value = ( self.val()!='' ) ? parseInt(self.val()) : 0;
-	amount = parseInt(self.data("localAmount"));
-	total = parseFloat(value*amount).toFixed(2);
-	self.closest("h3").find(".totals").find(".totalnum").html("$ "+ total);
-	self.closest("h3").find(".totals").find(".totalnum").data("total", total);
-	self.closest("h3").next("div").find(".totalnum").html("$ "+ total);
-	$("#accordion").find("h3 .totalnum").each(function(){
-		suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
-	});
-	$("#suppdues_totalamount").html("$ "+ parseFloat(suppduesTotal).toFixed(2));	
-  }
-  }
 });
 
-$(document).on("change", 'input[name="questionnaire"]', function(){
-	if($(this).val() == 2) {
-      $(".questionnaire-userform").removeClass("hidden");
-    }else {
-      $(".questionnaire-userform").addClass("hidden");
+$(document).on("change", 'input[name="questionnaire"]', function () {
+    
+    if (parseInt($(this).val()) === 2) {
+        $(".questionnaire-userform").removeClass("hidden");
+    } else {
+        $(".questionnaire-userform").addClass("hidden");
     }
+});
+
+$(document).on("keydown", '.numbers-only', function (e) {
+    "use strict";
+    var key = e.charCode || e.keyCode || 0;
+    return (
+        key === 13 ||
+        key === 8 ||
+        key === 9 ||
+        key === 46 ||
+        (key >= 35 && key <= 40) ||
+        (key >= 48 && key <= 57) ||
+        (key >= 96 && key <= 105)
+    );
 });

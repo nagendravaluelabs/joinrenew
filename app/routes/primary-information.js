@@ -3,8 +3,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   activate() {
     this.controllerFor("application").set("model.class","no-sidebars page-primary-info");
-    /*this.set("class", "no-sidebars page-primary-info");
-    this.setMainClass();*/
   },
   model() {
     return Ember.RSVP.hash({
@@ -68,7 +66,7 @@ export default Ember.Route.extend({
           },
           "contactInfo" : {
             "addressType": "home",
-            "homeCountry": "",
+            "homeCountry": "UNITED STATES",
             "homePhone": "31243245325",
             "mobileCountry": "ALBANIA",
             "mobilePhone": "1243455453",

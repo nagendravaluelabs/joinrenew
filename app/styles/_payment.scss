@@ -2,7 +2,7 @@
   &.page-sign-up-payment {
     .aia-progress-bar {
       margin-top: 20px;
-    }
+    } 
     .page-title {
       margin-bottom: 54px;
       padding-bottom: 5px;
@@ -37,6 +37,9 @@
         @media (max-width: 767px) {
           width: 100%;
         }
+       .ui-accordion-content table tr td {
+         padding: 5px 0px !important;
+       }
       }
       .ui-helper-reset{
         font-size: 100%;
@@ -84,14 +87,24 @@
             height: 20px;
           }
         }
+        .membership { 
+          width:69%;
+          @media (max-width:1198px){
+             width:100%;
+          }
+        }
         span:last-child {
-          text-align: right;
-          float: right;
+          text-align:left;
         } 
+        .membership-total {
+          display:inline-block;
+          float:right !important;
+        }
       }
       .ui-accordion-content {
         padding: 9px 0 0px 40px;
         font-size: 16px;
+        width:100%;
         table {
           tr {
             border-bottom: 2px solid #e1e1e1;
@@ -226,11 +239,16 @@
         display: inline-block;
         color: #ef4135;
         font-size: 2.4rem;
+        span {
+          font-weight:bold;
+          font-size: 2.4rem;
+        }
       }
       #paymentplan_info_but {
-        float: left;
-        margin-left: 10px;
-        margin-top: -15px;
+        margin-left: 5px;
+        margin-top: -10px;
+        vertical-align:top;
+        display:inline-block;
         .extrainfo_icon {
           width: 26px;
           height: 26px;
@@ -248,8 +266,6 @@
         margin-top: 3px;
         label {
           font-weight: normal;
-          padding-left: 35px;
-          margin-bottom: 0;
         }
       }
     }

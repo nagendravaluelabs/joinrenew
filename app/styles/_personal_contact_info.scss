@@ -139,9 +139,10 @@
 }
 .common-form input[type="checkbox"]:not(:checked) + label, .common-form input[type="checkbox"]:checked + label {
     cursor: pointer;
-    padding:3px 0 0 25px;
+    padding:0 0 0 25px;
     position: relative;
 	margin:5px 0 25px 0;
+  line-height:23px; 
 }
 
 .common-form input[type="checkbox"]:not(:checked), .common-form input[type="checkbox"]:checked {
@@ -426,9 +427,7 @@ input:disabled {
 	#work-address.back-grey.block .info-left div{
 		width:100%
 	}
-	.common-form input[type="checkbox"]:not(:checked) + label:before, .common-form input[type="checkbox"]:checked + label:before{
-		top:10px;
-	}
+	
 	
 	#primary, #sidebar {
     padding: 20px;

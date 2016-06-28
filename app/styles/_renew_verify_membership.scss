@@ -154,7 +154,7 @@ footer disclaimer title hide */
         padding-top: 30px;
         font-size: 1.6rem;
     }
-    input[type="submit"], input[type="button"] {
+    input[type="submit"], input[type="button"], .link-to-button a {
         font-size:3.0rem !important;
         width:50%;
         background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
@@ -281,4 +281,10 @@ footer disclaimer title hide */
         padding-left: 20px;
         padding-right: 20px;
     }
+}
+
+span.membership{
+  display:inline-block;
+  width:auto;
+  float:none;
 }
