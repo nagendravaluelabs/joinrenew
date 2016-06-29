@@ -123,7 +123,7 @@
         
         <form action="#" id="form-totalRenew" method="post">
         	
-          <div class="total-no-renew-suppdue renew-container membership-dues-pages">
+          <div class="total-no-renew-suppdue renew-container membership-dues-pages common-form">
           
             <h3 class="sign-up-subheading">2016 dues</h3>
             
@@ -178,7 +178,7 @@
               {{#each model.Supplemental as |suppCal|}}
                 <h3>
                  <div class="titlelabel">{{suppCal.title}} {{#if suppCal.isRequired}}
-                  &nbsp;<span class="form-required">*</span>
+                  <span class="form-required">*</span>
                   <br/>
                   <span class="architect-sublabel">(include yourself)</span>{{/if}}
                   </div>
