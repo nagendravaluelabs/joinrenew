@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 import Ember from "ember";
+import rememberScroll from "../mixins/remember-scroll";
 const {$} = Ember;
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(rememberScroll, {
     isRenewSummary: true,
     isQuestionnarie: false,
     isTotalRenew: false,
@@ -13,9 +14,8 @@ export default Ember.Controller.extend({
         this.set("isQuestionnarie", questionnaire);
         this.set("isTotalRenew", total);
         this.set("isDuesCalculator", dues);
-        if ($(event.currentTarget).closest(".membership-button-container").hasClass("footer-btn-container")) {
-            $('html, body').animate({'scrollTop': $("#main-content").position().top + "px"}, 1000);
-        }
+        $("#error-container").hide();
+        this.scrollToTop();
     },
 
     valueObserver: function () {

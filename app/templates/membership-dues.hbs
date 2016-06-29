@@ -123,7 +123,7 @@
         
         <form action="#" id="form-totalRenew" method="post">
         	
-          <div class="total-no-renew-suppdue renew-container membership-dues-pages">
+          <div class="total-no-renew-suppdue renew-container membership-dues-pages common-form">
           
             <h3 class="sign-up-subheading">2016 dues</h3>
             
@@ -142,7 +142,7 @@
               </tbody>
             </table>
             
-            <div class="form-item form-type-checkbox form-item-licensed-architect">
+            <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
             
               <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
               value="1" class="form-checkbox required">
@@ -178,7 +178,7 @@
               {{#each model.Supplemental as |suppCal|}}
                 <h3>
                  <div class="titlelabel">{{suppCal.title}} {{#if suppCal.isRequired}}
-                  &nbsp;<span class="form-required">*</span>
+                  <span class="form-required">*</span>
                   <br/>
                   <span class="architect-sublabel">(include yourself)</span>{{/if}}
                   </div>
@@ -345,27 +345,35 @@
 	</aside>
   
 	<div class="button-container footer-btn-container membership-button-container visible-xs">
-	  <div class="renew-btn-container r-btn-container">
-      <input type="button" value="Continue" class="next membershipdues_next" onclick={{action 'questionnaireMembershipduesNext'}} />
-      <div class="read-only-block-previous-link">
-        {{#link-to 'primary-information' class="previous-link"}} &lt; Go back to previous page {{/link-to}}
+	  {{#if isRenewSummary}}
+      <div class="renew-btn-container r-btn-container">
+        <input type="button" value="Continue" class="next membershipdues_next" onclick={{action 'questionnaireMembershipduesNext'}} />
+        <div class="read-only-block-previous-link">
+          {{#link-to 'primary-information' class="previous-link"}} &lt; Go back to previous page {{/link-to}}
+        </div>
       </div>
-    </div>
-    <div class="questionnare-btn-container hidden r-btn-container">
-      <input type="button" value="Continue" class="next membershipdues_next" onclick={{action 'membershipduesNext'}}>
-      <div id="goback-link-questionnare-section">
-        <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
+    {{/if}}
+    
+    {{#if (ifCond isQuestionnarie isDuesCalculator "||")}}
+      <div class="questionnare-btn-container r-btn-container">
+        <input type="button" value="Continue" class="next membershipdues_next" onclick={{action 'membershipduesNext'}}>
+        <div id="goback-link-questionnare-section">
+          <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
+        </div>
       </div>
-    </div>
-    <div class="pay-now-container hidden r-btn-container">
+    {{/if}}
+    
+    {{#if isTotalRenew}}
+    <div class="pay-now-container r-btn-container">
       <div class="link-to-button">
-        {{#link-to 'payment-information' class="next form-submit"}} Pay now {{/link-to}}
+        <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
       </div>
       <div class="clearfix"></div>
       <div id="startoverbtn">
         <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
       </div>
     </div>
+    {{/if}}
 	</div>
 </div>
 <div class="clearfix"></div>

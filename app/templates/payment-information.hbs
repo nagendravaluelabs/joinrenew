@@ -38,14 +38,14 @@
                       <span>Annual: </span><span>${{payment.annual}}</span>
                     </td>
                     <td>
-                      <span>Pro-rated: </span><span>${{payment.proRated}}</span>
+                      <span>Pro-rated: </span><span class="pro-rate-val">${{payment.proRated}}</span>
                     </td>
                   </tr>
                   {{/each}}
                   <tr class="sum">
                     <td class="title">Subtotal due</td>
                     <td></td>
-                    <td>${{subTotal}}</td>
+                    <td class="due-total">${{subTotal}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -60,7 +60,7 @@
     </div>
     
     <div class="payment_method">
-      <h3>How do you want to pay?&nbsp;<span class="required" aria-required="true">*</span></h3>
+      <h3>How do you want to pay?<span class="required" aria-required="true">*</span></h3>
       <ul class="no-style">
       	<li>
           <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
@@ -255,10 +255,8 @@
             <td class="price">$1,205.00</td>
           </tr>
           <tr>
-            <th scope="row" class="hidden-xs hidden-sm">Number of payments</th>
-            <td class="hidden-xs hidden-sm"><div id="num_installments_selected">3</div></td>
-            <th scope="row" class="hidden-lg hidden-md"><span id="num_installments_selected_mobile"></span> Installments</th>
-            <td id="single_installment_amount" class="hidden-lg hidden-md"></td>
+            <th scope="row">Number of payments</th>
+            <td><div id="num_installments_selected">3</div></td>
           </tr>
         </tbody>
       </table>

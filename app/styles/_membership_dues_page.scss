@@ -69,16 +69,16 @@
   width: 280px;
   display: inline-block;
 }
-/* .page-renew-membership-dues-page .total-no-renew-suppdue table.duestable {
+.page-renew-membership-dues-page .total-no-renew-suppdue table.duestable {
   margin: 21px 1.2em 44px;
   width: 63.7%;
-} */
+}
 .page-renew-membership-dues-page .common-form .read-only-block-previous-link {
   margin-top: 22px;
 }
 .page-renew-membership-dues-page .renew-questionnaire, .page-renew-membership-dues-page .renew-calculator, .page-renew-membership-dues-page .total-renew-suppdue {
   font-size: 1.6rem;
-  width: 100%;
+  width: 72.5%;
 }
 .page-renew-membership-dues-page .renew-calculator {
   width: 66.5%;
@@ -423,6 +423,7 @@ span.membership-value {
 .page-renew-membership-dues-page .renew-calculator .inputpersons label {
   display: block;
   font-family:'architype-bold', Arial, sans-serif;
+  margin-bottom:0px !important;
 }
 #main-content.page-renew-membership-dues-page .member-details {
   margin-top: 20px;
@@ -483,9 +484,12 @@ span.membership-value {
   margin-bottom: 26px;
 }
 .renew-calculator .inputpersons input[type="text"]:not(.date-clear) {
-  width: 45px;
+  width: 45px !important;
   margin: 4px 0 0 5px;
   border: solid 1px #d1d2d3;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
 }
 .page-renew-membership-dues-page .renew-calculator .inputpersons label {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -532,14 +536,8 @@ span.membership-value {
   .renew-calculator .titlelabel {
     width: 30%;
   }
-  .renew-calculator .inputpersons {
-    width: 60%;
-  }
 }
 @media(min-width: 628px) and (max-width: 767px) {
-  .page-renew-membership-dues-page .renew-questionnaire, .page-renew-membership-dues-page .renew-calculator, .page-renew-membership-dues-page .total-renew-suppdue, .page-renew-membership-dues-page .common-form table.duestable {
-    width:100% !important;
-  }
   .membership-button-container {
     padding: 0 10px;
   }
@@ -555,6 +553,12 @@ span.membership-value {
 
 }
 @media (max-width: 767px) {
+  .page-renew-membership-dues-page .renew-questionnaire, .page-renew-membership-dues-page .renew-calculator, .page-renew-membership-dues-page .total-renew-suppdue, .page-renew-membership-dues-page .common-form table.duestable {
+    width:100% !important;
+  }
+  .page-renew-membership-dues-page .renew-calculator .ui-accordion {
+    margin-left: 0;
+  }
   .page-renew-membership-dues-page .renew-calculator {
     width: 100%;
   }
@@ -576,20 +580,20 @@ span.membership-value {
   .renew-calculator .inputpersons {
     text-align: right;
     width: 50%;
-    float: left;
+    float: right;
     display: block;
     margin: 0;
   }
   .page-renew-membership-dues-page .renew-calculator .inputpersons label {
     display: inline-block;
   }
-  .membership-dues-container * {
-    font-size: 20px !important;
+  .membership-dues-container{
+    font-size: 16px !important;
   }
   .page-renew-membership-dues-page .renew-suppdue {
     width: 100%;
     max-width: 100%;
-  }
+  } 
   .page-renew-membership-dues-page .common-form table.duestable {
     margin: 25px 0;
     font-size: 20px;
@@ -608,15 +612,10 @@ span.membership-value {
     display: block;
   }
   .renew-calculator .form-item-non-aia-member-persons, .renew-calculator .form-item-aia-member-persons, .renew-calculator .form-item-associates-persons, .renew-calculator .form-item-techstaff-persons, .renew-calculator .form-item-otherstaff-persons {
-    width: 160px;
-  }
-  .renew-calculator .inputpersons input[type="text"]:not(.date-clear){
-    float: left;
-    width: 52px;
-    height: 40px;
+    width: 100%;
   }
   .page-renew-membership-dues-page .renew-calculator .inputpersons label {
-    float: left;
+    /*float: left;*/
     margin-top: 22px;
   }
   .page-renew-membership-dues-page .renew-calculator .ui-icon {
@@ -657,9 +656,10 @@ span.membership-value {
   }
 }
 @media (max-width: 550px) {
-  .renew-calculator .titlelabel {
-    width: 44%;
-  }
+
+  .renew-calculator .titlelabel, .architect-sublabel, .renew-calculator .inputpersons label, .totals, .membership-value {
+    font-size: 16px !important;
+}
   .page-renew-membership-dues-page .renew-calculator #accordion {
     margin-left: 0;
   }
@@ -694,3 +694,11 @@ span.membership-value {
   color: #a94442 !important;
   font-weight: bold !important;
 }
+@media (max-width: 480px) {
+   .renew-calculator .titlelabel {
+    width: 40% !important;
+  } 
+  .renew-calculator .inputpersons label {
+    margin: 0 !important;
+}
+  }

@@ -37,6 +37,9 @@
         @media (max-width: 767px) {
           width: 100%;
         }
+        @media (min-width: 768px) and (max-width: 1200px) {
+          width: 100% !important;
+        }
        .ui-accordion-content table tr td {
          padding: 5px 0px !important;
        }
@@ -61,7 +64,7 @@
         border-right: 0px;
         background: #FFFFFF;
         margin-top: 0px;
-        padding:25px 0 25px 40px;
+        padding:25px 0 25px 28px;
         font-family: Verdana,Arial,sans-serif;
         font-size: 1.5rem;
         line-height:20px;
@@ -102,7 +105,7 @@
         }
       }
       .ui-accordion-content {
-        padding: 9px 0 0px 40px;
+        padding: 9px 0 0px 28px;
         font-size: 16px;
         width:100%;
         table {
@@ -116,6 +119,9 @@
                 padding-top: 27px !important;
                 padding-bottom: 7px !important;
               }
+              .due-total {
+                text-align:right;
+              }
             }
             td {
               padding: 5px 10px !important;
@@ -125,13 +131,50 @@
                 padding-left: 0;
                 border: 0;
               }
+               @media (min-width: 320px) and (max-width: 375px) {
+                  width:20% !important;
+                  font-size:14px;
+                span{
+                  font-size:12px;
+                }
+                span:first-child{
+                  margin-left:0 !important;
+                }
+               }
+               
+              @media (min-width: 375px) and (max-width: 479px) {
+               width:25% !important;
+                span{
+                  font-size:15px;
+                }
+               }
+               @media (min-width: 480px) and (max-width: 640px) {
+               width:55% !important;
+                span{
+                  font-size:16px;
+                }
+               }
+               
+              @media (max-width: 767px) {
+              width:55%;
+                    span:first-child{
+                      margin-left:30px;
+                    }
+              }
               &:not(:first-child) {
-                text-align: right;
-                width: 192px;
+                text-align: left;
+                width: 135px;
+                @media (max-width: 767px) {
+                    text-align:right;
+                    margin-right:0px !important;
+                }
               }
               &:last-child {
-                text-align: right;
-                width: 192px;
+                text-align: left;
+                width: 135px;
+                @media (max-width: 767px) {
+                   text-align:right;
+                  }
               }
               span {
                 &:first-child {
@@ -141,6 +184,18 @@
                   display: inline-block;
                   width: 78px;
                 }
+              }
+              span:last-child {
+                text-align:right;
+                float:right;
+                margin-right:30px;
+                @media (max-width: 767px) {
+                    margin-right:0px !important;
+                }
+                
+              }
+              .pro-rate-val {
+                margin-right:0px !important;
               }
             }
           }
@@ -478,6 +533,9 @@
             background: #555;
             color: #fff;
             font-weight: normal;
+          }
+          td {
+            padding: 10px;
           }
         }
       } 

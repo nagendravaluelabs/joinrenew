@@ -134,6 +134,9 @@ select.form-select.error,
 .chosen-container-single.chosen-container.error .chosen-single div b {
   background-image: url(../images/drop-down-arrow-error.png) !important;
 }
+.common-form input[type="checkbox"].error:not(:checked) + label:before {
+  border-color: #FF0000;
+}
 @media (min-width: 320px) and (max-width: 1023px){
   .chosen-container {
     width: 100% !important;
