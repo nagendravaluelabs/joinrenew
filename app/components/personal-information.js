@@ -1,10 +1,12 @@
 /*jslint es6, this*/
 import Ember from "ember";
+import rememberScroll from "../mixins/remember-scroll";
+
 const {$} = Ember;
 jQuery.validator.addMethod("acceptReg", function(value, element, param) {
   return value.match(new RegExp("." + param + "$"));
 });
-export default Ember.Component.extend({
+export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
     primaryHomeAddress: false,
@@ -101,11 +103,14 @@ export default Ember.Component.extend({
     actions: {
         showPersonalInfo: function () {
             this.sendAction("showPersonalInfo");
+            this.scrollToTop();
         },
         chapterSelection: function (value) {
             "use strict";
             var self;
             self = this;
+            $(".primary-action-btn").removeClass("hidden");
+            self.set('createOrganization', false);
             self.chapterSelection(value.capitalize());
         },
         createNewOrganization: function () {
