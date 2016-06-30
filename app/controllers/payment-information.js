@@ -33,6 +33,7 @@ export default Ember.Controller.extend({
     },
     showPaymentPlan: function() {
       $('#paymentplan_extrainfo').dialog('open');
+      return false;
     }
   }
 });
