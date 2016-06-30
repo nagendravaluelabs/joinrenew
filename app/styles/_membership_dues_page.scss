@@ -1,16 +1,4 @@
-#main-content.page-renew-membership-dues-page {
-  padding-top: 30px;
-}
-.page-renew-membership-dues-page .aia-progress-bar {
-  width: 100%;
-  margin-top: 0;
-  padding-bottom: 40px;
-  border-bottom: 1px solid #e1e1e1;
-}
-.page-renew-membership-dues-page .aia-progress-bar .aia-progress .steps p {
-  margin-bottom: 0;
-  padding-bottom: 35px;
-}
+
 .page-renew-membership-dues-page .aia-progress-bar .steps:first-child .progress-circle .tick {
   background: transparent url("../images/progress-tick.png") no-repeat scroll 5px 1px;
   display: block;
@@ -499,6 +487,7 @@ span.membership-value {
 
 .page-renew-membership-dues-page .renew-calculator .inputpersons .form-item {
   margin-top: 0;
+  text-align:center;
 }
 .page-renew-membership-dues-page .renew-calculator .next {
   margin-bottom: 2px;
@@ -542,7 +531,6 @@ span.membership-value {
     padding: 0 10px;
   }
   .page-renew-membership-dues-page .aia-progress-one-step {
-    border-bottom: 1px solid #ccc;
     margin: 0 10px!important;
     padding-bottom: 15px;
   }
@@ -553,6 +541,15 @@ span.membership-value {
 
 }
 @media (max-width: 767px) {
+.ui-accordion-content-active .totals {
+    margin-top: 4px;
+    font-weight: 600;
+}
+.page-renew-membership-dues-page .renew-calculator .inputpersons .form-item {
+  text-align:right;
+  margin-top:18px;
+}
+
   .page-renew-membership-dues-page .renew-questionnaire, .page-renew-membership-dues-page .renew-calculator, .page-renew-membership-dues-page .total-renew-suppdue, .page-renew-membership-dues-page .common-form table.duestable {
     width:100% !important;
   }
@@ -618,9 +615,9 @@ span.membership-value {
     /*float: left;*/
     margin-top: 22px;
   }
-  .page-renew-membership-dues-page .renew-calculator .ui-icon {
+  /*.page-renew-membership-dues-page .renew-calculator .ui-icon {
     top: 50%;
-  }
+  }*/
   .renew-calculator .totals.padding-total-top {
     margin-top: 20px;
   }

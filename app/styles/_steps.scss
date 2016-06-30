@@ -73,8 +73,7 @@
 }
 .aia-progress-bar {
   width: 100%;
-  margin-top: 56px;
-  padding-bottom: 36px;
+  padding-bottom: 40px;
   border-bottom: 1px solid #e1e1e1;
 }
 .aia-progress-bar .aia-progress .steps {
@@ -92,7 +91,7 @@
 }
 .aia-progress-bar .aia-progress .steps p {
   margin-bottom: 0;
-  padding-bottom: 25px;
+  padding-bottom: 35px;
 }
 .aia-progress-bar .aia-progress .steps .progress-line {
   height: 5px;
@@ -138,6 +137,7 @@
   }
   .aia-progress-bar-one-step{
     margin-top: 63px;
+	border-bottom: 1px solid #ccc;
   }
   .aia-progress-bar-one-step ol{
     list-style-type: none;
