@@ -44,7 +44,7 @@
 .renew-now .right-view .actions {
     padding-top: 31px;
 }
-.renew-now .actions .link-to-button {height: 50px;}
+
 .renew-now .actions #edit-next {
     margin-bottom: 20px;
     font-weight: bolder;
@@ -158,12 +158,15 @@ footer disclaimer title hide */
         font-size: 1.6rem;
     }
     input[type="submit"], input[type="button"], .link-to-button a {
-        font-size:3.0rem !important;
-        width:50%;
+        width:100% !important;
         background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
-        height:90px;
-        margin-bottom: 50px !important;
+        height:70px;
+		background-size: auto 100% !important;
+		display:inline-block;
     }
+	.link-to-button a {
+		padding:21px 40px 21px 18px;
+	}
     .calc-button input[type="submit"], .calc-button input[type="button"]{
       width:auto;
       padding-right:18px;
@@ -265,12 +268,7 @@ footer disclaimer title hide */
       background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
       width: 55% !important;
     }
-    /*
-    input[type="submit"], input[type="button"], .link-to-button a {
-        background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
-        font-size: 2.6rem !important;
-    }
-    */
+    
 }
 @media only screen and (max-width:567px) {
     input[type="submit"], .renew-now .actions input[type="submit"] {
