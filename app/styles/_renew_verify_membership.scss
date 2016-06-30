@@ -8,7 +8,7 @@
 .renew-confirmation .link-to-button {
     display: inline-block;
     margin: 20px 0;
-}
+} 
 .renew-now .left-view {
     border-right: 1px solid #ccc;
     float: left;
@@ -138,6 +138,9 @@ footer disclaimer title hide */
     .renew-page .region-content p, .page-renew .region-footer h4, .page-renew .region-footer .content .col-sm-6 {
         font-size: 2.4rem;
     }
+    .renew-now .right-view .actions {
+      padding-top: 20px;
+    }
     .page-renew .region-footer h4 {
         margin-bottom: 10px;
     }
@@ -161,10 +164,10 @@ footer disclaimer title hide */
         height:90px;
         margin-bottom: 50px !important;
     }
-	.calc-button input[type="submit"], .calc-button input[type="button"]{
-		width:auto;
-		padding-right:18px;
-	}
+    .calc-button input[type="submit"], .calc-button input[type="button"]{
+      width:auto;
+      padding-right:18px;
+    }
     /*verify membership page*/
     #content-wrap h1.page-title {
         margin-bottom: 53px;
@@ -250,7 +253,7 @@ footer disclaimer title hide */
     .page-renew-verify-membership .actions input[type="submit"] {
         font-size: 2.4rem !important;
     }
-}
+} 
 @media only screen and (max-width:767px) {
     #main-content.page-renew-verify-membership {
       padding-top: 78px;
@@ -262,6 +265,12 @@ footer disclaimer title hide */
       background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
       width: 55% !important;
     }
+    /*
+    input[type="submit"], input[type="button"], .link-to-button a {
+        background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
+        font-size: 2.6rem !important;
+    }
+    */
 }
 @media only screen and (max-width:567px) {
     input[type="submit"], .renew-now .actions input[type="submit"] {

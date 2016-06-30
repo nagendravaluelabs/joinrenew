@@ -88,7 +88,7 @@
           }
         }
         .membership { 
-          width:69%;
+          width:70%;
           @media (max-width:1198px){
              width:100%;
           }
@@ -130,7 +130,7 @@
               }
                @media (min-width: 320px) and (max-width: 375px) {
                   width:20% !important;
-                  font-size:14px;
+                  font-size:13px;
                 span{
                   font-size:12px;
                 }
@@ -277,12 +277,13 @@
         select {
           width: 70px !important;
           text-align: left;
-          padding-left: 5px;
+          padding-left: 10px;
           display: inline-block;
         }
         label {
           display: inline-block;
-          margin-left: 20px;
+          margin-left: 10px;
+          font-weight: normal;
         }
         margin-bottom: 25px;
       }
@@ -337,12 +338,19 @@
           font-weight: normal;
         }
       }
+       .secure-code{
       input {
         max-width: 370px;
         @media (max-width: 767px) {
           max-width: initial;
           width: 100%;
         }
+      }
+      @media (min-width: 768px) and (max-width: 1023px){
+        input {
+        max-width: 120px;
+        }
+      }
       }
       .gatewayimg {
         display: inline-block;
@@ -557,3 +565,5 @@
     opacity: 0.9;
   }
 }
+
+

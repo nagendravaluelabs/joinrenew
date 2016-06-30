@@ -28,6 +28,7 @@
 	position: relative;
 	display:block;
 }
+
 /*.common-form ul li:last-child{
 	margin-bottom:0;
 }*/
@@ -393,13 +394,22 @@ input:disabled {
   }
   .common-form ul li{
 	  width:100%;
-  }
-  
+  } 
   ul.form-radios li{
     width:auto !important;  
   }
   .address-block-container .chosen-container{
 	  width:100% !important;
+  }
+  #company-organization  .state {
+    width: 50%;
+  } 
+  .personal-contact.common-form .state {
+    width: 50%;
+  }
+  .common-form ul li.inline-bl {
+    display: inline-block;
+    width: 50% !important;
   }
 
 }
