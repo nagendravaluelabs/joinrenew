@@ -17,11 +17,12 @@
       <div id="ordersummaryinfo">
         <h3>Invoice summary</h3>
         <div id="payment-accordion">
-          <h3>
-            New AIA membership: 
+           <h3>
+            New AIA membership:
+			<strong class="member-role">{{model.role}}</strong>
             <span class="membership">
+			<strong class="member-role mobile-view">{{model.role}}</strong>
               <span class="membership-type">
-                <strong>{{model.role}}</strong>
                 <span class="membership-total">${{subTotal}}</span></span>
               </span>
             
@@ -92,11 +93,11 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <label for="select-installments">Installments</label>
+              <label for="select-installments">installments</label>
             </div>
             <div id="firstinstallment">Total for first installment: <span>$97.93</span>
             <span id="paymentplan_info_but">
-              <a class="extrainfo_icon" {{action "showPaymentPlan"}}></a>
+              <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
             </span></div>
             
             <div class="clearfix"></div>
@@ -152,7 +153,7 @@
                 </div>
               </li>
               <li>
-                <div class="pull-left">
+                <div class="pull-left secure-code">
                   <label for="cardSecurityCode">
                     Security code 
                     <span class="form-required">*</span>

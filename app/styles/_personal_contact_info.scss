@@ -23,10 +23,10 @@
 	list-style:none;
 }
 .common-form ul li {
-    margin-bottom: 1em;
-    margin-top: 2px;
-	position: relative;
-	display:block;
+  margin-bottom: 1em;
+  margin-top: 2px;
+  position: relative;
+  display:block;
 }
 /*.common-form ul li:last-child{
 	margin-bottom:0;
@@ -43,11 +43,11 @@
 }
 
 .common-form .required-field{
-    color: #a7a7a7;
-    padding: 11px 0 20px 0;
-    font-weight: normal;
-	margin-bottom:0;
-    line-height: 20px;
+  color: #a7a7a7;
+  padding: 11px 0 20px 0;
+  font-weight: normal;
+  margin-bottom:0;
+  line-height: 20px;
 }
 .common-form .all-info {
     padding-left: 20px;
@@ -279,7 +279,7 @@ ul.field-options-select > li > select.form-select, ul.field-options-select > li 
 
 .actions-btn  input[type="submit"],
 .actions-btn .link-to-button a {
-    width: 32%;
+    width: 280px;
     display: inline-block;
 }
 
@@ -394,14 +394,38 @@ input:disabled {
   .common-form ul li{
 	  width:100%;
   }
-  
+  .your-contact-info ul.field-options-select > li {
+    width: 50%;
+    float: left;
+    margin-right: 0;
+  }
+  .your-contact-info ul.field-options-select > li:nth-child(3n+1) {
+    padding-right: 10px;
+  }
+  .your-contact-info ul.field-options-select > li:nth-child(3n+2) {
+    padding-left: 10px;
+  }
   ul.form-radios li{
     width:auto !important;  
   }
   .address-block-container .chosen-container{
 	  width:100% !important;
   }
-
+  .personal-contact.common-form .state,
+  #company-organization .state {
+    width: 50%;
+  }
+  .personal-contact.common-form ul li.inline-bl,
+  .personal-contact.common-form .state, 
+  #company-organization .state {
+    width: 50%;
+  }
+  #company-organization .creative-zip {
+    padding-right: 14px;
+  }
+  #company-organization .state + .creative-zip {
+    padding-right: 0px;
+  }
 }
 @media (min-width: 320px) and (max-width: 1023px){
   .common-form ul li.inline-bl{
@@ -445,6 +469,9 @@ h3 {
     font-size: 3rem;
     line-height: 30px;
 }
+  .payment-method h3 {
+    font-size: 2.9rem !important;
+  }
 
 .personal-contact.common-form .address-block-container .chosen-container, 
 .personal-contact.common-form input[type="text"]#primary_home_zipcode:not(.date-clear),

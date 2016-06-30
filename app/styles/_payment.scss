@@ -1,8 +1,5 @@
 #main-content {
   &.page-sign-up-payment {
-    .aia-progress-bar {
-      margin-top: 20px;
-    } 
     .page-title {
       margin-bottom: 54px;
       padding-bottom: 5px;
@@ -90,12 +87,28 @@
             height: 20px;
           }
         }
+        
+        
+        strong.member-role{
+			 width:67%;
+			 &.mobile-view{
+			display:none !important;
+		  }
+          @media (max-width:767px){
+             display:none;
+          
+		  &.mobile-view{
+			display:inline-block !important;
+		  }
+		  }
+		}
         .membership { 
-          width:69%;
-          @media (max-width:1198px){
+          @media (max-width:767px){
              width:100%;
           }
         }
+      
+      
         span:last-child {
           text-align:left;
         } 
@@ -133,7 +146,7 @@
               }
                @media (min-width: 320px) and (max-width: 375px) {
                   width:20% !important;
-                  font-size:14px;
+                  font-size:13px;
                 span{
                   font-size:12px;
                 }
@@ -277,15 +290,15 @@
         padding: 15px 0 8px 16px;        
       }
       #installmentnumber {
-        select {
+        select { 
           width: 70px !important;
           text-align: left;
-          padding-left: 5px;
+          padding-left: 10px;
           display: inline-block;
         }
         label {
           display: inline-block;
-          margin-left: 20px;
+          font-weight:normal;
         }
         margin-bottom: 25px;
       }
@@ -295,7 +308,6 @@
         color: #ef4135;
         font-size: 2.4rem;
         span {
-          font-weight:bold;
           font-size: 2.4rem;
         }
       }
@@ -340,12 +352,19 @@
           font-weight: normal;
         }
       }
+       .secure-code{
       input {
         max-width: 370px;
         @media (max-width: 767px) {
           max-width: initial;
           width: 100%;
         }
+      }
+      @media (min-width: 768px) and (max-width: 1023px){
+        input {
+        max-width: 120px;
+        }
+      }
       }
       .gatewayimg {
         display: inline-block;
@@ -464,8 +483,8 @@
       }
       .form-submit {
         margin: 25px 0;
-        width: 100%;
-        max-width: 280px;
+        width: 280px;
+		
       }
     }
     .form-required {

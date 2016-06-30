@@ -44,7 +44,7 @@
 .renew-now .right-view .actions {
     padding-top: 31px;
 }
-.renew-now .actions .link-to-button {height: 50px;}
+
 .renew-now .actions #edit-next {
     margin-bottom: 20px;
     font-weight: bolder;
@@ -138,6 +138,9 @@ footer disclaimer title hide */
     .renew-page .region-content p, .page-renew .region-footer h4, .page-renew .region-footer .content .col-sm-6 {
         font-size: 2.4rem;
     }
+    .renew-now .right-view .actions {
+      padding-top: 20px;
+    }
     .page-renew .region-footer h4 {
         margin-bottom: 10px;
     }
@@ -155,16 +158,19 @@ footer disclaimer title hide */
         font-size: 1.6rem;
     }
     input[type="submit"], input[type="button"], .link-to-button a {
-        font-size:3.0rem !important;
-        width:50%;
+        width:100% !important;
         background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
-        height:90px;
-        margin-bottom: 50px !important;
+        height:70px;
+		background-size: auto 100% !important;
+		display:inline-block;
     }
-	.calc-button input[type="submit"], .calc-button input[type="button"]{
-		width:auto;
-		padding-right:18px;
+	.link-to-button a {
+		padding:21px 40px 21px 18px;
 	}
+    .calc-button input[type="submit"], .calc-button input[type="button"]{
+      width:auto;
+      padding-right:18px;
+    }
     /*verify membership page*/
     #content-wrap h1.page-title {
         margin-bottom: 53px;
@@ -286,5 +292,5 @@ footer disclaimer title hide */
 span.membership{
   display:inline-block;
   width:auto;
-  float:none;
+  float:right;
 }
