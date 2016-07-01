@@ -2,6 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     isLoggedin: false,
+    didInsertElement() {
+      this._super(...arguments);
+      $('#login-box').dialog({
+        modal: true,
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        width: $(window).width() > 500 ? 550 : '90%',
+        title: '',
+        responsive: true,
+        closeText: 'X',
+        show: false,
+        hide: false
+      });
+      $(window).resize(function() {
+        $("#login-box").dialog("option", "width", $(window).width() > 500 ? 550 : '90%');
+      });
+    },
     actions: {
         signIn: function () {
             this.set("isLoggedin", true);
@@ -10,6 +28,9 @@ export default Ember.Component.extend({
         signOut: function () {
             this.set("isLoggedin", false);
             this.get('router').transitionTo('index');
+        },
+        showSignIn: function() {
+          $('#login-box').dialog('open');
         }
     }
 });
