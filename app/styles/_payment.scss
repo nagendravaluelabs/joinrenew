@@ -244,6 +244,9 @@
         margin: 52px 0px 44px 0;
         padding-top: 54px;
         color:#000;
+        @media (max-width: 767px) {
+          font-size: 27px;
+        }
       }
       ul {
         margin-left: 16px;
@@ -493,11 +496,6 @@
     .required {
       color: #FF0000;
       vertical-align: 4px;
-    }
-    .payment-method h3 {
-      @media (max-width: 767px) {
-        font-size: 28px;
-      }
     }
   }
 }
