@@ -494,6 +494,11 @@
       color: #FF0000;
       vertical-align: 4px;
     }
+    .payment-method h3 {
+      @media (max-width: 767px) {
+        font-size: 28px;
+      }
+    }
   }
 }
 #paymentplan_modal{
