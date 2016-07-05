@@ -14,24 +14,27 @@ export default Ember.Component.extend({
         responsive: true,
         closeText: 'X',
         show: false,
-        hide: false
+        hide: false,
+        close: function( event, ui ) {
+          $('#sign-In').validate().resetForm();
+        }
       });
       $(window).resize(function() {
         $("#login-box").dialog("option", "width", $(window).width() > 500 ? 550 : '90%');
       });
     },
     actions: {
-        signIn: function () {
-            this.set("isLoggedin", true);
-            this.get('router').transitionTo('renew-verify-membership');
-        },
-        signOut: function () {
-            this.set("isLoggedin", false);
-            this.get('router').transitionTo('index');
-        },
-        showSignIn: function() {
-          $('#login-box').dialog('open');
-        }
+      signIn: function () {
+        this.set("isLoggedin", true);
+        this.get('router').transitionTo('renew-verify-membership');
+      },
+      signOut: function () {
+        this.set("isLoggedin", false);
+        this.get('router').transitionTo('index');
+      },
+      showSignIn: function() {
+        $('#login-box').dialog('open');
+      }        
     }
 });
 

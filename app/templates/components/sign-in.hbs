@@ -1,4 +1,5 @@
 <div id="login-box">
+<form action="/" id="sign-In">
 <div class="sign-box">
     <div class="header">
         <h1>Sign in</h1>
@@ -11,14 +12,15 @@
     </ul>
     <div class="user-login-form">
     <div class="form-group">
-        <input value="" type="email" class="form-control" placeholder="email address"
+       <span class="fa fa-search"></span>
+        <input value="" type="email" class="form-control" id="signInEmailAddress" placeholder="email address"
         name="signInEmailAddress">
     </div>
     <div class="form-group">
-        <input value="" type="password" class="form-control" placeholder="Password"
+        <input value="" type="password" class="form-control" id="currentPassword" placeholder="Password"
         name="currentPassword">
     </div>
-        <button class="capture_btn" type="submit">
+        <button class="capture_btn" type="button" onclick={{action 'signInRequired'}}>
             <span class="icon-key glyphicon glyphicon-lock"></span>Sign in</button><a href="#">Reset password</a>
     <p class="terms-txt">By signing up, you agree to AIA.org's
         <a href="#" target="_blank">Terms of Use and Privacy Policy.</a>
@@ -31,5 +33,6 @@
             <a href="#">Sign up.</a>
         </p>
     </div>
+    </form>
     </div>
     
