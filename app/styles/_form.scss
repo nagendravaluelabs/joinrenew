@@ -115,7 +115,7 @@ input[type="button"] {
 
 /* Start: styles for Error */
 label {
-  .error {
+  &.error {
     font-size: 12px;
     color: #FF0000 !important;
     font-weight: normal !important;
