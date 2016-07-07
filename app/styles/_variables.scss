@@ -1,3 +1,41 @@
-$font-light: 'Architype-light',sans-serif;
-$primary-bgcolor: #ef4135;
+$font-light: 'architype-light',sans-serif;
+$primary-color: #ef4135;
+$primary-text-color: #000;
 $font-helvetica: "Helvetica Neue",Helvetica,Arial,sans-serif;
+$font-architype-bold: "architype-bold",Arial,sans-serif;
+$font-size: 14px;
+
+/* Header
+================================================== */
+$header-bg-color: $primary-color;
+$header-font-family: $font-light;
+$header-font-color: #FFF;
+$header-font-size: 16px;
+$header-logo-height: 71px;
+$header-menu-padding: 28px 10px 26px 10px;
+
+/* Common Styles
+================================================== */
+$page-title-color: $primary-color;
+$page-title-font-size: 6.4rem;
+$page-title-border-color: #CCCCCC;
+$button-bg-color: $primary-color;
+$button-bg-hover-color: #cc0000;
+$button-font-size: 2.4rem;
+$button-padding: 10px 40px 10px 18px;
+$button-color: #FFF;
+$button-hover-color: #FFF;
+
+/* Join Homepage
+================================================== */
+$header-bg-color: $primary-color;
+$header-font-family: $font-light;
+$header-font-color: #FFF;
+$header-font-size: 16px;
+$header-logo-height: 71px;
+$header-menu-padding: 28px 10px 26px 10px;
+
+/* Renew Homepage
+================================================== */
+$renewhome-font-size: $font-size;
+$renewhome-font-size: $font-size;

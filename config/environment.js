@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'workspace',
+    modulePrefix: 'aia-joinrenew',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
