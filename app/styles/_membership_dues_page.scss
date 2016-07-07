@@ -119,7 +119,7 @@
   background-image: url(../images/plus-sign.png) !important;
   height: 20px;
   width: 20px;
-  margin-top:-4px;
+  margin-top:-14px;
 }
 .page-renew-membership-dues-page .renew-calculator .selectedIcon {
   background-image: url(../images/minus-sign.png) !important;
@@ -178,7 +178,7 @@
   margin-bottom: 0;
 }
 .renew-calculator .totals.padding-total-top {
-  margin: 32px 0 0 0;
+  margin: 10px 0 0 0;
 }
 .totals {
   display: inline-block;
@@ -382,7 +382,7 @@ span.membership-value {
     width: 30%;
   }
   .page-renew-membership-dues-page .renew-calculator #accordion .ui-helper-reset {
-    padding-right: 35px;
+    padding-right: 20px;
   }
 }
 @media(min-width: 628px) and (max-width: 767px) {
@@ -403,6 +403,9 @@ span.membership-value {
 .ui-accordion-content-active .totals {
     margin-top: 4px;
     font-weight: 600;
+}
+#questionnaire-wrapper {
+  padding-left: 0;
 }
 .page-renew-membership-dues-page .renew-calculator .inputpersons .form-item {
   text-align:right;

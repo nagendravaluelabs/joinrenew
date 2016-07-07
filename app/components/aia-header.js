@@ -2,15 +2,39 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     isLoggedin: false,
-    actions: {
-        signIn: function () {
-            this.set("isLoggedin", true);
-            this.get('router').transitionTo('renew-verify-membership');
-        },
-        signOut: function () {
-            this.set("isLoggedin", false);
-            this.get('router').transitionTo('index');
+    didInsertElement() {
+      this._super(...arguments);
+      $('#login-box').dialog({
+        modal: true,
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        width: $(window).width() > 500 ? 550 : '90%',
+        title: '',
+        responsive: true,
+        closeText: 'X',
+        show: false,
+        hide: false,
+        close: function( event, ui ) {
+          $('#sign-In').validate().resetForm();
         }
+      });
+      $(window).resize(function() {
+        $("#login-box").dialog("option", "width", $(window).width() > 500 ? 550 : '90%');
+      });
+    },
+    actions: {
+      signIn: function () {
+        this.set("isLoggedin", true);
+        this.get('router').transitionTo('renew-verify-membership');
+      },
+      signOut: function () {
+        this.set("isLoggedin", false);
+        this.get('router').transitionTo('index');
+      },
+      showSignIn: function() {
+        $('#login-box').dialog('open');
+      }        
     }
 });
 

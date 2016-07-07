@@ -1,10 +1,10 @@
-/*
-  Maintains all the css for Signup Landing Page form.
-*/
 #main-content {
   &.page-sign-up-home {
     padding-bottom: 0;
     padding-top: 36px;
+    @include mq(xs) {
+      padding: 90px 0px 0;
+    }
     .container {
       width: auto;
       padding-left: 0px;
@@ -14,382 +14,366 @@
       margin-left: 0;
       margin-right: 0;
     }
+    .renew-container {
+      max-width: 1205px;
+      margin: 0 auto;
+      padding-left: 10px;
+      padding-right: 10px;
+      @media (max-width: 1240px) {
+        max-width: 966px;
+      }
+      @media (max-width: 992px) {
+        max-width: 756px;
+      }
+      @include mq(xs) {
+        max-width: initial;
+        padding: 0 30px;
+      }
+    }
+    .page-title {
+      display: none;
+    }
+    .container-column {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .renew-page {
+      padding-top: 8px;
+      .landing-page-image {
+        margin-bottom: -3px;
+        @media (max-width: 1240px) {
+          margin-bottom: 0;
+        }
+        .img-responsive {
+          @media (max-width: 992px) {
+            margin: 0 auto;
+          }
+        }
+      }
+      .right-view {
+        padding-top: 21px;
+        #landingPage-body {
+          @media (max-width: 1240px) {
+            margin-bottom: 15px;
+          }
+          h1 {
+            padding-bottom: 34px;
+            padding-right: 50px;
+            font-size: 64px;
+            line-height: 80px;
+            br {              
+              @media (max-width: 992px) {
+                display: none;
+              }
+            }
+          }
+          p {
+            padding-bottom: 87px;
+            width: 380px;
+            font-size: 24px;
+            @media (max-width: 992px) {
+              width: 100%;
+              padding-bottom: 40px;
+            }
+          }
+        }
+      }
+    }
+    .form-type-select {
+      select {
+        &.form-select {
+          background: url(../images/arrow.png) no-repeat scroll right center !important; 
+        }
+      }
+    }
+    .edit-next {
+      margin-top: -5px;
+      @media (max-width: 1240px) {
+        margin-bottom: 15px;
+      }
+    }
+    .homepageButton {
+      width: 380px;
+      max-width: 100%;
+      display: block;
+      height: 70px;
+      padding-top: 20px;
+      margin-left: 1px;
+      background-position:center right;
+    }
+    .right-view {
+      .edit-next, #edit-next-footer {
+        a {
+          @extend .homepageButton;
+          &.ieBrowser {
+            padding-top: 22px;
+          }
+          &:hover {
+            background-color: #8F8F8F;
+          }
+        }
+      }
+      #edit-next-footer {
+        margin-bottom: 35px;
+        a {
+          margin-left: 6px;
+        }
+      }
+      .infolinks {
+        margin-left: 6px;
+        margin-top: 2px;
+        #edit-benefits-eligibility {
+          display: block;
+          margin-bottom: 8px;
+          @media (max-width: 1240px) {
+            margin-bottom: 20px;
+          }
+        }
+      }
+      .slick-prev, .slick-next {
+        top: 43% !important;
+        @include mq(xs) {
+          display: none !important;
+        }
+      }
+    }
+    .renew-page-benefits {
+      background-color: #E3E3E4;
+      position: relative;
+      z-index: 20;
+      padding-top: 50px;
+      @include mq(xs) {
+        padding-top: 45px;
+      }
+      .renew-container {
+        padding-left: 2px;
+        padding-right: 2px;
+        .explore-benefits {
+          @include mq(xs) {
+            padding: 0px 28px;
+          }
+          h2 {
+            font-size: 64px;
+            margin-left: 8.3%;
+            padding-bottom: 2px;
+            @include mq(xs) {
+              font-size: 36px;
+              margin-left: 2%;
+              padding-bottom: 9px;
+            }
+          }
+          .custom-explore-benefits {
+            position: relative;
+            margin-left: 8.3%;
+            @include mq(xs) {
+              margin-left: 2%;
+            }
+            h3 {
+              font-weight: bolder ;
+              font-size: 64px ;
+              padding-bottom: 2px;
+              color: #EE3D32;
+              vertical-align: middle;
+              margin: 0;
+              @include mq(xs) {
+                font-size: 24px;
+                padding-left: 20px;
+                margin-top: 30px;
+              }
+            }
+            .actions {
+              position: absolute;
+              top: 3px;
+              left: 0;
+              padding-left: 9%;
+              width: 100%;
+              @include mq(xs) {
+                padding-left: 0;
+                margin-top: -25px;
+              }
+              #select-explore-benefits {
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                background: url(../images/arrow.png) no-repeat scroll right center ;
+                width: 860px;
+                line-height: 24px;
+                padding-right: 48px;
+                height: 80px;
+                border: 3px #EF3E33 solid ;
+                vertical-align: middle;
+                z-index: 2;
+                position: relative;
+                color: transparent;
+                top: 0px;
+                left: 11px;
+                outline: none;
+                option {
+                  color: #EE3D32;
+                  font-size: 16px !important;
+                }
+                @media (max-width: 1240px) {
+                  width: 740px;
+                  left: 35px;
+                }
+                @media (max-width: 992px) {
+                  width: 560px;
+                  left: 35px;
+                }
+                @include mq(xs) {
+                  width: 95%;
+                  left: 0;
+                }
+              }
+            }
+            .viewport {
+              position: absolute;
+              z-index: 1;
+              overflow: hidden;
+              white-space: nowrap;
+              -ms-text-overflow: ellipsis;
+              -o-text-overflow: ellipsis;
+              text-overflow: ellipsis;
+              font-size: 64px;
+              font-weight: bold;
+              color: #EE3D32;
+              line-height: 78px;
+              top: 0;
+              width: 70%;
+              padding: 0 35px 0 43px;
+              @media (max-width: 1240px) {
+                max-width: 700px;
+                width: 100%;
+                padding-left: 65px;
+              }
+              @media (max-width: 992px) {
+                max-width: 535px;
+                width: 100%;
+                padding-left: 50px;
+              }
+              @include mq(xs) {
+                font-size: 24px;
+                max-width: initial;
+                width: 84%;
+                left: 10px;
+              }
+            }
+          }
+        }
+        #benefits-wrapper {
+          max-width: 977px;
+          margin-left: 9%;
+          padding-bottom: 35px;
+          font-size: 16px;
+          line-height: 30px;
+          padding-top: 48px;
+          @media (max-width: 1240px) {
+            width: 85%;
+            width: calc(100% - 160px);
+            margin-left: auto;
+            margin-right: auto;
+          }
+          @include mq(xs) {
+            width: 100% !important;
+            margin: 75px 0 0 0;
+            padding: 5px 42px 0 20px;
+          }
+          p {
+            padding-bottom: 27px;
+          }
+          li {
+            list-style-type: square;
+            &+li,
+            &:first-child {
+              margin-bottom: 14px;
+            }
+          }
+          .main-container {
+            padding-top: 10px;
+            h4 {
+              font-weight: bold;
+              font-size: 24px;
+              line-height: 30px;
+              @include mq(xs) {
+                font-size:22px;
+              }
+            }
+            li {
+              &+li,
+              &:first-child {
+                @include mq(xs) {
+                  margin-bottom: 10px;
+                }
+              }
+            }
+            .main_block1,
+            .main_block2,
+            .main_block3 {
+              div {
+                display: inline-block;
+                width: 24.33%;
+                vertical-align: top;
+                @include mq(xs) {
+                  width:100%;
+                  margin-bottom:10px;
+                }
+              }
+            }
+            .main_block1 .block1,
+            .main_block1 .block2,
+            .main_block2 .block4,
+            .main_block2 .block5,
+            .main_block3 .block7,
+            .main_block3 .block8 {
+              margin-right: 12%;
+            }
+            .main_block1,
+            .main_block2 {
+              padding-bottom: 18px;
+              @include mq(xs) {
+                padding-bottom: 0;
+              }
+            }
+            p {
+              padding-bottom: 0px !important;
+              @include mq(xs) {
+                padding-bottom:32px;
+              }
+            }
+          }
+        }
+        .renew-footer-links {
+          margin-left: 9.1%;
+          margin-top: 2px;
+          @include mq(xs) {
+            margin-left: 2%;
+          }
+        }
+      }
+      .right-view {
+        #edit-next-footer {
+          a {
+            margin-left: 0;
+            @include mq(xs) {
+              width: 100%;
+              height: 90px;
+              font-size: 3rem;
+              background: rgb(239, 65, 53) url(../images/arrow-right.png) no-repeat scroll right 21px;
+              margin-left: 0;
+              padding-top: 28px;
+            }
+            @media (max-width: 550px) {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
   }
-}
-
-#main-content.page-sign-up-home .renew-container {
-  max-width: 1205px;
-  margin: 0 auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-#main-content.page-sign-up-home .page-title {
-  display: none;
-}
-.page-sign-up-home .container-column {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-.page-sign-up-home .renew-page {
-  padding-top: 8px;
-}
-.page-sign-up-home  .renew-page .right-view {
-  padding-top: 21px;
-}
-.page-sign-up-home .landing-page-image {
-  margin-bottom: -3px;
-}
-.page-sign-up-home #landingPage-body h1 {
-  padding-bottom: 34px;
-  padding-right: 50px;
-  font-size: 64px;
-  line-height: 80px;
-}
-.page-sign-up-home #landingPage-body p {
-  padding-bottom: 87px;
-  width: 380px;
-  font-size: 24px;
-}
-.page-sign-up-home .form-type-select select.form-select {
-  background: url("../images/arrow.png") no-repeat scroll right center !important; 
-}
-.page-sign-up-home .edit-next {
-  margin-top: -5px;
-}
-.page-sign-up-home .right-view .edit-next a, .page-sign-up-home .right-view #edit-next-footer a{
-  width: 380px;
-  max-width: 100%;
-  display: block;
-  height: 70px;
-  padding-top: 20px;
-  margin-left: 1px;
-  background-position:center right;
-  background-color: #EF3E33;
-}
-.page-sign-up-home .right-view #edit-next-footer a{
-  margin-left: 6px;
-}
-.page-sign-up-home .right-view .edit-next a.ieBrowser, 
-.page-sign-up-home .right-view #edit-next-footer a.ieBrowser{
-  padding-top: 22px;
-}
-.page-sign-up-home #edit-next-footer a:hover,
-.page-sign-up-home .edit-next a:hover{
-  background-color: #8F8F8F;
-}
-.page-sign-up-home .renew-page-benefits {
-  background-color: #E3E3E4;
-  position: relative;
-  z-index: 20;
-  padding-top: 50px;
-}
-#main-content.page-sign-up-home .renew-page-benefits .renew-container {
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.page-sign-up-home .explore-benefits h2 {
-  font-size: 64px;
-  margin-left: 8.3%;
-  padding-bottom: 2px;
-}
-.custom-explore-benefits {
-  position: relative;
-  margin-left: 8.3%;
-}
-
-.custom-explore-benefits h3 {
-  font-weight: bolder ;
-  font-size: 64px ;
-  padding-bottom: 2px;
-  color: #EE3D32;
-  vertical-align: middle;
-  margin: 0;
-}
-
-.custom-explore-benefits .actions {
-  position: absolute;
-  top: 3px;
-  left: 0;
-  padding-left: 9%;
-  width: 100%;
-}
-
-.custom-explore-benefits .viewport {
-  position: absolute;
-  z-index: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  font-size: 64px;
-  font-weight: bold;
-  color: #EE3D32;
-  line-height: 78px;
-  top: 0;
-  width: 70%;
-  padding: 0 35px 0 43px;
-}
-
-#select-explore-benefits {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background: url("../images/arrow.png") no-repeat scroll right center ;
-  width: 860px;
-  line-height: 24px;
-  padding-right: 48px;
-  height: 80px;
-  border: 3px #EF3E33 solid ;
-  vertical-align: middle;
-  z-index: 2;
-  position: relative;
-  color: transparent;
-  top: 0px;
-  left: 11px;
-  outline: none;
-}
-#select-explore-benefits option {
-  color: #EE3D32;
-  font-size: 16px !important;
-}
-.page-sign-up-home #benefits-wrapper {
-  max-width: 977px;
-  margin-left: 9%;
-  padding-bottom: 35px;
-  font-size: 16px;
-  line-height: 30px;
-  padding-top: 48px;
-}
-
-.page-sign-up-home #benefits-wrapper li {
-  list-style-type: square;
-}
-.page-sign-up-home #benefits-wrapper li+li, .page-sign-up-home #benefits-wrapper li:first-child {
-  margin-bottom: 14px;
-}
-.page-sign-up-home #benefits-wrapper p {
-  padding-bottom: 27px;
-}
-.page-sign-up-home #benefits-wrapper .main-container h4 {
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 30px;
-}
-.page-sign-up-home #benefits-wrapper .main-container {
-  padding-top: 10px;
-}
-.page-sign-up-home .main-container .main_block1 div,
-.page-sign-up-home .main-container .main_block2 div,
-.page-sign-up-home .main-container .main_block3 div {
-  display: inline-block;
-  width: 24.33%;
-  vertical-align: top;
-}
-
-.main_block1 .block1, .main_block1 .block2, .main_block2 .block4, .main_block2 .block5,
-.main_block3 .block7, .main_block3 .block8 {
-  margin-right: 12%;
-}
-
-.page-sign-up-home .main-container p {
-  padding-bottom: 0px !important;
-}
-
-.page-sign-up-home .main_block1, .page-sign-up-home .main_block2 {
-  padding-bottom: 18px;
-}
-.page-sign-up-home .right-view #edit-next-footer {
-  margin-bottom: 35px;
-}
-.page-sign-up-home .renew-footer-links {
-  margin-left: 9.1%;
-  margin-top: 2px;
-}
-.page-sign-up-home .right-view .infolinks {
-  margin-left: 6px;
-  margin-top: 2px;
-}
-.page-sign-up-home .right-view .infolinks #edit-benefits-eligibility {
-  display: block;
-  margin-bottom: 8px;
-}
-.page-sign-up-home .right-view .slick-prev, .page-sign-up-home .right-view .slick-next {
-  top: 43% !important;
-}
-
-.page-sign-up-home .renew-page-benefits .right-view #edit-next-footer a {
-  margin-left: 0;
 }
 #dues_est {
 	width:640px;
-
 }
 .ui-dialog {
 	max-width:780px;
-}
-@media (max-width: 1240px) {
-  #main-content.page-sign-up-home .renew-container {
-    max-width: 966px;
-  }
-  .page-sign-up-home #benefits-wrapper {
-    width: 85%;
-    width: calc(100% - 160px);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #select-explore-benefits {
-    width: 740px;
-    left: 35px;
-  }
-  .custom-explore-benefits .viewport {
-    max-width: 700px;
-    width: 100%;
-    padding-left: 65px;
-  }
-  .page-sign-up-home .right-view .infolinks #edit-benefits-eligibility {
-    margin-bottom: 20px;
-  }
-  .page-sign-up-home #landingPage-body {
-    margin-bottom: 15px;
-  }
-  .page-sign-up-home .edit-next {
-    margin-bottom: 15px;
-  }
-  .page-sign-up-home .landing-page-image {
-    margin-bottom: 0;
-  }
-}
-@media (max-width: 992px) {
-  #main-content.page-sign-up-home .renew-container {
-    max-width: 756px;
-  }
-  #select-explore-benefits {
-    width: 560px;
-    left: 35px;
-  }
-  .custom-explore-benefits .viewport {
-    max-width: 535px;
-    width: 100%;
-    padding-left: 50px;
-  }
-  .page-sign-up-home .landing-page-image .img-responsive {
-    margin: 0 auto;
-  }
-  #landingPage-body h1 br {
-    display: none;
-  }
-  .page-sign-up-home #landingPage-body p {
-    width: 100%;
-    padding-bottom: 40px;
-  }
-}
-@media (max-width: 767px) {
-  .navbar-custom {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 150;
-  }
-  #main-content.page-sign-up-home {
-    padding: 90px 0px 0;    
-  }
-  #main-content.page-sign-up-home .renew-container {
-    max-width: initial;
-    padding: 0 30px;
-  }
-  .page-sign-up-home .renew-page-benefits {
-    padding-top: 45px;
-  }
-  .page-sign-up-home .explore-benefits {
-    padding: 0px 28px;
-  }
-  .page-sign-up-home .explore-benefits h2 {
-    font-size: 36px;
-    margin-left: 2%;
-    padding-bottom: 9px;
-  }
-  #select-explore-benefits {
-    width: 95%;
-    left: 0;
-  }
-  .custom-explore-benefits {
-    margin-left: 2%;
-  }
-  .custom-explore-benefits h3 {
-    font-size: 24px;
-    padding-left: 20px;
-    margin-top: 30px;
-  }
-  .custom-explore-benefits .actions {
-    padding-left: 0;
-  }
-  .custom-explore-benefits .viewport {
-    font-size: 24px;
-    max-width: initial;
-    width: 84%;
-    left: 10px;
-  }
-  .custom-explore-benefits .actions {
-    margin-top: -25px;
-  }
-  .slick-prev{
-    display: none !important;
-  }
-  
-  .slick-next{
-    display: none !important;
-  }
-  #main-content.page-sign-up-home #benefits-wrapper{
-    width: 100% !important;
-    margin: 0;
-    margin-top: 75px;
-    padding-top:5px;
-    padding-bottom:0;
-    padding-left:20px;
-    padding-right:42px;
-  }
-  #main-content.page-sign-up-home #benefits-wrapper .main-container h4 {
-    font-size:22px;
-  }
-  #main-content.page-sign-up-home #benefits-wrapper li+li, 
-  #main-content.page-sign-up-home #benefits-wrapper li:first-child{
-    margin-bottom:38px;
-  }
-  #main-content.page-sign-up-home .main-container .main_block1 div, 
-  #main-content.page-sign-up-home .main-container .main_block2 div, 
-  #main-content.page-sign-up-home .main-container .main_block3 div{
-    width:100%;
-    margin-bottom:10px;
-  }
-  
-  #main-content.page-sign-up-home .main_block1, .page-sign-up .main_block2 {
-    padding-bottom: 0;
-  }
-  
-  #main-content.page-sign-up-home #benefits-wrapper p{
-    padding-bottom:32px;
-  }
-  
-  #main-content.page-sign-up-home #benefits-wrapper li+li, #main-content.page-sign-up-home #benefits-wrapper li:first-child {
-    margin-bottom: 10px;
-  }
-  .page-sign-up-home .renew-footer-links {
-    margin-left: 2%;
-  }
-  .page-sign-up-home .renew-page-benefits .right-view #edit-next-footer a {
-    width: 100%;
-    height: 90px;
-    font-size: 3rem;
-    background: rgb(239, 65, 53) url("../images/arrow-right.png") no-repeat scroll right 21px;
-    margin-left: 0;
-    padding-top: 28px;
-  }
-}
-
-@media (max-width: 550px) {
-  .page-sign-up-home .renew-page-benefits .right-view #edit-next-footer a {
-    width: 100%;
-  }
 }

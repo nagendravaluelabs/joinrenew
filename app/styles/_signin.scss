@@ -1,0 +1,124 @@
+.ui-dialog[aria-describedby="login-box"] .ui-widget-content{
+  padding:0;
+}
+.ui-dialog[aria-describedby="login-box"] .ui-dialog-titlebar {
+  position: absolute; 
+  top: 0;
+  right: 5px;
+  z-index: 99;
+}
+.ui-dialog[aria-describedby="login-box"] .ui-dialog-titlebar .ui-dialog-title{
+  display:none !important;
+}
+#login-box{
+  font-family: "architype-light", sans-serif;
+  padding:0;
+  font-size: 15px;
+  font-weight: normal;
+  color: #404041;
+}
+.sign-box{
+  padding:15px 20px;
+}
+#login-box .header{
+  display:block;
+}
+#login-box .header h1{
+  margin:0;
+  color: #404041;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: inherit;
+  font-family: "architype-bold", sans-serif;
+}
+#login-box ul.social-account{
+  display:block;
+  margin:25px 0;
+  list-style:none;
+}
+ul.social-account h3{
+  font-size: 15px;
+}
+ul.social-account p{
+  font-size: 18px;
+  font-weight: normal;
+  height: 20px;
+  background-color :rgb(238, 238, 238);
+}
+ul.social-account li{
+  margin-right:10px;
+  display:inline-block;
+}
+ul.social-account li a {
+  font-family: Arial, sans-serif;
+  display:block;
+  background-repeat: no-repeat;
+  background-position: 8px 50%;
+  border:1px #ccc solid;
+  padding:10px 10px 10px 40px;
+  color: #3B5998;
+}
+ul.social-account li a.social-facebook {
+  background-image: url(../images/facebook.png);
+}
+ul.social-account li a.social-linkedin {
+  background-image: url(../images/linkedin.png);
+}
+ul.social-account li a:hover {
+  background-color: #DDD;
+}
+.user-login-form{
+  display:block;
+}
+.user-login-form input, .user-login-form input[type="text"] {
+  border-radius:0;
+  color:#333;
+  font-size:20px;
+  border: 1px solid #eee;
+  background:#f8f8f8;
+  box-shadow: none;
+  padding:24px 10px;
+}
+.user-login-form input:focus{
+  background:#e2e2e2;
+  border: 1px solid #009ddc;
+  box-shadow: 0 0 3px #009ddc,0 0 3px rgba(0,0,0,0.2) inset;
+}
+button.capture_btn {
+    font-size:20px;
+    padding: 13px 40px;
+    background: #ef4135;
+    margin-right:20px;
+}
+p.terms-txt{
+   margin:15px 0 0 0;
+}
+p.terms-txt, p.terms-txt a{
+  font-size:15px;
+}
+
+.login-footer{
+  padding:20px;
+  background-color: #f6f6f6;
+  box-shadow: 0 9px 9px -9px rgba(0,0,0,0.1) inset; 
+}
+.login-footer p{
+  margin-bottom:0;
+}
+
+.icon-key {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.ui-dialog[aria-describedby="login-box"] .ui-dialog-titlebar .ui-dialog-titlebar-close {
+  background: #FFF url(../images/close_button.png) no-repeat;
+  width: 19px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+}
+.ui-widget-overlay {
+    background: #000 !important;
+    opacity: 0.5 !important;
+}

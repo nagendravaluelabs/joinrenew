@@ -1,144 +1,232 @@
 .qitem-wrapper, .form-type-radio {
 	position: relative;
 }
+/* Start: styles for radio buttons */
 input[type="radio"]:not(old) {
-	border: 0 none;
-	height: 22px;
-	left: 5px;
-	margin: 0;
-	opacity: 0;
-	padding: 0;
-    position: absolute;
-	top: 5px;
-	width: 28px;
-} 
-input[type="radio"]:not(old) + label {
-	background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 2px;
-	display: inline-block;
-	line-height: 28px;
-
-	padding-left: 40px;
+  border: 0 none;
+  height: 22px;
+  left: 5px;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  width: 28px;
+  & + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 2px;
+    display: inline-block;
+    line-height: 28px;
+    padding-left: 40px;
+  }
+  &:checked + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 2px;
+    cursor: default;
+  }
 }
-input[type="radio"]:checked:not(old) + label {
-	background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 2px;
-	cursor: default;
-}
-
+/* End: styles for radio buttons */
 input[type="button"] {
 	margin-top: 20px;
 }
-
-.chosen-container{
-  margin-bottom:10px;
-  width:360px !important;
+/* Start: styles for Chosen */
+.chosen-container {
+  &,
+  .group-education-information & {
+    margin-bottom:10px;
+    width:360px !important;
+    &.chosen-container-single {
+      .chosen-single {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 0;
+        box-shadow: none;
+        height: 50px;
+        padding: 13px 0 0 17px;
+        white-space: normal;
+        width: 100%;
+        span {
+          color: #000;
+        }
+        div {
+          width: 48px;
+          b {
+            background: rgba(0, 0, 0, 0) url(../images/drop-down-arrow.png) no-repeat scroll 0 0 !important;
+          }
+        }
+      }
+      .chosen-drop {
+        border-radius: 0 0 4px 4px;
+        width: 100%;
+        border: 1px solid #ccc;
+        background: #fff;
+        box-shadow: none;
+        .chosen-search {
+          input[type="text"] {
+            width:100% !important;
+            padding:10px !important;
+          }          
+        }
+        .chosen-results {
+          color: #000;
+          max-height: 200px;
+        }
+      }
+    }  
+  }
+  .form-type-select &,
+  .group-education-information & {
+    .chosen-single {
+      width: 100% !important;
+    }
+  }
+  .form-type-select &,
+  .chosen-drop {
+    width: 100% !important;
+  }
+  .state & {
+    max-height: 150px;
+  }
+  @media (min-width: 320px) and (max-width: 1023px) {
+    width: 100% !important;
+  }
 }
 
-.chosen-container-single .chosen-single, .group-education-information .chosen-container-single .chosen-single {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0;
-  box-shadow: none;
-  height: 50px;
-  padding: 13px 0 0 17px;
-  white-space: normal;
-  width: 100%;
+.chosen-container-active {
+  & ,
+  .group-education-information & {
+    &.chosen-with-drop {
+      .chosen-single {
+        border: 1px solid #ccc;
+        background-image: none;
+        box-shadow: none;
+        div {
+          b {
+            background-position: 0px 0px;
+          }
+        }
+      }
+    }
+  }
 }
-.form-type-select .chosen-container, .group-education-information .chosen-container-single .chosen-single {
-  width: 100%!important;
+/* End: styles for Chosen */
+
+/* Start: styles for Checkbox */
+
+/* End: styles for Checkbox */
+
+/* Start: styles for Error */
+label {
+  &.error {
+    font-size: 12px;
+    color: #FF0000 !important;
+    font-weight: normal !important;
+    cursor: pointer;
+  }
 }
-.chosen-container-active.chosen-with-drop .chosen-single, .group-education-information .chosen-container-active.chosen-with-drop .chosen-single {
-  border: 1px solid #ccc;
-  background-image: none;
-  box-shadow: none;
-}
-.chosen-container-active.chosen-with-drop .chosen-single div b, .group-education-information .chosen-container-active.chosen-with-drop .chosen-single div b {
-  background-position: 0px 0px;
-}
-.chosen-container-single .chosen-drop, .group-education-information .chosen-container-single .chosen-drop {
-  border-radius: 0;
-  width: 100%;
-}
-.chosen-container .chosen-drop, .chosen-container .chosen-drop {
-  border: 1px solid #ccc;
-  background: #fff;
-  box-shadow: none
-}
-.chosen-container-single .chosen-single span, .group-education-information .chosen-container-single .chosen-single span {
-  color: #000;
-}
-.chosen-container-single .chosen-drop .chosen-results, .group-education-information .chosen-container-single .chosen-drop .chosen-results {
-  color: #000;
-}
-.chosen-container-single .chosen-single {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0;
-  box-shadow: none;
-  height: 50px;
-  padding: 13px 0 0 17px;
-  white-space: normal;
-}
-.chosen-search input[type="text"] {
-  width:100% !important;
-  padding:10px !important;
-}
-.chosen-container-single .chosen-single div {
-  width: 48px;
-}
-.chosen-container-single .chosen-single div b {
-  background: rgba(0, 0, 0, 0) url("../images/drop-down-arrow.png") no-repeat scroll 0 0 !important;
-}
-.form-type-select .chosen-container, .chosen-drop {
-  width: 100% !important;
-}
-.chosen-container-active.chosen-with-drop .chosen-single {
-  background-image: none;
-  border: 1px solid #ccc;
-  box-shadow: none;
-}
-.chosen-container-active.chosen-with-drop .chosen-single div b {
-  background-position: 0 0;
-}
-.chosen-container-single .chosen-drop {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0 0 4px 4px;
-  box-shadow: none;
-}
-.chosen-container .chosen-results {
-  max-height: 200px;
-}
-.state.chosen-container .chosen-results {
-  max-height: 150px;
-}
-/* Custom checkbox Start*/
-label.error {
-  font-size: 12px;
-  color: #FF0000 !important;
-  font-weight: normal !important;
-  cursor: pointer;
-}
-.common-form input.form-text.error, 
-textarea.form-textarea.error, 
-select.form-select.error, 
-.chosen-container.error .chosen-single {
+.form-error {
   color: #FF0000 !important;
   border-color: #FF0000 !important;
   outline-color: #FF0000 !important;
 }
-.chosen-container.error .chosen-single span {
-  color: #FF0000 !important;
-}
-
-.common-form select.form-select.error,
-.chosen-container-single.chosen-container.error .chosen-single div b {
-  background-image: url(../images/drop-down-arrow-error.png) !important;
-}
-.common-form input[type="checkbox"].error:not(:checked) + label:before {
-  border-color: #FF0000;
-}
-@media (min-width: 320px) and (max-width: 1023px){
+.common-form {
+  input {
+    &.form-text {
+      &.error {
+        @extend .form-error;
+      }
+    }
+    &[type="checkbox"] {
+      &.error {
+        &:not(:checked) {
+            & + label {
+              &:before {
+                border-color: #FF0000;
+              }
+            }
+        }
+      }
+    }
+  }
+  textarea {
+    &.form-textarea {
+      &.error {
+        @extend .form-error;
+      }
+    }
+  }
+  select {
+    &.form-select {
+      &.error {
+        @extend .form-error;
+        background-image: url(../images/drop-down-arrow-error.png) !important;
+      }
+    }
+  }
   .chosen-container {
-    width: 100% !important;
+    &.error {
+      .chosen-single {
+        @extend .form-error;
+        span {
+          color: #FF0000 !important;
+        }
+        div {
+          b {
+            background-image: url(../images/drop-down-arrow-error.png) !important;
+          }
+        }
+      }
+    }
   }
 }
+/* End: styles for Error */
+
+/* Start: Button styles */
+  button,
+  input[type="submit"], 
+  input[type="reset"], 
+  input[type="button"],
+  .link-to-button a  {
+    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 0;
+    border: 0 none;
+    border-radius: 0;
+    color: $button-color !important;
+    font-family: $font-light;
+    font-size: $button-font-size;
+    margin-bottom: 3px;
+    padding: $button-padding;
+    position: relative;
+    text-align: left;
+    transition: all 0.25s ease-in-out 0s;
+    display:inline-block;
+    &:hover {
+      background-color: $button-bg-hover-color;
+      border: 0 none;
+      border-radius: 0;
+      color: $button-hover-color;
+      cursor: pointer;
+    }
+    &.full-width {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      text-align: center;
+      width: 100%;
+    }
+  }
+/* End: Button styles */
+
+/* Start: Textarea styles */
+textarea {
+  .form-textarea {
+    padding: 4px;
+  }
+}
+/* End: Textarea styles */
+
+/* Start: Select styles */
+
+select {
+  .form-select {
+    padding: 4px;
+  }
+}
+
+/* Start: Select styles */
