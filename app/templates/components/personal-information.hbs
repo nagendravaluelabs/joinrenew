@@ -12,11 +12,13 @@
           </label>
           <select id="prefix" name="prefix" class="form-select required">
             <option value="">Select</option>
-            {{#each prefixes as |prefix|}}
-              {{#if (isEqualTo prefix info.personalInfo.prefix)}}
-                <option value="{{prefix}}" selected>{{prefix}}</option>
-              {{else}}
-                <option value="{{prefix}}">{{prefix}}</option>
+            {{#each genericData.generic.prefix as |prefix|}}
+              {{#if prefix.prf_code}}
+                {{#if (isEqualTo prefix.prf_key info.personalInfo.prefix)}}
+                  <option value="{{prefix.prf_key}}" selected>{{prefix.prf_code}}</option>
+                {{else}}
+                  <option value="{{prefix.prf_key}}">{{prefix.prf_code}}</option>
+                {{/if}}
               {{/if}}
             {{/each}}
           </select>
@@ -50,11 +52,13 @@
           <label for="suffix">Suffix</label>
           <select id="suffix" name="suffix" class="form-select">
             <option value="">Select</option>
-            {{#each suffixes as |suffix|}}
-              {{#if (isEqualTo suffix info.personalInfo.suffix)}}
-                <option value="{{suffix}}" selected>{{suffix}}</option>
-              {{else}}
-                <option value="{{suffix}}">{{suffix}}</option>
+            {{#each genericData.generic.suffix as |suffix|}}
+              {{#if suffix.sfx_code}}
+                {{#if (isEqualTo suffix.sfx_key info.personalInfo.suffix)}}
+                  <option value="{{suffix.sfx_key}}" selected>{{suffix.sfx_code}}</option>
+                {{else}}
+                  <option value="{{suffix.sfx_key}}">{{suffix.sfx_code}}</option>
+                {{/if}}
               {{/if}}
             {{/each}}
           </select>

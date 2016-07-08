@@ -13,6 +13,7 @@ export default Ember.Component.extend(rememberScroll, {
     primaryWorkAddress: false,
     createOrganization: false,
     contactAddressType: "",
+    genericData: Ember.inject.service('generic-data'),
     init: function () {
         "use strict";
         var self, primaryAddress, chapterType, contactInfo;
@@ -27,17 +28,9 @@ export default Ember.Component.extend(rememberScroll, {
         }
         self.set('contactAddressType', contactInfo.addressType);
     },
-    prefixes: function () {
+    /*prefixes: function () {
         "use strict";
-        var data = [
-            "Dr.",
-            "Hon.",
-            "Miss",
-            "Mr.",
-            "Mrs.",
-            "Ms.",
-            "Rev."
-        ];
+        var data = this.get("generic").prefix;
         return data;
     }.property(),
     suffixes: function () {
@@ -52,7 +45,7 @@ export default Ember.Component.extend(rememberScroll, {
             "V"
         ];
         return data;
-    }.property(),
+    }.property(),*/
     addressType: function () {
         "use strict";
         var data = [

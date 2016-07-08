@@ -16,7 +16,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    AIA_DRUPAL_URL: 'https://aia-netforum-ws-sgsjohnny.c9users.io/web/getdata.php'
   };
 
   if (environment === 'development') {

@@ -104,7 +104,7 @@
 		}
         .membership { 
           @media (max-width:767px){
-             width:100%;
+             /* width:100%; */  /* Removed for payment page in renew */
           }
         }
       
@@ -115,6 +115,9 @@
         .membership-total {
           display:inline-block;
           float:right !important;
+            @media (max-width:767px){
+             line-height:20px !important;
+            }
         }
       }
       .ui-accordion-content {
@@ -125,7 +128,7 @@
           tr {
             border-bottom: 2px solid #e1e1e1;
             color: #000;
-            &.sum {
+            &.sum { 
               font-weight: normal !important;
               border:0 none;
               .title{ 
@@ -139,7 +142,7 @@
             td {
               padding: 5px 10px !important;
               text-align:left;
-              width:35%;
+              width:65%; /* changed 35% to 65% for payment page in renew */
               &:nth-child(odd) {
                 padding-left: 0;
                 border: 0;
@@ -183,7 +186,7 @@
                 }
               }
               &:last-child {
-                text-align: left;
+                text-align: right;  /* changed text aligned from left to right for payment table in renew page */
                 width: 135px;
                 @media (max-width: 767px) {
                    text-align:right;

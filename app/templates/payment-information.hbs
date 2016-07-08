@@ -18,16 +18,14 @@
         <h3>Invoice summary</h3>
         <div id="payment-accordion">
            <h3>
-            New AIA membership:
-			<strong class="member-role">{{model.role}}</strong>
+            AIA membership dues:
+		<!-- 	<strong class="member-role">{{model.role}}</strong> -->
             <span class="membership">
-			<strong class="member-role mobile-view">{{model.role}}</strong>
+		<!-- 	<strong class="member-role mobile-view">{{model.role}}</strong> -->
               <span class="membership-type">
                 <span class="membership-total">${{subTotal}}</span></span>
               </span>
-            
           </h3>
-          
           <div class="newaiamembership">
             <div class="result">
               <table>
@@ -35,19 +33,22 @@
                   {{#each model.payments as |payment|}}
                   <tr>
                     <td>{{payment.title}}</td>
-                    <td>
+                    <td>${{payment.proRated}}</td>
+                    <!-- <td>
                       <span>Annual: </span><span>${{payment.annual}}</span>
                     </td>
                     <td>
                       <span>Pro-rated: </span><span class="pro-rate-val">${{payment.proRated}}</span>
-                    </td>
+                    </td> -->
                   </tr>
                   {{/each}}
+                  
                   <tr class="sum">
                     <td class="title">Subtotal due</td>
-                    <td></td>
+                    
                     <td class="due-total">${{subTotal}}</td>
-                  </tr>
+                  </tr> 
+                  
                 </tbody>
               </table>
             </div>
