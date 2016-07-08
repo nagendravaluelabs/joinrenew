@@ -16,10 +16,16 @@
   </head>
   <body>
     {{content-for "body"}}
-
+    <div class="ajax-spinner"></div>
     <script src="assets/vendor.js"></script>
     <script src="assets/aia-joinrenew.js"></script>
-
+    <script>
+      jQuery(document).ready(function($){
+        $(document).ajaxStart(function(){ $('.ajax-spinner').show() });
+        $(document).ajaxStop(function(){ $('.ajax-spinner').hide() });
+      });
+    </script>
+    
     {{content-for "body-footer"}}
   </body>
 </html>
