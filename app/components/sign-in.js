@@ -11,7 +11,10 @@ export default Ember.Component.extend({
       var signIn;
       signIn = $('#sign-In').validate({
         rules: {
-          signInEmailAddress:{required: true},
+          signInEmailAddress:{
+            required: true,
+            email: true
+          },
           currentPassword:{required: true}
         },
         messages: {
@@ -23,6 +26,7 @@ export default Ember.Component.extend({
         }
       })
       if(signIn.form()) {
+        $('#login-box').dialog('close');
         this.get('router').transitionTo('renew-verify-membership');
       }
     }

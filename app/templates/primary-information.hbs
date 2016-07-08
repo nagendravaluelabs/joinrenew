@@ -4,7 +4,6 @@
     <h1 class="page-title">Personal and contact info</h1>
  
     <h3 class="verify-subheading">Please verify your information</h3>
-    
     <div class="read-only-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
       {{#each model.page.information as |info|}}
         {{#if (isNotEqual info.title 'address')}}

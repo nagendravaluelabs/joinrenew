@@ -6,6 +6,7 @@ export default Ember.Route.extend({
   },
   model() {
     return Ember.RSVP.hash({
+      generic : this.store.findAll("primary-information"),
       steps: [
         {
           "title": "Step 1. Primary information",
@@ -58,7 +59,7 @@ export default Ember.Route.extend({
         ],
         "primaryInformation": {
           "personalInfo" : {
-            "prefix": "Mrs.",
+            "prefix": "48baa5c1-cb00-4996-930f-82967b81c8a7",
             "firstName": "Thomas",
             "middleName": "Y",
             "lastName": "sds",
