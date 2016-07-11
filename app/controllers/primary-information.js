@@ -4,7 +4,7 @@ import Ember from 'ember';
 const {$} = Ember;
 
 export default Ember.Controller.extend({
-    editContactInfo: false,
+    editContactInfo: true,
     actions: {
         showPersonalInfo: function () {
             'use strict';

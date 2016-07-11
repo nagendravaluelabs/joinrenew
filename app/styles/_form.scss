@@ -12,14 +12,15 @@ input[type="radio"]:not(old) {
   position: absolute;
   top: 5px;
   width: 28px;
+  vertical-align: middle;
   & + label {
-    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 2px;
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 4px;
     display: inline-block;
     line-height: 28px;
     padding-left: 40px;
   }
   &:checked + label {
-    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 2px;
+    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 4px;
     cursor: default;
   }
 }
@@ -111,6 +112,42 @@ input[type="button"] {
 
 /* Start: styles for Checkbox */
 
+input[type="checkbox"] {
+  vertical-align: middle;
+  border: none;
+  opacity: 0;
+  position: absolute;
+  & + label {
+    cursor: pointer;
+    padding:0 0 0 25px;
+    position: relative;
+    margin:5px 0 25px 0;
+    line-height:23px;
+    &:before {
+      background-color: #fff;
+      border: 1px solid #d1d2d3;
+      content: '';
+      height: 17px;
+      left: 0;
+      position: absolute;
+      top: 2px;
+      width: 17px;
+    }
+    &:after {
+      color: #fa4132;
+      content: '✔';
+      font-size: 1.9rem;
+      left: 0px;
+      position: absolute;
+      top: -3px;
+      opacity: 0;
+    }    
+  }
+  &:checked + label:after {
+    opacity: 1;
+  }
+}
+
 /* End: styles for Checkbox */
 
 /* Start: styles for Error */
@@ -128,7 +165,61 @@ label {
   outline-color: #FF0000 !important;
 }
 .common-form {
+  display:block;
+  ul{
+    margin:0;
+    list-style:none;
+    &.field-options-select {
+      display:block;
+      clear:both;
+      >li{
+        display: inline-block;
+        float:left;
+        margin-right:20px;
+        &.clearfix{
+          margin: 0;
+          float: none;
+          display: block;
+          clear: both;
+        }
+        select {
+          &.form-select {
+            width:360px !important;
+          }
+        }
+        input[type="text"] {
+          width:360px !important;
+        }
+      }
+    }
+    li {
+      margin-bottom: 1em;
+      margin-top: 2px;
+      position: relative;
+      display:block;
+    }
+  }
+  .required-field {
+    color: #a7a7a7;
+    padding: 11px 0 20px 0;
+    font-weight: normal;
+    margin-bottom:0;
+    line-height: 20px;
+  }
+  label {
+    color: #000;
+    font: 1.6rem 'Architype-Light',sans-serif normal;
+    margin-bottom: 18px;
+    max-width: 100%;
+    display:block;
+    font-weight: 700;
+  }
   input {
+    &[type="text"] {
+      height: 50px;
+      padding: 0 0 0 15px;
+      width: 55%;
+    }
     &.form-text {
       &.error {
         @extend .form-error;
@@ -154,12 +245,29 @@ label {
     }
   }
   select {
+    height: 50px;
     &.form-select {
+      width: 55%;
+      padding: 4px 4px 4px 15px;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
+      line-height: 24px;
+      padding-right: 48px;
+
       &.error {
         @extend .form-error;
         background-image: url(../images/drop-down-arrow-error.png) !important;
       }
     }
+  }
+  input.form-text,
+  textarea.form-textarea,
+  select.form-select {
+    border: 1px solid #d1d2d3;
+    color:#000;
+    margin-bottom: 10px;
   }
   .chosen-container {
     &.error {
@@ -174,6 +282,21 @@ label {
           }
         }
       }
+    }
+  }
+  span {
+    &.form-required {
+      color: #f00;
+    }
+  }
+  .form-type-radios{
+    overflow:hidden;
+    margin: 15px 59px 9px 0;
+    display:inline-block;
+  }
+  label {
+    &.option {
+      font-weight: normal;
     }
   }
 }
