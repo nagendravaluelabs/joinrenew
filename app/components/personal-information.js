@@ -238,7 +238,8 @@ export default Ember.Component.extend(rememberScroll, {
                     work_number: "Please Enter Valid Work Number",
                     primary_home_address_country: "Please Select Country",
                     primary_home_address1:"Please enter a valid home address",
-                    primary_home_zipcode: "Please enter a valid Zip Code"
+                    primary_home_zipcode: "Please enter a valid Zip Code",
+                    primary_home_city:"Please enter a valid City Name"
                 }
             });
             if(validate.form()) {
