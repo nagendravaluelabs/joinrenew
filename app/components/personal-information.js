@@ -23,7 +23,7 @@ export default Ember.Component.extend(rememberScroll, {
         primaryAddress = self.get('info.primaryAddress');
         chapterType = primaryAddress.chaptersType.capitalize();
         self.chapterSelection(chapterType);
-        if (primaryAddress.home.country === "UNITED STATES") {
+        if (primaryAddress.home.country === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
             self.set('homeShowState', true);
         }
         self.set('contactAddressType', contactInfo.addressType);
@@ -121,7 +121,7 @@ export default Ember.Component.extend(rememberScroll, {
         },
         setWorkStateStatus: function (value) {
             "use strict";
-            if (value === "UNITED STATES") {
+            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
                 this.set("workShowState", true);
             } else {
                 this.set("workShowState", false);
@@ -129,7 +129,7 @@ export default Ember.Component.extend(rememberScroll, {
         },
         setHomeStateStatus: function (value) {
             "use strict";
-            if (value === "UNITED STATES") {
+            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
                 this.set("homeShowState", true);
             } else {
                 this.set("homeShowState", false);
@@ -213,7 +213,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     administrative_area_state: {
                       required: function() {
-                        return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "UNITED STATES";
+                        return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                       }
                     }
                 },
@@ -236,7 +236,10 @@ export default Ember.Component.extend(rememberScroll, {
                     home_number: "Please Enter Valid Phone Number",
                     mobile_number: "Please Enter Valid Mobile Number",
                     work_number: "Please Enter Valid Work Number",
-                    primary_home_address_country: "Please Select Country"
+                    primary_home_address_country: "Please Select Country",
+                    primary_home_address1:"Please enter a valid home address",
+                    primary_home_zipcode: "Please enter a valid Zip Code",
+                    primary_home_city:"Please enter a valid City Name"
                 }
             });
             if(validate.form()) {
@@ -254,7 +257,7 @@ export default Ember.Component.extend(rememberScroll, {
                     url: true
                   },
                   work_administrative_state: function(){
-                    return $("#create_org_country").val() === "UNITED STATES";
+                    return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                   },
                   org_company_phone: {
                     digits: true,

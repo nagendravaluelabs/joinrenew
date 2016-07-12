@@ -46,7 +46,7 @@
           <label for="lastname">Last name
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          <input class="form-text required" type="text" id="lastname" name="lastname" value="{{info.personalInfo.lastName}}" size="60" maxlength="255" />
+          <input class="form-text required text-capitalize" type="text" id="lastname" name="lastname" value="{{info.personalInfo.lastName}}" size="60" maxlength="255" />
         </li>
         <li>
           <label for="suffix">Suffix</label>
@@ -190,7 +190,7 @@
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{info.primaryAddress.home.postalcode}}" size="30" maxlength="255" />
+                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{info.primaryAddress.home.postalcode}}" size="30" minlength="5" maxlength="10" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">

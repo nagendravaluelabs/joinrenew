@@ -1,294 +1,295 @@
+#main-content {
+  &.renew-verify-membership {
+    @include mq(xs) {
+      padding-top: 78px;
+    }
+    #content-wrap {
+      .page-title {
+        padding-bottom:6px;
+        margin-bottom:53px;
+        font-weight: normal;
+        @include mq(xs) {
+          margin-bottom: 53px;
+          padding-bottom: 11px;
+          margin-top: 25px;
+          font-size: 39px !important;
+        }
+      }
+      .renew-now {
+        @include mq(xs) {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        p {
+          margin-bottom: 0px;
+        }
+        .chapter,
+        .download,
+        .membership p:last-child {
+          margin-top: 20px;
+        }
+        .form-item {
+          font-size: 1.2em;
+        }
+        address {
+          font-size: 16px;
+          margin-bottom: 3px;
+          color: #000000;
+          padding-bottom: 14px;
+          margin-top: 0;
+          padding: 5px 0 23px 0;
+          a {
+            &,
+            &:link,
+            &:visited {
+              text-decoration: underline;
+            }
+            &.email {
+              padding-bottom: 10px;
+            }
+          }
+          &.address-indent {
+            margin-left: 30px;
+          }
+        }
+        .left-view {
+          border-right: 1px solid #ccc;
+          padding-right: 70px;
+          float: left;
+          @include mq(xs) {
+            width: 100%;
+            padding-right: 0;
+            padding-left: 0;
+            border-right: none;
+          }
+          .membership {
+            p {
+              span {
+                display: block;
+              }
+            }
+          }
+          > h3 {
+            margin: 2px 0 15px 0;
+            padding-bottom: 0px;
+          }
+          .chapter {
+            padding-bottom: 14px;
+            margin-top: 0;
+            padding: 10px 0 16px;
+            @include mq(xs) {
+              padding: 5px 0 45px 0;
+            }
+            p {
+              font-size: 1.2em;
+              margin-bottom:3px;
+              color:#000000;
+              margin-top: 0;
+              padding: 0;
+              @include mq(xs) {
+                &:first-child {
+                  margin-bottom: 25px;
+                }
+              }              
+              a {
+                text-decoration: underline;
+              }
+              @include mq(xs) {
+                &:first-child {
+                  margin-bottom: 3px;
+                  font-size: 2.4rem;
+                }
+              }              
+            }
+            .text {
+              margin-top: 18px;
+              @include mq(xs) {
+                margin-top: 23px;
+                margin: 40px 0 0 0;
+              }
+            }
+          }
+          .subhead {
+            @include mq(xs) {
+              margin-top: 46px;
+              &:first-child {
+                border-bottom: 1px #ccc solid;
+              }
+              .need-help {
+                margin: 20px 0;
+              }
+            }            
+          }
+          .subhead-second {
+            .left-view-heading {
+              margin-bottom: 10px;    
+            }
+            .address-indent {
+              @include mq(xs) {
+                margin-left: 0;
+                padding-bottom: 0;
+              }
+              p {
+                font-size: 1.05em;
+                margin-bottom: 3px;
+                &.chapter-name {
+                  color: #000000;
+                  font-size: 16px;
+                }
+              }
+            }
+            .chapter-indent{
+              padding-top: 5px;
+            }
+          }
+          p {
+            @include mq(xs) {
+              font-size: 2.4rem !important;
+            }
+          }
+        }
+        .right-view {
+          left: 0px;
+          padding-left: 40px;
+          float: right;
+          @include mq(xs) {
+            padding: 0 0 45px 0;
+            border-bottom: 1px #ccc solid;
+            margin-bottom: 0;
+            width: 100%;
+          }
+          .actions {
+            padding-top: 31px;
+            @include mq(xs) {
+              padding-top: 20px;
+            }
+            #edit-next {
+              margin-bottom: 20px;
+              font-weight: bolder;
+            }
+            p {
+              a {
+                &,
+                &:link,
+                &:visited {
+                  text-decoration: underline;
+                }              
+              }
+            }
+          }
+          .mail-renewal {
+            font-size: 1.2em;
+            margin-bottom: 3px;    
+          }
+        }
+        h3.left-view-heading {
+          color:#000000;
+          margin:0px 0px 8px 0;
+          padding-bottom: 0;
+        }
+        input[type="submit"],
+        input[type="button"],
+        .link-to-button a {
+          @include mq(xs) {
+            width:100% !important;
+            background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
+            height:70px;
+            background-size: auto 100% !important;
+            display:inline-block;
+            font-size: 2.4rem !important;
+            @media (max-width:567px) {
+              width:100% !important;
+            }
+          }
+        }
+        .link-to-button a {
+          @include mq(xs) {
+            padding:21px 40px 21px 18px;
+          }
+        }
+      }
+    }    
+  }
+}
 #edit-landing-page-body {
-    padding-top: 40px;
+  padding-top: 40px;
 }
 #edit-landing-page-body h2 {
-    padding-bottom: 30px;
-    font-size: 36px;
+  padding-bottom: 30px;
+  font-size: 36px;
 }
 .renew-confirmation .link-to-button {
     display: inline-block;
     margin: 20px 0;
 }
-.renew-now .left-view {
-    border-right: 1px solid #ccc;
-    float: left;
-    padding-right: 70px;
-}
-.renew-now .right-view {
-    float: right;
-    left: 0px;
-    padding-left: 40px;
-}
-.red-copy {
-    color: #df2d21;
-}
-.renew-now .chapter, .renew-now .download, .renew-now .membership p:last-child {
-    margin-top: 20px;
-}
-.black-copy {
-    color:#000;
-}
 .renew-now .download a {
-    color: #0066cc;
-    font-size: 13px;
-}
-.renew-now p {
-    margin-bottom: 0px;
-}
-.address-indent {
-    margin-left: 30px;
-}
-.renew-now .left-view .membership p span {
-    display: block;
-}
-.renew-now .right-view .actions {
-    padding-top: 31px;
-}
-
-.renew-now .actions #edit-next {
-    margin-bottom: 20px;
-    font-weight: bolder;
-}
-.renew-now .actions p a, .renew-now .actions p a:link, .renew-now .actions p a:visited, address a:link, address a:visited {
-    text-decoration: underline;
-}
-address {
-    font-size: 16px;
-    margin-bottom: 3px;
-    color: #000000;
-    padding-bottom: 14px;
-    margin-top: 0;
-    padding: 5px 0 23px 0;
-}
-address a.Email {
-    padding-bottom: 10px;
-}
-h3.left-view-heading {
-    color:#000000;
-    margin:0px 0px 8px 0;
-    padding-bottom: 0;
-}
-#content-wrap h1.page-title {
-    padding-bottom:6px;
-    margin-bottom: 50px;
-    font-weight: normal;
-}
-#content-wrap h1.page-title {
-    margin-bottom:53px;
-}
-.chapter p {
-    font-size: 1.2em;
-    margin-bottom:3px;
-    color:#000000;
-    margin-top: 0;
-    padding: 0;
-}
-.chapter p a {
-    text-decoration: underline;
-}
-.renew-page .form-item {
-    font-size: 1.2em;
-}
-.page-renew-verify-membership .left-view > h3 {
-    margin: 2px 0 15px 0;
-    padding-bottom: 0px;
-}
-.renew-now .left-view .chapter {
-    padding-bottom: 14px;
-    margin-top: 0;
-    padding: 10px 0 16px
-}
-.left-view .chapter .text {
-    margin-top: 18px;
-}
-.subhead-second h3.left-view-heading {
-    margin-bottom: 10px;    
-}
-.subhead-second .address-indent p.chapter-name {
-    color: #000000;
-    font-size: 16px;
-}
-.subhead-second .address-indent p {
-    font-size: 1.05em;
-    margin-bottom: 3px;
-}
-.subhead-second .chapter-indent{
-    padding-top: 5px;
-}
-.right-view .mail-renewal {
-    font-size: 1.2em;
-    margin-bottom: 3px;    
-}
-/* -- ET -- renew
-footer disclaimer title hide */
- #block-block-1 h2 {
-    display:none;
+  color: #0066cc;
+  font-size: 13px;
 }
 @media(max-width: 767px) {
-    .renew-page .left-view {
-        display: none;
-    }
-    .renew-page .right-view {
-        width:100%;
-    }
-    .renew-page .right-view #edit-landing-page-body h2 {
-        width: 100%;
-        font-size: 64px;
-    }
-    .renew-page .region-content p, .page-renew .region-footer h4, .page-renew .region-footer .content .col-sm-6 {
-        font-size: 2.4rem;
-    }
-    .renew-now .right-view .actions {
-      padding-top: 20px;
-    }
-    .page-renew .region-footer h4 {
-        margin-bottom: 10px;
-    }
-    .page-renew .region-footer .content .row {
-        margin-bottom: 0;
-    }
-    .page-renew .region-footer .content .col-sm-6 {
-        margin-bottom: 50px;
-    }
-    .page-renew .region-footer .content .disclaimer-txt {
-        border-top: 5px #fff solid;
-        margin-left: -10px;
-        padding-left: 10px;
-        padding-top: 30px;
-        font-size: 1.6rem;
-    }
-    input[type="submit"], input[type="button"], .link-to-button a {
-        width:100% !important;
-        background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
-        height:70px;
-		background-size: auto 100% !important;
-		display:inline-block;
-    }
-	.link-to-button a {
-		padding:21px 40px 21px 18px;
-	}
-    .calc-button input[type="submit"], .calc-button input[type="button"]{
-      width:auto;
-      padding-right:18px;
-    }
-    /*verify membership page*/
-    #content-wrap h1.page-title {
-        margin-bottom: 53px;
-        padding-bottom: 11px;
-        margin-top: 25px;
-    }
-    .renew-now .actions input[type="submit"] {
-        width:55% !important;
-    }
-    .renew-now {
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .renew-now .right-view {
-        left: 0;
-        padding-right: 0;
-        padding-left: 0;
-        padding-bottom: 45px;
-        border-bottom: 1px #ccc solid;
-        margin-bottom: 0;
-        width: 100%;
-    }
-    .renew-now .left-view {
-        width: 100%;
-        padding-right: 0;
-        border-right: none;
-        padding-left: 0;
-    }
-    .renew-now .left-view .subhead {
-        margin-top: 46px;
-    }
-    .renew-now .left-view .subhead:first-child {
-        border-bottom: 1px #ccc solid;
-    }
-    .page-renew-verify-membership .left-view .subhead .need-help {
-        margin: 20px 0;
-    }
-    .renew-now .left-view p {
-        font-size: 2.4rem;
-    }
-    .renew-now .left-view .chapter {
-        padding: 5px 0 45px 0;
-    }
-    .renew-now .left-view .subhead .chapter p:first-child {
-        margin-bottom: 25px;
-    }
-    .renew-now .left-view .subhead .chapter .chapter p:first-child {
-        margin-top: 25px;
-    }
-    .left-view .chapter .text {
-        margin-top: 23px;
-        margin: 40px 0 0 0;
-    }
-    .left-view .chapter .address-indent {
-        margin-left: 0;
-        padding-bottom: 0;
-    }
-    .renew-now .left-view .subhead .chapter .text p:first-child {
-        margin-bottom: 3px;
-        font-size: 2.4rem;
-    }
-    .page-renew-complete #primary {
-        padding:20px 40px 26px 40px;
-    }
-    .page-renew-complete #content-wrap .page-title {
-        padding-bottom: 13px;
-        margin-top: 45px;
-    }
-    .renew-confirmation .link-to-button {
-        display: block;
-    }
-    .user-info.row > div > p {
-        margin-bottom: 43px;
-    }
-    .page-renew-complete .link-to-button a {
-        display: block;
-        width: 60%;
-        height: 90px;
-        padding: 30px 14px;
-        font-size: 3rem;
-        background: #ef4135 url("../images/arrow-right.png") no-repeat right center;
-    }
-    .page-renew-verify-membership .actions input[type="submit"] {
-        font-size: 2.4rem !important;
-    }
-}
-@media only screen and (max-width:767px) {
-    #main-content.page-renew-verify-membership {
-      padding-top: 78px;
-    }
-    #content-wrap h1.page-title {
-        font-size: 39px !important;
-    }
-    .page-renew-verify-membership .actions input[type="submit"] {
-      background: #ef4135 url("../images/arrow-right.png") no-repeat right center !important;
-      width: 55% !important;
-    }
+  .renew-page .left-view {
+    display: none;
+  }
+  .renew-page .right-view {
+    width:100%;
+  }
+  .renew-page .right-view #edit-landing-page-body h2 {
+    width: 100%;
+    font-size: 64px;
+  }
+  .renew-page .region-content p,
+  .page-renew .region-footer h4,
+  .page-renew .region-footer .content .col-sm-6 {
+    font-size: 2.4rem;
+  }
+  .page-renew .region-footer h4 {
+    margin-bottom: 10px;
+  }
+  .page-renew .region-footer .content .row {
+    margin-bottom: 0;
+  }
+  .page-renew .region-footer .content .col-sm-6 {
+    margin-bottom: 50px;
+  }
+  .page-renew .region-footer .content .disclaimer-txt {
+    border-top: 5px #fff solid;
+    margin-left: -10px;
+    padding-left: 10px;
+    padding-top: 30px;
+    font-size: 1.6rem;
+  }
+  .calc-button input[type="submit"], .calc-button input[type="button"]{
+    width:auto;
+    padding-right:18px;
+  }
+  .page-renew-complete #primary {
+    padding:20px 40px 26px 40px;
+  }
+  .page-renew-complete #content-wrap .page-title {
+    padding-bottom: 13px;
+    margin-top: 45px;
+  }
+  .renew-confirmation .link-to-button {
+    display: block;
+  }
+  .user-info.row > div > p {
+    margin-bottom: 43px;
+  }
+  .page-renew-complete .link-to-button a {
+    display: block;
+    width: 60%;
+    height: 90px;
+    padding: 30px 14px;
+    font-size: 3rem;
+    background: #ef4135 url("../images/arrow-right.png") no-repeat right center;
+  }
 }
 @media only screen and (max-width:567px) {
-    input[type="submit"], .renew-now .actions input[type="submit"] {
-        width:100% !important;
-    }
-    .page-renew-verify-membership .actions input[type="submit"] {
-      width:100% !important;
-    }
-    .renew-now {
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-    .page-renew-complete .link-to-button a {
-        width: 100%;
-    }
-    .page-renew-complete #primary {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .page-renew-complete #primary {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
-
 span.membership{
   display:inline-block;
   width:auto;
