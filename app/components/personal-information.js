@@ -20,10 +20,10 @@ export default Ember.Component.extend(rememberScroll, {
         self = this;
         self._super(...arguments);
         contactInfo = self.get('info.contactInfo');
-        primaryAddress = self.get('info.primaryAddress');
-        chapterType = primaryAddress.chaptersType.capitalize();
+        primaryAddress = self.get('personalInfo.personal.address');
+        chapterType = primaryAddress.primary.capitalize();
         self.chapterSelection(chapterType);
-        if (primaryAddress.home.country === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        if (primaryAddress.home.country.key.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
             self.set('homeShowState', true);
         }
         self.set('contactAddressType', contactInfo.addressType);
