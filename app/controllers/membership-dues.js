@@ -29,17 +29,25 @@ export default Ember.Controller.extend(rememberScroll, {
             });
         });
     }.observes('isDuesCalculator'),
+    init: function() {
+      this.totalDuesFunc();
+    },
     totalDues: 0,
     totalDuesObserver: function() {
+      this.totalDuesFunc();
+    }.observes('duesData.data'),
+    totalDuesFunc: function() {
       var totalDues=0;
       var duesData = this.get("duesData");
-      if(typeof duesData.data.invoice != "undefined") {
-        Ember.$.each(duesData.data.invoice.dues, function(key, value){
-          totalDues += parseInt(value.due);
-        });
-        this.set("totalDues", totalDues.toFixed(2));
+      if(duesData.data != "undefined" && duesData.data != "") {
+        if(typeof duesData.data.invoice != "undefined") {
+          Ember.$.each(duesData.data.invoice.dues, function(key, value){
+            totalDues += parseInt(value.due);
+          });
+          this.set("totalDues", totalDues.toFixed(2));
+        }
       }
-    }.observes('duesData.data'),
+    },
     actions: {
         questionnaireMembershipduesNext: function (event) {
             "use strict";

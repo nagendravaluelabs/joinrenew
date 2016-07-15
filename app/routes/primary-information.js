@@ -5,11 +5,7 @@ export default Ember.Route.extend({
     this.controllerFor("application").set("model.class","no-sidebars page-primary-info personal-info-component");
   },
   model() {
-    var primaryInfo = Ember.$.getJSON("https://aia-netforum-ws-sgsjohnny.c9users.io/web/getdata.php?datatype=user&key=1234").then(function(data){
-      return data;
-    })
     return Ember.RSVP.hash({
-      primaryInformationData : primaryInfo,
       steps: [
         {
           "title": "Step 1. Primary information",
