@@ -5,8 +5,11 @@ export default Ember.Route.extend({
     this.controllerFor("application").set("model.class","no-sidebars page-primary-info personal-info-component");
   },
   model() {
+    var primaryInfo = Ember.$.getJSON("https://aia-netforum-ws-sgsjohnny.c9users.io/web/getdata.php?datatype=user&key=1234").then(function(data){
+      return data;
+    })
     return Ember.RSVP.hash({
-      generic : this.store.findAll("primary-information"),
+      primaryInformationData : primaryInfo,
       steps: [
         {
           "title": "Step 1. Primary information",
@@ -58,13 +61,6 @@ export default Ember.Route.extend({
           }
         ],
         "primaryInformation": {
-          "personalInfo" : {
-            "prefix": "48baa5c1-cb00-4996-930f-82967b81c8a7",
-            "firstName": "Thomas",
-            "middleName": "Y",
-            "lastName": "sds",
-            "suffix": "II"
-          },
           "contactInfo" : {
             "addressType": "home",
             "homeCountry": "UNITED STATES",
