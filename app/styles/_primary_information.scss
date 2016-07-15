@@ -85,23 +85,7 @@
       width: 75% !important;
   }
 }
-.common-form {
-  .creative-zip {
-      width: 50% !important;
-      margin-bottom: 5px;
-  }
-  .state {
-      float: left;
-      width: 27%;
-      .chosen-container {
-          width: 95% !important;
-      }
-  }
-  .zip {
-      width: 50%;
-      margin-bottom: 20px;
-  }
-}
+
 .info-left-company {
   .company-lookup-address-block {
       background-color: #fff;
@@ -175,6 +159,9 @@ form.common-form {
 @media (max-width: 767px) {
   .read-only-block {
     padding-left: 0;
+  }
+  .common-form .zip {
+      width: 100%;
   }
   #main-content.page-primary-info .actions-btn,
   .page-primary-info #personal-contact  {
