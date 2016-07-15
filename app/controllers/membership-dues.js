@@ -7,7 +7,7 @@ export default Ember.Controller.extend(rememberScroll, {
     isQuestionnarie: false,
     isTotalRenew: false,
     isDuesCalculator: false,
-
+    duesData: Ember.inject.service('user-data'),
     updateDuesPage: function (renew, questionnaire, total, dues, event) {
         "use strict";
         this.set("isRenewSummary", renew);
@@ -17,7 +17,6 @@ export default Ember.Controller.extend(rememberScroll, {
         $("#error-container").hide();
         this.scrollToTop();
     },
-
     valueObserver: function () {
         "use strict";
         this._super();
@@ -30,7 +29,17 @@ export default Ember.Controller.extend(rememberScroll, {
             });
         });
     }.observes('isDuesCalculator'),
-
+    totalDues: 0,
+    totalDuesObserver: function() {
+      var totalDues=0;
+      var duesData = this.get("duesData");
+      if(typeof duesData.data.invoice != "undefined") {
+        Ember.$.each(duesData.data.invoice.dues, function(key, value){
+          totalDues += parseInt(value.due);
+        });
+        this.set("totalDues", totalDues.toFixed(2));
+      }
+    }.observes('duesData.data'),
     actions: {
         questionnaireMembershipduesNext: function (event) {
             "use strict";

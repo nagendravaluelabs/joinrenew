@@ -5,22 +5,33 @@
 	  <h1 class="page-title">Your membership invoice</h1>
 	  
     <div class="clearfix"></div>
+    
     <div id="error-container" class="alert alert-danger"></div>
+    
 	  <div class="membership-dues-container">
       {{#if isRenewSummary}}
         <div class="common-form membership-dues-pages" id="contact-info-form">
-        
           <div class="renew-suppdue">
-            <h3 class="sign-up-subheading">2016 dues</h3>
+            <h3 class="sign-up-subheading">{{duesData.data.membership.membershipyear}} dues</h3>
             <p>Summary of dues</p>
             <table class="duestable">
               <tbody>
-              {{#each model.data as |dues|}}
-                <tr class="{{dues.class}}">
-                  <td>{{dues.title}}</td>
-                  <td id="{{dues.id}}" class="value">${{dues.value}}</td>
+              {{#each-in duesData.data.invoice.dues as |key dues|}}
+                <tr>
+                  <td>{{dues.chapter}}</td>
+                  <td id="{{key}}dues" class="value">${{format-currency dues.due}}</td>
                 </tr>
-               {{/each}}
+               {{/each-in}}
+               <tr>
+                <td class="membership-dues-total">
+                  {{duesData.data.membership.membershipyear}} individual dues total
+                </td>
+                <td id="indivdualdues" class="value">$ {{totalDues}}</td>
+              </tr>
+              <tr>
+                <td>Supplemental dues</td>
+                <td id="suppdues" class="value">$ 0.00</td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -41,7 +52,7 @@
               <div class="form-item form-type-radio form-item-questionnaire">
               
                 <input type="radio" id="edit-questionnaire-1" name="questionnaire" value="1"
-                class="form-radio" aria-required="true" checked>
+                class="form-radio" aria-required="true">
                 
                 <label class="option" for="edit-questionnaire-1">
                   I am not a sole practitioner, and I do not own or manage an architecture firm.
@@ -270,78 +281,14 @@
 	
 	<aside id="sidebar" class="col-sm-3" role="complementary">
 	  
-	  {{#each model.MembershipSide as |side|}}
-	  <div class="member-details">
-		<h2>Your info</h2>
-		<div class="member-align">
-		  <p>Member ID</p>
-		  <p>{{side.MemberID}}</p>
-		</div>
-		<div class="member-align">
-		  <p>Membership year</p>
-		  <p>{{side.MembershipYear}}</p>
-		</div>
-		<div class="member-align">
-		  <p>Membership type</p>
-		  <p>{{side.MembershipType}}</p>
-		</div>
-		<div class="member-align">
-		  <p>Payment due date</p>
-		  <p>{{side.PaymentDueDate}}</p>
-		</div>
-		<div class="member-align">
-		  <p>Invoice number</p>
-		  <p>{{side.InvoiceNumber}}</p>
-		</div>
-	  </div>
-	   {{/each}}
-	  <div class="clearfix"></div>
+    {{widget-your-info membership=duesData.data.membership invoice=duesData.data.invoice}}
 	  
-   {{#each model.MembershipSide as |side|}}
-      <div class="tax-deductibles-block block-pane">
-        <h3>Tax deductible percentage</h3>
-        <div class="result-wrapper">
-          <div class="result">
-          <div>
-            <label>National:</label>
-            <span>{{side.National}}%</span>
-          </div>
-          <div>
-            <label>State:</label>
-            <span>{{side.State}}%</span>
-          </div>
-          <div>
-            <label>Local:</label>
-            <span>{{side.Local}}%</span>
-          </div>
-          </div>
-        </div>
-      </div>
-	  {{/each}}
-	  <div class="clearfix"></div>
-	  <div class="need-help block-pane">
-      <h3 class="title">Need help</h3>
-      <div class="clearfix"></div>
-      <div class="body">
-        <p>800-242-3837 (option 2)</p>
-        <p><a href="mailto:infocentral@aia.org">infocentral@aia.org</a></p>
-      </div>
-	  </div>
-	  <div class="disclosures block-pane">
-      <h3 class="title">Disclosures</h3>
-      <div class="clearfix"></div>
-      <div class="body">
-        <p>
-        <a href="http://www.aia.org/about_privacy/index.htm" target="_blank">Privacy ›</a>
-        </p>
-        <p>
-        <a href="http://www.aia.org/about/ethicsandbylaws/AIAS077625" target="_blank">Ethics statement ›</a>
-        </p>
-        <p>
-        <a href="http://www.aia.org/members/memberresources/AIAB099486" target="_blank">Terms of service ›</a>
-        </p>
-      </div>
-	  </div>
+    {{widget-tax-info chapters=duesData.data.chapter}}
+    
+    {{widget-need-help}}
+	  
+    {{widget-disclosures}}
+	  
 	</aside>
   
 	<div class="button-container footer-btn-container membership-button-container visible-xs">

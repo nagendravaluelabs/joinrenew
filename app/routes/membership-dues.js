@@ -136,19 +136,7 @@ return Ember.RSVP.hash({
 		},
 		
 	],
-MembershipSide : [
-				 {
-					 "MemberID": "Non AIA Member architects",
-					 "MembershipYear": "2016",
-					 "MembershipType": "architect",
-					 "PaymentDueDate": "01/15/2016",
-					 "InvoiceNumber": "2009088960",
-					 "National": "90",
-					 "State": "79",
-					 "Local": "80"
-				 }
-              ]
-		
+  
  });
 }
 });
