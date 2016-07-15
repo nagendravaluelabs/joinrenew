@@ -89,7 +89,11 @@
       <ul class="field-options-select clearfix">
         {{#each addressType as |type|}}
           <li>
-            <label for="contact_{{type}}_country">Country</label>
+            <label for="contact_{{type}}_country">Country
+            {{#if (isEqualTo type contactAddressType)}}
+              <span class="form-required" title="This field is required.">*</span>
+            {{/if}}
+          </label>
             {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(jsStrings (get personalInfo.personal.phone (concat type '.country.key')) 'lower')}}
           </li>
           <li>
@@ -98,7 +102,7 @@
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
-            <input class="form-text required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat type '.value')}}" size="60" maxlength="255" />
+            <input class="form-text numbers-only required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat type '.value')}}" size="60" maxlength="255" />
           </li>
           <li class="clearfix"></li>
         {{/each}}
@@ -178,7 +182,7 @@
                   <input class="form-text required" type="text" id="primary_home_city" name="primary_home_city" value="{{personalInfo.personal.address.home.city}}" size="30" maxlength="255"
                   />
                 </li>
-                {{#if homeShowState}}
+                {{#if homeShowState}} 
                   <li class="state" id="state">
                     <label for="administrative_area_state">State
                       <span class="form-required" title="This field is required.">*</span>
@@ -186,10 +190,26 @@
                     {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required"}}
                   </li>
                 {{/if}}
-                <li class="inline-bl">
+                
+                <!-- Zip code validation for United States -->
+               {{#if homeShowState}} 
+                 <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
+                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30"/>
+                  {{#if (isEqualTo type 'join')}}
+                    <div class="calc-button">
+                      <span class="button-to-link">
+                        <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"/>
+                      </span>
+                    </div>
+                  {{/if}}
+                </li>
+                {{else}}
+                 <!-- No validation for zipcode for other countries -->
+                 <li class="inline-bl">
+                  <label for="primary_home_zipcode">Zip code</label>
                   <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
@@ -200,6 +220,8 @@
                     </div>
                   {{/if}}
                 </li>
+                {{/if}}
+               <!--  zip code validation end here -->
               </ul>
             </fieldset>
           </div>
@@ -302,9 +324,7 @@
                 {{/ember-chosen}}
               </li>
               <li>
-                <label for="create_org_country">Country
-                  <span class="form-required" title="This field is required.">*</span>
-                </label>
+                 <label for="contact_{{type}}_country">Country</label>
                 {{select-country idPrefix='create_org' namePrefix='create_org' selected="" class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus'}}
               </li>
               <li>
@@ -335,13 +355,30 @@
                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required"}}
                 </li>
               {{/if}}
+              
               <li class="state creative-zip">
                 <label for="postal-code">Zip code</label>
                 <input class="postal-code form-text" autocomplete="postal-code"
-                type="text" id="#" name="postal_code" value="" size="30" maxlength="255"
-                />
+                type="text" id="#" name="postal_code" value="" size="30" maxlength="255"/>
               </li>
-              <li class="clearfix"></li>
+              
+             <!--  This code commented for need to check for Validation for United States -->
+              <!-- {{#if workShowState}} 
+                <li class="state creative-zip">
+                  <label for="postal-code">Zip code
+                  <span class="form-required" title="This field is required.">*</span></label>
+                  <input class="postal-code form-text zipcodeUS" autocomplete="postal-code"
+                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
+                </li>
+                {{else}}
+                <li class="state creative-zip">
+                  <label for="postal-code">Zip code</label>
+                  <input class="postal-code form-text " autocomplete="postal-code"
+                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
+                </li>
+              {{/if}} -->
+              
+              <li class="clear"></li>
               <li class="state" id="state">
                 <label for="create_org_code_code">Country code</label>
                 {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected="UNITED STATES"}}
@@ -365,7 +402,7 @@
   {{/if}}
 </div>
 
-<div class="clear"></div>
+<div class="clearfix"></div>
 
 <div class="actions-btn primary-action-btn">
   <div class="edit-next">

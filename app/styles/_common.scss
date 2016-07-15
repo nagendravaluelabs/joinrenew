@@ -1,7 +1,9 @@
 .list-horizontal li {
   display: inline-block;
 }
-
+select::-ms-expand {
+    display: none;
+}
 #main-content {
   padding: 35px 0 20px 0;
   .page-title {
