@@ -85,6 +85,11 @@
         td:nth-child(2) {
           text-align:right;
         }
+        &.sum {
+          td:first-child {
+            padding-left: 30px;
+          }
+        }
       }
       tr.even, tr.odd, tr:last-child td, tr:last-child td {
         border-bottom: none;
@@ -291,7 +296,7 @@
       }
     }
     
-    .form-item-non-aia-member-persons, .form-item-aia-member-persons, .form-item-associates-persons, .form-item-techstaff-persons, .form-item-otherstaff-persons {
+    .form-item-text-fields {
       display: inline-block;
       width: 130px;
       margin-bottom: 0;
@@ -449,10 +454,9 @@
 #edit-questionnaire{
   input[type="radio"]:not(old) + label {
     padding-left: 44px;
-    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 6px 4px;
   }
   input[type="radio"]:checked:not(old) + label {
-    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 6px 4px;
+    
   }
 }
 

@@ -23,6 +23,9 @@ input[type="radio"]:not(old) {
     background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 4px;
     cursor: default;
   }
+  &.error + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected-error.png") no-repeat 4px 4px;
+  }
 }
 /* End: styles for radio buttons */
 input[type="button"] {

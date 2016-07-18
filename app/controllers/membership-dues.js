@@ -32,6 +32,8 @@ export default Ember.Controller.extend(rememberScroll, {
     init: function() {
       this.totalDuesFunc();
     },
+    supplementalDuesTotal: 0,
+    supplementalTotalDues: 0,
     totalDues: 0,
     totalDuesObserver: function() {
       this.totalDuesFunc();
@@ -48,6 +50,23 @@ export default Ember.Controller.extend(rememberScroll, {
         }
       }
     },
+    supTotalDuesObserver: function() {
+      this.supTotalDuesFunc();
+    }.observes('totalDues', 'supplementalDuesTotal'),
+    supTotalDuesFunc: function() {
+      var totalDues=this.get("totalDues");
+      var supplementalDuesTotal = this.get("supplementalDuesTotal");
+      this.set("supplementalTotalDues", parseInt(supplementalDuesTotal) + parseInt(totalDues) );
+    },
+    supplementalList: function() {
+      var list = [];
+      list[list.length] = {"id": "nonmember", "text": "Non AIA Member architects"};
+      list[list.length] = {"id": "member", "text": "AIA Member architects", "isRequired" : true};
+      list[list.length] = {"id": "associate", "text": "AIA Associates"};
+      list[list.length] = {"id": "technical", "text": "Technical staff"};
+      list[list.length] = {"id": "other", "text": "Other staff"};
+      return list;
+    }.property(),
     actions: {
         questionnaireMembershipduesNext: function (event) {
             "use strict";
@@ -59,7 +78,11 @@ export default Ember.Controller.extend(rememberScroll, {
             isDuesCalculator = this.get("isDuesCalculator");
             isQuestionnarie = this.get("isQuestionnarie");
             if (isQuestionnarie) {
-                questionnaire = parseInt($('input[name="questionnaire"]:checked').val());
+              questionnaire = parseInt($('input[name="questionnaire"]:checked').val());
+              if(questionnaire){
+                $("#error-container").html('').hide();
+                $('input[name="questionnaire"]').removeClass("error");
+                $('input[name="questionnaire"]').off("change");
                 if (questionnaire === 1) {
                     this.updateDuesPage(false, false, true, false, event);
                 } else if (questionnaire === 2) {
@@ -93,6 +116,15 @@ export default Ember.Controller.extend(rememberScroll, {
                 } else {
                     this.updateDuesPage(false, false, false, true, event);
                 }
+              } else {
+                $("#error-container").html('<label class="error">Please select an option from the questionnaire</label>').show();
+                $('input[name="questionnaire"]').addClass("error");
+                $("html, body").animate({scrollTop: ($('input[name="questionnaire"]').offset().top-50)+"px"}, 1000);
+                $('input[name="questionnaire"]').on("change", function(){
+                  $("#error-container").html('').hide();
+                  $('input[name="questionnaire"]').removeClass("error");
+                });
+              }
             } else if (isDuesCalculator) {
                 var validate;
                 validate = $("#dues-calculator").validate({
@@ -114,6 +146,7 @@ export default Ember.Controller.extend(rememberScroll, {
             } else if (isDuesCalculator || isTotalRenew) {
                 this.updateDuesPage(false, true, false, false, event);
             }
+            this.set("supplementalDuesTotal", 0);
             return false;
         },
         calculateSum: function (e) {
@@ -132,7 +165,8 @@ export default Ember.Controller.extend(rememberScroll, {
             $("#accordion").find("h3 .totalnum").each(function () {
                 suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
             });
-            $("#suppdues_totalamount").html("$ " + parseFloat(suppduesTotal).toFixed(2));
+            //$("#suppdues_totalamount").html("$ " + parseFloat(suppduesTotal).toFixed(2));
+            this.set("supplementalDuesTotal", suppduesTotal);
         },
         payNow: function () {
             var validate;
