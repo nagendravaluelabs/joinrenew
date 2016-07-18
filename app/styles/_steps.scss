@@ -73,6 +73,7 @@
 }
 .aia-progress-bar {
   width: 100%;
+  overflow: hidden;
   padding-bottom: 40px;
   border-bottom: 1px solid #e1e1e1;
 }
@@ -80,9 +81,11 @@
   font-size: 16px;
   color: #d1d2d3;
   width: 33.33%;
+  float: left;
   padding-right: 2px;
   box-sizing: border-box;
   display: inline-block;
+ 
 }
 .aia-progress-bar .aia-progress .steps a {
 

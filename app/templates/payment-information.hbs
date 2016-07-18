@@ -1,9 +1,7 @@
 {{renew-steps steps=model.steps}}
 <div class="row">
   <div class="col-sm-9">
-    
     <h1 class="page-title">Payment information</h1>
-    
     <div id="userprofileinfo">
       <ul class="no-style">
       	<li>First Name Lastname</li>
@@ -133,7 +131,7 @@
                   Card number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="255" />
+                <input class="text-full numbers-only no-special-char form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="255" />
               </li>
               <li>
                 <label for="cardExpirationMonth">

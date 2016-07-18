@@ -184,7 +184,6 @@ export default Ember.Controller.extend(rememberScroll, {
 });
 
 $(document).on("change", 'input[name="questionnaire"]', function () {
-    
     if (parseInt($(this).val()) === 2) {
         $(".questionnaire-userform").removeClass("hidden");
     } else {
@@ -205,3 +204,5 @@ $(document).on("keydown", '.numbers-only', function (e) {
         (key >= 96 && key <= 105)
     );
 });
+
+

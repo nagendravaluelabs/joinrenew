@@ -197,7 +197,7 @@
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30"/>
+                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlengh="5" maxlength="10"/>
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -359,7 +359,7 @@
               <li class="state creative-zip">
                 <label for="postal-code">Zip code</label>
                 <input class="postal-code form-text" autocomplete="postal-code"
-                type="text" id="#" name="postal_code" value="" size="30" maxlength="255"/>
+                type="text" id="#" name="postal_code" value="" size="30" minlengh="5" maxlength="10"/>
               </li>
               
              <!--  This code commented for need to check for Validation for United States -->
