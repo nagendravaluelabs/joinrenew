@@ -14,20 +14,31 @@ export default Ember.Component.extend(rememberScroll, {
     createOrganization: false,
     contactAddressType: "",
     genericData: Ember.inject.service('generic-data'),
-    init: function () {
+    init: function() {
+      this._super(...arguments);
+      this.serviceLoad();
+    },
+    serviceLoad: function () {
         "use strict";
         var self, primaryAddress, chapterType, contactInfo;
         self = this;
-        self._super(...arguments);
         contactInfo = self.get('info.contactInfo');
-        primaryAddress = self.get('info.primaryAddress');
-        chapterType = primaryAddress.chaptersType.capitalize();
-        self.chapterSelection(chapterType);
-        if (primaryAddress.home.country === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-            self.set('homeShowState', true);
+        primaryAddress = self.get('personalInfo');
+        if(typeof primaryAddress.personal!="undefined") {
+          primaryAddress = primaryAddress.personal.address;
+          chapterType = primaryAddress.primary.capitalize();
+          self.chapterSelection(chapterType);
+          if (primaryAddress.home.country.key.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+              self.set('homeShowState', true);
+          }
+          self.set('contactAddressType', contactInfo.addressType);
         }
-        self.set('contactAddressType', contactInfo.addressType);
+        
     },
+    controllerLoadObserves: function () {
+        "use strict";
+        this.serviceLoad();
+    }.observes("personalInfo"),
     /*prefixes: function () {
         "use strict";
         var data = this.get("generic").prefix;

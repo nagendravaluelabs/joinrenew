@@ -4,34 +4,32 @@
     <h1 class="page-title">Personal and contact info</h1>
  
     <h3 class="verify-subheading">Please verify your information</h3>
-    <div class="read-only-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
-      {{#each model.page.information as |info|}}
+    <ul class="read-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
+      {{#each userData as |info|}}
         {{#if (isNotEqual info.title 'address')}}
-          <div class="read-only-block-{{info.class}}">
+          <li class="{{info.class}}">
             {{#if info.title}}
-            <span class="read-only-block-{{info.class}}-label">{{info.title}}:</span>
+            <span class="{{info.class}}-label">{{info.title}}:</span>
             {{/if}}
-            <span class="{{info.class}}">{{info.value}}</span>
+            <span class="{{info.class}}-value">{{info.value}}</span>
             {{#if info.isPrimary}}
             <span>[Primary]</span>
             {{/if}}
-          </div>
+          </li>
         {{else}}
-          <div class="read-only-block-address">
+          <li class="address">
             {{#each info.value as |address key|}}
-            <div class="read-only-block-address{{key}}">
+            <p class="address{{key}}">
               <span class="address{{key}}">{{address}}</span>
-            </div>
+            </p>
             {{/each}}
-          </div>
+          </li>
         {{/if}}
       {{/each}}
-      <div class="read-only-block-links actions">
-        <div class="read-only-block-edit-link">
+      <li class="links actions">
           <a class="edit-link" id="hide-info" href="#" {{action 'showPersonalInfo'}}>Edit contact information &gt;</a>
-        </div>
-      </div>
-    </div>
-    {{personal-information info=model.page.primaryInformation type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo}}
+      </li>
+    </ul>
+    {{personal-information info=model.page.primaryInformation personalInfo=primaryData.data type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo}}
   </div>
 </div>

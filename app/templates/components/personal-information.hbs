@@ -14,10 +14,10 @@
             <option value="">Select</option>
             {{#each genericData.generic.prefix as |prefix|}}
               {{#if prefix.prf_code}}
-                {{#if (isEqualTo prefix.prf_key info.personalInfo.prefix)}}
-                  <option value="{{prefix.prf_key}}" selected>{{prefix.prf_code}}</option>
+                {{#if (isEqualTo prefix.prf_code personalInfo.personal.prefix)}}
+                  <option value="{{prefix.prf_code}}" selected>{{prefix.prf_code}}</option>
                 {{else}}
-                  <option value="{{prefix.prf_key}}">{{prefix.prf_code}}</option>
+                  <option value="{{prefix.prf_code}}">{{prefix.prf_code}}</option>
                 {{/if}}
               {{/if}}
             {{/each}}
@@ -27,16 +27,16 @@
           <label for="first-name">First name
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          {{#if info.personalInfo.firstName}}
-            <input class="form-text required" type="text" id="firstname" name="firstname" value="{{info.personalInfo.firstName}}" size="60" maxlength="255" disabled  />
+          {{#if personalInfo.personal.firstname}}
+            <input class="form-text required" type="text" id="firstname" name="firstname" value="{{personalInfo.personal.firstname}}" size="60" maxlength="255" disabled  />
           {{else}}
             <input class="form-text required" type="text" id="firstname" name="firstname" size="60" maxlength="255"  />
           {{/if}}
         </li>
         <li>
           <label for="middle-name">Middle initial</label>
-          {{#if info.personalInfo.middleName}}
-            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" value="{{info.personalInfo.middleName}}" size="1" maxlength="1" disabled />
+          {{#if personalInfo.personal.middlename}}
+            <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" value="{{personalInfo.personal.middlename}}" size="1" maxlength="1" disabled />
           {{else}}
             <input class="form-text input-middle-name" type="text" id="middlename" name="middlename" size="1" maxlength="1"  />
           {{/if}}
@@ -46,7 +46,7 @@
           <label for="lastname">Last name
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          <input class="form-text required text-capitalize" type="text" id="lastname" name="lastname" value="{{info.personalInfo.lastName}}" size="60" maxlength="255" />
+          <input class="form-text required text-capitalize" type="text" id="lastname" name="lastname" value="{{personalInfo.personal.lastname}}" size="60" maxlength="255" />
         </li>
         <li>
           <label for="suffix">Suffix</label>
@@ -54,10 +54,10 @@
             <option value="">Select</option>
             {{#each genericData.generic.suffix as |suffix|}}
               {{#if suffix.sfx_code}}
-                {{#if (isEqualTo suffix.sfx_key info.personalInfo.suffix)}}
-                  <option value="{{suffix.sfx_key}}" selected>{{suffix.sfx_code}}</option>
+                {{#if (isEqualTo suffix.sfx_code personalInfo.personal.suffix)}}
+                  <option value="{{suffix.sfx_code}}" selected>{{suffix.sfx_code}}</option>
                 {{else}}
-                  <option value="{{suffix.sfx_key}}">{{suffix.sfx_code}}</option>
+                  <option value="{{suffix.sfx_code}}">{{suffix.sfx_code}}</option>
                 {{/if}}
               {{/if}}
             {{/each}}
@@ -89,8 +89,12 @@
       <ul class="field-options-select clearfix">
         {{#each addressType as |type|}}
           <li>
-            <label for="contact_{{type}}_country">Country</label>
-            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(lookupProp info.contactInfo type "Country")}}
+            <label for="contact_{{type}}_country">Country
+            {{#if (isEqualTo type contactAddressType)}}
+              <span class="form-required" title="This field is required.">*</span>
+            {{/if}}
+          </label>
+            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(jsStrings (get personalInfo.personal.phone (concat type '.country.key')) 'lower')}}
           </li>
           <li>
             <label for="{{type}}-number" class="text-capitalize">{{type}} phone
@@ -98,7 +102,7 @@
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
-            <input class="form-text required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{lookupProp info.contactInfo type 'Phone'}}" size="60" maxlength="255" />
+            <input class="form-text numbers-only required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat type '.value')}}" size="60" maxlength="255" />
           </li>
           <li class="clearfix"></li>
         {{/each}}
@@ -157,40 +161,56 @@
                   <label for="primary_home_address_country">Country
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=info.primaryAddress.home.country class="counrty required" actionHooks='setHomeStateStatus' setHomeStateStatus='setHomeStateStatus'}}
+                  {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=(jsStrings (get personalInfo.personal.address 'home.country.key') 'lower') class="counrty required" actionHooks='setHomeStateStatus' setHomeStateStatus='setHomeStateStatus'}}
                 </li>
                 <li>
                   <label for="primary_home_address1">Address line 1
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{info.primaryAddress.home.address1}}" size="30" maxlength="255"
+                  <input class="form-text required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{personalInfo.personal.address.home.line1}}" size="30" maxlength="255"
                   />
                 </li>
                 <li>
                   <label for="primary_home_address2">Address line 2</label>
-                  <input class="form-text" type="text" id="primary_home_address2" name="primary_home_address2" value="{{info.primaryAddress.home.address2}}" size="30" maxlength="255"
+                  <input class="form-text" type="text" id="primary_home_address2" name="primary_home_address2" value="{{personalInfo.personal.address.home.line2}}" size="30" maxlength="255"
                   />
                 </li>
                 <li>
                   <label for="primary_home_city">City
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text required" type="text" id="primary_home_city" name="primary_home_city" value="{{info.primaryAddress.home.city}}" size="30" maxlength="255"
+                  <input class="form-text required" type="text" id="primary_home_city" name="primary_home_city" value="{{personalInfo.personal.address.home.city}}" size="30" maxlength="255"
                   />
                 </li>
-                {{#if homeShowState}}
+                {{#if homeShowState}} 
                   <li class="state" id="state">
                     <label for="administrative_area_state">State
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=info.primaryAddress.home.state class="state required"}}
+                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required"}}
                   </li>
                 {{/if}}
-                <li class="inline-bl">
+                
+                <!-- Zip code validation for United States -->
+               {{#if homeShowState}} 
+                 <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{info.primaryAddress.home.postalcode}}" size="30" minlength="5" maxlength="10" />
+                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlengh="5" maxlength="10"/>
+                  {{#if (isEqualTo type 'join')}}
+                    <div class="calc-button">
+                      <span class="button-to-link">
+                        <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"/>
+                      </span>
+                    </div>
+                  {{/if}}
+                </li>
+                {{else}}
+                 <!-- No validation for zipcode for other countries -->
+                 <li class="inline-bl">
+                  <label for="primary_home_zipcode">Zip code</label>
+                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -200,10 +220,12 @@
                     </div>
                   {{/if}}
                 </li>
+                {{/if}}
+               <!--  zip code validation end here -->
               </ul>
             </fieldset>
           </div>
-          <div class="clearfix"></div>
+          <div class="clear"></div>
           {{#if (isEqualTo type 'join')}}
           <div class="common-form">
             <div class="due-add-my-work-address">
@@ -255,7 +277,7 @@
                 </div>
             </fieldset>
           </div>
-          <div class="clearfix"></div>
+          <div class="clear"></div>
           {{#if (isEqualTo type 'join')}}
             <div class="common-form">
               <div class="due-add-my-home-address">
@@ -302,9 +324,7 @@
                 {{/ember-chosen}}
               </li>
               <li>
-                <label for="create_org_country">Country
-                  <span class="form-required" title="This field is required.">*</span>
-                </label>
+                 <label for="contact_{{type}}_country">Country</label>
                 {{select-country idPrefix='create_org' namePrefix='create_org' selected="" class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus'}}
               </li>
               <li>
@@ -335,13 +355,30 @@
                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required"}}
                 </li>
               {{/if}}
+              
               <li class="state creative-zip">
                 <label for="postal-code">Zip code</label>
                 <input class="postal-code form-text" autocomplete="postal-code"
-                type="text" id="#" name="postal_code" value="" size="30" maxlength="255"
-                />
+                type="text" id="#" name="postal_code" value="" size="30" minlengh="5" maxlength="10"/>
               </li>
-              <li class="clearfix"></li>
+              
+             <!--  This code commented for need to check for Validation for United States -->
+              <!-- {{#if workShowState}} 
+                <li class="state creative-zip">
+                  <label for="postal-code">Zip code
+                  <span class="form-required" title="This field is required.">*</span></label>
+                  <input class="postal-code form-text zipcodeUS" autocomplete="postal-code"
+                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
+                </li>
+                {{else}}
+                <li class="state creative-zip">
+                  <label for="postal-code">Zip code</label>
+                  <input class="postal-code form-text " autocomplete="postal-code"
+                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
+                </li>
+              {{/if}} -->
+              
+              <li class="clear"></li>
               <li class="state" id="state">
                 <label for="create_org_code_code">Country code</label>
                 {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected="UNITED STATES"}}
@@ -351,7 +388,7 @@
                 <input class="text-full form-text" type="text" id="org_company_phone"
                 name="org_company_phone" value="" size="60" maxlength="255" />
               </li>  
-              <li class="clearfix"></li>
+              <li class="clear"></li>
             </ul>
             <div class="create-org-action">
               <span class="link-to-button">

@@ -5,11 +5,12 @@ export default Ember.Service.extend({
   init: function() {
     var self= this;
     self._super(...arguments);
+    $('.ajax-spinner').show();
     Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=generic`).then(function(data){
       self.set("generic", data);
     })    
   },
-  report: function(){
+  updateChosen: function(){
     setTimeout(function(){
       $(".select-chosen").trigger("chosen:updated");      
     },100)

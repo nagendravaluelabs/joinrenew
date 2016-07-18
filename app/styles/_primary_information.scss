@@ -6,6 +6,9 @@
   }
   .actions-btn {
     margin-top: 0px;
+    @media (max-width: 767px) {
+      padding-left: 0;
+    }
   }
   .common-form {
       .required-field {
@@ -23,60 +26,60 @@
       }
   }
 }
-.page-primary-info {
-  h3.sign-up-subheading {
-    margin-bottom: 38px;
-    margin-top: 48px;
-  }
-}
+
 .verify-subheading {
   margin-bottom: 16px;
   display: block;
   margin-top: 53px;
 }
-.read-only-block {
+.read-block {
+  list-style:none;
+  margin:0;
   padding: 28px 0 0 20px;
-  .read-only-block-home-phone {
-    padding-top: 20px;
-    margin-bottom: 5px;
+  @media (max-width: 767px) {
+    padding-left: 0;
   }
-  .read-only-block-mobile-phone {
+  li{
+    margin-bottom: 5px;
+    &:first-child{
+      padding-bottom: 15px;
+    }
+    &.mobile-phone {
       margin-bottom: 5px;
       .mobile-phone + span {
           padding-left: 5px;
       }
-  }
-  .read-only-block-work-phone {
-      padding-bottom: 19px;
-  }
-  .read-only-block-edit-link {
-      padding-bottom: 26px;
-  }
-  .read-only-block-address {
-      line-height: 24px;
-  }
-  .home-phone {
+    }
+    &.address {
+        line-height: 15px;
+        margin-top:23px;
+    }
+    &.links.actions {
+      margin: 28px 0 26px 0;
+    }
+    p{
+      margin:0 0 7px 0;
+    }
+    .home-phone-value {
       padding-left: 21px;
+    }
+    .mobile-phone-value {
+        padding-left: 16px;
+    }
+    .work-phone-value {
+        padding-left: 26px;
+    }
   }
-  .mobile-phone {
-      padding-left: 16px;
-  }
-  .work-phone {
-      padding-left: 26px;
-  }
-  .read-only-block-links.actions {
-      margin: 25px 0 0 0;
-  }
-  .read-only-block-previous-link {
+  .previous-link {
       margin: 0 0 94px -19px;
   }
 }
-.read-only-block-continue-link {
+.continue-link {
   .link-to-button {
       a {
           display: block;
           width: 280px;
-          margin: 0 0 26px -17px;
+          margin: 0 0 26px 0;
       }
   }
 }
@@ -85,23 +88,7 @@
       width: 75% !important;
   }
 }
-.common-form {
-  .creative-zip {
-      width: 50% !important;
-      margin-bottom: 5px;
-  }
-  .state {
-      float: left;
-      width: 27%;
-      .chosen-container {
-          width: 95% !important;
-      }
-  }
-  .zip {
-      width: 50%;
-      margin-bottom: 20px;
-  }
-}
+
 .info-left-company {
   .company-lookup-address-block {
       background-color: #fff;
@@ -126,15 +113,24 @@ form.common-form {
 }
 
 .page-primary-info {
-
   h3.your-contact-heading {
       margin-bottom: 16px;
       margin-top: 51px;
   }
+  h3.sign-up-subheading {
+    margin-bottom: 38px;
+    margin-top: 48px;
+  }
+  
   .common-form {
       .form-type-radio {
           margin: 8px 59px 9px 0;
           display: inline-block;
+      }
+      .zip {
+        @media (max-width: 767px) {
+          width: 100%;
+        } 
       }
   }
   .separator {
@@ -160,6 +156,9 @@ form.common-form {
   #personal-contact {
     display: block;
     padding-left: 20px;
+    @media (max-width: 767px) {
+      padding-left: 0;
+    }
   }
   .create-org-action {
     .save-company-info {
@@ -167,18 +166,7 @@ form.common-form {
       display: inline-block;
     }
   }
-}
-
-.page-primary-info .primary-action-btn {
+  .primary-action-btn {
   padding-left: 20px;
 }
-@media (max-width: 767px) {
-  .read-only-block {
-    padding-left: 0;
-  }
-  #main-content.page-primary-info .actions-btn,
-  .page-primary-info #personal-contact  {
-    padding-left: 0;
-  }
-  
 }

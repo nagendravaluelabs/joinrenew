@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import EmberChosenCli from 'ember-cli-chosen/components/ember-chosen';
 export default EmberChosenCli.extend({
-  attributeBindings: ['name'],_setupChosen: function() {
+  attributeBindings: ['name'],
+  _setupChosen: function() {
     var _this = this,
       options = _this.get('_options'),
       isMultiple = _this.get('multiple'),
@@ -23,7 +24,7 @@ export default EmberChosenCli.extend({
     _this.$().chosen(options)
       .on('change', function (e, params) {
       var index;
-
+      $(this).trigger("blur");
       if(isMultiple) {
         currentValue = _this.get('value');
 

@@ -22,6 +22,8 @@ export function ifCond(params) {
       return (params[0] && params[1]);
     case '||':
       return (params[0] || params[1]);
+    case '%':
+      return (params[0] % params[1] == 0) ? true : false;
     default:
       return false;
   }
