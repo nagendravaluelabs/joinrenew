@@ -124,14 +124,16 @@
                   Name on card 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="cardName" name="cardName" size="60" maxlength="255" />
+                <input class="text-full few-special-char form-text" type="text" id="cardName" name="cardName" size="60" maxlength="255" />
+                <p id="error">Special Characters $, &lt;, &gt; not allowed</p>
               </li>
               <li>
                 <label for="cardNumber">
                   Card number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full numbers-only no-special-char form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="255" />
+                <input class="text-full no-special-char form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="255"  />
+                 <p id="no-spl-char">Special Characters not allowed</p>
               </li>
               <li>
                 <label for="cardExpirationMonth">
@@ -157,7 +159,7 @@
                     Security code 
                     <span class="form-required">*</span>
                   </label>
-                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" min="3" max="4" size="60" maxlength="255" />
+                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" min="3" max="4" size="60" maxlength="4" />
                 </div>
                 <div class="gatewayimg"></div>
                 <div class="clearfix clear600"></div>
@@ -203,8 +205,10 @@
                   Name on account 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="accountName" name="accountName" size="60" maxlength="255" />
+                <input class="text-full few-special-char form-text" type="text" id="accountName" name="accountName" size="60" maxlength="255" />
+                 <p id="error">Special Characters $, &lt;, &gt; not allowed</p>
               </li>
+              
               <li>
                 <label for="bankroutingNumber">
                   Bank routing number 

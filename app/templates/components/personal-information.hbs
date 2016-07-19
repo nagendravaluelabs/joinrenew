@@ -102,7 +102,7 @@
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
-            <input class="form-text numbers-only required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat type '.value')}}" size="60" maxlength="255" />
+            <input class="form-text required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat type '.value')}}" size="60" maxlength="255" />
           </li>
           <li class="clearfix"></li>
         {{/each}}

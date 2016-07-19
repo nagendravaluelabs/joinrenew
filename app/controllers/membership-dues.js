@@ -205,4 +205,39 @@ $(document).on("keydown", '.numbers-only', function (e) {
     );
 });
 
+$(document).on("keypress", '.no-special-char', function(e){
+      "use strict";
+      var specialKeys = new Array();
+      specialKeys.push(8); //Backspace
+      specialKeys.push(9); //Tab
+      specialKeys.push(46); //Delete
+      specialKeys.push(36); //Home
+      specialKeys.push(35); //End
+      specialKeys.push(37); //Left
+      specialKeys.push(39); //Right
+      
+      var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+      var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      document.getElementById("no-spl-char").style.display = ret ? "none" : "block";
+      return ret;
+})
+
+$(document).on("keypress", '.few-special-char', function(e){
+      "use strict";
+      var specialKeys = new Array();
+      specialKeys.push(8);  //Backspace
+      specialKeys.push(9);  //Tab
+      specialKeys.push(46); //Delete
+      specialKeys.push(36); //Home
+      specialKeys.push(35); //End
+      specialKeys.push(37); //Left
+      specialKeys.push(39); //Right
+      
+      var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+      console.log( "keyCode --- " + keyCode )
+      var ret = ((keyCode >= 33 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode==61) || (keyCode >= 63 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      document.getElementById("error").style.display = ret ? "none" : "block";
+      return ret;
+})
+
 
