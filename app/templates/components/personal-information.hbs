@@ -167,20 +167,17 @@
                   <label for="primary_home_address1">Address line 1
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{personalInfo.personal.address.home.line1}}" size="30" maxlength="255"
-                  />
+                  <input class="form-text few-special-char required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{personalInfo.personal.address.home.line1}}" size="30" maxlength="255"/>
                 </li>
                 <li>
                   <label for="primary_home_address2">Address line 2</label>
-                  <input class="form-text" type="text" id="primary_home_address2" name="primary_home_address2" value="{{personalInfo.personal.address.home.line2}}" size="30" maxlength="255"
-                  />
+                  <input class="form-text few-special-char" type="text" id="primary_home_address2" name="primary_home_address2" value="{{personalInfo.personal.address.home.line2}}" size="30" maxlength="255"/>
                 </li>
                 <li>
                   <label for="primary_home_city">City
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text required" type="text" id="primary_home_city" name="primary_home_city" value="{{personalInfo.personal.address.home.city}}" size="30" maxlength="255"
-                  />
+                  <input class="form-text few-special-char required" type="text" id="primary_home_city" name="primary_home_city" value="{{personalInfo.personal.address.home.city}}" size="30" maxlength="255"/>
                 </li>
                 {{#if homeShowState}} 
                   <li class="state" id="state">
@@ -331,19 +328,19 @@
                 <label for="org_company_address1">Address line 1
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="thoroughfare form-text required" autocomplete="address-line1"
+                <input class="thoroughfare few-special-char form-text required" autocomplete="address-line1"
                 type="text" id="org_company_address1" name="org_company_address1" value="" size="30" maxlength="255" />
               </li>
               <li>
                 <label for="org_company_address2">Address line 2</label>
-                <input class="premise form-text" autocomplete="address-line2"
+                <input class="premise few-special-char form-text" autocomplete="address-line2"
                 type="text" id="org_company_address2" name="org_company_address2" value="" size="30" maxlength="255" />
               </li>
               <li>
                 <label for="org_locality">City
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="locality form-text required" autocomplete="&quot;address-level2"
+                <input class="locality few-special-char form-text required" autocomplete="&quot;address-level2"
                 type="text" id="org_locality" name="org_locality" value="" size="30" maxlength="255"
                 />
               </li>
