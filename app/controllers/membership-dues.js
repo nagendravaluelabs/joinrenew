@@ -205,4 +205,26 @@ $(document).on("keydown", '.numbers-only', function (e) {
     );
 });
 
-
+var specialKeys = new Array();
+specialKeys.push(8);  //Backspace
+specialKeys.push(9);  //Tab
+specialKeys.push(46); //Delete
+specialKeys.push(36); //Home
+specialKeys.push(35); //End
+specialKeys.push(37); //Left
+specialKeys.push(39); //Right
+  
+$(document).on("keypress", ".few-special-char", function(e){
+      "use strict";
+      var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+      console.log( "keyCode --- " + keyCode )
+      var ret = ((keyCode >= 33 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode==61) || (keyCode >= 63 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      if(!ret) {
+        if($(this).next("label.error").length==0) {
+          $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
+        }
+      } else {
+        $(this).next("label.error").remove();
+      }
+      return ret;
+});
