@@ -12,7 +12,7 @@ export default Ember.Service.extend({
   },
   updateChosen: function(){
     setTimeout(function(){
-      $(".select-chosen").trigger("chosen:updated");      
+      $(".select-chosen").trigger("chosen:updated");
     },100)
   }.observes("generic")
 });
