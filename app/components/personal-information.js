@@ -10,10 +10,11 @@ export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
     primaryHomeAddress: false,
-    primaryWorkAddress: false,
+    primaryOfficeAddress: false,
     createOrganization: false,
     contactAddressType: "",
     genericData: Ember.inject.service('generic-data'),
+    statesData: Ember.inject.service('states-data'),
     init: function() {
       this._super(...arguments);
       this.serviceLoad();
@@ -22,7 +23,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var self, primaryAddress, chapterType, contactInfo;
         self = this;
-        contactInfo = self.get('info.contactInfo');
+        contactInfo = self.get('personalInfo.personal.phone');
         primaryAddress = self.get('personalInfo');
         if(typeof primaryAddress.personal!="undefined") {
           primaryAddress = primaryAddress.personal.address;
@@ -31,7 +32,7 @@ export default Ember.Component.extend(rememberScroll, {
           if (primaryAddress.home.country.key.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
               self.set('homeShowState', true);
           }
-          self.set('contactAddressType', contactInfo.addressType);
+          self.set('contactAddressType', contactInfo.primary);
         }
         
     },
@@ -62,7 +63,7 @@ export default Ember.Component.extend(rememberScroll, {
         var data = [
             "home",
             "mobile",
-            "work"
+            "directoffice"
         ];
         return data;
     }.property(),
@@ -70,7 +71,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var data = [
             "home",
-            "work"
+            "office"
         ];
         return data;
     }.property(),
@@ -90,19 +91,19 @@ export default Ember.Component.extend(rememberScroll, {
     }.property(),
     chapterSelection: function (chapterType) {
         "use strict";
-        var primaryAddress, self;
+        var self;
         self = this;
         self.set('primaryHomeAddress', false);
-        self.set('primaryWorkAddress', false);
+        self.set('primaryOfficeAddress', false);
         self.set('createOrganization', false);
-        primaryAddress = self.get('info.primaryAddress');
+        //primaryAddress = self.get('personalInfo.personal.address');
         self.set('primary' + chapterType + 'Address', true);
-        if (primaryAddress.showWorkAddress === true) {
-            self.set('primaryWorkAddress', true);
+        /*if (primaryAddress.primary === "office") {
+            self.set('primaryOfficeAddress', true);
         }
-        if (primaryAddress.showHomeAddress === true) {
+        if (primaryAddress.primary === "home") {
             self.set('primaryHomeAddress', true);
-        }
+        }*/
     },
     actions: {
         showPersonalInfo: function () {

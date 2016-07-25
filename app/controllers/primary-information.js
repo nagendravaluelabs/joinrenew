@@ -40,11 +40,11 @@ export default Ember.Controller.extend({
               userData[index].isPrimary = true;
             }
           }
-          if(typeof personalData.phone.work != "undefined" && personalData.phone.work.value!="") {
+          if(typeof personalData.phone.directoffice != "undefined" && personalData.phone.directoffice.value!="") {
             index++;
             userData[index] = {};
-            userData[index] = {"title": "Work phone", "value": personalData.phone.work.value, "class": "work-phone"};
-            if(personalData.phone.primary === "work") {
+            userData[index] = {"title": "Work phone", "value": personalData.phone.directoffice.value, "class": "work-phone"};
+            if(personalData.phone.primary === "home") {
               userData[index].isPrimary = true;
             }
           }
@@ -59,9 +59,9 @@ export default Ember.Controller.extend({
             primaryAddress[1]= personalData.address.home.line2;
             primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;
           } else {
-            primaryAddress[0]= personalData.address.work.line1;
-            primaryAddress[1]= personalData.address.work.line2;
-            primaryAddress[2]= personalData.address.work.city + ", " + personalData.address.work.state.value + ", " + personalData.address.work.country.value + ", " + personalData.address.work.zip;
+            primaryAddress[0]= personalData.address.office.line1;
+            primaryAddress[1]= personalData.address.office.line2;
+            primaryAddress[2]= personalData.address.office.city + ", " + personalData.address.office.state.value + ", " + personalData.address.office.country.value + ", " + personalData.address.office.zip;
           }
           console.log(primaryAddress);
           userData[index] = {"title": "address", "value": primaryAddress, "class": "address"};

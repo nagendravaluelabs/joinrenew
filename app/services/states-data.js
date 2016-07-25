@@ -6,13 +6,8 @@ export default Ember.Service.extend({
     var self= this;
     self._super(...arguments);
     $('.ajax-spinner').show();
-    Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=C3EA6EE0-78AD-4FDC-8A3E-AF3162E3098B`).then(function(data){
+    Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
       self.set("data", data);
     })    
-  },
-  updateChosen: function(){
-    setTimeout(function(){
-      $(".select-chosen").trigger("chosen:updated");
-    },100)
-  }.observes("data")
+  }
 });

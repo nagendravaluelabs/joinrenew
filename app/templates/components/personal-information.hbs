@@ -76,7 +76,7 @@
         <ul class="form-radios clearfix">
           {{#each addressType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{#if (isEqualTo type info.contactInfo.addressType)}}
+            {{#if (isEqualTo type personalInfo.personal.phone.primary)}}
             <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action "updateContactInformation" value="target.value"}} class="form-radio" checked />
             {{else}}
               <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action 'updateContactInformation' value="target.value"}} class="form-radio" />
@@ -94,7 +94,7 @@
               <span class="form-required" title="This field is required.">*</span>
             {{/if}}
           </label>
-            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(jsStrings (get personalInfo.personal.phone (concat type '.country.key')) 'lower')}}
+            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(jsStrings (get personalInfo.personal.phone (concat type '.country')) 'lower')}}
           </li>
           <li>
             <label for="{{type}}-number" class="text-capitalize">{{type}} phone
@@ -125,7 +125,7 @@
       <ul class="form-radios clearfix">
         {{#each chaptersType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{#if (isEqualTo type info.primaryAddress.chaptersType)}}
+            {{#if (isEqualTo type personalInfo.personal.address.primary)}}
             <input type="radio" id="choose_chapter_{{type}}" name="choose_chapter" value="{{type}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} checked />
             {{else}}
               <input type="radio" id="choose_chapter_{{type}}" name="choose_chapter" value="{{type}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} />
@@ -234,7 +234,7 @@
           {{/if}}
         </div>
       {{/if}}
-      {{#if primaryWorkAddress}}
+      {{#if primaryOfficeAddress}}
         <div class="workAddress-container address-container">
           <div id="work-address" class="back-grey block">
             {{#if (isEqualTo type 'join')}}
@@ -265,7 +265,16 @@
                 <div class="auto-address clearfix">
                   <span class="info-left">
                     <div id="company-lookup-address-block">
-                        {{{nl2br info.primaryAddress.work.address}}}
+                        {{#if personalInfo.personal.address.office.line1}}
+                        {{personalInfo.personal.address.office.line1}}<br />
+                        {{/if}}
+                        {{#if personalInfo.personal.address.office.line2}}
+                        {{personalInfo.personal.address.office.line2}}<br />
+                        {{/if}}
+                        {{#if personalInfo.personal.address.office.line3}}
+                        {{personalInfo.personal.address.office.line3}}<br />
+                        {{/if}}
+                        {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}, {{personalInfo.personal.address.office.country.value}} {{personalInfo.personal.address.office.zip}}
                     </div>
                   </span>
                   <span class="info-link">Can’t find your work address?
