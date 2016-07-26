@@ -201,24 +201,20 @@ $(document).on("keydown", '.numbers-only', function (e) {
         key === 46 ||
         (key >= 35 && key <= 40) ||
         (key >= 48 && key <= 57) ||
-        (key >= 96 && key <= 105)
+        (key >= 96 && key <= 105) 
     );
 });
 
 var specialKeys = new Array();
-specialKeys.push(8);  //Backspace
-specialKeys.push(9);  //Tab
-specialKeys.push(46); //Delete
-specialKeys.push(36); //Home
-specialKeys.push(35); //End
-specialKeys.push(37); //Left
-specialKeys.push(39); //Right
+specialKeys.push(8);   //Backspace
+specialKeys.push(9);   //Tab
+specialKeys.push(144); //Num Lock
   
 $(document).on("keypress", ".few-special-char", function(e){
       "use strict";
       var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
       console.log( "keyCode --- " + keyCode )
-      var ret = ((keyCode >= 33 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode==61) || (keyCode >= 63 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      var ret = ( (keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode==61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
       if(!ret) {
         if($(this).next("label.error").length==0) {
           $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));

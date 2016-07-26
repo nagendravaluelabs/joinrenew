@@ -24,6 +24,16 @@
         max-width: 100%;
         display: block;
       }
+      #home_number-error, #mobile_number-error, #directoffice_number-error {
+        max-width: 100% !important;
+        width: 400px;
+        line-height: 18px;
+          @media (max-width: 767px) {
+            max-width:100%;
+            width: 600px;
+          }
+      }
+      
   }
 }
 

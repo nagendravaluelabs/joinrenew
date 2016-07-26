@@ -40,24 +40,6 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         this.serviceLoad();
     }.observes("personalInfo"),
-    /*prefixes: function () {
-        "use strict";
-        var data = this.get("generic").prefix;
-        return data;
-    }.property(),
-    suffixes: function () {
-        "use strict";
-        var data = [
-            "Esq.",
-            "II",
-            "III",
-            "IV",
-            "Jr.",
-            "Sr.",
-            "V"
-        ];
-        return data;
-    }.property(),*/
     addressType: function () {
         "use strict";
         var data = [
@@ -158,14 +140,14 @@ export default Ember.Component.extend(rememberScroll, {
                 rules:{
                     firstname: {
                       required: true,
-                      lettersonly: true
+                      letterswithbasicpunc: true
                     },
                     middlename: {
-                      lettersonly: true
+                      letterswithbasicpunc: true
                     },
                     lastname: {
                       required: true,
-                      lettersonly: true
+                      letterswithbasicpunc: true
                     },
                     contact_home_country: {
                       required: function() {
@@ -196,9 +178,9 @@ export default Ember.Component.extend(rememberScroll, {
                       digits: true,
                       minlength: 10
                     },
-                    work_number: {
+                    directoffice_number: {
                       required: function() {
-                        return $("#primary_number_work").is(":checked");
+                        return $("#primary_number_directoffice").is(":checked");
                       },
                       digits: true,
                       minlength: 10
@@ -218,11 +200,11 @@ export default Ember.Component.extend(rememberScroll, {
                         return $("#choose_chapter_home").is(":checked");
                       }
                     },
-                    primary_home_zipcode: {
+                     primary_home_zipcode: {
                       required: function() {
-                        return $("#choose_chapter_home").is(":checked");
+                        return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                       }
-                    },
+                    }, 
                     administrative_area_state: {
                       required: function() {
                         return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
@@ -230,28 +212,37 @@ export default Ember.Component.extend(rememberScroll, {
                     }
                 },
                 messages: {
-                    prefix: "Please select valid Prefix",
+                    prefix: "Prefix is required",
                     firstname: {
-                      required: "Please enter your Firstname",
-                      lettersonly: "Special characters not allowed for Firstname"
+                      required: "First name is required",
+                      letterswithbasicpunc: "Special characters not allowed for First name"
                     },
                     middlename: {
-                      lettersonly: "Please enter a single letter for your middle initial"
+                      letterswithbasicpunc: "Please enter a single letter for your middle initial"
                     },
                     lastname: {
-                      required: "Please enter your Lastname",
-                      lettersonly: "Special characters not allowed for Lastname"
+                      required: "Last name is required",
+                      letterswithbasicpunc: "Special characters not allowed for last name"
                     },
-                    contact_home_country: "Please select country",
-                    contact_mobile_country: "Please select country",
-                    contact_work_country: "Please select country",
-                    home_number: "Please Enter Valid Phone Number",
-                    mobile_number: "Please Enter Valid Mobile Number",
-                    work_number: "Please Enter Valid Work Number",
-                    primary_home_address_country: "Please Select Country",
-                    primary_home_address1:"Please enter a valid home address",
-                    primary_home_zipcode: "Please enter a valid Zip Code",
-                    primary_home_city:"Please enter a valid City Name"
+                    contact_home_country: "Country field is required",
+                    contact_mobile_country: "Country field is required",
+                    contact_work_country: "Country field is required",
+                    home_number: { 
+                      required: "Home number is required",
+                      digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                    },
+                    mobile_number: {
+                      required: "Mobile number is required",
+                      digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                    },
+                    directoffice_number: {
+                      required: "Office number is required",
+                      digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                    },
+                    primary_home_address_country: "Country field is required",
+                    primary_home_address1: "Address line1 is required",
+                    primary_home_city: "City is required",
+                    primary_home_zipcode: "Zip code is required"
                 }
             });
             if(validate.form()) {
@@ -277,14 +268,14 @@ export default Ember.Component.extend(rememberScroll, {
                   }
                 },
                 messages: {
-                  organization_name: "Please enter organization name",
-                  company_type: "Please select Company Type",
-                  create_org_country: "Please select country",
-                  org_company_address1: "Please enter company address",
-                  org_locality: "Please enter city",
-                  work_administrative_state: "Please select state",
+                  organization_name: "Organization Name is required",
+                  company_type: "Company Type is required",
+                  create_org_country: "Country is required",
+                  org_company_address1: "Address line1 is required",
+                  org_locality: "City is required",
+                  work_administrative_state: "State is required",
                   org_company_phone: {
-                    digits: "Pleas enter valid phone number"
+                    digits: "Please enter a valid Company phone number"
                   }
                 }
             });
