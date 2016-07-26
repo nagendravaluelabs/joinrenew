@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
         this.set("address", addressData.data.chapter.national);
       }		  
 	  if(addressData.data.membership){
-		  this.set("renewMailLink","https://aia.hbp.com/assets/pdf/3"+addressData.data.membership.memberid);		  
+		  this.set("renewMailLink","https://aia.hbp.com/assets/pdf/"+addressData.data.membership.memberid+".pdf");		  
 	  }
 	  if(addressData.data.membership.membershipstatus != 'Active')	    
 		this.set("dipslayFlag", "display:none");
