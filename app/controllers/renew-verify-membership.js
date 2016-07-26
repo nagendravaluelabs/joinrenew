@@ -12,27 +12,16 @@ export default Ember.Controller.extend({
         this.set("address", addressData.data.chapter.state);
       } else if(typeof addressData.data.chapter.national) {
         this.set("address", addressData.data.chapter.national);
-      }	else{	  
-		   addressData.data.chapter["defaultInfo"]={
-            "chapterlevel": "default",
-            "chaptername": "",
-            "tax_deductible": "",
-            "address": "The American Institute of Architects 1735 New York Ave NwWashington, DC 20006-5209",
-            "phone": "",
-            "email": "",
-            "website": "www.aia.org"
-            };			  	   
-		    this.set("address",addressData.data.chapter.defaultInfo);	 
-		  		  
-	  }
-	  
+      }		  
 	  if(addressData.data.membership){
 		  this.set("renewMailLink","https://aia.hbp.com/assets/pdf/3"+addressData.data.membership.memberid);		  
-	  }else{
-		  
 	  }
-	  if(addressData.data.membership.membershipstatus == 'Terminated')
-	    this.set("dipslayFlag", "display:none");  
+	  if(addressData.data.membership.membershipstatus != 'Active')	    
+		this.set("dipslayFlag", "display:none");
+	
+	  this.set("changeMembershipLink", " https://aiad8dev.prod.acquia-sites.com/sites/default/files/2016-07/2016%20Associate%20to%20Architect%20Form.pdf");
+	  
+	  this.set("changeChapterLink", " https://aiad8dev.prod.acquia-sites.com/sites/default/files/2016-07/2016%20Chapter%20Transfer%20Request%20Form.pdf");	
     }	
   }.observes("addressData.data")
 });
