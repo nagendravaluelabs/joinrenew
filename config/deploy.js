@@ -1,16 +1,6 @@
 /* jshint node: true */
 
-var AWS = require('aws-sdk');
-const AWS_PROFILE_NAME = 'aia-dt';
-
-process.env.AWS_PROFILE=AWS_PROFILE_NAME;
-
 module.exports = function(deployTarget) {
-
-  var credentials = AWS.config.keys.credentials();
-  if (!credentials || !credentials.secretAccessKey || !credentials.accessKeyId) {
-    throw new Error("Unable to find AWS credentials. ");
-  }
 
   var ENV = {
     build: {
@@ -18,16 +8,16 @@ module.exports = function(deployTarget) {
     },
     s3: {
       filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,otf,ttf,woff,woff2,html}',
-      accessKeyId: credentials.accessKeyId,
-      secretAccessKey: credentials.secretAccessKey,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
       region: 'us-east-1',
       bucket: 'aia-joinrenew-stg'
     },
 
     's3-index': {
       allowOverwrite: true,
-      accessKeyId: credentials.accessKeyId,
-      secretAccessKey: credentials.secretAccessKey,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
       region: 'us-east-1',
       bucket: 'aia-joinrenew-stg',
     },
