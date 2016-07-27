@@ -8,16 +8,16 @@ module.exports = function(deployTarget) {
     },
     s3: {
       filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,otf,ttf,woff,woff2,html}',
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       region: 'us-east-1',
       bucket: 'aia-joinrenew-stg'
     },
 
     's3-index': {
       allowOverwrite: true,
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       region: 'us-east-1',
       bucket: 'aia-joinrenew-stg',
     },
