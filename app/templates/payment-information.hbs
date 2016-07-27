@@ -4,10 +4,10 @@
     <h1 class="page-title">Payment information</h1>
     <div id="userprofileinfo">
       <ul class="no-style">
-      	<li>First Name Lastname</li>
-        <li>AIA New York Chapter</li>
-        <li>536 LaGuardia Place</li>
-        <li>New York,  NY  10012</li>
+      	<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
+        <li>{{primaryData.data.personal.address.office.line1}}</li>
+        <li>{{primaryData.data.personal.address.office.city}}</li>
+        <li>{{primaryData.data.personal.address.office.country.value}},{{primaryData.data.personal.address.office.state.value}} {{primaryData.data.personal.address.office.zip}}</li>
       </ul>
     </div>
     
@@ -28,18 +28,19 @@
             <div class="result">
               <table>
                 <tbody>
-                  {{#each model.payments as |payment|}}
+                
                   <tr>
-                    <td>{{payment.title}}</td>
-                    <td>${{payment.proRated}}</td>
-                    <!-- <td>
-                      <span>Annual: </span><span>${{payment.annual}}</span>
-                    </td>
-                    <td>
-                      <span>Pro-rated: </span><span class="pro-rate-val">${{payment.proRated}}</span>
-                    </td> -->
+                    <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.national.due}}</td>
                   </tr>
-                  {{/each}}
+               <tr>
+                    <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.state.due}}</td>
+                  </tr>
+                   <tr>
+                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.local.due}}</td>
+                  </tr>
                   
                   <tr class="sum">
                     <td class="title">Subtotal due</td>

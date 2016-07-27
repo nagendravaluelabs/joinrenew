@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
 export default Ember.Controller.extend({
+   primaryData: Ember.inject.service('user-data'),
         debitPayment: true,
         echeckPayment: false,
         insallmentsPayment: false,
