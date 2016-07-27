@@ -170,7 +170,11 @@
          
           @media (min-width: 320px) and (max-width: 767px){
             .form-type-radio{
-              margin: 15px 45px 9px 0;
+              /*margin: 15px 45px 9px 0;*/
+              margin: 15px 15px 9px 0;
+                &:last-child{
+                margin-right:0px;
+                }
             }
             select.form-select, input[type="text"]{
               width: 100%;
