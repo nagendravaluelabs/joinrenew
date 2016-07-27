@@ -31,10 +31,22 @@ export default Ember.Controller.extend(rememberScroll, {
     }.observes('isDuesCalculator'),
     init: function() {
       this.totalDuesFunc();
+      this.hasSupplementalDues();
     },
     supplementalDuesTotal: 0,
     supplementalTotalDues: 0,
     totalDues: 0,
+    hasSupplementalDues: function() {
+      var duesData = this.get("duesData");
+      if(duesData.data != "undefined" && duesData.data != "") {
+        if(duesData.data.invoice.issupplementaldues == 0) {
+          this.updateDuesPage(false, false, true, false);
+        }
+      }
+    },
+    hasSupplementalDuesObserver: function() {
+      this.hasSupplementalDues();
+    }.observes('duesData.data'),
     totalDuesObserver: function() {
       this.totalDuesFunc();
     }.observes('duesData.data'),

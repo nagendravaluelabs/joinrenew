@@ -299,6 +299,9 @@ label {
     overflow:hidden;
     margin: 15px 59px 9px 0;
     display:inline-block;
+    @media screen and (max-width: 767px){
+      margin: 15px 0 9px 0;
+    }
   }
   label {
     &.option {

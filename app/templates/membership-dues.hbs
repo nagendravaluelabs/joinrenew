@@ -283,9 +283,11 @@
             <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
           </div>
           <div class="clearfix"></div>
+          {{#if duesData.data.invoice.issupplementaldues}}
           <div id="startoverbtn">
             <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
           </div>
+          {{/if}}
         </div>
         {{/if}}
       </div>

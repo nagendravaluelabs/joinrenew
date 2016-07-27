@@ -105,8 +105,10 @@
             </div>
             <div class="clearfix"></div>
             <div id="servicefee">
-              <input type="checkbox" id="installment_iagree" name="installment_iagree" value="I agree" class="form-checkbox" />
-              <label for="installment_iagree">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
+              <form action="#" id="install-agreement" method="post">
+                <input type="checkbox" id="installment_iagree" name="installment_iagree" value="I agree" class="form-checkbox installment_iagree" />
+                <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
+              </form>
             </div>
           </div>
         </div>
@@ -158,7 +160,7 @@
                     Security code 
                     <span class="form-required">*</span>
                   </label>
-                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" min="3" max="4" size="60" maxlength="4" />
+                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" size="60" maxlength="4" />
                 </div>
                 <div class="gatewayimg"></div>
                 <div class="clearfix clear600"></div>
@@ -166,13 +168,16 @@
                 <div class="clearfix"></div>
               </li>
               <li class="terms">
-                <input type="checkbox" id="iagree_terms" name="iagree_terms" value="I agree" class="form-checkbox" />
-                <label for="iagree_terms">
+                <input type="checkbox" id="iagree_terms" name="iagree_terms" value="I agree" class="form-checkbox iagree_terms" />
+                <label for="iagree_terms" class="agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
               <li>
-                <input type="submit" value="Submit payment" class="form-submit">
+                <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>
+                <!--<input type="button" value="Submit payment" class="form-submit"  
+                {{action 'validatePaymentInfo'}} {{action 'validateInstallmentAgreeInfo'}}  /> -->
+                
               </li>
             </ul>
           </form>
@@ -222,13 +227,14 @@
                 <input class="text-full form-text" type="text" id="accountNumber" name="accountNumber" size="60" maxlength="255" />
               </li>
               <li class="terms">
-                <input type="checkbox" id="check_iagree_terms" name="check_iagree_terms" value="I agree" class="form-checkbox" />
-                <label for="check_iagree_terms">
+                <input type="checkbox" id="check_iagree_terms" name="check_iagree_terms" value="I agree" class="form-checkbox check_iagree_terms" />
+                <label for="check_iagree_terms" class="ele-agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
+              
               <li>
-                <input type="submit" value="Submit payment" class="form-submit">
+                <input type="button" value="Submit payment" class="form-submit" {{action 'validatePaymentElectronicInfo'}}>
               </li>
             </ul>
           </form>
@@ -248,7 +254,7 @@
             <th scope="row">Member dues</th>
             <td class="price">$1,165.00</td>
           </tr>
-          <tr>
+          <tr> 
             <th scope="row">Administrative fees</th>
             <td class="price">$40.00</td>
           </tr>
