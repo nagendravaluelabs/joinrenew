@@ -6,12 +6,16 @@ const AWS_PROFILE_NAME = 'aia-dt';
 process.env.AWS_PROFILE=AWS_PROFILE_NAME;
 
 module.exports = function(deployTarget) {
-  var credentials = new AWS.SharedIniFileCredentials({
-    profile: AWS_PROFILE_NAME
-  });
+
+  var credentials = AWS.config.keys.credentials();
+  if (!credentials || !credentials.secretAccessKey || !credentials.accessKeyId) {
+    throw new Error("Unable to find AWS credentials. ");
+  }
 
   var ENV = {
-    build: {},
+    build: {
+      environment: 'production' // the default
+    },
     s3: {
       filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,otf,ttf,woff,woff2,html}',
       accessKeyId: credentials.accessKeyId,
@@ -36,7 +40,6 @@ module.exports = function(deployTarget) {
   }
 
   if (deployTarget === 'staging') {
-    ENV.build.environment = 'test';
     ENV['s3-index'].bucket = 'aia-joinrenew-stg';
     ENV['s3'].bucket = 'aia-joinrenew-stg';
   }

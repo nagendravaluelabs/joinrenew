@@ -1,9 +1,10 @@
 ---
 language: node_js
 node_js:
-  - "4"
+  - "5.0"
 
 sudo: false
+dist: trusty
 
 cache:
   directories:
@@ -13,10 +14,19 @@ before_install:
   - npm config set spin false
   - npm install -g bower
   - npm install phantomjs-prebuilt
+  - "npm install -g npm@^2"
 
 install:
+  - npm install -g bower
   - npm install
   - bower install
 
 script:
   - npm test
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: node_modules/.bin/ember deploy staging --activate --verbose
+    on:
+      branch: master
