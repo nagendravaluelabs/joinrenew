@@ -1,0 +1,108 @@
+#main-content {
+  &.page-renew {
+    padding-bottom: 0;
+    padding-top: 36px;
+    .container {
+      width: auto;
+      padding-left: 0px;
+      padding-right: 0px;  
+    }
+    .row  {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .container-column {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .renew-container {
+      width: 1170px;
+      margin: 0 auto;
+      padding-left: 0px;
+      padding-right: 0px;
+      @media (max-width: 1199px) {
+        width: 960px;
+      }
+      @media (max-width: 991px) {
+        width: 750px;
+      }
+      @include mq(xs) {
+        width: 100%;
+      }
+    }
+    .page-title {
+      display: none;
+    }
+    .landing-page-image {
+      margin-top: 1px;
+    }
+    .renew-page {
+      .right-view{
+        margin-top: -1px;
+        #landingPage-body {
+          padding-top: 40px;
+          font-size: 16.8px;
+          margin-bottom: 14px;
+          margin-top: 2px;
+          @include mq(xs) {
+            padding-top: 30px;
+          }
+          h2 {
+            padding-bottom: 30px;
+            font-size: 36px;
+            clear: both;
+            line-height: 1.4em;
+            word-spacing: -1px;
+            @include mq(xs) {
+              padding-top: 40px;
+              font-size: 64px;
+              width: 100%;
+            }
+          }
+          #edit-next {
+            display: inline-block;
+            background-color: #ef4135;
+            font-size: 2.4rem;
+            color: #fff;
+            margin-top:2px;
+            padding: 10px 40px 10px 18px;
+          }
+          p {
+            font-size: 1.2em;
+            margin-bottom: 3px;
+            @include mq(xs) {
+              font-size: 2.0em;
+              margin-bottom: 37px;
+              color: #000000;
+              line-height: 1.25;
+              width: auto;
+            }
+          }
+        }
+        input[type="submit"] {
+          margin-bottom: 70px !important;
+        }
+      }
+    }
+    .renew-disclaimer {
+      background: #e3e3e4;
+      font: 14px/1.5 'Architype-Light',sans-serif;
+      color: #333333;
+      padding-top: 1px;
+      .container {
+        padding-top:42px;
+      }
+      h4 {
+        font: 14px/1 'Architype-Bold',sans-serif;
+      }
+      .row{ 
+        margin-top:45px;
+      }
+      .disclaimer-txt{
+        margin-left: 4px;
+        margin-top: 40px;
+        color: #aaa;
+      }
+    }
+  }
+}

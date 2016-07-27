@@ -1,0 +1,294 @@
+{{renew-steps steps=model.steps}}
+<div class="row">
+  <div class="col-sm-9">
+    <h1 class="page-title">Payment information</h1>
+    <div id="userprofileinfo">
+      <ul class="no-style">
+      	<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
+        <li>{{primaryData.data.personal.address.office.line1}}</li>
+        <li>{{primaryData.data.personal.address.office.city}}</li>
+        <li>{{primaryData.data.personal.address.office.country.value}},{{primaryData.data.personal.address.office.state.value}} {{primaryData.data.personal.address.office.zip}}</li>
+      </ul>
+    </div>
+    
+    <div class="payment_information">
+      <div id="ordersummaryinfo">
+        <h3>Invoice summary</h3>
+        <div id="payment-accordion">
+           <h3>
+            AIA membership dues:
+		<!-- 	<strong class="member-role">{{model.role}}</strong> -->
+            <span class="membership">
+		<!-- 	<strong class="member-role mobile-view">{{model.role}}</strong> -->
+              <span class="membership-type">
+                <span class="membership-total">${{subTotal}}</span></span>
+              </span>
+          </h3>
+          <div class="newaiamembership">
+            <div class="result">
+              <table>
+                <tbody>
+                
+                  <tr>
+                    <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.national.due}}</td>
+                  </tr>
+               <tr>
+                    <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.state.due}}</td>
+                  </tr>
+                   <tr>
+                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
+                    <td>${{primaryData.data.invoice.dues.local.due}}</td>
+                  </tr>
+                  
+                  <tr class="sum">
+                    <td class="title">Subtotal due</td>
+                    
+                    <td class="due-total">${{subTotal}}</td>
+                  </tr> 
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="accordion_bottom">
+          <div class="total_label">Total due</div>
+          <div id="paymentdue" class="paymentdue">${{subTotal}}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment_method">
+      <h3>How do you want to pay?<span class="required" aria-required="true">*</span></h3>
+      <ul class="no-style">
+      	<li>
+          <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          <label for="pay-debit-credit">Debit or credit card </label>
+          <div class="creditcardType">
+            <div class="amexicon creditcardicon"></div>
+            <div class="visaicon creditcardicon"></div>
+            <div class="mastercardicon creditcardicon"></div>
+            <div class="discovericon creditcardicon"></div>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      	<li>
+          <input type="radio" id="pay-electronic-check" name="payment_type" value="Electronic check" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          <label for="pay-electronic-check">Electronic check</label>
+        </li>
+      	<li>
+          <input type="radio" id="pay-in-installments" name="payment_type" value="EMI" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          <label for="pay-in-installments">Pay in installments</label>
+        </li>
+      </ul>
+      {{#if insallmentsPayment}}
+        <div id="installments" class="common-form">
+          <div id="installmentsform">
+            <div id="installmentnumber">
+              Pay my dues in
+              <select class="select-installments form-select" id="select-installments">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <label for="select-installments">installments</label>
+            </div>
+            <div id="firstinstallment">Total for first installment: <span>$97.93</span>
+            <span id="paymentplan_info_but">
+              <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
+            </span></div>
+            
+            <div class="clearfix"></div>
+            <div class="servicefee_info">
+              A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments.
+            </div>
+            <div class="clearfix"></div>
+            <div id="servicefee">
+              <form action="#" id="install-agreement" method="post">
+                <input type="checkbox" id="installment_iagree" name="installment_iagree" value="I agree" class="form-checkbox installment_iagree" />
+                <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
+              </form>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="payments-container common-form">
+      {{#if (ifCond debitPayment insallmentsPayment '||')}}
+        <div class="card-payment">
+          <h3>Enter your credit or debit card information<span class="required">*</span></h3>
+          <form action="#" id="form-card-payment" method="post">
+            <ul class="no-style">
+              <li>
+                <label for="cardName">
+                  Name on card 
+                  <span class="form-required">*</span>
+                </label>
+                <input class="text-full few-special-char form-text" type="text" id="cardName" name="cardName" size="60" maxlength="255" />
+              </li>
+              <li>
+                <label for="cardNumber">
+                  Card number 
+                  <span class="form-required">*</span>
+                </label>
+                <input class="text-full form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="255"  />
+                
+              </li>
+              <li>
+                <label for="cardExpirationMonth">
+                  Expiration date 
+                  <span class="form-required">*</span>
+                </label>
+                <div class="cardExpiration clearfix">
+                  <div class="cardExpirations">
+                    <select id="cardExpirationMonth" name="cardExpirationMonth" class="form-select">
+                      <option value="">Month</option>
+                    </select>
+                  </div>
+                  <div class="cardExpirations">
+                    <select id="cardExpirationYear" name="cardExpirationYear" class="form-select">
+                      <option value="">Year</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pull-left secure-code">
+                  <label for="cardSecurityCode">
+                    Security code 
+                    <span class="form-required">*</span>
+                  </label>
+                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" size="60" maxlength="4" />
+                </div>
+                <div class="gatewayimg"></div>
+                <div class="clearfix clear600"></div>
+                <div class="securitycodeimg"></div>
+                <div class="clearfix"></div>
+              </li>
+              <li class="terms">
+                <input type="checkbox" id="iagree_terms" name="iagree_terms" value="I agree" class="form-checkbox iagree_terms" />
+                <label for="iagree_terms" class="agreement">
+                  I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
+                </label>
+              </li>
+              <li>
+                <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>
+                <!--<input type="button" value="Submit payment" class="form-submit"  
+                {{action 'validatePaymentInfo'}} {{action 'validateInstallmentAgreeInfo'}}  /> -->
+                
+              </li>
+            </ul>
+          </form>
+        </div>
+      {{/if}}
+      {{#if echeckPayment}}
+        <div class="electronic-check">
+          <h3>Enter your ACH information<span class="required" aria-required="true">*</span></h3>
+          <form action="#" id="form-electronic-check" method="post">
+            <div class="pull-left echeckMode">
+              <ul class="no-style">
+                <li>
+                  <input type="radio" id="ecChecking" name="echeckMode" value="Checking" checked="checked" class="form-radio" aria-required="true">
+                  <label for="ecChecking">Checking</label>
+                </li>
+                <li>
+                  <input type="radio" id="ecSavings" name="echeckMode" value="Savings" class="form-radio" aria-required="true">
+                  <label for="ecSavings">Savings</label>
+                </li>
+              </ul>
+            </div>
+            <div class="gatewayimg"></div>
+            <div class="clearfix clear600"></div>
+            <div class="electronicCheckImg"></div>
+            <div class="clearfix"></div>
+            <ul class="no-style">
+              <li>
+                <label for="accountName">
+                  Name on account 
+                  <span class="form-required">*</span>
+                </label>
+                <input class="text-full few-special-char form-text" type="text" id="accountName" name="accountName" size="60" maxlength="255" />
+              </li>
+              
+              <li>
+                <label for="bankroutingNumber">
+                  Bank routing number 
+                  <span class="form-required">*</span>
+                </label>
+                <input class="text-full form-text" type="text" id="bankroutingNumber" name="bankroutingNumber" size="60" maxlength="255" />
+              </li>
+              <li>
+                <label for="accountNumber">
+                  Account number 
+                  <span class="form-required">*</span>
+                </label>
+                <input class="text-full form-text" type="text" id="accountNumber" name="accountNumber" size="60" maxlength="255" />
+              </li>
+              <li class="terms">
+                <input type="checkbox" id="check_iagree_terms" name="check_iagree_terms" value="I agree" class="form-checkbox check_iagree_terms" />
+                <label for="check_iagree_terms" class="ele-agreement">
+                  I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
+                </label>
+              </li>
+              
+              <li>
+                <input type="button" value="Submit payment" class="form-submit" {{action 'validatePaymentElectronicInfo'}}>
+              </li>
+            </ul>
+          </form>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<div id="paymentplan_modal"></div>
+<div id="paymentplan_extrainfo">
+  <div class="extrainfo_box">
+    <div class="leftblock">
+      <span class="plan_heading">Payment Plan</span>
+      <table id="payment_plan_info_table" border="1">
+        <tbody>
+          <tr>
+            <th scope="row">Member dues</th>
+            <td class="price">$1,165.00</td>
+          </tr>
+          <tr> 
+            <th scope="row">Administrative fees</th>
+            <td class="price">$40.00</td>
+          </tr>
+          <tr>
+            <th scope="row">Total</th>
+            <td class="price">$1,205.00</td>
+          </tr>
+          <tr>
+            <th scope="row">Number of payments</th>
+            <td><div id="num_installments_selected">3</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rightblock">Installments
+      <div id="payment_tbl">
+        <table id="installment_payment_sum_list">
+          <tbody>
+            <tr class="installments_tbl_tr">
+              <td class="install_num">1 </td>
+              <td class="install_payment">$401.66</td>
+            </tr>
+            <tr class="installments_tbl_tr">
+              <td class="install_num">2 </td>
+              <td class="install_payment">$401.66</td>
+            </tr>
+            <tr class="installments_tbl_tr">
+              <td class="install_num">3 </td>
+              <td class="install_payment">$401.66</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

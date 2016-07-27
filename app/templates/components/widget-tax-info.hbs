@@ -1,0 +1,15 @@
+<div class="tax-deductibles-block block-pane">
+  <h3>Tax deductible percentage</h3>
+  <div class="result-wrapper">
+    <div class="result">
+      {{#each-in chapters as |key chapter|}}
+        <div>
+          <label>{{jsStrings chapter.chapterlevel 'capitalize'}}:</label>
+          <span>{{chapter.taxdeductible}}%</span>
+        </div>
+      {{/each-in}}
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>

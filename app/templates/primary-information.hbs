@@ -1,0 +1,35 @@
+{{renew-steps steps=model.steps}}
+<div class="row">
+  <div class="col-sm-9">
+    <h1 class="page-title">Personal and contact info</h1>
+ 
+    <h3 class="verify-subheading">Please verify your information</h3>
+    <ul class="read-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
+      {{#each userData as |info|}}
+        {{#if (isNotEqual info.title 'address')}}
+          <li class="{{info.class}}">
+            {{#if info.title}}
+            <span class="{{info.class}}-label">{{info.title}}:</span>
+            {{/if}}
+            <span class="{{info.class}}-value">{{info.value}}</span>
+            {{#if info.isPrimary}}
+            <span>[Primary]</span>
+            {{/if}}
+          </li>
+        {{else}}
+          <li class="address">
+            {{#each info.value as |address key|}}
+            <p class="address{{key}}">
+              <span class="address{{key}}">{{address}}</span>
+            </p>
+            {{/each}}
+          </li>
+        {{/if}}
+      {{/each}}
+      <li class="links actions">
+          <a class="edit-link" id="hide-info" href="#" {{action 'showPersonalInfo'}}>Edit contact information &gt;</a>
+      </li>
+    </ul>
+    {{personal-information info=model.page.primaryInformation personalInfo=primaryData.data type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo}}
+  </div>
+</div>

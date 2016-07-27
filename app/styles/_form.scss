@@ -1,0 +1,364 @@
+.qitem-wrapper, .form-type-radio {
+	position: relative;
+}
+/* Start: styles for radio buttons */
+input[type="radio"]:not(old) {
+  border: 0 none;
+  height: 22px;
+  left: 5px;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  width: 28px;
+  vertical-align: middle;
+  & + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected.png") no-repeat 4px 4px;
+    display: inline-block;
+    line-height: 28px;
+    padding-left: 40px;
+  }
+  &:checked + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-selected.png") no-repeat 4px 4px;
+    cursor: default;
+  }
+  &.error + label {
+    background: rgba(0, 0, 0, 0) url("../images/radio-unselected-error.png") no-repeat 4px 4px;
+  }
+}
+/* End: styles for radio buttons */
+input[type="button"] {
+	margin-top: 20px;
+}
+/* Start: styles for Chosen */
+.chosen-container {
+  &,
+  .group-education-information & {
+    margin-bottom:10px;
+    width:360px !important;
+    &.chosen-container-single {
+      .chosen-single {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 0;
+        box-shadow: none;
+        height: 50px;
+        padding: 13px 0 0 17px;
+        white-space: normal;
+        width: 100%;
+        span {
+          color: #000;
+        }
+        div {
+          width: 48px;
+          b {
+            background: rgba(0, 0, 0, 0) url(../images/drop-down-arrow.png) no-repeat scroll 0 0 !important;
+          }
+        }
+      }
+      .chosen-drop {
+        border-radius: 0 0 4px 4px;
+        width: 100%;
+        border: 1px solid #ccc;
+        background: #fff;
+        box-shadow: none;
+        .chosen-search {
+          input[type="text"] {
+            width:100% !important;
+            padding:10px !important;
+          }          
+        }
+        .chosen-results {
+          color: #000;
+          max-height: 200px;
+        }
+      }
+    }  
+  }
+  .form-type-select &,
+  .group-education-information & {
+    .chosen-single {
+      width: 100% !important;
+    }
+  }
+  .form-type-select &,
+  .chosen-drop {
+    width: 100% !important;
+  }
+  .state & {
+    max-height: 150px;
+  }
+  @media (min-width: 320px) and (max-width: 1023px) {
+    width: 100% !important;
+  }
+}
+
+.chosen-container-active {
+  & ,
+  .group-education-information & {
+    &.chosen-with-drop {
+      .chosen-single {
+        border: 1px solid #ccc;
+        background-image: none;
+        box-shadow: none;
+        div {
+          b {
+            background-position: 0px 0px;
+          }
+        }
+      }
+    }
+  }
+}
+/* End: styles for Chosen */
+
+/* Start: styles for Checkbox */
+
+input[type="checkbox"] {
+  vertical-align: middle;
+  border: none;
+  opacity: 0;
+  position: absolute;
+  & + label {
+    cursor: pointer;
+    padding:0 0 0 25px;
+    position: relative;
+    margin:5px 0 25px 0;
+    line-height:23px;
+    &:before {
+      background-color: #fff;
+      border: 1px solid #d1d2d3;
+      content: '';
+      height: 17px;
+      left: 0;
+      position: absolute;
+      top: 2px;
+      width: 17px;
+    }
+    &:after {
+      color: #fa4132;
+      content: '✔';
+      font-size: 1.9rem;
+      left: 0px;
+      position: absolute;
+      top: -3px;
+      opacity: 0;
+    }    
+  }
+  &:checked + label:after {
+    opacity: 1;
+  }
+}
+
+/* End: styles for Checkbox */
+
+/* Start: styles for Error */
+label {
+  &.error {
+    font-size: 12px;
+    color: #FF0000 !important;
+    font-weight: normal !important;
+    cursor: pointer;
+  }
+}
+.form-error {
+  color: #FF0000 !important;
+  border-color: #FF0000 !important;
+  outline-color: #FF0000 !important;
+}
+.common-form {
+  display:block;
+  ul{
+    margin:0;
+    list-style:none;
+    &.field-options-select {
+      display:block;
+      clear:both;
+      >li{
+        display: inline-block;
+        float:left;
+        margin-right:20px;
+        &.clearfix{
+          margin: 0;
+          float: none;
+          display: block;
+          clear: both;
+        }
+        select {
+          &.form-select {
+            width:360px !important;
+          }
+        }
+        input[type="text"] {
+          width:360px !important;
+        }
+      }
+    }
+    li {
+      margin-bottom: 1em;
+      margin-top: 2px;
+      position: relative;
+      display:block;
+    }
+  }
+  .required-field {
+    color: #a7a7a7;
+    padding: 11px 0 20px 0;
+    font-weight: normal;
+    margin-bottom:0;
+    line-height: 20px;
+  }
+  label {
+    color: #000;
+    font: 1.6rem 'Architype-Light',sans-serif normal;
+    margin-bottom: 18px;
+    max-width: 100%;
+    display:block;
+    font-weight: 700;
+  }
+  input {
+    &[type="text"] {
+      height: 50px;
+      padding: 0 0 0 15px;
+      width: 55%;
+      @media (max-width:767px){
+        width:100%;
+      }
+    }
+    &.form-text {
+      &.error {
+        @extend .form-error;
+      }
+    }
+    &[type="checkbox"] {
+      &.error {
+        &:not(:checked) {
+            & + label {
+              &:before {
+                border-color: #FF0000;
+              }
+            }
+        }
+      }
+    }
+  }
+  textarea {
+    &.form-textarea {
+      &.error {
+        @extend .form-error;
+      }
+    }
+  }
+  select {
+    height: 50px;
+    &.form-select {
+      width: 55%;
+      padding: 4px 4px 4px 15px;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      background: #fff url("../images/drop-down-arrow.png") no-repeat scroll right center !important;
+      line-height: 24px;
+      padding-right: 48px;
+
+      &.error {
+        @extend .form-error;
+        background-image: url(../images/drop-down-arrow-error.png) !important;
+      }
+    }
+  }
+  input.form-text,
+  textarea.form-textarea,
+  select.form-select {
+    border: 1px solid #d1d2d3;
+    color:#000;
+    margin-bottom: 10px;
+  }
+  .chosen-container {
+    &.error {
+      .chosen-single {
+        @extend .form-error;
+        span {
+          color: #FF0000 !important;
+        }
+        div {
+          b {
+            background-image: url(../images/drop-down-arrow-error.png) !important;
+          }
+        }
+      }
+    }
+  }
+  span {
+    &.form-required {
+      color: #f00;
+    }
+  }
+  .form-type-radios{
+    overflow:hidden;
+    margin: 15px 59px 9px 0;
+    display:inline-block;
+    @media screen and (max-width: 767px){
+      margin: 15px 0 9px 0;
+    }
+  }
+  label {
+    &.option {
+      font-weight: normal;
+    }
+  }
+}
+/* End: styles for Error */
+
+/* Start: Button styles */
+  button,
+  input[type="submit"], 
+  input[type="reset"], 
+  input[type="button"],
+  .link-to-button a  {
+    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 0;
+    border: 0 none;
+    border-radius: 0;
+    color: $button-color !important;
+    font-family: $font-light;
+    font-size: $button-font-size;
+    margin-bottom: 3px;
+    padding: $button-padding;
+    position: relative;
+    text-align: left;
+    transition: all 0.25s ease-in-out 0s;
+    display:inline-block;
+    &:hover {
+      background-color: $button-bg-hover-color;
+      border: 0 none;
+      border-radius: 0;
+      color: $button-hover-color;
+      cursor: pointer;
+    }
+    &.full-width {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      text-align: center;
+      width: 100%;
+    }
+  }
+/* End: Button styles */
+
+/* Start: Textarea styles */
+textarea {
+  .form-textarea {
+    padding: 4px;
+  }
+}
+/* End: Textarea styles */
+
+/* Start: Select styles */
+
+select {
+  .form-select {
+    padding: 4px;
+  }
+}
+
+/* Start: Select styles */

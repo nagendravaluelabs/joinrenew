@@ -1,0 +1,416 @@
+#main-content {
+  &.personal-info-component {
+   
+    .page-title {
+      margin-bottom: 0 !important;
+      margin-top: 40px;
+      padding-bottom: 4px;
+    }
+    h3 {
+      &.sign-up-subheading{
+        margin-bottom:48px;
+        margin-top:53px;
+      }
+    }
+    .common-form {
+      ul {
+        li {
+          &.inline-bl{
+            float: left;
+            display: inline-block;
+            width:65%;
+            @media (min-width: 768px) and (max-width: 1023px){
+              width:50%;
+            }
+            @media (max-width: 767px){
+              width:100%;
+            }
+            input[type="text"].year-txt,
+            > select.form-select {
+              display:inline-block;
+              float:left;
+              width:44%;
+              float:left;
+              margin-right:15px;
+            }
+            input[type="text"].year-txt{
+              width:25%;
+            }
+          }
+        }
+      }
+      .all-info {
+        padding-left: 20px;
+        padding-right:20px;
+      }
+      .separator {
+        border-bottom: 1px solid #cccccc;
+        clear: both;
+        height: auto;
+        padding: 0 0 33px;
+        zoom: 1;
+      }
+      .description {
+        display: none !important;
+      }
+      input {
+        &[type="text"] {
+          &.input-middle-name {
+            width: 80px !important;
+            @media (max-width: 767px){
+              width: 80px !important;
+            }
+          }
+        }
+      }
+      #field-middle-name{
+        width: 50px;
+      }
+      .due-add-my-work-address, .due-add-my-home-address{
+        @media (max-width: 767px){
+          .due-add-my-work-address, .due-add-my-home-address{
+            margin-bottom:46px;
+          }
+        }
+         label{
+          background: transparent url("../images/plus-sign.png") left center no-repeat;
+          cursor: pointer;
+          color: #de322e;
+          padding-left: 40px;
+          padding:25px 0 25px 40px;
+         }
+         input[type="checkbox"] + label:after, input[type="checkbox"] + label:before{
+            display: none;
+         }
+         input[type="checkbox"]:checked + label{
+            background: transparent url("../images/minus-sign.png") left center no-repeat;
+         }
+      }
+      
+    }
+    .personal-contact{
+      &.common-form {
+        input[type="text"] {
+           @media (max-width: 767px){
+              width: 100% !important;
+            }
+          &#primary_home_zipcode {
+            width: 49%;
+            @media (max-width: 767px){
+              width: 100% !important;
+            }
+          }
+        }
+        .state {
+          width: 35%;
+            @media (min-width: 768px) and (max-width: 1023px){
+              width: 50% !important;
+            }
+            @media(max-width: 767px){
+              width: 100% !important;
+            }
+        }
+        .address-block-container {
+          .chosen-container{
+            margin-bottom:10px;
+            width:67% !important;
+            @media (min-width: 768px) and (max-width: 1023px){ 
+              width:100% !important;
+            }
+          }
+          #company-organization {
+            .state {
+              width: 33.5%;
+              @media (min-width: 768px) and (max-width: 1023px){
+                width: 50%;
+              }
+            }
+          }
+          .calc-button {
+            float: left;
+            margin-left: 30px;
+          }
+          .back-grey {
+            background-color: #f2f2f3;
+            padding: 20px;
+            margin-bottom: 50px;
+          }
+          .creative-zip {
+            width: 50% !important;
+            margin-bottom: 5px;
+            @media (max-width: 767px){
+              width: 100% !important;
+              padding-right: 0 !important;
+            }
+          }
+          .state {
+            float: left;
+            width: 35%;
+            .chosen-container {
+              width: 95% !important;
+              @media (max-width: 767px){
+              width: 100% !important;
+            }
+            }
+          }
+          .zip {
+            float: left;
+            width: 50%;
+            margin-bottom: 20px;
+          }
+          @media (min-width: 320px) and (max-width: 767px){
+            .chosen-container {
+              width: 100% !important;
+            }
+          }
+        }
+          select.form-select, input[type="text"]{
+            width: 67%;
+          }
+         
+          @media (min-width: 320px) and (max-width: 767px){
+            .form-type-radio{
+              /*margin: 15px 45px 9px 0;*/
+              margin: 15px 15px 9px 0;
+                &:last-child{
+                margin-right:0px;
+                }
+            }
+            select.form-select, input[type="text"]{
+              width: 100%;
+            }
+            ul li.inline-bl {
+              display:block;
+            }
+          }
+          @media (min-width: 768px) and (max-width: 1023px){
+            select.form-select, input[type="text"]{
+              width: 100% !important;
+            }
+          }
+      }
+    }
+  }
+}
+.button-to-link{
+  input[type="submit"]{
+    &, &[disabled="disabled"] {
+        background: transparent !important;
+        color: #fa4132 !important;
+        font-size: 1.6rem;
+        margin: 0;
+        padding-top: 18px;
+    }
+  }
+}
+.form-autocomplete {
+  background-image: url(../images/throbber-inactive.png);
+  background-position: 100% center;
+  background-repeat: no-repeat;
+}
+.actions-btn{
+    margin-bottom: 95px;
+    .edit-prev{
+        padding-top: 24px;
+    }
+   input[type="submit"], .link-to-button a{
+      width: 280px;
+      display: inline-block;  
+    }
+
+}
+.mode-workAddress, .mode-add-company {
+  .due-add-my-home-address{
+    display: none;
+  }
+}
+.mode-homeAddress{
+  .due-add-my-work-address {
+    display: none;
+  }
+}
+.mode-add-company:not(.mode-workAddress){
+  .homeAddress-container {
+    display: none;
+  }
+}
+.referral-block{
+	margin-bottom:32px;
+}
+.add-clear-btn{
+  float:right;
+  font-weight:normal;
+  margin-right:20%;
+  cursor:pointer;
+  color: #ef4135;
+  font-size: 1.6rem;
+  text-align: right;
+}
+#work-address{
+  &.back-grey{
+    &.block {
+      .info-left {
+        div {
+          background-color: #fff;
+          border: 1px solid #ccc;
+          min-height: 110px;
+          margin: 7px 0 56px 0px;
+          padding: 14px 20px;
+          width: 55%;
+          line-height: 20px;
+          clear: both;
+          @media (min-width: 768px) and (max-width: 1023px){
+              width:100%;
+              font-size:13px;
+          }
+          @media (max-width: 767px){
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+.mobile-bottom{
+	display:none;
+}
+input:disabled {
+  background-color: #ccc!important;
+}
+#company-organization{
+  margin-top: -50px;
+  .creative-zip {
+    padding-right: 20px;
+  }
+  .state +{
+    .creative-zip {
+        padding-right: 0px;
+    }
+   }
+}
+@media (min-width: 320px) and (max-width: 767px){
+	ul{
+    &.field-options-select{
+      li{
+        margin-right:0;
+        float:none !important;
+        display:block !important;
+        > select.form-select, > input[type="text"]{
+          width: 100% !important;
+        }
+      }
+    }
+  }
+  #sidebar {
+    margin-top: 0 !important;
+  }
+  
+  .desk-bottom{
+	  display:none;
+  }
+  .mobile-bottom{
+	  display:block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px){
+	
+  #sidebar {
+    margin-top: 256px !important;
+  }
+  ul{
+    &.field-options-select{
+      li{
+        > select.form-select, > input[type="text"]{
+          width: 100% !important;
+        }
+      }
+    }
+  }
+  .your-contact-info{
+    ul{
+      &.field-options-select >{
+        li {
+          width: 45%;
+          float: left;
+          margin-right: 20px;
+          :nth-child(3n+1) {
+            padding-right: 10px;
+          }
+          :nth-child(3n+2) {
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  ul{
+    &.form-radios{
+      li{
+        width:auto !important;  
+      }
+    }
+  }
+  #company-organization{
+    .creative-zip {
+      padding-right: 14px;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1023px){
+  .calc-button {
+      margin-left: 0;
+      display: block;
+      width: 100% !important;
+      text-align: center;
+  }
+}
+@media (max-width: 567px){
+  .actions-btn, .magazine-radios{
+    input[type="submit"], input[type="button"], a{
+        width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 767px){
+	#primary, #sidebar {
+      padding: 20px;
+  }
+	body, body .ui-widget, input[type="text"], select, label, legend, span {
+    font-size: 1.8rem;
+    line-height: 30px;
+}
+	.block-pane, .tax-deductibles-block {
+    padding-bottom: 32px;
+    padding-top: 27px;
+}
+h3 {
+    font-size: 3rem;
+    line-height: 30px;
+}
+}
+.address-container{
+  h3{
+	margin:0;
+}
+}
+ul{
+  .personalinfo_third_party{
+    margin-bottom:54px;
+  }
+}
+#main-content.page-personal-info .info-link{
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 1024px) and (max-width: 1199px){
+	ul.field-options-select > li{
+		width:45%;
+	}
+	.chosen-container{
+		width:100% !important;
+	}
+}

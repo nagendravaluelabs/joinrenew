@@ -1,0 +1,632 @@
+
+.page-renew-membership-dues-page{
+  padding-top:0;
+  .aia-progress-bar{
+    .steps:first-child {
+      .progress-circle {
+        .tick {
+          background: transparent url("../images/progress-tick.png") no-repeat scroll 5px 1px;
+          display: block;
+          height: 20px;
+          position: relative;
+          width: 25px;
+          z-index: 9999;
+        }
+      }
+    }  
+  }
+  .button-container .next {
+      width: 280px;
+      display: inline-block;
+    }
+  .common-form{
+    input[type="text"]{
+      padding-left: 7px;
+    }
+    
+    table.duestable {
+      margin: 24px 1.2em 2.5em;
+      width: 100%;
+      @media (max-width: 767px) {
+        width:100% !important;
+        margin: 25px 0 !important;
+        font-size: 20px;
+      }      
+    }
+    .next{
+      width: 280px;
+      display: inline-block;
+    }
+    .read-only-block-previous-link {
+      margin-top: 22px;
+    }
+  }
+  .total-no-renew-suppdue{
+    p {
+      margin-top:45px;
+    }
+    p {
+      margin-bottom: 24px;
+    }
+    table.duestable {
+      margin: 21px 1.2em 44px;
+      width: 63.7%;
+      @media(min-width: 768px) and (max-width: 1200px) {
+          width: 91%;
+      }
+    }
+  }
+  .renew-suppdue {
+    width: 63.7%;
+    @media(min-width: 768px) and (max-width: 1200px) {
+        width: 90%;
+    }
+    @media (max-width: 767px) {
+       width: 100%;
+       max-width: 100%
+    }
+  }
+  
+  .common-form, .total-no-renew-suppdue{
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      background: #fff;
+      tr{
+        padding: 5px 5px;
+        td {
+          background-color: #fff;
+          border-bottom: #ccc 2px solid;
+          color: #000;
+          padding: 27px 0 24px 0;
+          border-top: none;
+          border-right: none;
+        }
+        td:nth-child(2) {
+          text-align:right;
+        }
+        &.sum {
+          td:first-child {
+            padding-left: 30px;
+          }
+        }
+      }
+      tr.even, tr.odd, tr:last-child td, tr:last-child td {
+        border-bottom: none;
+      }
+      
+    }
+    
+    input[type="checkbox"]:not(:checked) + label:before, input[type="checkbox"]:checked + label:before {
+      left: 2px;
+    }
+    .next {
+      margin-top: 38px;
+      margin-bottom: 26px;
+      @media(min-width: 768px) and (max-width: 1200px) {
+          margin-bottom: 25px;
+      }
+    }
+    
+  }
+  .renew-questionnaire, .renew-calculator, .total-renew-suppdue {
+    font-size: 1.6rem;
+    width: 66%;
+    @media(min-width: 768px) and (max-width: 1200px) {
+        width:81% !important;
+        
+    }
+    @media (max-width: 767px) {
+        width:100% !important;
+    }
+
+  }
+  .renew-calculator {
+    width: 66.5%;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+    > h3:first-child {
+      margin-bottom: 47px;
+      margin-top: 7px;
+    }
+    #accordion {
+      font: inherit;
+      border-bottom: #ccc 1px solid;
+      @media (max-width: 767px) {
+        font-size: 1.6rem;
+        border-bottom: #ccc 1px solid !important;
+      }
+      @media (max-width: 550px) {
+          margin-left: 0;
+      }
+      .ui-helper-reset {
+        margin: 0;
+        padding-right:5px;
+        width:100%;
+        @media screen and (max-width: 958px) {
+            padding-right: 20px;
+        }
+        @media (max-width: 767px) {
+          padding-right: 5px;
+        }
+      }
+      .ui-accordion-header {
+        padding: 0;
+        border-radius: 0;
+      }
+      h3 {
+        background: #fff;
+        display: inline-block;
+        margin-top: 0;
+        width:100%;
+        outline: none;
+      }
+    }
+    .ui-accordion {
+      font-weight: normal;
+      margin-top: 55px;
+      margin-left: 24px;
+      border-bottom: 2px solid #ccc !important;
+      > h3.ui-state-default {
+        border-top: solid 2px #e1e1e1;
+        clear: both;
+      }
+      @media (max-width: 767px) {
+        margin-left:0;
+      }
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+      border-bottom: none;
+    }
+    .ui-state-default {
+      color: #555;
+    }
+    .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+      color: #212121;
+    }
+    .ui-icon {
+      display: block;
+      text-indent: -99999px;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      top: 40px;
+      left: 0;
+    }
+    .defaultIcon, .selectedIcon {
+      background-image: url(../images/plus-sign.png) !important;
+      height: 20px;
+      width: 20px;
+      margin-top:-14px;
+    }
+    .selectedIcon {
+      background-image: url(../images/minus-sign.png) !important;
+    }
+    .titlelabel {
+      display: inline-table;
+      font-size: 1.6rem;
+      font-weight: normal;
+      line-height: 1.25em;
+      margin: 26px 5px 0px 37px;
+      width: 36.5%;
+      vertical-align: top;
+      color: #555;
+      @media screen and (max-width: 958px) {
+          width: 30%;
+      }
+      @media (max-width: 767px) {
+        text-align: left;
+        width: 50%;
+        float: left;
+        display: block;
+        margin: 0;
+        padding: 26px 0 0 37px;
+      }
+      @media (max-width: 550px) {
+        font-size: 16px !important;
+      }
+      @media (max-width: 480px) {
+          width: 40% !important;
+      }
+    }
+    .inputpersons {
+      display: inline-table;
+      text-align: left;
+      margin: 6px 0 10px;
+      width: 54.6%;
+      @media (max-width:767px){
+        text-align: right;
+        width: 50%;
+        float: right;
+        display: block;
+        margin: 0;
+      }
+      label {
+        display: block;
+        font-family:'architype-bold', Arial, sans-serif;
+        margin-bottom:0px !important;
+        @media (max-width: 767px) {
+           display: inline-block;
+           margin-top: 22px;
+        }
+        @media (max-width: 550px) {
+            font-size: 16px !important;
+            float: none;
+            display: block;
+            margin-bottom: 0;
+        }
+        @media (max-width: 480px) {
+            margin: 0 !important;
+        }
+      }
+      input[type="text"]:not(.date-clear) {
+        width: 45px !important;
+        margin: 4px 0 0 5px;
+        border: solid 1px #d1d2d3;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        @media (max-width: 550px) {
+            float: none;
+        }
+      }
+      label {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: bold;
+        color: #000;
+      }
+
+      .form-item {
+        margin-top: 0;
+        text-align:center;
+        @media (max-width: 767px) {
+          text-align:right;
+          margin-top:18px;
+        }
+      }
+    }
+    
+    .next {
+      margin-bottom: 2px;
+    }
+    .previous-link {
+      font-size: 14px;
+      @media(max-width: 767px) {
+        font-size: 20px;
+      }
+    }
+    
+    .form-item-text-fields {
+      display: inline-block;
+      width: 130px;
+      margin-bottom: 0;
+       @media(max-width: 767px) {
+          width: 100%;
+       }
+    }
+    .totals{
+      &.padding-total-top {
+        margin: 10px 0 0 0;
+          @media(max-width: 767px) {
+            float: none;
+            display: block;
+            margin-top: 20px;
+          }
+        }
+      }
+  }
+  label {
+    font-weight: normal;
+  }
+  .read-only-block-previous-link,  #goback-link-questionnare-section, #startoverbtn {
+    margin-top: 22px;
+  }
+  .form-item-questionnaire >label, #goback, #startoverbtn{
+    @media(max-width: 767px) {
+      font-size: 20px;
+    }
+  }
+  .questionnaire-userform {
+    margin-top: 14px;
+    margin-bottom: 10px;
+  }
+  .owner-detail {
+    padding-left: 46px;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  @media(min-width: 628px) and (max-width: 767px) {
+    .membership-button-container {
+      padding: 0 10px;
+    }
+    .aia-progress-one-step {
+      margin: 0 10px!important;
+      padding-bottom: 15px;
+    }
+    .aia-progress-bar-one-step {
+      margin-top: 90px;
+    }
+  }
+
+}
+
+#main-content{
+  &.page-renew-membership-dues-page{
+    .sign-up-subheading{
+      margin: 8px 0;
+      .sign-up-subheading{
+        margin-top: 7px;
+        margin-bottom: 2px;
+      }
+      .total-no-renew-suppdue{
+        .sign-up-subheading{
+          margin-top: 7px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+    .page-title{
+      margin: 45px 0;
+      @media (max-width: 550px) {
+          font-size: 48px;
+      }
+    }
+    .member-details {
+      margin-top: 20px;
+      padding-bottom: 4px;
+      margin-bottom: 11px;
+      border-bottom: 1px solid #ccc;
+      h2 {
+        font-size: 24px;
+        margin-bottom: 23px;
+        @media (max-width: 767px) {
+          font-size: 3rem;
+        }
+      }
+    }
+    
+.member-align {
+  margin-bottom: 20px;
+  > p{
+    @media (max-width: 767px) {
+      display: inline-block;
+      text-align: right;
+      margin-bottom: 0 !important;
+      font-size: 20px;
+      width: 45%;
+      &:first-child {
+        text-align: left;
+        width: 52%;
+      }
+      }
+  }
+}
+.tax-deductibles-block {
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  border-top: 0;
+  padding-bottom: 28px;
+  .result-wrapper {
+    .result {
+      div {
+        padding-bottom: 13px;
+        &:last-child {
+          padding-bottom: 0px;
+        }
+      }
+    }
+  }
+}
+
+.need-help {
+  padding-top: 4px;
+  padding-bottom: 14px;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  .body {
+    margin-top: 2px;
+  }
+}
+
+.disclosures {
+  padding-top: 4px;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  h3 {
+    margin-bottom: 17px;
+  }
+}
+
+#sidebar {
+  margin-bottom: 64px;
+  @media (max-width: 1023px) and (min-width: 768px) {
+      margin-top: 166px !important;
+  }
+
+
+
+  }
+}
+
+#edit-questionnaire{
+  input[type="radio"]:not(old) + label {
+    padding-left: 44px;
+  }
+  input[type="radio"]:checked:not(old) + label {
+    
+  }
+}
+
+.architect-sublabel {
+  color: #000 !important;
+    @media (max-width: 550px) {
+      font-size: 16px !important;
+    }
+}
+.totals {
+  display: inline-block;
+  float: right;
+  padding: 8px 0px 0px 0;
+  width: auto;
+  transition: all 0.5s ease;
+  @media (max-width: 550px) {
+      font-size: 16px !important;
+  }
+}
+
+
+.membership-dues-page{
+  .renew-calculator{
+    .ui-accordion{
+      .ui-accordion-header{
+        .ui-accordion-header-icon {
+          left: 0px;
+        }
+      }
+    }
+  }
+}
+.ui-widget-content {
+  border:none !important;
+}
+.ui-accordion-header-active{
+  .totals {
+    display:none;
+    transition: all 0.5s ease;
+    @media (max-width: 767px) {
+      .padding-total-top {
+        display: none;
+      }
+    }
+  }
+}
+.ui-accordion-content-active{
+  .totals {
+    margin-top:0;
+    padding-top:0;
+    @media (max-width: 767px) {
+       margin-top: 4px;
+       font-weight: 600;
+    }
+    @media (max-width: 550px) {
+        display: block;
+        margin-top: 15px;
+    }
+  }
+}
+span{
+  &.membership-value {
+    padding: 0px 40px 0 8px;
+    @media(min-width: 768px) and (max-width: 1200px) {
+        padding: 0px 20px 0 8px;
+    }
+    @media (max-width: 550px) {
+        font-size: 16px !important;
+        padding: 0 10px;
+    }
+  }
+}
+.totalnum {
+  float: right;
+  text-align: right;
+  width: auto;
+  margin-left: 15px;
+}
+#suppdues_totalamount {
+  display: block;
+  float: right;
+  text-align: right;
+  padding-right: 4px;
+}
+.renew-calculator{
+  .totaldues {
+    color: #000;
+    font-weight: normal;
+    line-height: 25px;
+    margin-bottom: 29px;
+    padding: 20px 0 32px 60px;
+    @media(max-width: 767px) {
+      margin: 20px 0px 0 30px;
+      border-bottom: solid 1px #e1e1e1;
+      padding: 20px 0 40px;
+    }
+  }
+  
+}
+
+.renew-questionnaire, .renew-calculator{
+  > h3:first-child{
+    margin-bottom: 45px;
+    margin-top: 8px;
+  }
+  @media(max-width: 767px) {
+    font-size: 20px;
+  }
+}
+#questionnaire-wrapper {
+  margin: 50px 0 29px 0;
+  padding-left: 14px;
+  @media (max-width: 767px) {
+       padding-left: 0;
+  }
+}
+
+.questionnaire-userform{
+  &.owner-detail{
+     label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: 12px;
+      margin-top: 0px;
+    }
+  }
+  .form-item-membername {
+    margin-bottom: 23px !important;
+    label {
+      margin-top: 6px;
+    }
+  }
+   input[type="text"]{
+    display: block;
+    width: 560px;
+    max-width: 100%;
+    border: solid 1px #d1d2d3;
+  }
+}
+}
+#error-container {
+        display: none;
+        label {
+            color: #a94442 !important;
+            font-weight: bold !important;
+        }
+    }
+    
+    .footer-btn-container {
+        @media (max-width: 767px) {
+            padding: 0 10px;
+            input[type="submit"], input[type="button"] {
+                margin-bottom: 0px !important;
+            }
+        }
+    }
+    
+    .membership-dues-container {
+    @media (max-width: 767px) {
+        font-size: 16px !important;
+    }
+}
+#membership-value {
+  @media (max-width: 550px) {
+    float: none;
+    padding-right: 0;
+  }  
+}
+
+.form-item {
+  margin-bottom: 1em;
+  margin-top: 2px;
+}

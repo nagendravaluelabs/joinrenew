@@ -1,0 +1,63 @@
+<div id="content-wrap">
+  <h1 class="page-title">Let’s get started</h1>              
+  <div class="content">
+    <div class="renew-now row">
+      <div class="right-view col-sm-6">      
+        <div class="text">
+          <h3  class="left-view-heading">I have no changes to my membership</h3>
+        </div>
+        <form class="common-form" action="verify-personal-contact-info.html" method="post" accept-charset="UTF-8">
+          <div class="actions">
+            <div class="link-to-button ">
+              {{#link-to 'primary-information' id="edit-next"}}Renew online now{{/link-to}}
+            </div>
+            <div class="clearfix"></div>
+            <p class="mail-renewal">
+              <a target="_blank" href="{{renewMailLink}}" style="{{dipslayFlag}}">>Or mail in your renewal</a>
+            </p> 
+          </div>
+        </form>
+      </div>
+      <div class="left-view col-sm-6">     
+        <div class="subhead">
+          <h3 class="left-view-heading">I have changes to my membership</h3>
+          <div class="chapter">
+            <p>Submit one of the forms below.</p>
+            <p>Newly licensed? <a href="{{changeMembershipLink}}" target="_blank">Associate to Architect form</a></p>
+            <p>Need to change your chapter? <a href="{{changeChapterLink}}" target="_blank" >Chapter transfer form</a></p>
+          </div> 
+        </div>
+        {{#if address}}
+          <div class="subhead subhead-second">
+            <h3 class="left-view-heading">Need additional help? </h3>  
+            <div class="chapter">
+              <p>Contact your chapter:</p>
+              <address class="text address-indent">
+                <p class="chapter-name"> {{address.chaptername}}</p>
+                <p>{{address.address1}}</p>
+                <p>{{address.city}}</p>
+                <p>{{address.state}},{{address.postalcode}}</p>
+                <p>Email: <a target="_top" href="mailto:zzsteve@aialosangeles.orgzz" class="email">{{address.email}}</a></p>
+                <p class="chapter-indent">Or contact AIA national:</p>
+                <p>1 (800)242-3837 (Option 2)</p>
+                <p><a href="mailto:zzinfocentral@aia.orgzz" target="_top">zzinfocentral@aia.orgzz</a></p>
+              </address>  
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div> 
+</div> 
+
+{{#if addressData.data.chapter.local}}
+
+{{else}}
+  {{#if addressData.data.chapter.state}}
+  
+  {{else}}
+    {{#if addressData.data.chapter.national}}
+    
+    {{/if}}
+  {{/if}}
+{{/if}}

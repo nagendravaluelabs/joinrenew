@@ -1,0 +1,76 @@
+.navbar-custom {
+  background: $header-bg-color;
+  font-family: $header-font-family;
+  font-size: $header-font-size;
+  color: $header-font-color;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 0px;
+  @include mq(xs) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 150;
+  }
+  .no-padding-right {
+    padding-right: 0;
+  }
+  &.navbar {
+    .navbar-brand {
+      height: auto;
+      padding: 0 0 3px 0;
+      margin-left: 0px;
+      img {
+        height: $header-logo-height;
+        @include mq(xs) {
+          height: 51px;
+          margin-left: 5px;
+        }
+      }
+    }
+    .navbar-toggle {
+      border: 1px solid #FFF;
+      border-radius: 0;
+      .icon-bar {
+        background: #FFF;
+      }
+    }
+    .navbar-nav {
+      > li {
+        > a {
+          color: $header-font-color;
+          padding: $header-menu-padding;
+          text-decoration: none;
+          position: relative;
+          &:hover,
+          &:focus {
+            background: rgba(0,0,0,0);
+            @include mq(xs) {
+              background: rgba(0,0,0,0.1);
+            }
+          }
+          @include mq(xs) {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 1px;
+          }
+        }
+        &.active {
+          > a {
+            &:hover,
+            &:focus {
+              background: rgba(0,0,0,0);
+              @include mq(xs) {
+                background: rgba(0,0,0,0.1);
+              }
+            }
+          }
+        }
+      }
+      @include mq(xs) {
+        padding-right: 10px;
+      }
+    }
+  }
+}
