@@ -21,7 +21,7 @@ install:
   - bower install
 
 script:
-  - npm help
+  - npm test
 
 deploy:
   - provider: script
