@@ -5,14 +5,18 @@ export default Ember.Controller.extend({
         debitPayment: true,
         echeckPayment: false,
         insallmentsPayment: false,
-        subTotal: function() {
-          var model = this.get("model");
+        subTotal: 0,
+        subTotalObserves: function() {
+          var primaryData = this.get("primaryData");
           var subTotal = 0;
-          $.map(model.payments, function(payment, v) {
-            subTotal += parseFloat(payment.proRated);
-          });
-          return parseFloat(subTotal, 2);
-        }.property(),
+          if(primaryData.data != "undefined" && primaryData.data != "") {
+            $.map(primaryData.data.invoice.dues, function(payment, v) {
+              console.log(payment)
+              subTotal += parseFloat(payment.due);
+            });
+            this.set("subTotal", parseFloat(subTotal, 2));
+          }
+        }.observes('primaryData.data'),
         updatePaymentType: function(type) {
           if(type === "Debit/Credit Card") {
             this.set("debitPayment", true);
