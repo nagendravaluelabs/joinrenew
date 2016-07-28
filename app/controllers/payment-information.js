@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
           var subTotal = 0;
           if(primaryData.data != "undefined" && primaryData.data != "") {
             $.map(primaryData.data.invoice.dues, function(payment, v) {
-              console.log(payment)
               subTotal += parseFloat(payment.due);
             });
             this.set("subTotal", parseFloat(subTotal, 2));

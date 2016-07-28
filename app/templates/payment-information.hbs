@@ -21,7 +21,7 @@
             <span class="membership">
 		<!-- 	<strong class="member-role mobile-view">{{model.role}}</strong> -->
               <span class="membership-type">
-                <span class="membership-total">${{subTotal}}</span></span>
+                <span class="membership-total">${{format-currency subTotal}}</span></span>
               </span>
           </h3>
           <div class="newaiamembership">
@@ -31,21 +31,21 @@
                 
                   <tr>
                     <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
-                    <td>${{primaryData.data.invoice.dues.national.due}}</td>
+                    <td>${{format-currency primaryData.data.invoice.dues.national.due}}</td>
                   </tr>
                <tr>
                     <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
-                    <td>${{primaryData.data.invoice.dues.state.due}}</td>
+                    <td>${{format-currency primaryData.data.invoice.dues.state.due}}</td>
                   </tr>
                    <tr>
                      <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
-                    <td>${{primaryData.data.invoice.dues.local.due}}</td>
+                    <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
                   </tr>
                   
                   <tr class="sum">
                     <td class="title">Subtotal due</td>
                     
-                    <td class="due-total">${{subTotal}}</td>
+                    <td class="due-total">${{format-currency subTotal}}</td>
                   </tr> 
                   
                 </tbody>
@@ -55,13 +55,14 @@
         </div>
         <div id="accordion_bottom">
           <div class="total_label">Total due</div>
-          <div id="paymentdue" class="paymentdue">${{subTotal}}</div>
+          <div id="paymentdue" class="paymentdue">${{format-currency subTotal}}</div>
         </div>
       </div>
     </div>
     
     <div class="payment_method">
       <h3>How do you want to pay?<span class="required" aria-required="true">*</span></h3>
+
       <ul class="no-style">
       	<li>
           <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
@@ -89,10 +90,10 @@
             <div id="installmentnumber">
               Pay my dues in
               <select class="select-installments form-select" id="select-installments">
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+                {{#each (for 3 primaryData.data.invoice.maxinstallments 1) as |installment|}}
+                  <option value="{{installment}}">{{installment}}</option>
+                {{/each}}
+              </select>              
               <label for="select-installments">installments</label>
             </div>
             <div id="firstinstallment">Total for first installment: <span>$97.93</span>
