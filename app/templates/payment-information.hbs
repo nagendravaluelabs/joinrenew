@@ -87,15 +87,17 @@
       {{#if insallmentsPayment}}
         <div id="installments" class="common-form">
           <div id="installmentsform">
+          {{#if primaryData.data.invoice.maxinstallments}}
             <div id="installmentnumber">
               Pay my dues in
-              <select class="select-installments form-select" id="select-installments">
+              <select class="select-installments form-select" id="select-installments" onchange={{action "install" value="target.value"}}>
                 {{#each (for 3 primaryData.data.invoice.maxinstallments 1) as |installment|}}
                   <option value="{{installment}}">{{installment}}</option>
                 {{/each}}
               </select>              
               <label for="select-installments">installments</label>
             </div>
+            {{/if}}
             <div id="firstinstallment">Total for first installment: <span>$97.93</span>
             <span id="paymentplan_info_but">
               <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
@@ -254,7 +256,7 @@
         <tbody>
           <tr>
             <th scope="row">Member dues</th>
-            <td class="price">$1,165.00</td>
+            <td class="price">${{format-currency subTotal}}</td>
           </tr>
           <tr> 
             <th scope="row">Administrative fees</th>
@@ -262,11 +264,11 @@
           </tr>
           <tr>
             <th scope="row">Total</th>
-            <td class="price">$1,205.00</td>
+            <td class="price">${{format-currency total}}</td>
           </tr>
           <tr>
             <th scope="row">Number of payments</th>
-            <td><div id="num_installments_selected">3</div></td>
+            <td><div id="num_installments_selected">{{installNumber}}</div></td>
           </tr>
         </tbody>
       </table>
@@ -275,18 +277,12 @@
       <div id="payment_tbl">
         <table id="installment_payment_sum_list">
           <tbody>
-            <tr class="installments_tbl_tr">
-              <td class="install_num">1 </td>
-              <td class="install_payment">$401.66</td>
-            </tr>
-            <tr class="installments_tbl_tr">
-              <td class="install_num">2 </td>
-              <td class="install_payment">$401.66</td>
-            </tr>
-            <tr class="installments_tbl_tr">
-              <td class="install_num">3 </td>
-              <td class="install_payment">$401.66</td>
-            </tr>
+            {{#each (for 1 installNumber 1) as |key|}}
+              <tr class="installments_tbl_tr">
+                <td class="install_num">{{key}} </td>
+                <td class="install_payment">${{format-currency installment}}</td>
+              </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
