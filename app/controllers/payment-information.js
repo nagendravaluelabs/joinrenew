@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
         installNumber:3,
         init: function() {
           this.calculateInstallments(this.get("installNumber"));
+          this.subTotalObserves();
         },
         subTotalObserves: function() {
           var primaryData = this.get("primaryData");
