@@ -1,18 +1,32 @@
-import DS from 'ember-data';
+/*global $*/
+/*global Ember*/
 
 export default Ember.Controller.extend({
    primaryData: Ember.inject.service('user-data'),
         debitPayment: true,
         echeckPayment: false,
         insallmentsPayment: false,
-        subTotal: function() {
-          var model = this.get("model");
+        subTotal: 0,
+        total :0,
+        installNumber:3,
+        init: function() {
+          this.calculateInstallments(this.get("installNumber"));
+          this.subTotalObserves();
+        },
+        subTotalObserves: function() {
+          var primaryData = this.get("primaryData");
           var subTotal = 0;
-          $.map(model.payments, function(payment, v) {
-            subTotal += parseFloat(payment.proRated);
-          });
-          return parseFloat(subTotal, 2);
-        }.property(),
+          var total = 0;
+          if(primaryData.data !== "undefined" && primaryData.data !== "") {
+            $.map(primaryData.data.invoice.dues, function(payment) {
+              subTotal += parseFloat(payment.due);
+              total  = subTotal + 40;
+            });
+            this.set("subTotal", parseFloat(subTotal, 2));
+            this.set("total", parseFloat(total, 2));
+           
+          }
+        }.observes('primaryData.data'),
         updatePaymentType: function(type) {
           if(type === "Debit/Credit Card") {
             this.set("debitPayment", true);
@@ -127,8 +141,21 @@ export default Ember.Controller.extend({
             
           } 
         },
-            
+        calculateInstallmentsObserves: function() {
+          this.calculateInstallments(this.get("installNumber"));
+        }.observes("total"),
+        calculateInstallments: function(value) {
+          var total = this.get("total");
+          var installment;
+          this.set('installNumber',value);
+          var installNumber = value;
+          installment = parseFloat(total/installNumber);
+          this.set("installment", parseFloat(installment, 2));
+        },
         actions: {
+          install : function(value){
+            this.calculateInstallments(value);
+          },
           updatePaymentType: function(type) {
             this.updatePaymentType(type);
           },
@@ -138,8 +165,10 @@ export default Ember.Controller.extend({
           },
           callValidations: function() {
             this.validatePaymentInfo();
-            if(this.get("insallmentsPayment"))
+            if(this.get("insallmentsPayment")){
               this.validateInstallmentAgreeInfo();
+            }
+              
           },
           validatePaymentElectronicInfo: function () {
                   var validate;

@@ -1,7 +1,7 @@
 import Ember from "ember";
 import rememberScrollMixin from "../mixins/remember-scroll";
 var rememberScroll = Ember.Mixin.create(rememberScrollMixin, {
-  render: function(controller, model) {
+  render: function() {
     this._super();
     this.scrollToTop();
   },

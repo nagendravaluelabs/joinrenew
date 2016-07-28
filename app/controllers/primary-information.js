@@ -1,8 +1,4 @@
-/*jslint es6, this*/
-import DS from 'ember-data';
 import Ember from 'ember';
-const {$} = Ember;
-
 export default Ember.Controller.extend({
     editContactInfo: false,
     primaryData: Ember.inject.service('user-data'),
@@ -17,14 +13,14 @@ export default Ember.Controller.extend({
       var primaryData, personalData, name, primaryAddress, userData;
       userData = [];
       primaryData = this.get("primaryData");
-      if(primaryData.data != "undefined" && primaryData.data != "") {
+      if(primaryData.data !== "undefined" && primaryData.data !== "") {
         personalData = primaryData.data.personal;
         name = personalData.prefix + " " + personalData.firstname + " " + personalData.middlename + " " + personalData.lastname + " " + personalData.suffix;
         var index = userData.length;
         userData[index] = {};
         userData[index] = {"title": "", "value": name, "class": "full-name"};
-        if(typeof personalData.phone != "undefined") {
-          if(typeof personalData.phone.home != "undefined" && personalData.phone.home.value!="") {
+        if(typeof personalData.phone !== "undefined") {
+          if(typeof personalData.phone.home !== "undefined" && personalData.phone.home.value!=="") {
             index++;
             userData[index] = {};
             userData[index] = {"title": "Home phone", "value": personalData.phone.home.value, "class": "home-phone"};
@@ -32,7 +28,7 @@ export default Ember.Controller.extend({
               userData[index].isPrimary = true;
             }
           }
-          if(typeof personalData.phone.mobile !="undefined" && personalData.phone.mobile.value!="") {
+          if(typeof personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
             index++;
             userData[index] = {};
             userData[index] = {"title": "Mobile phone", "value": personalData.phone.mobile.value, "class": "mobile-phone"};
@@ -40,7 +36,7 @@ export default Ember.Controller.extend({
               userData[index].isPrimary = true;
             }
           }
-          if(typeof personalData.phone.directoffice != "undefined" && personalData.phone.directoffice.value!="") {
+          if(typeof personalData.phone.directoffice !== "undefined" && personalData.phone.directoffice.value!=="") {
             index++;
             userData[index] = {};
             userData[index] = {"title": "Work phone", "value": personalData.phone.directoffice.value, "class": "work-phone"};
@@ -50,11 +46,11 @@ export default Ember.Controller.extend({
           }
         }
         
-        if(typeof personalData.address != "undefined") {
+        if(typeof personalData.address !== "undefined") {
           index++;
           userData[index] = {};
           primaryAddress=[];
-          if(personalData.address.primary == "home") {
+          if(personalData.address.primary === "home") {
             primaryAddress[0]= personalData.address.home.line1;
             primaryAddress[1]= personalData.address.home.line2;
             primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;

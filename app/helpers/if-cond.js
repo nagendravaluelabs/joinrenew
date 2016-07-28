@@ -3,11 +3,11 @@ import Ember from 'ember';
 export function ifCond(params) {
   switch (params[2]) {
     case '==':
-      return (params[0] == params[1]);
+      return (params[0] === params[1]);
     case '===':
       return (params[0] === params[1]);
     case '!=':
-      return (params[0] != params[1]);
+      return (params[0] !== params[1]);
     case '!==':
       return (params[0] !== params[1]);
     case '<':
@@ -23,7 +23,7 @@ export function ifCond(params) {
     case '||':
       return (params[0] || params[1]);
     case '%':
-      return (params[0] % params[1] == 0) ? true : false;
+      return (params[0] % params[1] === 0) ? true : false;
     default:
       return false;
   }

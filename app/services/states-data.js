@@ -1,3 +1,4 @@
+/*global $*/
 import Ember from 'ember';
 import ENV from '../config/environment';
 export default Ember.Service.extend({
@@ -8,6 +9,6 @@ export default Ember.Service.extend({
     $('.ajax-spinner').show();
     Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
       self.set("data", data);
-    })    
+    }); 
   }
 });

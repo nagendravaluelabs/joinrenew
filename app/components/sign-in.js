@@ -1,3 +1,4 @@
+/*global $*/
 import Ember from 'ember';
 
 export default Ember.Component.extend({
@@ -21,10 +22,10 @@ export default Ember.Component.extend({
           signInEmailAddress:{required: "Email address is required."},
           currentPassword:{required: "Password is required."}
         },
-        invalidHandler: function (event, validator) {
+        invalidHandler: function () {
           
         }
-      })
+      });
       if(signIn.form()) {
         $('#login-box').dialog('close');
         this.get('router').transitionTo('renew-verify-membership');
