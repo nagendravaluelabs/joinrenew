@@ -7,7 +7,7 @@ export default Ember.Controller.extend(rememberScroll, {
     isTotalRenew: false,
     isDuesCalculator: false,
     duesData: Ember.inject.service('user-data'),
-    updateDuesPage: function (renew, questionnaire, total, dues, event) {
+    updateDuesPage: function (renew, questionnaire, total, dues) {
         "use strict";
         this.set("isRenewSummary", renew);
         this.set("isQuestionnarie", questionnaire);
@@ -28,14 +28,14 @@ export default Ember.Controller.extend(rememberScroll, {
             });
         });
     }.observes('isDuesCalculator'),
-    init: function() {
+    init: function () {
       this.totalDuesFunc();
       this.hasSupplementalDues();
     },
     supplementalDuesTotal: 0,
     supplementalTotalDues: 0,
     totalDues: 0,
-    hasSupplementalDues: function() {
+    hasSupplementalDues: function () {
       var duesData = this.get("duesData");
       if(duesData.data !== "undefined" && duesData.data !== "") {
         if(duesData.data.invoice.issupplementaldues === 0) {
@@ -79,11 +79,11 @@ export default Ember.Controller.extend(rememberScroll, {
       return list;
     }.property(),
     actions: {
-        questionnaireMembershipduesNext: function (event) {
+        questionnaireMembershipduesNext: function () {
             "use strict";
-            this.updateDuesPage(false, true, false, false, event);
+            this.updateDuesPage(false, true, false, false);
         },
-        membershipduesNext: function (event) {
+        membershipduesNext: function () {
             "use strict";
             var isDuesCalculator, isQuestionnarie, questionnaire;
             isDuesCalculator = this.get("isDuesCalculator");
@@ -95,7 +95,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 $('input[name="questionnaire"]').removeClass("error");
                 $('input[name="questionnaire"]').off("change");
                 if (questionnaire === 1) {
-                    this.updateDuesPage(false, false, true, false, event);
+                    this.updateDuesPage(false, false, true, false);
                 } else if (questionnaire === 2) {
                       var validate;
                       validate = $("#questionnaireUserform").validate({
@@ -122,10 +122,10 @@ export default Ember.Controller.extend(rememberScroll, {
                           }
                       });
                       if(validate.form()) {
-                          this.updateDuesPage(false, false, true, false, event);
+                          this.updateDuesPage(false, false, true, false);
                       }
                 } else {
-                    this.updateDuesPage(false, false, false, true, event);
+                    this.updateDuesPage(false, false, false, true);
                 }
               } else {
                 $("#error-container").html('<label class="error">Please select an option from the questionnaire</label>').show();
@@ -142,20 +142,20 @@ export default Ember.Controller.extend(rememberScroll, {
                   errorLabelContainer : "#error-container"
                 });
                 if(validateDuesCalc.form()) {
-                    this.updateDuesPage(false, false, true, false, event);
+                    this.updateDuesPage(false, false, true, false);
                 }
             }
         },
-        membershipduesPrev: function (event) {
+        membershipduesPrev: function () {
             "use strict";
             var isDuesCalculator, isQuestionnarie, isTotalRenew;
             isDuesCalculator = this.get("isDuesCalculator");
             isTotalRenew = this.get("isTotalRenew");
             isQuestionnarie = this.get("isQuestionnarie");
             if (isQuestionnarie) {
-                this.updateDuesPage(true, false, false, false, event);
+                this.updateDuesPage(true, false, false, false);
             } else if (isDuesCalculator || isTotalRenew) {
-                this.updateDuesPage(false, true, false, false, event);
+                this.updateDuesPage(false, true, false, false);
             }
             this.set("supplementalDuesTotal", 0);
             return false;
