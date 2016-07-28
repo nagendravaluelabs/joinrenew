@@ -29,6 +29,7 @@ export default Ember.Controller.extend(rememberScroll, {
         });
     }.observes('isDuesCalculator'),
     init: function () {
+        "use strict";
       this.totalDuesFunc();
       this.hasSupplementalDues();
     },
@@ -36,47 +37,54 @@ export default Ember.Controller.extend(rememberScroll, {
     supplementalTotalDues: 0,
     totalDues: 0,
     hasSupplementalDues: function () {
-      var duesData = this.get("duesData");
-      if(duesData.data !== "undefined" && duesData.data !== "") {
-        if(duesData.data.invoice.issupplementaldues === 0) {
-          this.updateDuesPage(false, false, true, false);
+        "use strict";
+        var duesData = this.get("duesData");
+        if (duesData.data !== "undefined" && duesData.data !== "") {
+            if (duesData.data.invoice.issupplementaldues === 0) {
+                this.updateDuesPage(false, false, true, false);
+            }
         }
-      }
     },
-    hasSupplementalDuesObserver: function() {
-      this.hasSupplementalDues();
+    hasSupplementalDuesObserver: function () {
+        "use strict";
+        this.hasSupplementalDues();
     }.observes('duesData.data'),
-    totalDuesObserver: function() {
-      this.totalDuesFunc();
+    totalDuesObserver: function () {
+        "use strict";
+        this.totalDuesFunc();
     }.observes('duesData.data'),
-    totalDuesFunc: function() {
-      var totalDues=0;
-      var duesData = this.get("duesData");
-      if(duesData.data !== "undefined" && duesData.data !== "") {
-        if(typeof duesData.data.invoice !== "undefined") {
-          Ember.$.each(duesData.data.invoice.dues, function(key, value){
-            totalDues += parseInt(value.due);
-          });
-          this.set("totalDues", totalDues.toFixed(2));
+    totalDuesFunc: function () {
+        "use strict";
+        var totalDues = 0;
+        var duesData = this.get("duesData");
+        if (duesData.data !== "undefined" && duesData.data !== "") {
+            if (typeof duesData.data.invoice !== "undefined") {
+                Ember.$.each(duesData.data.invoice.dues, function (key, value) {
+                    totalDues += parseInt(value.due);
+                });
+                this.set("totalDues", totalDues.toFixed(2));
+            }
         }
-      }
     },
-    supTotalDuesObserver: function() {
-      this.supTotalDuesFunc();
+    supTotalDuesObserver: function () {
+        "use strict";
+        this.supTotalDuesFunc();
     }.observes('totalDues', 'supplementalDuesTotal'),
-    supTotalDuesFunc: function() {
-      var totalDues=this.get("totalDues");
-      var supplementalDuesTotal = this.get("supplementalDuesTotal");
-      this.set("supplementalTotalDues", parseInt(supplementalDuesTotal) + parseInt(totalDues) );
+    supTotalDuesFunc: function () {
+        "use strict";
+        var totalDues = this.get("totalDues");
+        var supplementalDuesTotal = this.get("supplementalDuesTotal");
+        this.set("supplementalTotalDues", parseInt(supplementalDuesTotal) + parseInt(totalDues));
     },
-    supplementalList: function() {
-      var list = [];
-      list[list.length] = {"id": "nonmember", "text": "Non AIA Member architects"};
-      list[list.length] = {"id": "member", "text": "AIA Member architects", "isRequired" : true};
-      list[list.length] = {"id": "associate", "text": "AIA Associates"};
-      list[list.length] = {"id": "technical", "text": "Technical staff"};
-      list[list.length] = {"id": "other", "text": "Other staff"};
-      return list;
+    supplementalList: function () {
+        "use strict";
+        var list = [];
+        list[list.length] = {"id": "nonmember", "text": "Non AIA Member architects"};
+        list[list.length] = {"id": "member", "text": "AIA Member architects", "isRequired": true};
+        list[list.length] = {"id": "associate", "text": "AIA Associates"};
+        list[list.length] = {"id": "technical", "text": "Technical staff"};
+        list[list.length] = {"id": "other", "text": "Other staff"};
+        return list;
     }.property(),
     actions: {
         questionnaireMembershipduesNext: function () {
@@ -89,62 +97,62 @@ export default Ember.Controller.extend(rememberScroll, {
             isDuesCalculator = this.get("isDuesCalculator");
             isQuestionnarie = this.get("isQuestionnarie");
             if (isQuestionnarie) {
-              questionnaire = parseInt($('input[name="questionnaire"]:checked').val());
-              if(questionnaire){
-                $("#error-container").html('').hide();
-                $('input[name="questionnaire"]').removeClass("error");
-                $('input[name="questionnaire"]').off("change");
-                if (questionnaire === 1) {
-                    this.updateDuesPage(false, false, true, false);
-                } else if (questionnaire === 2) {
-                      var validate;
-                      validate = $("#questionnaireUserform").validate({
-                          rules: {
-                            questionnaire_membername: {
-                              required: function () {
-                                  return $("#edit-questionnaire-2").is(":checked");
-                              },
-                              lettersonly: true
+                questionnaire = parseInt($('input[name="questionnaire"]:checked').val());
+                if (questionnaire) {
+                    $("#error-container").html('').hide();
+                    $('input[name="questionnaire"]').removeClass("error");
+                    $('input[name="questionnaire"]').off("change");
+                    if (questionnaire === 1) {
+                        this.updateDuesPage(false, false, true, false);
+                    } else if (questionnaire === 2) {
+                        var validate;
+                        validate = $("#questionnaireUserform").validate({
+                            rules: {
+                                questionnaire_membername: {
+                                    required: function () {
+                                        return $("#edit-questionnaire-2").is(":checked");
+                                    },
+                                    lettersonly: true
+                                },
+                                questionnaire_memberid: {
+                                    required: function () {
+                                        return $("#edit-questionnaire-2").is(":checked");
+                                    },
+                                    digits: true
+                                }
                             },
-                            questionnaire_memberid: {
-                              required: function () {
-                                  return $("#edit-questionnaire-2").is(":checked");
-                              },
-                              digits: true
+                            messages: {
+                                questionnaire_membername: "Please enter Member name",
+                                questionnaire_memberid: {
+                                    required: "Please enter Member ID",
+                                    digits: "Please enter only numerics"
+                                }
                             }
-                          },
-                          messages: {
-                            questionnaire_membername: "Please enter Member name",
-                            questionnaire_memberid: {
-                              required: "Please enter Member ID",
-                              digits: "Please enter only numerics"
-                            }
-                          }
-                      });
-                      if(validate.form()) {
-                          this.updateDuesPage(false, false, true, false);
-                      }
+                        });
+                        if (validate.form()) {
+                            this.updateDuesPage(false, false, true, false);
+                        }
+                    } else {
+                        this.updateDuesPage(false, false, false, true);
+                    }
                 } else {
-                    this.updateDuesPage(false, false, false, true);
+                    $("#error-container").html('<label class="error">Please select an option from the questionnaire</label>').show();
+                    $('input[name="questionnaire"]').addClass("error");
+                    $("html, body").animate({scrollTop: ($('input[name="questionnaire"]').offset().top - 50) + "px"}, 1000);
+                    $('input[name="questionnaire"]').on("change", function () {
+                        $("#error-container").html('').hide();
+                        $('input[name="questionnaire"]').removeClass("error");
+                    });
                 }
-              } else {
-                $("#error-container").html('<label class="error">Please select an option from the questionnaire</label>').show();
-                $('input[name="questionnaire"]').addClass("error");
-                $("html, body").animate({scrollTop: ($('input[name="questionnaire"]').offset().top-50)+"px"}, 1000);
-                $('input[name="questionnaire"]').on("change", function(){
-                  $("#error-container").html('').hide();
-                  $('input[name="questionnaire"]').removeClass("error");
-                });
-              }
             } else if (isDuesCalculator) {
                 var validateDuesCalc;
                 validateDuesCalc = $("#dues-calculator").validateDuesCalc({
-                  errorLabelContainer : "#error-container"
+                    errorLabelContainer: "#error-container"
                 });
-                if(validateDuesCalc.form()) {
+                if (validateDuesCalc.form()) {
                     this.updateDuesPage(false, false, true, false);
                 }
-            }
+              }
         },
         membershipduesPrev: function () {
             "use strict";
@@ -178,14 +186,15 @@ export default Ember.Controller.extend(rememberScroll, {
             this.set("supplementalDuesTotal", suppduesTotal);
         },
         payNow: function () {
+            "use strict";
             var validate;
             validate = $("#form-totalRenew").validate({
-              messages: {
-                licensed_architect: "You must agree to the affidavit"
-              },
-              errorLabelContainer : "#error-container"
+                messages: {
+                  licensed_architect: "You must agree to the affidavit"
+                },
+                errorLabelContainer : "#error-container"
             });
-            if(validate.form()) {
+            if (validate.form()) {
                 this.transitionToRoute('payment-information');
             }
         }
@@ -219,13 +228,13 @@ specialKeys.push(8);   //Backspace
 specialKeys.push(9);   //Tab
 specialKeys.push(144); //Num Lock
   
-$(document).on("keypress", ".few-special-char", function(e){
+$(document).on("keypress", ".few-special-char", function (e){
       "use strict";
       var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
       console.log( "keyCode --- " + keyCode );
       var ret = ( (keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode===61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
-      if(!ret) {
-        if($(this).next("label.error").length===0) {
+      if (!ret) {
+        if ($(this).next("label.error").length===0) {
           $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
         }
       } else {

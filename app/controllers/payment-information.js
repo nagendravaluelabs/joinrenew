@@ -1,4 +1,5 @@
-import DS from 'ember-data';
+/*global $*/
+/*global Ember*/
 
 export default Ember.Controller.extend({
    primaryData: Ember.inject.service('user-data'),
@@ -16,8 +17,8 @@ export default Ember.Controller.extend({
           var primaryData = this.get("primaryData");
           var subTotal = 0;
           var total = 0;
-          if(primaryData.data != "undefined" && primaryData.data != "") {
-            $.map(primaryData.data.invoice.dues, function(payment, v) {
+          if(primaryData.data !== "undefined" && primaryData.data !== "") {
+            $.map(primaryData.data.invoice.dues, function(payment) {
               subTotal += parseFloat(payment.due);
               total  = subTotal + 40;
             });
@@ -164,8 +165,10 @@ export default Ember.Controller.extend({
           },
           callValidations: function() {
             this.validatePaymentInfo();
-            if(this.get("insallmentsPayment"))
+            if(this.get("insallmentsPayment")){
               this.validateInstallmentAgreeInfo();
+            }
+              
           },
           validatePaymentElectronicInfo: function () {
                   var validate;
