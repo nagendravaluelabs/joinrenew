@@ -1,3 +1,5 @@
+/*global jQuery*/
+/*global $*/
 import Ember from 'ember';
 
 export default Ember.Component.extend({
@@ -15,7 +17,7 @@ export default Ember.Component.extend({
         closeText: 'X',
         show: false,
         hide: false,
-        close: function( event, ui ) {
+        close: function() {
           $('#sign-In').validate().resetForm();
         }
       });

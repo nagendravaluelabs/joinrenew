@@ -1,4 +1,4 @@
-/*jslint es6, this*/
+/*global jQuery*/
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
 
@@ -25,7 +25,7 @@ export default Ember.Component.extend(rememberScroll, {
         self = this;
         contactInfo = self.get('personalInfo.personal.phone');
         primaryAddress = self.get('personalInfo');
-        if(typeof primaryAddress.personal!="undefined") {
+        if(typeof primaryAddress.personal!=="undefined") {
           primaryAddress = primaryAddress.personal.address;
           chapterType = primaryAddress.primary.capitalize();
           self.chapterSelection(chapterType);
@@ -248,8 +248,10 @@ export default Ember.Component.extend(rememberScroll, {
             if(validate.form()) {
                 this.get('router').transitionTo('membership-dues');
             } else {
-                if($("#personal-contact").hasClass("hidden"))
-                  this.sendAction("showPersonalInfo");
+                if($("#personal-contact").hasClass("hidden")){
+                   this.sendAction("showPersonalInfo");
+                }
+                 
             }
         },
         addNewOrganization: function () {

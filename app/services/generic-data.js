@@ -1,3 +1,4 @@
+/*global $*/
 import Ember from 'ember';
 import ENV from '../config/environment';
 export default Ember.Service.extend({
@@ -8,11 +9,11 @@ export default Ember.Service.extend({
     $('.ajax-spinner').show();
     Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=generic`).then(function(data){
       self.set("generic", data);
-    })    
+    });    
   },
   updateChosen: function(){
     setTimeout(function(){
       $(".select-chosen").trigger("chosen:updated");
-    },100)
+    },100);
   }.observes("generic")
 });

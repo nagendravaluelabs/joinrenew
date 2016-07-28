@@ -1,4 +1,3 @@
-import DS from 'ember-data';
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
 const {$} = Ember;
@@ -38,8 +37,8 @@ export default Ember.Controller.extend(rememberScroll, {
     totalDues: 0,
     hasSupplementalDues: function() {
       var duesData = this.get("duesData");
-      if(duesData.data != "undefined" && duesData.data != "") {
-        if(duesData.data.invoice.issupplementaldues == 0) {
+      if(duesData.data !== "undefined" && duesData.data !== "") {
+        if(duesData.data.invoice.issupplementaldues === 0) {
           this.updateDuesPage(false, false, true, false);
         }
       }
@@ -53,8 +52,8 @@ export default Ember.Controller.extend(rememberScroll, {
     totalDuesFunc: function() {
       var totalDues=0;
       var duesData = this.get("duesData");
-      if(duesData.data != "undefined" && duesData.data != "") {
-        if(typeof duesData.data.invoice != "undefined") {
+      if(duesData.data !== "undefined" && duesData.data !== "") {
+        if(typeof duesData.data.invoice !== "undefined") {
           Ember.$.each(duesData.data.invoice.dues, function(key, value){
             totalDues += parseInt(value.due);
           });
@@ -138,11 +137,11 @@ export default Ember.Controller.extend(rememberScroll, {
                 });
               }
             } else if (isDuesCalculator) {
-                var validate;
-                validate = $("#dues-calculator").validate({
+                var validateDuesCalc;
+                validateDuesCalc = $("#dues-calculator").validateDuesCalc({
                   errorLabelContainer : "#error-container"
                 });
-                if(validate.form()) {
+                if(validateDuesCalc.form()) {
                     this.updateDuesPage(false, false, true, false, event);
                 }
             }
@@ -166,9 +165,7 @@ export default Ember.Controller.extend(rememberScroll, {
             var self, value, amount, total, suppduesTotal;
             self = $(e.currentTarget);
             suppduesTotal = 0;
-            value = (self.val() !== '')
-                ? parseInt(self.val())
-                : 0;
+            value = (self.val() !== '') ? parseInt(self.val()) : 0;
             amount = parseInt(self.data("localAmount"));
             total = parseFloat(value * amount).toFixed(2);
             self.closest("h3").find(".totals").find(".totalnum").html("$ " + total);
@@ -217,18 +214,18 @@ $(document).on("keydown", '.numbers-only', function (e) {
     );
 });
 
-var specialKeys = new Array();
+var specialKeys = [];
 specialKeys.push(8);   //Backspace
 specialKeys.push(9);   //Tab
 specialKeys.push(144); //Num Lock
   
 $(document).on("keypress", ".few-special-char", function(e){
       "use strict";
-      var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
-      console.log( "keyCode --- " + keyCode )
-      var ret = ( (keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode==61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+      console.log( "keyCode --- " + keyCode );
+      var ret = ( (keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode===61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
       if(!ret) {
-        if($(this).next("label.error").length==0) {
+        if($(this).next("label.error").length===0) {
           $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
         }
       } else {

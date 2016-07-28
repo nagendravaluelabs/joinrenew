@@ -1,6 +1,4 @@
 import Ember from 'ember';
-const { $ } = Ember;
-
 export default Ember.Component.extend({
   tagName: '',
   genericData: Ember.inject.service('generic-data'),
