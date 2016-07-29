@@ -147,7 +147,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 }
             } else if (isDuesCalculator) {
                 var validateDuesCalc;
-                validateDuesCalc = $("#dues-calculator").validateDuesCalc({
+                validateDuesCalc = $("#dues-calculator").validate({
                     errorLabelContainer: "#error-container"
                 });
                 if (validateDuesCalc.form()) {
