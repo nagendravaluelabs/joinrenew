@@ -1,8 +1,7 @@
-/*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 /*global jQuery*/
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
-
+import ENV from '../config/environment';
 const {$} = Ember;
 jQuery.validator.addMethod("acceptReg", function (value, element, param) {
     "use strict";
@@ -17,10 +16,14 @@ export default Ember.Component.extend(rememberScroll, {
     contactAddressType: "",
     genericData: Ember.inject.service('generic-data'),
     statesData: Ember.inject.service('states-data'),
+    workstates: {},
+    Homestates:{},
     init: function () {
         "use strict";
         this._super(...arguments);
         this.serviceLoad();
+        this.setWorkStateStatus();
+        this.setHomeStateStatus();
     },
     serviceLoad: function () {
         "use strict";
@@ -89,6 +92,40 @@ export default Ember.Component.extend(rememberScroll, {
             self.set('primaryHomeAddress', true);
         }*/
     },
+     setWorkStateStatus: function (value) {
+            "use strict";
+              var self=this;
+              value = "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+            if(value) {
+              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
+                self.set("workstates", data);
+              });
+            } else {
+              self.set("workstates", []);
+            }
+            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+                this.set("workShowState", true);
+            } else {
+                this.set("workShowState", false);
+            }
+        },
+        setHomeStateStatus: function (value) {
+            "use strict";
+            var self=this;
+             value = "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+            if(value) {
+              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
+                self.set("Homestates", data);
+              });
+            } else {
+              self.set("Homestates", []);
+            }
+            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+                this.set("homeShowState", true);
+            } else {
+                this.set("homeShowState", false);
+            }
+        },
     actions: {
         showPersonalInfo: function () {
             "use strict";
@@ -118,6 +155,17 @@ export default Ember.Component.extend(rememberScroll, {
         },
         setWorkStateStatus: function (value) {
             "use strict";
+              var self=this;
+            if(value) {
+              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
+                self.set("workstates", data);
+                setTimeout(function(){
+                  $(".select-chosen").trigger("chosen:updated");
+                },100);
+              });alert(value);
+            } else {
+              self.set("workstates", []);
+            }
             if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
                 this.set("workShowState", true);
             } else {
@@ -126,6 +174,17 @@ export default Ember.Component.extend(rememberScroll, {
         },
         setHomeStateStatus: function (value) {
             "use strict";
+            var self=this;
+            if(value) {
+              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
+                self.set("Homestates", data);
+                setTimeout(function(){
+                  $(".select-chosen").trigger("chosen:updated");
+                },100);
+              });
+            } else {
+              self.set("Homestates", []);
+            }
             if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
                 this.set("homeShowState", true);
             } else {
