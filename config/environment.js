@@ -18,7 +18,7 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || 'https://54.175.120.187/netforum/web/getdata'
+    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || 'http://54.175.120.187/netforum/web/getdata'
 
   };
 

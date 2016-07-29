@@ -9,7 +9,7 @@ export default Ember.Service.extend({
     var self= this;
     self._super(...arguments);
     $('.ajax-spinner').show();
-    $.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=C3EA6EE0-78AD-4FDC-8A3E-AF3162E3098B`).then(function(data){
+    $.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=AF65438E-A745-4477-B32D-DD241B705CC8`).then(function(data){
       self.set("data", data);
     });    
   },
