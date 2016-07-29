@@ -1,3 +1,4 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
 const {$} = Ember;
@@ -13,7 +14,7 @@ export default Ember.Controller.extend(rememberScroll, {
         this.set("isQuestionnarie", questionnaire);
         this.set("isTotalRenew", total);
         this.set("isDuesCalculator", dues);
-        $("#error-container").hide();
+        Ember.$("#error-container").hide();
         this.scrollToTop();
     },
     valueObserver: function () {
@@ -152,7 +153,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 if (validateDuesCalc.form()) {
                     this.updateDuesPage(false, false, true, false);
                 }
-              }
+            }
         },
         membershipduesPrev: function () {
             "use strict";
@@ -190,9 +191,9 @@ export default Ember.Controller.extend(rememberScroll, {
             var validate;
             validate = $("#form-totalRenew").validate({
                 messages: {
-                  licensed_architect: "You must agree to the affidavit"
+                    licensed_architect: "You must agree to the affidavit"
                 },
-                errorLabelContainer : "#error-container"
+                errorLabelContainer: "#error-container"
             });
             if (validate.form()) {
                 this.transitionToRoute('payment-information');
@@ -201,7 +202,8 @@ export default Ember.Controller.extend(rememberScroll, {
     }
 });
 
-$(document).on("change", 'input[name="questionnaire"]', function () {
+Ember.$(document).on("change", 'input[name="questionnaire"]', function () {
+    "use strict";
     if (parseInt($(this).val()) === 2) {
         $(".questionnaire-userform").removeClass("hidden");
     } else {
@@ -209,7 +211,7 @@ $(document).on("change", 'input[name="questionnaire"]', function () {
     }
 });
 
-$(document).on("keydown", '.numbers-only', function (e) {
+Ember.$(document).on("keydown", '.numbers-only', function (e) {
     "use strict";
     var key = e.charCode || e.keyCode || 0;
     return (
@@ -228,17 +230,17 @@ specialKeys.push(8);   //Backspace
 specialKeys.push(9);   //Tab
 specialKeys.push(144); //Num Lock
   
-$(document).on("keypress", ".few-special-char", function (e){
-      "use strict";
-      var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
-      console.log( "keyCode --- " + keyCode );
-      var ret = ( (keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode===61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
-      if (!ret) {
-        if ($(this).next("label.error").length===0) {
-          $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
+$(document).on("keypress", ".few-special-char", function (e) {
+    "use strict";
+    var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+    console.log(keyCode);
+    var ret = ((keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode === 61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
+    if (!ret) {
+        if ($(this).next("label.error").length === 0) {
+            $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
         }
-      } else {
+    } else {
         $(this).next("label.error").remove();
-      }
-      return ret;
+    }
+    return ret;
 });

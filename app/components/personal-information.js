@@ -1,3 +1,4 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 /*global jQuery*/
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";

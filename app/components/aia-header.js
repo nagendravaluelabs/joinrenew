@@ -1,5 +1,7 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 /*global jQuery*/
 /*global $*/
+/*global window */
 import Ember from 'ember';
 
 export default Ember.Component.extend({
