@@ -1,7 +1,12 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
+/*global $*/
+/*global window*/
+
 import Ember from 'ember';
 
 export default Ember.Route.extend({
     activate() {
+      "use strict";
       this.controllerFor("application").set("model.class", "no-sidebars page-sign-up page-sign-up-payment");
       this._super();
       Ember.run.schedule("afterRender", this, function () {
@@ -24,15 +29,16 @@ export default Ember.Route.extend({
           show: false,
           hide: false
         });
-        $(window).resize(function() {
+        $(window).resize(function () {
           $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 500 ? 450 : '90%');
         });
-        $('body').on("click", ".ui-widget-overlay", function() {
+        $('body').on("click", ".ui-widget-overlay", function () {
           $("#paymentplan_extrainfo").dialog("close");
         });
       });
   },
   model(){
+    "use strict";
     return Ember.RSVP.hash({
       steps: [
         {

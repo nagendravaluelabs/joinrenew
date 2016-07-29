@@ -1,10 +1,13 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 import Ember from 'ember';
 
 export default Ember.Route.extend({
 activate() {
+  "use strict";
   this.controllerFor("application").set("model.class","no-sidebars page-sign-up-home");
 },
 model(){
+  "use strict";
   return Ember.RSVP.hash({
     page: {
         "body": "<h1>Join us at<br> the AIA <br></h1><p>No matter where you live, where you practice, or where you are in your career, your AIA membership connects you to top-quality education, critical business and career resources, and a community deeply engaged in promoting the value of architecture.</p>",
