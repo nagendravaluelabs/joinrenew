@@ -1,14 +1,17 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  model: function () {
+    "use strict";
     return {
       class: ""
     };
   },
   actions: {
-    setMainClass: function() {
+    setMainClass: function () {
       //this.set("model", {"class":"hello"});
+      "use strict";
       var model = this.get('controller.model');
       model.class = "hello";
     }

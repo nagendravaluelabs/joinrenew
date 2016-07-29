@@ -1,6 +1,8 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 import Ember from 'ember';
 export default Ember.Route.extend({
 activate() {
+  "use strict";
   this.controllerFor("application").set("model.class","one-sidebar sidebar-first page-renew-membership-dues-page");
   this._super();
   Ember.run.schedule("afterRender", this, function () {
@@ -8,6 +10,7 @@ activate() {
   });
 },
 model(){
+  "use strict";
 return Ember.RSVP.hash({
   steps: [
 	{

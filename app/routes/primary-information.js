@@ -1,10 +1,13 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 import Ember from 'ember';
 
 export default Ember.Route.extend({
   activate() {
+    "use strict";
     this.controllerFor("application").set("model.class","no-sidebars page-primary-info personal-info-component");
   },
   model() {
+    "use strict";
     return Ember.RSVP.hash({
       steps: [
         {
@@ -25,7 +28,8 @@ export default Ember.Route.extend({
       ]
     });
   },
-  setMainClass: function(){
+  setMainClass: function (){
+    "use strict";
     this.send("setMainClass");
   }
 });

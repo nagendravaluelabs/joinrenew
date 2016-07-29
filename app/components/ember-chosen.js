@@ -1,3 +1,4 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 /*global $*/
 import Ember from 'ember';
 import EmberChosenCli from 'ember-cli-chosen/components/ember-chosen';

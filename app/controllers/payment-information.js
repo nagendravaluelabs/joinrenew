@@ -1,3 +1,4 @@
+/*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $*/
 /*global Ember*/
 
@@ -9,16 +10,18 @@ export default Ember.Controller.extend({
         subTotal: 0,
         total :0,
         installNumber:3,
-        init: function() {
-          this.calculateInstallments(this.get("installNumber"));
-          this.subTotalObserves();
+        init: function () {
+            "use strict";
+            this.calculateInstallments(this.get("installNumber"));
+            this.subTotalObserves();
         },
-        subTotalObserves: function() {
+        subTotalObserves: function () {
+          "use strict";
           var primaryData = this.get("primaryData");
           var subTotal = 0;
           var total = 0;
-          if(primaryData.data !== "undefined" && primaryData.data !== "") {
-            $.map(primaryData.data.invoice.dues, function(payment) {
+          if (primaryData.data !== "undefined" && primaryData.data !== "") {
+            $.map(primaryData.data.invoice.dues, function (payment) {
               subTotal += parseFloat(payment.due);
               total  = subTotal + 40;
             });
@@ -28,7 +31,8 @@ export default Ember.Controller.extend({
           }
         }.observes('primaryData.data'),
         updatePaymentType: function(type) {
-          if(type === "Debit/Credit Card") {
+          "use strict";
+          if (type === "Debit/Credit Card") {
             this.set("debitPayment", true);
             this.set("echeckPayment", false);
             this.set("insallmentsPayment", false);
@@ -43,6 +47,7 @@ export default Ember.Controller.extend({
           } 
         },
         validatePaymentInfo: function () {
+            "use strict";
             var validate;
             validate = $("#form-card-payment").validate({
                 rules:{
@@ -68,8 +73,8 @@ export default Ember.Controller.extend({
                      minlength: 3,
                      maxlength: 4
                     },
-                    iagree_terms:{
-                      required: true,
+                    iagree_terms: {
+                      required: true
                     }
                 },
                 messages: {
@@ -82,10 +87,10 @@ export default Ember.Controller.extend({
                       digits: "Please enter a valid credit card number"
                     },
                     cardExpirationMonth: {
-                      required: "Expiration month is required",
+                      required: "Expiration month is required"
                     },
                     cardExpirationYear: {
-                      required: "Expiration year is required",
+                      required: "Expiration year is required"
                     },
                     cardSecurityCode: {
                       required: "Security code is required",
@@ -113,6 +118,7 @@ export default Ember.Controller.extend({
         },
         
         validateInstallmentAgreeInfo: function () {
+        "use strict";
         var validate;
         validate = $("#install-agreement").validate({
             rules:{
@@ -142,9 +148,11 @@ export default Ember.Controller.extend({
           } 
         },
         calculateInstallmentsObserves: function() {
+          "use strict";
           this.calculateInstallments(this.get("installNumber"));
         }.observes("total"),
         calculateInstallments: function(value) {
+          "use strict";
           var total = this.get("total");
           var installment;
           this.set('installNumber',value);
@@ -154,16 +162,20 @@ export default Ember.Controller.extend({
         },
         actions: {
           install : function(value){
+            "use strict";
             this.calculateInstallments(value);
           },
           updatePaymentType: function(type) {
+            "use strict";
             this.updatePaymentType(type);
           },
           showPaymentPlan: function() {
+            "use strict";
             $('#paymentplan_extrainfo').dialog('open');
             return false;
           },
           callValidations: function() {
+            "use strict";
             this.validatePaymentInfo();
             if(this.get("insallmentsPayment")){
               this.validateInstallmentAgreeInfo();
@@ -171,6 +183,7 @@ export default Ember.Controller.extend({
               
           },
           validatePaymentElectronicInfo: function () {
+                  "use strict";
                   var validate;
                   validate = $("#form-electronic-check").validate({
                       rules:{
@@ -186,7 +199,7 @@ export default Ember.Controller.extend({
                              digits: true
                           },
                           check_iagree_terms:{
-                            required: true,
+                            required: true
                           }
                       },
                       messages: {
