@@ -2,12 +2,24 @@
   <h3>Tax deductible percentage</h3>
   <div class="result-wrapper">
     <div class="result">
-      {{#each-in chapters as |key chapter|}}
+       {{#if chapters.national}}
         <div>
-          <label>{{jsStrings chapter.chapterlevel 'capitalize'}}:</label>
-          <span>{{chapter.taxdeductible}}%</span>
+          <label>National:</label>
+          <span>{{chapters.national.taxdeductible}}%</span>
         </div>
-      {{/each-in}}
+		{{/if}}
+		{{#if chapters.state}}
+		<div>
+          <label>State:</label>
+          <span>{{chapters.state.taxdeductible}}%</span>
+        </div>
+		{{/if}}
+		{{#if chapters.local}}
+		<div>
+          <label>Local:</label>
+          <span>{{chapters.local.taxdeductible}}%</span>
+        </div>
+     {{/if}}
     </div>
   </div>
 </div>
