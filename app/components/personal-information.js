@@ -161,7 +161,7 @@ export default Ember.Component.extend(rememberScroll, {
             }
         },
         setWorkStateStatus: function (value) {
-            "use strict";;
+            "use strict";
             this.setWorkStateStatusFn(value);
             /*if(value) {
               Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
