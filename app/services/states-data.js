@@ -4,13 +4,27 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 export default Ember.Service.extend({
   data: [],
-  init: function () {
+  setStateData: function(value, update) {
+    var data = this.get("data");
+    data[value] = update;
+    this.set("data", data);
+  },
+  getStateData: function(value) {
+    var stateData, self;
+    self = this;
+    stateData = self.get("data");
+    if(Ember.get(stateData, value) !== undefined) {
+      return {'type': "data", info: stateData[value]};
+    } else {
+      this.setStateData(value, []);
+      return {'type': "response", info: Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`)};
+    }
+  },
+  updateChosen: function (){
     "use strict";
-    var self= this;
-    self._super(...arguments);
-    $('.ajax-spinner').show();
-    $.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
-      self.set("data", data);
-    }); 
-  }
+    setTimeout(function (){
+      alert();
+      $(".select-chosen").trigger("chosen:updated");
+    },100);
+  }.observes("data")
 });
