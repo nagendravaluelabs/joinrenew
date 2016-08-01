@@ -31,8 +31,8 @@ export default Ember.Controller.extend(rememberScroll, {
     }.observes('isDuesCalculator'),
     init: function () {
         "use strict";
-      this.totalDuesFunc();
-      this.hasSupplementalDues();
+        this.totalDuesFunc();
+        this.hasSupplementalDues();
     },
     supplementalDuesTotal: 0,
     supplementalTotalDues: 0,

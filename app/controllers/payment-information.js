@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
             });
             this.set("subTotal", parseFloat(subTotal, 2));
             this.set("total", parseFloat(total, 2));
-           
+            this.calculateInstallments(this.get("installNumber"));
           }
         }.observes('primaryData.data'),
         updatePaymentType: function(type) {
