@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
         subTotal: 0,
         total :0,
         installNumber:3,
+        installment: 0,
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));
