@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     tagName: '',
     didUpdate: function() {
       setTimeout(function (){
-        $(".select-chosen").trigger("chosen:updated");
+        Ember.$(".select-chosen").trigger("chosen:updated");
       },100);
     }
 });
