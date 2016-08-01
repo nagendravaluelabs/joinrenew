@@ -184,16 +184,7 @@
                     <label for="administrative_area_state">State
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{#ember-chosen id="administrative_area_state" name="administrative_area_state" class="state required form-select select-chosen"}}
-                      <option value="">Select</option>
-                      {{#each Homestates as |state|}}
-                        {{#if (isEqualTo state.statekey (jsStrings (get personalInfo.personal.address 'home.state.key') 'lower'))}}
-                          <option value="{{state.statekey}}" selected>{{state.statename}}</option>
-                        {{else}}
-                          <option value="{{state.statekey}}">{{state.statename}}</option>
-                        {{/if}}
-                      {{/each}}
-                    {{/ember-chosen}}
+                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates}}
                   </li>
                 {{/if}}
                 
@@ -340,7 +331,7 @@
               </li>
               <li>
                  <label for="contact_{{type}}_country">Country</label>
-                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings (get personalInfo.personal.address 'home.country.key') 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' value="target.value"}}
+                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' value="target.value"}}
               </li>
               <li>
                 <label for="org_company_address1">Address line 1
@@ -367,16 +358,7 @@
                   <label for="work_administrative_state">State
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                   {{#ember-chosen id="administrative_area_state" name="administrative_area_state" class="state required form-select select-chosen"}}
-                      <option value="">Select</option>
-                      {{#each workstates as |state|}}
-                        {{#if (isEqualTo state.statekey (jsStrings (get personalInfo.personal.address 'home.state.key') 'lower'))}}
-                          <option value="{{state.statekey}}" selected>{{state.statename}}</option>
-                        {{else}}
-                          <option value="{{state.statekey}}">{{state.statename}}</option>
-                        {{/if}}
-                      {{/each}}
-                    {{/ember-chosen}}
+                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required" states=workstates}}
                 </li>
               {{/if}}
               
@@ -405,7 +387,7 @@
               <li class="clear"></li>
               <li class="state" id="state">
                 <label for="create_org_code_code">Country code</label>
-                {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected="UNITED STATES"}}
+                {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower')}}
               </li>
               <li class="state creative-zip">
                 <label for="org_company_phone">Company phone</label>
