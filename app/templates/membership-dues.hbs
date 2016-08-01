@@ -24,19 +24,19 @@
                {{/each-in}} -->
 			   {{#if duesData.data.invoice.dues.national}}
 			   	 <tr>
-                  <td>National</td>
+                  <td>{{duesData.data.invoice.dues.national.chapter}}</td>
                   <td id="nationaldues" class="value">$ {{format-currency duesData.data.invoice.dues.national.due}}</td>
                 </tr>
 			   {{/if}}
 			   {{#if duesData.data.invoice.dues.state}}
 				 <tr>
-                  <td>State</td>
+                  <td>{{duesData.data.invoice.dues.state.chapter}}</td>
                   <td id="statedues" class="value">$ {{format-currency duesData.data.invoice.dues.state.due}}</td>
                 </tr>
 				{{/if}}
 				{{#if duesData.data.invoice.dues.local}}
 				 <tr>
-                  <td>Local</td>
+                  <td>{{duesData.data.invoice.dues.local.chapter}}</td>
                   <td id="localdues" class="value">$ {{format-currency duesData.data.invoice.dues.local.due}}</td>
                 </tr>
 				{{/if}}
