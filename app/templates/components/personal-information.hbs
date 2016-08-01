@@ -7,10 +7,10 @@
           <span class="form-required">*</span>
         </label>
         <li>
-          <label for="prefix">Prefix
+          <label for="{{i18N 'en' 'prefix' 'id'}}">{{i18N 'en' 'prefix' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          <select id="prefix" name="prefix" class="form-select required">
+          <select id="{{i18N 'en' 'prefix' 'id'}}" name="{{i18N 'en' 'prefix' 'id'}}" class="form-select required">
             <option value="">Select</option>
             {{#each genericData.generic.prefix as |prefix|}}
               {{#if prefix.prf_code}}
@@ -77,11 +77,11 @@
           {{#each addressType as |type|}}
           <li class="form-type-radio text-capitalize">
             {{#if (isEqualTo type personalInfo.personal.phone.primary)}}
-            <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action "updateContactInformation" value="target.value"}} class="form-radio" checked />
+            <input type="radio" id="primary_number_{{i18N 'en' type 'id'}}" name="primary_number" value="{{i18N 'en' type 'value'}}" onchange={{action "updateContactInformation" value="target.value"}} class="form-radio" checked />
             {{else}}
-              <input type="radio" id="primary_number_{{type}}" name="primary_number" value="{{type}}" onchange={{action 'updateContactInformation' value="target.value"}} class="form-radio" />
+              <input type="radio" id="primary_number_{{i18N 'en' type 'id'}}" name="primary_number" value="{{i18N 'en' type 'value'}}" onchange={{action 'updateContactInformation' value="target.value"}} class="form-radio" />
             {{/if}}
-            <label class="option" for="primary_number_{{type}}">{{type}}</label>
+            <label class="option" for="primary_number_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'label'}} </label>
           </li>
           {{/each}}
         </ul>
