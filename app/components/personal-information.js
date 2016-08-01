@@ -2,7 +2,6 @@
 /*global jQuery*/
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
-import ENV from '../config/environment';
 const {$} = Ember;
 jQuery.validator.addMethod("acceptReg", function (value, element, param) {
     "use strict";
@@ -87,7 +86,7 @@ export default Ember.Component.extend(rememberScroll, {
     }.observes("statesData.data"),
     setWorkStateStatusFn: function (value) {
         "use strict";
-        var self, data, stateData;
+        var self, data;
         self = this;
         value = (typeof value === "undefined") ? "" : value;
         if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
@@ -111,7 +110,7 @@ export default Ember.Component.extend(rememberScroll, {
     },
     setHomeStateStatusFn: function (value) {
         "use strict";
-        var self, data, stateData;
+        var self, data;
         self = this;
         value = (typeof value === "undefined") ? "" : value;
         if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
@@ -162,8 +161,7 @@ export default Ember.Component.extend(rememberScroll, {
             }
         },
         setWorkStateStatus: function (value) {
-            "use strict";
-            var self=this;
+            "use strict";;
             this.setWorkStateStatusFn(value);
             /*if(value) {
               Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
