@@ -32,13 +32,12 @@ export default Ember.Controller.extend({
               userData[index].isPrimary = true;
             }
           }
-          if (typeof personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
+          if (typeof personalData.phone.cell !=="undefined" && personalData.phone.cell.value!=="" || personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
             index += 1;
             userData[index] = {};
-            userData[index] = {"title": "Mobile phone", "value": personalData.phone.mobile.value, "class": "mobile-phone"};
-            if (personalData.phone.primary === "mobile") {
-              userData[index].isPrimary = true;
-            }
+             var PhoneValues = (personalData.phone.primary === "mobile") ? personalData.phone.mobile.value : personalData.phone.cell.value;
+                userData[index] = {"title": "Mobile phone", "value": PhoneValues, "class": "mobile-phone"};
+                userData[index].isPrimary = true;
           }
           if (typeof personalData.phone.directoffice !== "undefined" && personalData.phone.directoffice.value!=="") {
             index += 1;
