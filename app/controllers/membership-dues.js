@@ -175,11 +175,11 @@ export default Ember.Controller.extend(rememberScroll, {
             self = $(e.currentTarget);
             suppduesTotal = 0;
             value = (self.val() !== '') ? parseInt(self.val()) : 0;
-            amount = parseInt(self.data("localAmount"));
+            amount = parseFloat(self.data("localAmount"));
             total = parseFloat(value * amount).toFixed(2);
-            self.closest("h3").find(".totals").find(".totalnum").html("$ " + total);
+            self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
             self.closest("h3").find(".totals").find(".totalnum").data("total", total);
-            self.closest("h3").next("div").find(".totalnum").html("$ " + total);
+            self.closest("h3").next("div").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
             $("#accordion").find("h3 .totalnum").each(function () {
                 suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
             });

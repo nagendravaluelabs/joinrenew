@@ -4,5 +4,5 @@ import Ember from 'ember';
 export default Ember.Helper.helper(function ([value]) {
   "use strict";
   value = parseFloat(value);
-    return value.toFixed(2);
+  return value.toLocaleString('en-US',{minimumFractionDigits:2});
 });
