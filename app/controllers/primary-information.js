@@ -1,6 +1,4 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
-
-
 import Ember from 'ember';
 export default Ember.Controller.extend({
     editContactInfo: false,
@@ -27,23 +25,22 @@ export default Ember.Controller.extend({
         userData[index] = {"title": "", "value": name, "class": "full-name"};
         if (typeof personalData.phone !== "undefined") {
           if (typeof personalData.phone.home !== "undefined" && personalData.phone.home.value!=="") {
-            index++;
+            index += 1;
             userData[index] = {};
             userData[index] = {"title": "Home phone", "value": personalData.phone.home.value, "class": "home-phone"};
             if (personalData.phone.primary === "home") {
               userData[index].isPrimary = true;
             }
           }
-          if (typeof personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
-            index++;
+          if (typeof personalData.phone.cell !=="undefined" && personalData.phone.cell.value!=="" || personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
+            index += 1;
             userData[index] = {};
-            userData[index] = {"title": "Mobile phone", "value": personalData.phone.mobile.value, "class": "mobile-phone"};
-            if (personalData.phone.primary === "mobile") {
-              userData[index].isPrimary = true;
-            }
+             var PhoneValues = (personalData.phone.primary === "mobile") ? personalData.phone.mobile.value : personalData.phone.cell.value;
+                userData[index] = {"title": "Mobile phone", "value": PhoneValues, "class": "mobile-phone"};
+                userData[index].isPrimary = true;
           }
           if (typeof personalData.phone.directoffice !== "undefined" && personalData.phone.directoffice.value!=="") {
-            index++;
+            index += 1;
             userData[index] = {};
             userData[index] = {"title": "Work phone", "value": personalData.phone.directoffice.value, "class": "work-phone"};
             if (personalData.phone.primary === "home") {
@@ -53,7 +50,7 @@ export default Ember.Controller.extend({
         }
         
         if (typeof personalData.address !== "undefined") {
-          index++;
+          index += 1;
           userData[index] = {};
           primaryAddress=[];
           if (personalData.address.primary === "home") {

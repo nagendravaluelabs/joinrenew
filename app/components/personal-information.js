@@ -2,7 +2,6 @@
 /*global jQuery*/
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
-import ENV from '../config/environment';
 const {$} = Ember;
 jQuery.validator.addMethod("acceptReg", function (value, element, param) {
     "use strict";
@@ -12,19 +11,17 @@ export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
     primaryHomeAddress: false,
-    primaryOfficeAddress: false,
+    primaryWorkAddress: false,
     createOrganization: false,
     contactAddressType: "",
     genericData: Ember.inject.service('generic-data'),
     statesData: Ember.inject.service('states-data'),
     workstates: {},
-    Homestates:{},
+    homeStates: [],
     init: function () {
         "use strict";
         this._super(...arguments);
         this.serviceLoad();
-        this.setWorkStateStatus();
-        this.setHomeStateStatus();
     },
     serviceLoad: function () {
         "use strict";
@@ -36,9 +33,7 @@ export default Ember.Component.extend(rememberScroll, {
             primaryAddress = primaryAddress.personal.address;
             chapterType = primaryAddress.primary.capitalize();
             self.chapterSelection(chapterType);
-            if (primaryAddress.home.country.key.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                self.set('homeShowState', true);
-            }
+            self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
             self.set('contactAddressType', contactInfo.primary);
         }
     },
@@ -51,7 +46,7 @@ export default Ember.Component.extend(rememberScroll, {
         var data = [
             "home",
             "mobile",
-            "directoffice"
+            "work"
         ];
         return data;
     }.property(),
@@ -82,51 +77,61 @@ export default Ember.Component.extend(rememberScroll, {
         var self;
         self = this;
         self.set('primaryHomeAddress', false);
-        self.set('primaryOfficeAddress', false);
+        self.set('primaryWorkAddress', false);
         self.set('createOrganization', false);
-        //primaryAddress = self.get('personalInfo.personal.address');
         self.set('primary' + chapterType + 'Address', true);
-        /*if (primaryAddress.primary === "office") {
-            self.set('primaryOfficeAddress', true);
-        }
-        if (primaryAddress.primary === "home") {
-            self.set('primaryHomeAddress', true);
-        }*/
     },
-     setWorkStateStatus: function (value) {
-            "use strict";
-              var self=this;
-              value = "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-            if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
-                self.set("workstates", data);
-              });
-            } else {
-              self.set("workstates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("workShowState", true);
-            } else {
-                this.set("workShowState", false);
-            }
-        },
-        setHomeStateStatus: function (value) {
-            "use strict";
-            var self=this;
-             value = "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-            if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=bc4b70f8-280e-4bb0-b935-9f728c50e183`).then(function(data){
-                self.set("Homestates", data);
-              });
-            } else {
-              self.set("Homestates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("homeShowState", true);
-            } else {
-                this.set("homeShowState", false);
-            }
-        },
+    updateStateData: function() {
+      alert();
+    }.observes("statesData.data"),
+    setWorkStateStatusFn: function (value) {
+        "use strict";
+        var self, data;
+        self = this;
+        value = (typeof value === "undefined") ? "" : value;
+        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          data = self.get("statesData").getStateData(value);
+          if(data.type === "data") {
+            self.set("workstates", data.info);
+          } else {
+            data.info.then(function(output){
+              self.set("workstates", output);
+              self.get("statesData").setStateData(value, output);
+            });
+          }
+        } else {
+          self.set("workstates", []);
+        }            
+        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+            this.set("workShowState", true);
+        } else {
+            this.set("workShowState", false);
+        }
+    },
+    setHomeStateStatusFn: function (value) {
+        "use strict";
+        var self, data;
+        self = this;
+        value = (typeof value === "undefined") ? "" : value;
+        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          data = self.get("statesData").getStateData(value);
+          if(data.type === "data") {
+            self.set("homeStates", data.info);
+          } else {
+            data.info.then(function(output){
+              self.set("homeStates", output);
+              self.get("statesData").setStateData(value, output);
+            });
+          }
+        } else {
+          self.set("homeStates", []);
+        }            
+        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+            this.set("homeShowState", true);
+        } else {
+            this.set("homeShowState", false);
+        }
+    },
     actions: {
         showPersonalInfo: function () {
             "use strict";
@@ -146,6 +151,7 @@ export default Ember.Component.extend(rememberScroll, {
             var self, value;
             self = this;
             value = self.get('createOrganization');
+            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
             if (value) {
                 $(".primary-action-btn").removeClass("hidden");
                 self.set('createOrganization', false);
@@ -156,14 +162,14 @@ export default Ember.Component.extend(rememberScroll, {
         },
         setWorkStateStatus: function (value) {
             "use strict";
-              var self=this;
-            if(value) {
+            this.setWorkStateStatusFn(value);
+            /*if(value) {
               Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
                 self.set("workstates", data);
                 setTimeout(function(){
                   $(".select-chosen").trigger("chosen:updated");
                 },100);
-              });alert(value);
+              });
             } else {
               self.set("workstates", []);
             }
@@ -171,11 +177,12 @@ export default Ember.Component.extend(rememberScroll, {
                 this.set("workShowState", true);
             } else {
                 this.set("workShowState", false);
-            }
+            }*/
         },
         setHomeStateStatus: function (value) {
             "use strict";
-            var self=this;
+            this.setHomeStateStatusFn(value);
+            /*var self=this;
             if(value) {
               Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
                 self.set("Homestates", data);
@@ -190,7 +197,7 @@ export default Ember.Component.extend(rememberScroll, {
                 this.set("homeShowState", true);
             } else {
                 this.set("homeShowState", false);
-            }
+            }*/
         },
         updateContactInformation: function (value) {
             "use strict";
@@ -320,14 +327,16 @@ export default Ember.Component.extend(rememberScroll, {
         },
         addNewOrganization: function () {
             "use strict";
-            var validate;
-            validate = $("#addNewOrganization").validate({
+            var validator;
+            validator = $("#addNewOrganization").validate({
                 rules: {
                     org_website: {
                         url: true
                     },
-                    work_administrative_state: function () {
-                        return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                    work_administrative_state: {
+                        required: function () {
+                            return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                        }
                     },
                     org_company_phone: {
                         digits: true,
@@ -340,13 +349,16 @@ export default Ember.Component.extend(rememberScroll, {
                     create_org_country: "Country is required",
                     org_company_address1: "Address line1 is required",
                     org_locality: "City is required",
-                    work_administrative_state: "State is required",
+                    work_administrative: "State is required",
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
                     }
                 }
             });
-            if (validate.form()) {
+            if (validator.form()) {
+                console.log("success");
+            } else {
+              console.log("error");
             }
         }
     }

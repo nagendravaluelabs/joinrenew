@@ -1,10 +1,10 @@
 {{#ember-chosen id=(concat idPrefix '_state') name=(concat namePrefix '_state') class=(concat class ' form-select select-chosen')}}
   <option value="">Select</option>
   {{#each states as |state|}}
-    {{#if (isEqualTo state.id selected)}}
-      <option value="{{state.id}}" selected>{{state.name}}</option>
+    {{#if (isEqualTo state.statekey selected)}}
+      <option value="{{state.statekey}}" selected>{{state.statename}}</option>
     {{else}}
-      <option value="{{state.id}}">{{state.name}}</option>
+      <option value="{{state.statekey}}">{{state.statename}}</option>
     {{/if}}
   {{/each}}
 {{/ember-chosen}}

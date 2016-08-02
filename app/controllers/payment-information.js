@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
         subTotal: 0,
         total :0,
         installNumber:3,
+        installment: 0,
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));
@@ -27,7 +28,7 @@ export default Ember.Controller.extend({
             });
             this.set("subTotal", parseFloat(subTotal, 2));
             this.set("total", parseFloat(total, 2));
-           
+            this.calculateInstallments(this.get("installNumber"));
           }
         }.observes('primaryData.data'),
         updatePaymentType: function(type) {
