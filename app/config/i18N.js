@@ -34,22 +34,26 @@ export default {
     "work": {
       "id": "work",
       "label": "Work",
-      "value": "work"
+      "value": "work",
+	  "key": "directoffice"
     },
     "cell": {
       "id": "mobile",
       "label": "Mobile",
-      "value": "mobile"
+      "value": "mobile",
+	  "key": "cell"
     },
     "mobile": {
       "id": "mobile",
       "label": "Mobile",
-      "value": "mobile"
+      "value": "mobile",
+	  "key": "cell"
     },
     "directoffice": {
       "id": "work",
       "label": "Work",
-      "value": "work"
+      "value": "work",
+	  "key": "directoffice"
     }
   }
 };
