@@ -11,7 +11,7 @@ export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
     primaryHomeAddress: false,
-    primaryOfficeAddress: false,
+    primaryWorkAddress: false,
     createOrganization: false,
     contactAddressType: "",
     genericData: Ember.inject.service('generic-data'),
@@ -46,7 +46,7 @@ export default Ember.Component.extend(rememberScroll, {
         var data = [
             "home",
             "mobile",
-            "directoffice"
+            "work"
         ];
         return data;
     }.property(),
@@ -77,7 +77,7 @@ export default Ember.Component.extend(rememberScroll, {
         var self;
         self = this;
         self.set('primaryHomeAddress', false);
-        self.set('primaryOfficeAddress', false);
+        self.set('primaryWorkAddress', false);
         self.set('createOrganization', false);
         self.set('primary' + chapterType + 'Address', true);
     },
