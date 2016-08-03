@@ -41,18 +41,18 @@
                      <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
                     <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
                   </tr>
-                  
                   <tr class="sum">
-                    <td class="title">Subtotal due</td>
-                    
+                    <td class="title">Subtotal due</td>                    
                     <td class="due-total">${{format-currency subTotal}}</td>
-                  </tr> 
+                  </tr>
                   
-      
-                     <td>Supplymental dues</td>
-                    <td>${{format-currency primaryData.data.supplementalDuesTotal}}</td>
-     
-                  
+                   
+                  {{#if primaryData.data.supplementalDuesTotal}}
+                  <tr class="sum">
+                    <td class="title">Supplyment Total</td>
+                    <td class="due-total">${{format-currency primaryData.data.supplementalDuesTotal}}</td>
+                  </tr>
+                  {{/if}}
                   
                 </tbody>
               </table>
@@ -61,7 +61,11 @@
         </div>
         <div id="accordion_bottom">
           <div class="total_label">Total due</div>
+          {{#if primaryData.data.supplementalDuesTotal}}
           <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
+          {{else}}
+          <div id="paymentdue" class="paymentdue">${{format-currency subTotal}}</div>
+          {{/if}}
         </div>
       </div>
     </div>
