@@ -53,8 +53,7 @@ export default Ember.Controller.extend({
             validate = $("#form-card-payment").validate({
                 rules:{
                     cardName: {
-                      required: true,
-                      letterswithbasicpunc: true
+                      required: true
                     },
                     cardNumber: {
                       required: true,
@@ -79,10 +78,7 @@ export default Ember.Controller.extend({
                     }
                 },
                 messages: {
-                    cardName: {
-                      required: "Please enter name on credit card",
-                      letterswithbasicpunc: "Invalid name on credit card"
-                    },
+                    cardName: "Please enter name on credit card",
                     cardNumber: {
                       required: "Card number is required",
                       digits: "Please enter a valid credit card number"

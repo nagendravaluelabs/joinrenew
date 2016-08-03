@@ -165,7 +165,7 @@
                 {{#each-in duesData.data.invoice.dues as |key dues|}}
                   <tr>
                     <td>{{dues.chapter}}</td>
-                    <td id="{{key}}dues" class="value">${{format-currency dues.due}}</td>
+                    <td id="{{key}}dues" class="value">$ {{format-currency dues.due}}</td>
                   </tr>
                 {{/each-in}}
                 <tr>
