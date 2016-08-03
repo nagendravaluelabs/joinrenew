@@ -32,6 +32,7 @@ export default Ember.Component.extend(rememberScroll, {
         if (typeof primaryAddress.personal !== "undefined") {
             primaryAddress = primaryAddress.personal.address;
             chapterType = primaryAddress.primary.capitalize();
+            chapterType = (chapterType === "Billing") ? "Work" : chapterType;
             self.chapterSelection(chapterType);
             self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
             self.set('contactAddressType', contactInfo.primary);
@@ -250,7 +251,7 @@ export default Ember.Component.extend(rememberScroll, {
                         digits: true,
                         minlength: 10
                     },
-                    directoffice_number: {
+                    work_number: {
                         required: function () {
                             return $("#primary_number_directoffice").is(":checked");
                         },
@@ -307,7 +308,7 @@ export default Ember.Component.extend(rememberScroll, {
                         required: "Mobile number is required",
                         digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
                     },
-                    directoffice_number: {
+                    work_number: {
                         required: "Office number is required",
                         digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
                     },
