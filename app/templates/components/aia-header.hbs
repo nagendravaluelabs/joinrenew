@@ -16,13 +16,7 @@
             {{/link-to}}
           </div>          
           <div class="collapse navbar-collapse" id="primary-menu">
-            <ul class="nav navbar-nav navbar-right">
-              {{#if isLoggedin}}
-                <li><a href="#" {{action "signOut"}}>Sign out</a></li>
-              {{else}}
-                <li><a href="#" {{action "showSignIn"}}>Sign in</a></li>                
-              {{/if}}
-            </ul>
+            {{login-control}}
           </div>
         </div>
       </div>

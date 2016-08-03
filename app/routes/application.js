@@ -10,10 +10,9 @@ export default Ember.Route.extend({
   },
   actions: {
     setMainClass: function () {
-      //this.set("model", {"class":"hello"});
       "use strict";
       var model = this.get('controller.model');
-      model.class = "hello";
+      model.class = "";
     }
   }
 });

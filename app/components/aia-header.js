@@ -1,47 +1,39 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 /*global jQuery*/
 /*global $*/
-/*global window */
 import Ember from 'ember';
+import inject from 'ember-service/inject';
 
 export default Ember.Component.extend({
     isLoggedin: false,
+    auth: inject(),
+    janrain: inject(),
+    tools: inject(),
     didInsertElement() {
-        "use strict";
-        this._super(...arguments);
-        Ember.$('#login-box').dialog({
-            modal: true,
-            autoOpen: false,
-            draggable: false,
-            resizable: false,
-            width: $(window).width() > 500 ? 550 : '90%',
-            title: '',
-            responsive: true,
-            closeText: 'X',
-            show: false,
-            hide: false,
-            close: function () {
-                $('#sign-In').validate().resetForm();
-            }
-        });
-        $(window).resize(function () {
-            $("#login-box").dialog("option", "width", $(window).width() > 500? 550 : '90%');
-        });
+      "use strict";
+      this._super(...arguments);
+      let janrain = this.get('janrain');
+      janrain.setLoginCallback(this.onLogin.bind(this));
+    },
+    onLogin() {
+      Ember.run.next(() => {
+        //this.get('router').transitionTo('renew-verify-membership');
+      });
     },
     actions: {
         signIn: function () {
-            "use strict";
+          "use strict";
           this.set("isLoggedin", true);
           this.get('router').transitionTo('renew-verify-membership');
         },
         signOut: function () {
-            "use strict";
+          "use strict";
           this.set("isLoggedin", false);
           this.get('router').transitionTo('index');
         },
         showSignIn: function () {
-            "use strict";
-            $('#login-box').dialog('open');
+          "use strict";
+          $('#login-box').dialog('open');
         }    
     }
 });
