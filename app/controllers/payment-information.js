@@ -25,13 +25,15 @@ export default Ember.Controller.extend({
           var supplyTotal = 0;
           if (primaryData.data !== "undefined" && primaryData.data !== "") {
             $.map(primaryData.data.invoice.dues, function (payment) {
-              subTotal += parseFloat(payment.due);
-              total  = subTotal + 40;            
+              subTotal += parseFloat(payment.due);          
             });
-            alert(primaryData.data.supplementalDuesTotal)
+            total  = parseFloat(subTotal) + 40; 
+
             if(typeof primaryData.data.supplementalDuesTotal !== undefined) {
-              supplyTotal = parseFloat(subTotal) + primaryData.data.supplementalDuesTotal;
+              supplyTotal = parseFloat(subTotal) + parseFloat(primaryData.data.supplementalDuesTotal);
+              total += parseFloat(primaryData.data.supplementalDuesTotal);
             }  
+
             this.set("subTotal", parseFloat(subTotal, 2));
             this.set("total", parseFloat(total, 2));
             this.set("supplyTotal", parseFloat(supplyTotal, 2));

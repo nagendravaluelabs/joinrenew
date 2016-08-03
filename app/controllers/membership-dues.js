@@ -74,7 +74,6 @@ export default Ember.Controller.extend(rememberScroll, {
     }.observes('totalDues', 'supplementalDuesTotal'),
     supTotalDuesFunc: function () {
         "use strict";
-        var supptot = 0;
         var duesData = this.get("duesData");
         var totalDues = this.get("totalDues");
         var supplementalDuesTotal = this.get("supplementalDuesTotal");

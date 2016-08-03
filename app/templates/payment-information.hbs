@@ -289,7 +289,11 @@
         <tbody>
           <tr>
             <th scope="row">Member dues</th>
+            {{#if primaryData.data.supplementalDuesTotal}}
+            <td class="price">${{format-currency supplyTotal}}</td>
+            {{else}}
             <td class="price">${{format-currency subTotal}}</td>
+            {{/if}}
           </tr>
           <tr> 
             <th scope="row">Administrative fees</th>
