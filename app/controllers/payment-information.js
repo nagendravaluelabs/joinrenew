@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
         insallmentsPayment: false,
         subTotal: 0,
         total :0,
+        supplyTotal:0,
         installNumber:3,
         installment: 0,
         init: function () {
@@ -21,13 +22,16 @@ export default Ember.Controller.extend({
           var primaryData = this.get("primaryData");
           var subTotal = 0;
           var total = 0;
+          var supplyTotal = 0;
           if (primaryData.data !== "undefined" && primaryData.data !== "") {
             $.map(primaryData.data.invoice.dues, function (payment) {
               subTotal += parseFloat(payment.due);
               total  = subTotal + 40;
+              supplyTotal = parseFloat(subTotal + primaryData.data.supplementalDuesTotal);
             });
             this.set("subTotal", parseFloat(subTotal, 2));
             this.set("total", parseFloat(total, 2));
+            this.set("supplyTotal", parseFloat(supplyTotal, 2));
             this.calculateInstallments(this.get("installNumber"));
           }
         }.observes('primaryData.data'),

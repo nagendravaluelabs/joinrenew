@@ -48,6 +48,12 @@
                     <td class="due-total">${{format-currency subTotal}}</td>
                   </tr> 
                   
+      
+                     <td>Supplymental dues</td>
+                    <td>${{format-currency primaryData.data.supplementalDuesTotal}}</td>
+     
+                  
+                  
                 </tbody>
               </table>
             </div>
@@ -55,7 +61,7 @@
         </div>
         <div id="accordion_bottom">
           <div class="total_label">Total due</div>
-          <div id="paymentdue" class="paymentdue">${{format-currency subTotal}}</div>
+          <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
         </div>
       </div>
     </div>
