@@ -41,7 +41,7 @@ export default {
       "id": "mobile",
       "label": "Mobile",
       "value": "mobile",
-	  "key": "cell"
+      "key": "cell"
     },
     "mobile": {
       "id": "mobile",
@@ -53,7 +53,13 @@ export default {
       "id": "work",
       "label": "Work",
       "value": "work",
-	  "key": "directoffice"
+      "key": "directoffice"
+    },
+    "billing": {
+      "id": "work",
+      "label": "Work",
+      "value": "office",
+      "key": "billing"
     }
   }
 };
