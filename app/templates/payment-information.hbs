@@ -5,9 +5,9 @@
     <div id="userprofileinfo">
       <ul class="no-style">
       	<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
-        <li>{{primaryData.data.personal.address.office.line1}}</li>
-        <li>{{primaryData.data.personal.address.office.city}}</li>
-        <li>{{primaryData.data.personal.address.office.country.value}},  {{primaryData.data.personal.address.office.state.value}} {{primaryData.data.personal.address.office.zip}}</li>
+        <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
+        <li>{{primaryData.data.personal.address.home.city}}</li>
+        <li>{{primaryData.data.personal.address.home.country.value}},  {{primaryData.data.personal.address.home.state.value}} {{primaryData.data.personal.address.home.zip}}</li>
       </ul>
     </div>
     
@@ -42,25 +42,22 @@
                     <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
                   </tr>
                   <tr class="sum">
-                    <td class="title">Subtotal due</td>                    
+                    <td class="title">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</td>
                     <td class="due-total">${{format-currency subTotal}}</td>
                   </tr>
-                  
-                   
-                  {{#if primaryData.data.supplementalDuesTotal}}
-                  <tr class="sum">
-                    <td class="title">Supplemental dues</td>
-                    <td class="due-total">${{format-currency primaryData.data.supplementalDuesTotal}}</td>
-                  </tr>
-                  {{/if}}
-                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        {{#if primaryData.data.supplementalDuesTotal}}
+        <div class="spl_dues_bottom">
+          <div class="sup-title total_label">Supplemental dues</div>
+          <div class="sup-due-total paymentdue">${{format-currency primaryData.data.supplementalDuesTotal}}</div> 
+        </div>
+         {{/if}}
         <div id="accordion_bottom">
-          <div class="total_label">Total due</div>
+          <div class="total_label">Total</div>
           {{#if primaryData.data.supplementalDuesTotal}}
           <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
           {{else}}

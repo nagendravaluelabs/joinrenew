@@ -7,6 +7,16 @@ jQuery.validator.addMethod("acceptReg", function (value, element, param) {
     "use strict";
     return value.match(new RegExp("." + param + "$"));
 });
+
+jQuery.validator.addMethod( "zipcodeUS", function( value, element ) {
+    "use strict";
+	  return this.optional( element ) || /^\d{5}(-\d{4})?$/.test( value );
+},  "Please enter a valid US zip code. The format should be either 00000 or 00000-0000." );
+
+jQuery.validator.addMethod( "alphanumeric", function( value, element ) {
+	return this.optional( element ) || /^[a-z0-9\-\s]+$/i.test( value );
+}, "Special characters not allowed" );
+
 export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
@@ -242,21 +252,22 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#primary_number_home").is(":checked");
                         },
                         digits: true,
-                        minlength: 10
+                        maxlength: 10
                     },
                     mobile_number: {
                         required: function () {
                             return $("#primary_number_mobile").is(":checked");
                         },
                         digits: true,
-                        minlength: 10
+                        maxlength: 10
+                        
                     },
                     work_number: {
                         required: function () {
                             return $("#primary_number_directoffice").is(":checked");
                         },
                         digits: true,
-                        minlength: 10
+                        maxlength: 10
                     },
                     primary_home_address_country: {
                         required: function () {
@@ -276,7 +287,10 @@ export default Ember.Component.extend(rememberScroll, {
                     primary_home_zipcode: {
                         required: function () {
                             return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-                        }
+                        },
+                        alphanumeric:true,
+                        minlength: 5
+                       
                     },
                     administrative_area_state: {
                         required: function () {
@@ -315,7 +329,10 @@ export default Ember.Component.extend(rememberScroll, {
                     primary_home_address_country: "Country field is required",
                     primary_home_address1: "Address line1 is required",
                     primary_home_city: "City is required",
-                    primary_home_zipcode: "Zip code is required"
+                    primary_home_zipcode: {
+                      required : "Zip code is required",
+                      alphanumeric : "Special characters not allowed"
+                    } 
                 }
             });
             if (validate.form()) {

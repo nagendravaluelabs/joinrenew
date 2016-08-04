@@ -100,7 +100,8 @@ export default Ember.Controller.extend({
                     },
                     cardSecurityCode: {
                       required: "Security code is required",
-                      digits: "Please enter a value less than or equal to 4"
+                      digits: "Please enter a valid CVV number",
+                      minlength: "Please enter at least 3 digits"
                     },
                     iagree_terms:{
                       required: "You must agree to the terms and conditions"
