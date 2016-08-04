@@ -42,7 +42,7 @@
                     <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
                   </tr>
                   <tr class="sum">
-                    <td class="title">Subtotal due</td>                    
+                    <td class="title">Individual dues subtotal</td>                    
                     <td class="due-total">${{format-currency subTotal}}</td>
                   </tr>
                   
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div id="accordion_bottom">
-          <div class="total_label">Total due</div>
+          <div class="total_label">Total</div>
           {{#if primaryData.data.supplementalDuesTotal}}
           <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
           {{else}}
