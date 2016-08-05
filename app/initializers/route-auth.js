@@ -19,6 +19,9 @@ var AuthMixin = Ember.Mixin.create({
           if(this.get("auth").get("authState") === "logout") {
             this.transitionTo('/renew');
             localStorage['route'] = "";
+          } else if(this.get("auth").get("authState") === "invalid-invoice") {
+            this.transitionTo('/invoice-invalid');
+            localStorage['route'] = "";
           } else {
             this.transitionTo('/not-authorized');
           }        

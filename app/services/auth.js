@@ -6,9 +6,9 @@ import inject from 'ember-service/inject';
 import moment from 'moment';
 import RouteRefresherMixin from '../mixins/route-refresher';
 const SLEEP_POLL_INTERVAL = 60 * 1000;
-
 export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
+  janrain: inject(),
   authState: "",
   _refreshOnWakeFromSleep() {
     let lastTime = (new Date()).getTime();
@@ -95,12 +95,23 @@ export default Ember.Service.extend(RouteRefresherMixin, {
       },
       body: fetchParams
     };
-    return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => response.status === 200);
+    return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => {
+      if(response.status === 200) {
+        return response.json().then(function(json) {
+          if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
+            return json;
+          } else {
+            return "invalid-user";
+          }
+        });
+      }
+    });
   },
 
   logout() {
-    //this.transitionTo('/renew');
-    this.set("authState", "logout");
+    if(this.get("authState") !== "invalid-invoice" && this.get("authState") !== "no-access") {
+      this.set("authState", "logout");
+    }
     localStorage.removeItem('aia-user');
     this.set('user', null);
     this.reloadRoute();
@@ -124,6 +135,11 @@ export default Ember.Service.extend(RouteRefresherMixin, {
             this.refresh(user.refresh_token);
           }
           this.set('user', null);
+        } else if(valid === "invalid-user") {
+          this.set("authState", "no-access");
+          this.set("user", ["invalid"]);
+          this.logout();
+          this.get('janrain').doLogout();
         } else {
           let expiration = moment(user.expires_at, moment.iso_8601);
           if (expiration.isBefore(moment().add(user.expires_in / 2, 'seconds')) && user.refresh_token) {

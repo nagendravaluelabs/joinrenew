@@ -86,11 +86,16 @@ export default Service.extend(RouteRefresherMixin, {
         if(response.status === 200) {
           return response.json().then(function(json){
             $('.ajax-spinner').hide();
-            if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined) {
+            if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
               self.get("userData").setUserData(json.result.nfIndividualKey);
               self.get("auth").set("authState", "");
               self.reloadRoute();
-            }                
+            } else {
+              self.get("auth").set("authState", "no-access");
+              self.get("auth").set("user", ["invalid"]);
+              self.get('auth').logout();
+              self.doLogout();
+            }
           });
         }
       });

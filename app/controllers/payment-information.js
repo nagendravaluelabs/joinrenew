@@ -1,6 +1,21 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $*/
 /*global Ember*/
+$.validator.addMethod( "creditcardMonth", function() {
+  var date = new Date ();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var cardExpirationYear; 
+  var cardExpirationMonth;
+  var selectedYear = parseInt(cardExpirationYear.value);
+  var selectedMonth = parseInt(cardExpirationMonth.value);
+  if(selectedMonth !== "") {
+    if (year === selectedYear && selectedMonth <= month){
+        return false;
+    }
+  }
+  return true;
+}, "Invalid expiration date." );
 
 export default Ember.Controller.extend({
    primaryData: Ember.inject.service('user-data'),
@@ -17,6 +32,17 @@ export default Ember.Controller.extend({
             this.calculateInstallments(this.get("installNumber"));
             this.subTotalObserves();
         },
+        currentYear: function(){
+          var date = new Date();
+          var presentYear = date.getFullYear();
+          return presentYear;
+        }.property(),
+        maxYearList: function(){
+          var date = new Date();
+          var presentYear = date.getFullYear();
+          var maxYears = presentYear + 10;
+          return maxYears;
+        }.property(),
         subTotalObserves: function () {
           "use strict";
           var primaryData = this.get("primaryData");
@@ -57,6 +83,8 @@ export default Ember.Controller.extend({
           } 
         },
         validatePaymentInfo: function () {
+            
+            
             "use strict";
             var validate;
             validate = $("#form-card-payment").validate({
@@ -70,7 +98,8 @@ export default Ember.Controller.extend({
                     },
                     cardExpirationMonth: {
                       required: true,
-                      digits: true
+                      digits: true,
+                      creditcardMonth: true
                     },
                     cardExpirationYear: {
                       required: true, 
