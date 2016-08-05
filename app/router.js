@@ -20,6 +20,7 @@ Router.map(function() {
   this.route('thankyou-page', {path: '/renew/thankyou-page' });
   this.route('page-not-found', { path: '/*path' });
   this.route('not-authorized');
+  this.route('invoice-invalid');
 });
 
 export default Router;

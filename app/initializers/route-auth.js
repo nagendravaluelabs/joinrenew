@@ -3,6 +3,7 @@ import inject from 'ember-service/inject';
 var AuthMixin = Ember.Mixin.create({
   auth: inject(),
   verfiyUserAuth: function() {
+    alert();
     this.authVerify();
   }.observes("auth.user"),
   beforeModel: function() {
@@ -18,6 +19,9 @@ var AuthMixin = Ember.Mixin.create({
           localStorage['route'] = currenRoute;
           if(this.get("auth").get("authState") === "logout") {
             this.transitionTo('/renew');
+            localStorage['route'] = "";
+          } else if(this.get("auth").get("authState") === "invalid-invoice") {
+            this.transitionTo('/invoice-invalid');
             localStorage['route'] = "";
           } else {
             this.transitionTo('/not-authorized');

@@ -6,7 +6,6 @@ import inject from 'ember-service/inject';
 import moment from 'moment';
 import RouteRefresherMixin from '../mixins/route-refresher';
 const SLEEP_POLL_INTERVAL = 60 * 1000;
-
 export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
   authState: "",
@@ -95,12 +94,23 @@ export default Ember.Service.extend(RouteRefresherMixin, {
       },
       body: fetchParams
     };
-    return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => response.status === 200);
+    return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => {
+      if(response.status === 200) {
+        return response.json().then(function(json) {
+          if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
+            return json;
+          } else {
+            return false;
+          }
+        });
+      }
+    });
   },
 
   logout() {
-    //this.transitionTo('/renew');
-    this.set("authState", "logout");
+    if(this.get("authState") !== "invalid-invoice" && this.get("authState") !== "no-access") {
+      this.set("authState", "logout");
+    }
     localStorage.removeItem('aia-user');
     this.set('user', null);
     this.reloadRoute();
