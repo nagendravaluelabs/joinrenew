@@ -56,9 +56,9 @@ export default {
       "key": "directoffice"
     },
     "billing": {
-      "id": "work",
-      "label": "Work",
-      "value": "office",
+      "id": "home",
+      "label": "home",
+      "value": "home",
       "key": "billing"
     }
   }

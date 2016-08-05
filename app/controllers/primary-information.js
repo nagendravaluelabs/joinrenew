@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
             userData[index] = {};
              var PhoneValues = (personalData.phone.primary === "mobile") ? personalData.phone.mobile.value : personalData.phone.cell.value;
                  userData[index] = {"title": "Mobile phone", "value": PhoneValues, "class": "mobile-phone"};
-                if(personalData.phone.primary === "mobile"){
+                if(personalData.phone.primary === "mobile" ||personalData.phone.primary==="cell"){
                 userData[index].isPrimary = true;
                 }
           }
@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
             index += 1;
             userData[index] = {};
             userData[index] = {"title": "Work phone", "value": personalData.phone.directoffice.value, "class": "work-phone"};
-            if (personalData.phone.primary === "home") {
+            if (personalData.phone.primary === "work" || personalData.phone.primary === "directoffice" ) {
               userData[index].isPrimary = true;
             }
           }
