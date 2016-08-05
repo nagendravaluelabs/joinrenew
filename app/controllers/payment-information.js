@@ -1,6 +1,19 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $*/
 /*global Ember*/
+$.validator.addMethod( "creditcardMonth", function( value, element, param ) {
+  var date = new Date ();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var selectedYear = parseInt(cardExpirationYear.value);
+  var selectedMonth = parseInt(cardExpirationMonth.value);
+  if(selectedMonth != "") {
+    if (year === selectedYear && selectedMonth <= month){
+        return false;
+    }
+  }
+  return true;
+}, "Invalid expiration date." );
 
 export default Ember.Controller.extend({
    primaryData: Ember.inject.service('user-data'),
@@ -57,6 +70,8 @@ export default Ember.Controller.extend({
           } 
         },
         validatePaymentInfo: function () {
+            
+            
             "use strict";
             var validate;
             validate = $("#form-card-payment").validate({
@@ -70,7 +85,8 @@ export default Ember.Controller.extend({
                     },
                     cardExpirationMonth: {
                       required: true,
-                      digits: true
+                      digits: true,
+                      creditcardMonth: true
                     },
                     cardExpirationYear: {
                       required: true, 
