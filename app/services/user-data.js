@@ -11,7 +11,7 @@ export default Ember.Service.extend({
   setUserData: function(userkey) {
     var self= this;
     if(userkey !== null && userkey !== "") {
-      Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=CD8E9F88-1228-4649-BA9B-645843C35F68`).then(function(data){
+      Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=${userkey}`).then(function(data){
         self.set("data", data);
       });
     } else {
