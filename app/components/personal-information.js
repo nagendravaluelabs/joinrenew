@@ -42,7 +42,7 @@ export default Ember.Component.extend(rememberScroll, {
         if (typeof primaryAddress.personal !== "undefined") {
             primaryAddress = primaryAddress.personal.address;
             chapterType = primaryAddress.primary.capitalize();
-            chapterType = (chapterType === "Billing") ? "Work" : chapterType;
+            chapterType = (chapterType === "Billing") ? "Home" : chapterType;
             self.chapterSelection(chapterType);
             self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
             self.set('contactAddressType', contactInfo.primary);
