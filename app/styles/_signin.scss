@@ -1,22 +1,53 @@
-#login-box{
-  font-family: $font-light;
-  font-size: 15px;
-  font-weight: normal;
-  color: #404041;
-  .sign-box{
-    padding:15px 20px;
-      .header{
-      display:block;
-      h1{
-        margin:0;
-        color: #404041;
-        font-size: 25px;
-        font-weight: normal;
-        line-height: inherit;
-        font-family: "architype-bold", sans-serif;
-      }	
+
+
+/*new*/
+#janrainModal{
+  width: 550px !important;
+  @include mq(xs) {
+    width: 90% !important;
+    max-width: 550px;
+    left: 0 !important;
+    margin: 0 auto !important;
+    right: 0 !important;
+  }
+  font-family: "architype-light", sans-serif;
+  .header{
+    h1{
+      display: inline-block;
+      font-size: 24px !important;
+          margin-left: 20px !important;
     }
-    .user-login-form{
+  }
+  h2{
+    padding: 20px;
+    font-weight: normal !important;
+  }
+  h3{
+    font-weight: bold;
+  }
+  h3, p{
+    padding:0 20px;
+  }
+  p{
+    font-size: 15px;
+  }
+  .social-account{
+    h3{
+      padding: 0 !important;
+      font-weight: normal;
+    }
+  }
+  .janrain_modal_closebutton{
+    top:20px;
+  }
+  .social-account, .capture_form_item{
+    padding:0 20px;
+  }
+  #janrainProviderPages{
+    left:0 !important;
+    position: relative !important;
+  }
+  .user-login-form, .capture_form_item{
 		  display:block;
 			input {
 				&, &[type="text"] {
@@ -24,9 +55,9 @@
 					color:#333;
 					font-size:20px;
 					border: 1px solid #eee;
-					background:#f8f8f8;
+					background-color:#f8f8f8;
 					box-shadow: none;
-					padding:24px 10px;
+					padding:14px 10px;
 					&:focus{
 						background:#e2e2e2;
 						border: 1px solid #009ddc;
@@ -35,93 +66,172 @@
 				}
 			  
 			}
+      label{
+        display: none;
+      }
 			button{
 				&.capture_btn {
           font-size:20px;
           padding: 13px 40px;
-          background: #ef4135;
+          background-color: #ef4135;
           margin-right:20px;
+          margin-left: 20px;
+          box-shadow: none;
+          border-radius: 0;
         }
 			}
+      .capture_btn{
+          font-size:20px;
+          padding: 13px 40px;
+          background-color: #ef4135;
+          margin-right:20px;
+          margin-left: 20px;
+          box-shadow: none;
+          border-radius: 0;
+        }
+      a{
+        font-size: 15px;
+      }
 			p.terms-txt{
-			   margin:15px 0 0 0;
+			   margin:15px 0 15px 0;
 			   a{
 				  font-size:15px;
 				}
 			}
 			
 		}
-	}
-  ul.social-account{
-	  display:block;
-	  margin:25px 0;
-	  list-style:none;
-	}
-	h3{
-	  font-size: 15px;
-	}
-	li{
-	  margin-right:10px;
-	  display:inline-block;
-	  a {
-		  font-family: Arial, sans-serif;
-		  display:block;
-		  background-repeat: no-repeat;
-		  background-position: 8px 50%;
-		  border:1px #ccc solid;
-		  padding:10px 10px 10px 40px;
-		  color: #3B5998;
-      font-weight:600;
-      font-size:16px;
-			&.social-facebook {
-			  background-image: url(../images/facebook.png);
-			}
-			&.social-linkedin {
-			  background-image: url(../images/linkedin.png);
-			}
-			&:hover {
-			  background-color: #DDD;
-			}
-		}
-	}
-	.login-footer{
-	  padding:20px;
-	  background-color: #f6f6f6;
+    #capture_signIn_login_widget{
+      min-height: auto;
+      #janrainEngageEmbed{
+        .janrainContent{
+          width:100% !important;
+          background: #fff !important;
+          height: auto !important;
+        }
+      }
+      li{
+        height:42px !important;
+        padding: 5px;
+        margin-right:15px !important;
+      }
+    }
+    a{
+      color:#ee4034;
+      font-family: "architype-light", sans-serif;
+    }
+    p{
+      &.terms-txt{
+        font-size: 15px;
+        padding:0 20px;
+        font-family: "architype-light", sans-serif;
+      }
+    }
+    
+    .login-footer{
+	  padding:15px 0;
+	  background-color: #f6f6f6 !important;
 	  box-shadow: 0 9px 9px -9px rgba(0,0,0,0.1) inset; 
 		p{
 		  margin-bottom:0;
+      font-size: 15px;
+      font-family: "architype-light", sans-serif;
 		}
 		.icon-key {
 		  margin-right: 5px;
 		  font-size: 16px;
 		}
-	}
-  a{
-      color:#ee4034;
+    .capture_createAccountButton::before{
+        display: none;
     }
-}
-.ui-dialog[aria-describedby="login-box"] {
-	.ui-widget-content{
-	  padding:0;
+    a{
+      &#capture_signIn_createAccountButton{
+        padding:0 !important;
+        background: none;
+        font-size:15px;
+        margin: 0 !important;
+      }
+    }
 	}
-	.ui-dialog-titlebar {
-	  position: absolute; 
-	  top: 0;
-	  right: 5px;
-	  z-index: 99;
-	    .ui-dialog-title{
-		  display:none !important;
-		}
-		.ui-dialog-titlebar-close {
-		  background: #FFF url(../images/close_button.png) no-repeat;
-		  width: 19px;
-		  height: 19px;
-		  border: none;
-		  cursor: pointer;
-		}
-	}
+  .capture_footer{
+    height: auto !important
+  }
+  .capture_btn {
+    font-size:20px;
+    padding: 13px 40px;
+    background-color: #ef4135;
+    margin-right:20px;
+    margin-left: 20px;
+    box-shadow: none;
+    border-radius: 0;
+    &.capture_processing{
+      color:#fff;
+    }
+  }
+  
+  .janrain-capture-ui{
+    &.capture-ui-content{
+      width: 100%;
+      padding:20px 0 0 0 !important;
+      border-radius: 0 !important;
+      h2{
+        font-weight: normal;
+        font-size: 15px;
+      }
+    }
+    .capture_form_item{
+      >label{
+        display: none;
+      }
+    }
+    .capture_error .capture_radio, .capture_error .capture_checkbox, .capture_error .capture_text_input, .capture_error .capture_inputPlaceholder{
+      border: 1px solid #f58002 !important;
+    }
+    .capture_fatal_error, .capture_form_error, &.janrain-capture-ui-mobile .capture_form_error{
+      padding:10px 20px 10px 45px;
+      background-position: 20px 10px !important;
+      font-size:15px;
+    }
+  }
+  .recaptcha_only_if_privacy{
+    a{
+      font-size: 10px !important;
+    }
+  }
+  @media screen and (max-width: 767px){
+    #recaptcha_image {
+      width: 80% !important;
+      float: left
+    }
+    .recaptcha_input_area input {
+      width: 78% !important;
+      margin-left: 0;
+      border: 1px solid #000 !important;
+    }
+    .recaptcha_image_cell{
+      width:240px;
+    }
+    .janrainContent{
+      padding-left: 0px !important;
+    }
+    .janrainPage{
+      ul{
+        &.providers{
+          width:100%;
+            li{
+              width:100% !important;
+              span{
+                &.janrain-provider-text-color-facebook, &.janrain-provider-text-color-linkedin{
+                  margin-top: 0px !important;
+                }
+              }
+            }
+        }
+      }
+    }
+  }
+  
 }
-.ui-widget-overlay {
-  background: #000 !important;
-  opacity: 0.5 !important;
+.height10{
+  height:10px;
+  display:block;
 }

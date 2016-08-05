@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
         insallmentsPayment: false,
         subTotal: 0,
         total :0,
+        supplyTotal:0,
         installNumber:3,
         installment: 0,
         init: function () {
@@ -21,13 +22,21 @@ export default Ember.Controller.extend({
           var primaryData = this.get("primaryData");
           var subTotal = 0;
           var total = 0;
+          var supplyTotal = 0;
           if (primaryData.data !== "undefined" && primaryData.data !== "") {
             $.map(primaryData.data.invoice.dues, function (payment) {
-              subTotal += parseFloat(payment.due);
-              total  = subTotal + 40;
+              subTotal += parseFloat(payment.due);          
             });
+            total  = parseFloat(subTotal) + 40; 
+
+            if(typeof primaryData.data.supplementalDuesTotal !== undefined) {
+              supplyTotal = parseFloat(subTotal) + parseFloat(primaryData.data.supplementalDuesTotal);
+              total += parseFloat(primaryData.data.supplementalDuesTotal);
+            }  
+
             this.set("subTotal", parseFloat(subTotal, 2));
             this.set("total", parseFloat(total, 2));
+            this.set("supplyTotal", parseFloat(supplyTotal, 2));
             this.calculateInstallments(this.get("installNumber"));
           }
         }.observes('primaryData.data'),
@@ -53,8 +62,7 @@ export default Ember.Controller.extend({
             validate = $("#form-card-payment").validate({
                 rules:{
                     cardName: {
-                      required: true,
-                      letterswithbasicpunc: true
+                      required: true
                     },
                     cardNumber: {
                       required: true,
@@ -79,10 +87,7 @@ export default Ember.Controller.extend({
                     }
                 },
                 messages: {
-                    cardName: {
-                      required: "Please enter name on credit card",
-                      letterswithbasicpunc: "Invalid name on credit card"
-                    },
+                    cardName: "Please enter name on credit card",
                     cardNumber: {
                       required: "Card number is required",
                       digits: "Please enter a valid credit card number"
@@ -95,7 +100,8 @@ export default Ember.Controller.extend({
                     },
                     cardSecurityCode: {
                       required: "Security code is required",
-                      digits: "Please enter a value less than or equal to 4"
+                      digits: "Please enter a valid CVV number",
+                      minlength: "Please enter at least 3 digits"
                     },
                     iagree_terms:{
                       required: "You must agree to the terms and conditions"

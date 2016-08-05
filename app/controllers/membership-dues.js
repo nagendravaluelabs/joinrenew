@@ -37,6 +37,7 @@ export default Ember.Controller.extend(rememberScroll, {
     supplementalDuesTotal: 0,
     supplementalTotalDues: 0,
     totalDues: 0,
+    supptot:0,
     hasSupplementalDues: function () {
         "use strict";
         var duesData = this.get("duesData");
@@ -73,8 +74,13 @@ export default Ember.Controller.extend(rememberScroll, {
     }.observes('totalDues', 'supplementalDuesTotal'),
     supTotalDuesFunc: function () {
         "use strict";
+        var duesData = this.get("duesData");
         var totalDues = this.get("totalDues");
         var supplementalDuesTotal = this.get("supplementalDuesTotal");
+        if (duesData.data !== "undefined" && duesData.data !== "") {
+          duesData.data["supplementalDuesTotal"] = supplementalDuesTotal;
+          this.get("duesData").set("data", duesData.data);
+        }
         this.set("supplementalTotalDues", parseInt(supplementalDuesTotal) + parseInt(totalDues));
     },
     supplementalList: function () {

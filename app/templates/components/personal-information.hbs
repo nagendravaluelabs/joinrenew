@@ -125,7 +125,7 @@
       <ul class="form-radios clearfix">
         {{#each chaptersType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{#if (isEqualTo type personalInfo.personal.address.primary)}}
+            {{#if (isEqualTo type (i18N 'en' personalInfo.personal.address.primary 'value'))}}
             <input type="radio" id="choose_chapter_{{i18N 'en' type 'id'}}" name="choose_chapter" value="{{i18N 'en' type 'id'}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} checked />
             {{else}}
               <input type="radio" id="choose_chapter_{{i18N 'en' type 'id'}}" name="choose_chapter" value="{{i18N 'en' type 'id'}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} />
@@ -194,7 +194,7 @@
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlengh="5" maxlength="10"/>
+                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10"/>
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -207,7 +207,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code</label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10" />
+                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30"  maxlength="10" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -265,16 +265,31 @@
                 <div class="auto-address clearfix">
                   <span class="info-left">
                     <div id="company-lookup-address-block">
-                        {{#if personalInfo.personal.address.office.line1}}
-                        {{personalInfo.personal.address.office.line1}}<br />
+                        {{#if personalInfo.personal.address.office}}
+                          {{#if personalInfo.personal.address.office.line1}}
+                            {{personalInfo.personal.address.office.line1}}<br />
+                          {{/if}}
+                          {{#if personalInfo.personal.address.office.line2}}
+                            {{personalInfo.personal.address.office.line2}}<br />
+                          {{/if}}
+                          {{#if personalInfo.personal.address.office.line3}}
+                            {{personalInfo.personal.address.office.line3}}<br />
+                          {{/if}}
+                          {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}, {{personalInfo.personal.address.office.country.value}} {{personalInfo.personal.address.office.zip}}
                         {{/if}}
-                        {{#if personalInfo.personal.address.office.line2}}
-                        {{personalInfo.personal.address.office.line2}}<br />
+                        
+                        {{#if personalInfo.personal.address.billing}}
+                          {{#if personalInfo.personal.address.billing.line1}}
+                            {{personalInfo.personal.address.billing.line1}}<br />
+                          {{/if}}
+                          {{#if personalInfo.personal.address.billing.line2}}
+                            {{personalInfo.personal.address.billing.line2}}<br />
+                          {{/if}}
+                          {{#if personalInfo.personal.address.billing.line3}}
+                            {{personalInfo.personal.address.billing.line3}}<br />
+                          {{/if}}
+                          {{personalInfo.personal.address.billing.city}}, {{personalInfo.personal.address.billing.state.value}}, {{personalInfo.personal.address.billing.country.value}} {{personalInfo.personal.address.billing.zip}}
                         {{/if}}
-                        {{#if personalInfo.personal.address.office.line3}}
-                        {{personalInfo.personal.address.office.line3}}<br />
-                        {{/if}}
-                        {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}, {{personalInfo.personal.address.office.country.value}} {{personalInfo.personal.address.office.zip}}
                     </div>
                   </span>
                   <span class="info-link">Can’t find your work address?

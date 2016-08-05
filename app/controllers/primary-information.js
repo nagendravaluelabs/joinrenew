@@ -36,8 +36,10 @@ export default Ember.Controller.extend({
             index += 1;
             userData[index] = {};
              var PhoneValues = (personalData.phone.primary === "mobile") ? personalData.phone.mobile.value : personalData.phone.cell.value;
-                userData[index] = {"title": "Mobile phone", "value": PhoneValues, "class": "mobile-phone"};
+                 userData[index] = {"title": "Mobile phone", "value": PhoneValues, "class": "mobile-phone"};
+                if(personalData.phone.primary === "mobile"){
                 userData[index].isPrimary = true;
+                }
           }
           if (typeof personalData.phone.directoffice !== "undefined" && personalData.phone.directoffice.value!=="") {
             index += 1;
@@ -58,11 +60,17 @@ export default Ember.Controller.extend({
             primaryAddress[1]= personalData.address.home.line2;
             primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;
           } else {
-            primaryAddress[0]= personalData.address.office.line1;
-            primaryAddress[1]= personalData.address.office.line2;
-            primaryAddress[2]= personalData.address.office.city + ", " + personalData.address.office.state.value + ", " + personalData.address.office.country.value + ", " + personalData.address.office.zip;
+            if(typeof personalData.address.office !== "undefined") {
+              primaryAddress[0]= personalData.address.office.line1;
+              primaryAddress[1]= personalData.address.office.line2;
+              primaryAddress[2]= personalData.address.office.city + ", " + personalData.address.office.state.value + ", " + personalData.address.office.country.value + ", " + personalData.address.office.zip;
+            } else if(typeof personalData.address.billing !== "undefined"){
+              primaryAddress[0]= personalData.address.billing.line1;
+              primaryAddress[1]= personalData.address.billing.line2;
+              primaryAddress[2]= personalData.address.billing.city + ", " + personalData.address.billing.state.value + ", " + personalData.address.billing.country.value + ", " + personalData.address.billing.zip;
+            }
           }
-          console.log(primaryAddress);
+          
           userData[index] = {"title": "address", "value": primaryAddress, "class": "address"};
         }
         this.set("userData", userData);

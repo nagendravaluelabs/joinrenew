@@ -43,9 +43,6 @@
   }
   .total-no-renew-suppdue{
     p {
-      margin-top:45px;
-    }
-    p {
       margin-bottom: 24px;
     }
     table.duestable {
@@ -353,7 +350,7 @@
 #main-content{
   &.page-renew-membership-dues-page{
     .sign-up-subheading{
-      margin: 8px 0;
+      margin: 8px 0 45px 0;
       .sign-up-subheading{
         margin-top: 7px;
         margin-bottom: 2px;

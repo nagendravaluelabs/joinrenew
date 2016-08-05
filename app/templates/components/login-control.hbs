@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-right">
+  {{#if auth.user}}
+    <li><a href="#" {{action "logout"}}>Sign out</a></li>
+  {{else}}
+    {{#using-janrain as |enabled janrain|}}
+      <li><a href="#" {{action janrain.login}}>Login</a></li>
+    {{/using-janrain}}
+  {{/if}}
+</ul>
