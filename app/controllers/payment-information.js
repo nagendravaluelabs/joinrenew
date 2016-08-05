@@ -1,13 +1,15 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $*/
 /*global Ember*/
-$.validator.addMethod( "creditcardMonth", function( value, element, param ) {
+$.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
   var month = date.getMonth();
   var year = date.getFullYear();
+  var cardExpirationYear; 
+  var cardExpirationMonth;
   var selectedYear = parseInt(cardExpirationYear.value);
   var selectedMonth = parseInt(cardExpirationMonth.value);
-  if(selectedMonth != "") {
+  if(selectedMonth !== "") {
     if (year === selectedYear && selectedMonth <= month){
         return false;
     }
@@ -30,6 +32,17 @@ export default Ember.Controller.extend({
             this.calculateInstallments(this.get("installNumber"));
             this.subTotalObserves();
         },
+        currentYear: function(){
+          var date = new Date();
+          var presentYear = date.getFullYear();
+          return presentYear;
+        }.property(),
+        maxYearList: function(){
+          var date = new Date();
+          var presentYear = date.getFullYear();
+          var maxYears = presentYear + 10;
+          return maxYears;
+        }.property(),
         subTotalObserves: function () {
           "use strict";
           var primaryData = this.get("primaryData");
