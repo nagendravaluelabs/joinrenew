@@ -91,7 +91,6 @@ export default Service.extend(RouteRefresherMixin, {
               self.get("auth").set("authState", "");
               self.reloadRoute();
             } else {
-              console.log("aa");
               self.get("auth").set("authState", "no-access");
               self.get("auth").set("user", ["invalid"]);
               self.get('auth').logout();

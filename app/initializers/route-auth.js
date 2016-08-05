@@ -3,7 +3,6 @@ import inject from 'ember-service/inject';
 var AuthMixin = Ember.Mixin.create({
   auth: inject(),
   verfiyUserAuth: function() {
-    alert();
     this.authVerify();
   }.observes("auth.user"),
   beforeModel: function() {

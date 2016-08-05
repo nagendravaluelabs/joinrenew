@@ -8,6 +8,7 @@ import RouteRefresherMixin from '../mixins/route-refresher';
 const SLEEP_POLL_INTERVAL = 60 * 1000;
 export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
+  janrain: inject(),
   authState: "",
   _refreshOnWakeFromSleep() {
     let lastTime = (new Date()).getTime();
@@ -100,7 +101,7 @@ export default Ember.Service.extend(RouteRefresherMixin, {
           if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
             return json;
           } else {
-            return false;
+            return "invalid-user";
           }
         });
       }
@@ -134,6 +135,11 @@ export default Ember.Service.extend(RouteRefresherMixin, {
             this.refresh(user.refresh_token);
           }
           this.set('user', null);
+        } else if(valid === "invalid-user") {
+          this.set("authState", "no-access");
+          this.set("user", ["invalid"]);
+          this.logout();
+          this.get('janrain').doLogout();
         } else {
           let expiration = moment(user.expires_at, moment.iso_8601);
           if (expiration.isBefore(moment().add(user.expires_in / 2, 'seconds')) && user.refresh_token) {
