@@ -43,6 +43,7 @@ export default Ember.Component.extend(rememberScroll, {
             primaryAddress = primaryAddress.personal.address;
             chapterType = primaryAddress.primary.capitalize();
             chapterType = (chapterType === "Billing") ? "Home" : chapterType;
+            chapterType = (chapterType === "Office") ? "Work" : chapterType;
             self.chapterSelection(chapterType);
             self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
             self.set('contactAddressType', contactInfo.primary);
@@ -65,7 +66,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var data = [
             "home",
-            "office"
+            "work"
         ];
         return data;
     }.property(),
@@ -92,9 +93,6 @@ export default Ember.Component.extend(rememberScroll, {
         self.set('createOrganization', false);
         self.set('primary' + chapterType + 'Address', true);
     },
-    updateStateData: function() {
-      alert();
-    }.observes("statesData.data"),
     setWorkStateStatusFn: function (value) {
         "use strict";
         var self, data;
