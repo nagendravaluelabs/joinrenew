@@ -178,7 +178,13 @@
                   <tr>
                     <td>Supplemental dues</td>
                     <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
-                  </tr>                
+                  </tr> 
+                  <tr>
+                    <td><input type="checkbox" id="archipac-check" name="" value="1" class="form-checkbox required" checked>
+                    <label class="option archipac-label" for="archipac-check">
+                    <span>Archipac</span>, a political action committee of the AIA, donation</label></td>
+                    <td id="suppdues" class="value">$ 25.00</td>
+                  </tr>                  
                   <tr class="sum">
                     <td>Total due</td>
                     <td id="totaldue" class="value"><div id="the_grand_total">$ {{format-currency supplementalTotalDues}}</div></td>

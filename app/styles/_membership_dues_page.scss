@@ -456,6 +456,14 @@
     
   }
 }
+.option{
+  &.archipac-label{
+      margin-bottom:0px;
+      span{
+        color:#f4473a;
+      }
+    }
+  }
 
 .architect-sublabel {
   color: #000 !important;
