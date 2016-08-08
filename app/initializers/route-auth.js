@@ -13,8 +13,9 @@ var AuthMixin = Ember.Mixin.create({
     let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
+      let authUser = this.get("auth").get("user");
       if(authRoutes.indexOf(currenRoute) !== -1) {
-        if(!this.get("auth").get("user")) {
+        if(!authUser) {
           localStorage['route'] = currenRoute;
           if(this.get("auth").get("authState") === "logout") {
             this.transitionTo('/renew');
@@ -22,12 +23,15 @@ var AuthMixin = Ember.Mixin.create({
           } else if(this.get("auth").get("authState") === "invalid-invoice") {
             this.transitionTo('/invoice-invalid');
             localStorage['route'] = "";
+          } else if(this.get("auth").get("authState") === "no-access") {
+            this.transitionTo('/invalid-janrain');
+            localStorage['route'] = "";
           } else {
             this.transitionTo('/not-authorized');
           }        
         }
       } else if(nonAuthRoutes.indexOf(currenRoute) !== -1) {
-        if(this.get("auth").get("user")) {
+        if(authUser && authUser.access_token !== undefined) {
           let transitionToRoute = localStorage['route'];
           if(transitionToRoute) {
             this.transitionTo(transitionToRoute);
@@ -35,9 +39,11 @@ var AuthMixin = Ember.Mixin.create({
             this.transitionTo("renew-verify-membership");
           }
           localStorage['route'] = "";
+        } else if(authUser && authUser.indexOf("invalid") !== -1) {
+          this.transitionTo("invalid-janrain");
         }
-      } else if(currenRoute === "not-authorized"){
-        if(this.get("auth").get("user")) {
+      } else if(currenRoute === "not-authorized" || currenRoute === "invoice-invalid" || currenRoute === "invalid-janrain"){
+        if(authUser && authUser.access_token !== undefined) {
           let transitionToRoute = localStorage['route'];
           if(transitionToRoute) {
             this.transitionTo(transitionToRoute);
