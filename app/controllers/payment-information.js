@@ -5,10 +5,10 @@ $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
   var month = date.getMonth();
   var year = date.getFullYear();
-  var cardExpirationYear; 
-  var cardExpirationMonth;
-  var selectedYear = parseInt(cardExpirationYear.value);
-  var selectedMonth = parseInt(cardExpirationMonth.value);
+  var cardExpirationYear = $("#cardExpirationYear").val();
+  var cardExpirationMonth = $("#cardExpirationMonth").val();
+  var selectedYear = parseInt(cardExpirationYear); 
+  var selectedMonth = parseInt(cardExpirationMonth);   
   if(selectedMonth !== "") {
     if (year === selectedYear && selectedMonth <= month){
         return false;

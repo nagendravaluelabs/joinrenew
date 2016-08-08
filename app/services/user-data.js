@@ -15,7 +15,6 @@ export default Ember.Service.extend({
     var self= this;
     if(userkey !== null && userkey !== "") {
       Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=${userkey}`).then(function(data){
-        console.log(data.invoice);
         if(typeof data !== undefined && typeof data.invoice !== undefined && typeof data.invoice.proforma !== undefined && parseInt(data.invoice.proforma) === 1 ) {
           self.set("data", data);
         } else {

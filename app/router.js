@@ -21,6 +21,7 @@ Router.map(function() {
   this.route('page-not-found', { path: '/*path' });
   this.route('not-authorized');
   this.route('invoice-invalid');
+  this.route('invalid-janrain');
 });
 
 export default Router;
