@@ -250,14 +250,14 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#primary_number_home").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                     },
                     mobile_number: {
                         required: function () {
                             return $("#primary_number_mobile").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                         
                     },
                     work_number: {
@@ -265,7 +265,7 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#primary_number_directoffice").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                     },
                     primary_home_address_country: {
                         required: function () {
