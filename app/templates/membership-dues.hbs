@@ -240,9 +240,9 @@
                     <div class="form-item form-type-textfield form-item-text-fields">
                       <label for="{{supplemental.text}}_persons">#persons:</label>
                       {{#if supplemental.isRequired}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
+                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
                       {{else}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} />
+                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} />
                       {{/if}}
                     </div>
                     <div class="totals padding-total-top">
