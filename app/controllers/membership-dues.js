@@ -255,10 +255,8 @@ $(document).on("keypress", ".few-special-char", function (e) {
 });
 
 $(document).on("keypress", '.no-special-char', function(e){
-   
       "use strict";
-      var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
-      console.log( "keyCode --- " + keyCode )
-      var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+      var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+      var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
       return ret;
-})
+});
