@@ -177,11 +177,14 @@ export default Ember.Controller.extend(rememberScroll, {
         },
         calculateSum: function (e) {
             "use strict";
-            var self, value, amount, total, suppduesTotal;
+			
+            var self, value, amount, total, suppduesTotal,localAmount,stateAmount;
             self = $(e.currentTarget);
             suppduesTotal = 0;
             value = (self.val() !== '') ? parseInt(self.val()) : 0;
-            amount = parseFloat(self.data("localAmount"));
+            localAmount = parseFloat(self.data("localAmount"));
+			stateAmount = parseFloat(self.data("stateAmount"));				
+			amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
             self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
             self.closest("h3").find(".totals").find(".totalnum").data("total", total);
@@ -249,4 +252,11 @@ $(document).on("keypress", ".few-special-char", function (e) {
         $(this).next("label.error").remove();
     }
     return ret;
+});
+
+$(document).on("keypress", '.no-special-char', function(e){
+      "use strict";
+      var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+      var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
+      return ret;
 });

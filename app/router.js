@@ -22,6 +22,7 @@ Router.map(function() {
   this.route('not-authorized');
   this.route('invoice-invalid');
   this.route('invalid-janrain');
+  this.route('invoice-unavailable');
 });
 
 export default Router;

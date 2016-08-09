@@ -250,14 +250,14 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#primary_number_home").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                     },
                     mobile_number: {
                         required: function () {
                             return $("#primary_number_mobile").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                         
                     },
                     work_number: {
@@ -265,7 +265,7 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#primary_number_directoffice").is(":checked");
                         },
                         digits: true,
-                        maxlength: 10
+                        maxlength: 15
                     },
                     primary_home_address_country: {
                         required: function () {
@@ -287,8 +287,7 @@ export default Ember.Component.extend(rememberScroll, {
                             return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                         },
                         alphanumeric:true,
-                        minlength: 5
-                       
+                        minlength: 5 
                     },
                     administrative_area_state: {
                         required: function () {
@@ -329,8 +328,9 @@ export default Ember.Component.extend(rememberScroll, {
                     primary_home_city: "City is required",
                     primary_home_zipcode: {
                       required : "Zip code is required",
-                      alphanumeric : "Special characters not allowed"
-                    } 
+                      alphanumeric : "Please enter a valid zip code"
+                    }
+                   
                 }
             });
             if (validate.form()) {
@@ -357,7 +357,8 @@ export default Ember.Component.extend(rememberScroll, {
                     org_company_phone: {
                         digits: true,
                         minlength: 6
-                    }
+                    },
+                    postal_code: {alphanumeric:true}
                 },
                 messages: {
                     organization_name: "Organization Name is required",
@@ -368,7 +369,8 @@ export default Ember.Component.extend(rememberScroll, {
                     work_administrative: "State is required",
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
-                    }
+                    },
+                    postal_code:{alphanumeric : "Please enter a valid zip code"}
                 }
             });
             if (validator.form()) {
