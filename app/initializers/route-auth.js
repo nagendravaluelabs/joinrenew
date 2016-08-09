@@ -11,6 +11,7 @@ var AuthMixin = Ember.Mixin.create({
   authVerify: function() {    
     let currenRoute  = this.routeName;
     let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page"];
+    let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
@@ -22,6 +23,9 @@ var AuthMixin = Ember.Mixin.create({
             localStorage['route'] = "";
           } else if(this.get("auth").get("authState") === "invalid-invoice") {
             this.transitionTo('/invoice-invalid');
+            localStorage['route'] = "";
+          } else if(this.get("auth").get("authState") === "invoice-unavailable") {
+            this.transitionTo('/invoice-unavailable');
             localStorage['route'] = "";
           } else if(this.get("auth").get("authState") === "no-access") {
             this.transitionTo('/invalid-janrain');
@@ -42,7 +46,7 @@ var AuthMixin = Ember.Mixin.create({
         } else if(authUser && authUser.indexOf("invalid") !== -1) {
           this.transitionTo("invalid-janrain");
         }
-      } else if(currenRoute === "not-authorized" || currenRoute === "invoice-invalid" || currenRoute === "invalid-janrain"){
+      } else if(routeIgnoreKeys.indexOf(currenRoute) !== -1) {
         if(authUser && authUser.access_token !== undefined) {
           let transitionToRoute = localStorage['route'];
           if(transitionToRoute) {
