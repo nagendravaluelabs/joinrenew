@@ -242,7 +242,7 @@
                       {{#if supplemental.isRequired}}
                         <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
                       {{else}}
-                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="Please enter value greater than 1."/>
+                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="Please enter minimum 1 person."/>
                       {{/if}}
                     </div>
                     <div class="totals padding-total-top">
