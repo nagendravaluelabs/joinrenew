@@ -262,7 +262,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     work_number: {
                         required: function () {
-                            return $("#primary_number_directoffice").is(":checked");
+                            return $("#primary_number_work").is(":checked");
                         },
                         digits: true,
                         maxlength: 15
@@ -320,7 +320,7 @@ export default Ember.Component.extend(rememberScroll, {
                         digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
                     },
                     work_number: {
-                        required: "Office number is required",
+                        required: "Work number is required",
                         digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
                     },
                     primary_home_address_country: "Country field is required",
