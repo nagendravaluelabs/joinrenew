@@ -129,10 +129,13 @@ export default Ember.Controller.extend(rememberScroll, {
                                 }
                             },
                             messages: {
-                                questionnaire_membername: "Please enter Member name",
+                                questionnaire_membername: {
+                                  required : "Member name is required",
+                                  lettersonly: "Please enter a valid member name"
+                                },
                                 questionnaire_memberid: {
-                                    required: "Please enter Member ID",
-                                    digits: "Please enter only numerics"
+                                    required: "Member ID number is required",
+                                    digits: "Please enter a valid member ID number"
                                 }
                             }
                         });

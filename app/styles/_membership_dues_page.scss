@@ -609,6 +609,13 @@ span{
             font-weight: bold !important;
         }
     }
+    .alert-danger{
+      .error{
+        display: block;
+        padding: 3px 0;
+        clear: both;
+      }
+    }
     
     .footer-btn-container {
         @media (max-width: 767px) {

@@ -228,7 +228,8 @@ export default Ember.Controller.extend({
                           },
                           bankroutingNumber:{
                              required: true,
-                             digits: true
+                             digits: true,
+                             minlength: 7
                           },
                           accountNumber: {
                              required: true,
@@ -245,7 +246,8 @@ export default Ember.Controller.extend({
                           },
                           bankroutingNumber:{
                             required: "Bank routing number is required",
-                            digits: "Please enter a valid routing number"
+                            digits: "Please enter a valid routing number",
+                            minlength : "Please enter a valid routing number"
                           },
                           accountNumber:{
                             required:"Account number is required",

@@ -313,19 +313,20 @@ export default Ember.Component.extend(rememberScroll, {
                     contact_work_country: "Country field is required",
                     home_number: {
                         required: "Home number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
                     },
                     mobile_number: {
                         required: "Mobile number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
                     },
                     work_number: {
                         required: "Office number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 5555555555"
+                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
                     },
                     primary_home_address_country: "Country field is required",
                     primary_home_address1: "Address line1 is required",
                     primary_home_city: "City is required",
+                    administrative_area_state: "State is required",
                     primary_home_zipcode: {
                       required : "Zip code is required",
                       alphanumeric : "Please enter a valid zip code"
@@ -358,7 +359,9 @@ export default Ember.Component.extend(rememberScroll, {
                         digits: true,
                         minlength: 6
                     },
-                    postal_code: {alphanumeric:true}
+                    postal_code: {
+                      alphanumeric:true
+                    }
                 },
                 messages: {
                     organization_name: "Organization Name is required",
@@ -366,11 +369,13 @@ export default Ember.Component.extend(rememberScroll, {
                     create_org_country: "Country is required",
                     org_company_address1: "Address line1 is required",
                     org_locality: "City is required",
-                    work_administrative: "State is required",
+                    work_administrative_state: "State is required",
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
                     },
-                    postal_code:{alphanumeric : "Please enter a valid zip code"}
+                    postal_code:{
+                      alphanumeric : "Please enter a valid zip code"
+                      }
                 }
             });
             if (validator.form()) {

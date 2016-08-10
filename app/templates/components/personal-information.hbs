@@ -210,7 +210,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code</label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30"  maxlength="10" />
+                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -341,7 +341,8 @@
                 {{/ember-chosen}}
               </li>
               <li>
-                 <label for="contact_{{type}}_country">Country</label>
+                 <label for="contact_{{type}}_country">Country
+                 <span class="form-required" title="This field is required.">*</span></label>
                 {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' value="target.value"}}
               </li>
               <li>
@@ -400,7 +401,7 @@
                  <li class="state creative-zip">
                     <label for="postal_code">Zip code</label>
                     <input class="postal-code form-text" autocomplete="postal_code"
-                    type="text" id="#" name="postal_code" value="" size="30" minlengh="5" maxlength="10"/>
+                    type="text" id="#" name="postal_code" value="" size="30"/>
                  </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
