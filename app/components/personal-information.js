@@ -231,9 +231,7 @@ export default Ember.Component.extend(rememberScroll, {
                         letterswithbasicpunc: true
                     },
                     contact_home_country: {
-                        required: function () {
-                            return $("#primary_number_home").is(":checked");
-                        }
+                        required: true
                     },
                     contact_mobile_country: {
                         required: function () {
@@ -246,9 +244,7 @@ export default Ember.Component.extend(rememberScroll, {
                         }
                     },
                     home_number: {
-                        required: function () {
-                            return $("#primary_number_home").is(":checked");
-                        },
+                        required: true,
                         digits: true,
                         maxlength: 15
                     },
