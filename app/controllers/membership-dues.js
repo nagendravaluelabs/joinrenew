@@ -9,6 +9,7 @@ export default Ember.Controller.extend(rememberScroll, {
     isDuesCalculator: false,
     duesData: Ember.inject.service('user-data'),
     hasDuesCalculcator: true,
+    maxCapExceeded: false,
     updateDuesPage: function (renew, questionnaire, total, dues) {
         "use strict";
         this.set("isRenewSummary", renew);
@@ -188,14 +189,15 @@ export default Ember.Controller.extend(rememberScroll, {
         },
         calculateSum: function (e) {
             "use strict";
-			
-            var self, value, amount, total, suppduesTotal,localAmount,stateAmount;
+            var self, value, amount, total, suppduesTotal,localAmount,stateAmount, duesData, maxCap;
+            duesData = this.get("duesData");
+            maxCap = parseFloat(duesData.data.invoice.supplementaldues.state.max);
             self = $(e.currentTarget);
             suppduesTotal = 0;
             value = (self.val() !== '') ? parseInt(self.val()) : 0;
             localAmount = parseFloat(self.data("localAmount"));
-			stateAmount = parseFloat(self.data("stateAmount"));				
-			amount =localAmount+stateAmount;
+            stateAmount = parseFloat(self.data("stateAmount"));				
+            amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
             self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
             self.closest("h3").find(".totals").find(".totalnum").data("total", total);
@@ -203,7 +205,13 @@ export default Ember.Controller.extend(rememberScroll, {
             $("#accordion").find("h3 .totalnum").each(function () {
                 suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
             });
-            //$("#suppdues_totalamount").html("$ " + parseFloat(suppduesTotal).toFixed(2));
+            this.set("maxCapExceeded", false);
+            if(maxCap > 0) {
+              if(suppduesTotal > maxCap) {
+                suppduesTotal = maxCap;
+                this.set("maxCapExceeded", true);
+              }              
+            }
             this.set("supplementalDuesTotal", suppduesTotal);
         },
         payNow: function () {
