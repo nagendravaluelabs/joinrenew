@@ -47,7 +47,7 @@ export default Ember.Controller.extend(rememberScroll, {
         duesData = this.get("duesData");
         
         if (duesData.data !== "undefined" && duesData.data !== "") {
-            if (duesData.data.invoice.issupplementaldues === 1 && validDuesUser.indexOf(duesData.data.membership.membershiptype) != -1) {
+            if (duesData.data.invoice.issupplementaldues === 1 && validDuesUser.indexOf(duesData.data.membership.membershiptype) !== -1) {
                 this.updateDuesPage(true, false, false, false);
                 this.set("hasDuesCalculcator", true);
             } else {
