@@ -214,16 +214,17 @@
                 {{/if}}
               </tbody>
             </table>
-            
-            <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
-            
-              <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
-              value="1" class="form-checkbox required">
-              <label class="option" for="edit-licensed-architect">
-                I attest that I am currently licensed to practice architecture in the U.S.          
-              </label>
-                
-            </div>
+            {{#if hasDuesCalculcator}}
+              <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
+              
+                <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
+                value="1" class="form-checkbox required">
+                <label class="option" for="edit-licensed-architect">
+                  I attest that I am currently licensed to practice architecture in the U.S.          
+                </label>
+                  
+              </div>
+            {{/if}}
             
             <div class="clearfix"></div>
             
@@ -329,7 +330,7 @@
             <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
           </div>
           <div class="clearfix"></div>
-          {{#if duesData.data.invoice.issupplementaldues}}
+          {{#if hasDuesCalculcator}}
           <div id="startoverbtn">
             <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
           </div>
