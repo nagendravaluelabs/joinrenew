@@ -28,23 +28,30 @@
             <div class="result">
               <table>
                 <tbody>
-                
+                  {{#if primaryData.data.invoice.dues.national}}
+                    <tr>
+                      <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
+                      <td>${{format-currency primaryData.data.invoice.dues.national.due}}</td>
+                    </tr>
+                  {{/if}}
+                  {{#if primaryData.data.invoice.dues.state}}
+                    <tr>
+                      <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
+                      <td>${{format-currency primaryData.data.invoice.dues.state.due}}</td>
+                    </tr>
+                  {{/if}}
+                  {{#if primaryData.data.invoice.dues.local}}
                   <tr>
-                    <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
-                    <td>${{format-currency primaryData.data.invoice.dues.national.due}}</td>
-                  </tr>
-               <tr>
-                    <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
-                    <td>${{format-currency primaryData.data.invoice.dues.state.due}}</td>
-                  </tr>
-                   <tr>
-                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
+                    <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
                     <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
                   </tr>
-                  <tr class="sum">
-                    <td class="title">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</td>
-                    <td class="due-total">${{format-currency subTotal}}</td>
-                  </tr>
+                  {{/if}}
+                  {{#if primaryData.data.membership.membershipyear}}
+                    <tr class="sum">
+                      <td class="title">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</td>
+                      <td class="due-total">${{format-currency subTotal}}</td>
+                    </tr>
+                  {{/if}}
                 </tbody>
               </table>
             </div>
