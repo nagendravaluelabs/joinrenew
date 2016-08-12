@@ -214,16 +214,17 @@
                 {{/if}}
               </tbody>
             </table>
-            
-            <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
-            
-              <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
-              value="1" class="form-checkbox required">
-              <label class="option" for="edit-licensed-architect">
-                I attest that I am currently licensed to practice architecture in the U.S.          
-              </label>
-                
-            </div>
+            {{#if hasDuesCalculcator}}
+              <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
+              
+                <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
+                value="1" class="form-checkbox required">
+                <label class="option" for="edit-licensed-architect">
+                  I attest that I am currently licensed to practice architecture in the U.S.          
+                </label>
+                  
+              </div>
+            {{/if}}
             
             <div class="clearfix"></div>
             
@@ -304,6 +305,12 @@
         
       {{/if}}
       
+      {{#if maxCapExceeded}}
+        <ul class="maxCapExceeded">
+        	<li>Supplemental dues cannot exceed $ {{format-currency duesData.data.invoice.supplementaldues.state.max}}. This is the max amount you’ll be charged.</li>
+        </ul>
+      {{/if}}
+      
       <div class="button-container membership-button-container hidden-xs">
         {{#if isRenewSummary}}
           <div class="renew-btn-container r-btn-container">
@@ -329,7 +336,7 @@
             <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
           </div>
           <div class="clearfix"></div>
-          {{#if duesData.data.invoice.issupplementaldues}}
+          {{#if hasDuesCalculcator}}
           <div id="startoverbtn">
             <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
           </div>

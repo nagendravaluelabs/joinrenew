@@ -285,7 +285,11 @@
                           {{#if personalInfo.personal.address.office.line3}}
                             {{personalInfo.personal.address.office.line3}}<br />
                           {{/if}}
-                          {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}, {{personalInfo.personal.address.office.country.value}} {{personalInfo.personal.address.office.zip}}
+                          {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}
+                          {{#if (isNotEqual personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183")}}
+                             {{personalInfo.personal.address.office.country.value}},
+                          {{/if}} 
+                          {{personalInfo.personal.address.office.zip}}
                         {{/if}}
                     </div>
                   </span>
