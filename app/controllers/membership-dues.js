@@ -195,8 +195,8 @@ export default Ember.Controller.extend(rememberScroll, {
             self = $(e.currentTarget);
             suppduesTotal = 0;
             value = (self.val() !== '') ? parseInt(self.val()) : 0;
-            localAmount = parseFloat(self.data("localAmount"));
-            stateAmount = parseFloat(self.data("stateAmount"));				
+            localAmount = (self.data("localAmount")!== "") ? parseFloat(self.data("localAmount")) : 0;
+            stateAmount = (self.data("stateAmount")!== "") ? parseFloat(self.data("stateAmount")) : 0;				
             amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
             self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));

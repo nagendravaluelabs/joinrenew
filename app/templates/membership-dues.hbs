@@ -269,7 +269,7 @@
                       
                       Total:
                       <div class="totalnum" data-total="0">$ 0.00</div>
-                      
+
                     </div>
                     
                   </div>
@@ -278,14 +278,20 @@
                  
                 <div>
                   State:
-                  <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
-                  
-                  <span class="mobile-break"></span>
+                    {{#if duesData.data.invoice.supplementaldues.state}}
+                      <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
+                      <span class="mobile-break"></span>
+                  {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                  {{/if}}
                   Local:
-                  <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
-                  
+                    {{#if duesData.data.invoice.supplementaldues.local}}
+                      <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
+                    {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                    {{/if}}
                   <div class="totals">
-                    Total:
+                    Totals:
                     <div class="totalnum" data-total="0">$ 0.00</div>
                   </div>
                 </div>
