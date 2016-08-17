@@ -33,6 +33,6 @@ deploy:
 after_deploy:
   - provider: script
     skip_cleanup: true
-    script: perl scripts/run_tests.pl
+    script: perl scripts/PullRequestMerge.pl
     on:
       branch: development
