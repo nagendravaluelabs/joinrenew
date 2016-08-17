@@ -90,7 +90,8 @@
         {{#each addressType as |type|}}
           <li>
             <label for="contact_{{type}}_country">Country
-            {{#if (isEqualTo type (i18N 'en' contactAddressType 'id'))}}
+            
+            {{#if (ifCond (isEqualTo type (i18N 'en' contactAddressType 'id')) (isEqualTo type "home") "||")}}
               <span class="form-required" title="This field is required.">*</span>
             {{/if}}
           </label>
@@ -98,7 +99,7 @@
           </li>
           <li>
             <label for="{{type}}-number" class="text-capitalize">{{type}} phone
-              {{#if (isEqualTo type (i18N 'en' contactAddressType 'id'))}}
+              {{#if (ifCond (isEqualTo type (i18N 'en' contactAddressType 'id')) (isEqualTo type "home") "||")}}
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
@@ -188,6 +189,9 @@
                   </li>
                 {{/if}}
                 
+                
+                
+                
                 <!-- Zip code validation for United States -->
                {{#if homeShowState}} 
                  <li class="inline-bl">
@@ -207,7 +211,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code</label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30"  maxlength="10" />
+                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" />
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -219,6 +223,12 @@
                 </li>
                 {{/if}}
                <!--  zip code validation end here -->
+               
+               
+               
+               
+               
+               
               </ul>
             </fieldset>
           </div>
@@ -275,7 +285,11 @@
                           {{#if personalInfo.personal.address.office.line3}}
                             {{personalInfo.personal.address.office.line3}}<br />
                           {{/if}}
-                          {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}, {{personalInfo.personal.address.office.country.value}} {{personalInfo.personal.address.office.zip}}
+                          {{personalInfo.personal.address.office.city}}, {{personalInfo.personal.address.office.state.value}}
+                          {{#if (isNotEqual personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183")}}
+                             {{personalInfo.personal.address.office.country.value}},
+                          {{/if}} 
+                          {{personalInfo.personal.address.office.zip}}
                         {{/if}}
                     </div>
                   </span>
@@ -332,7 +346,8 @@
                 {{/ember-chosen}}
               </li>
               <li>
-                 <label for="contact_{{type}}_country">Country</label>
+                 <label for="contact_{{type}}_country">Country
+                 <span class="form-required" title="This field is required.">*</span></label>
                 {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' value="target.value"}}
               </li>
               <li>
@@ -363,28 +378,37 @@
                    {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required" states=workstates}}
                 </li>
               {{/if}}
-              
-              <li class="state creative-zip">
-                <label for="postal-code">Zip code</label>
-                <input class="postal-code form-text" autocomplete="postal-code"
-                type="text" id="#" name="postal_code" value="" size="30" minlengh="5" maxlength="10"/>
-              </li>
-              
-             <!--  This code commented for need to check for Validation for United States -->
-              <!-- {{#if workShowState}} 
-                <li class="state creative-zip">
+            
+                <!-- Work mode -  Zip code validation for United States -->
+                {{#if workShowState}}
+                 <li class="inline-bl">
                   <label for="postal-code">Zip code
-                  <span class="form-required" title="This field is required.">*</span></label>
-                  <input class="postal-code form-text zipcodeUS" autocomplete="postal-code"
-                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
+                    <span class="form-required" title="This field is required.">*</span>
+                  </label>
+                  <input class="postal-code form-text required zipcodeUS" type="text" id="postal_code" name="postal_code" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10"/>
+                  {{#if (isEqualTo type 'join')}}
+                    <div class="calc-button">
+                      <span class="button-to-link">
+                        <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"/>
+                      </span>
+                    </div>
+                  {{/if}}
                 </li>
                 {{else}}
-                <li class="state creative-zip">
-                  <label for="postal-code">Zip code</label>
-                  <input class="postal-code form-text " autocomplete="postal-code"
-                  type="text" id="postal_code" name="postal_code" value="" size="30" maxlength="255"/>
-                </li>
-              {{/if}} -->
+                 <!-- No validation for zipcode for other countries -->
+                 <li class="state creative-zip">
+                    <label for="postal_code">Zip code</label>
+                    <input class="postal-code form-text" autocomplete="postal_code"
+                    type="text" id="#" name="postal_code" value="" size="30"/>
+                 </li> 
+                {{/if}}
+               <!-- Work mode -  zip code validation end here -->
+              
+              
+              
+              
+              
+              
               
               <li class="clear"></li>
               <li class="state" id="state">

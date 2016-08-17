@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
               userData[index].isPrimary = true;
             }
           }
-          if (typeof personalData.phone.cell !=="undefined" && personalData.phone.cell.value!=="" || personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="") {
+          if ((typeof personalData.phone.cell !=="undefined" && personalData.phone.cell.value!=="") || (typeof personalData.phone.mobile !=="undefined" && personalData.phone.mobile.value!=="")) {
             index += 1;
             userData[index] = {};
              var PhoneValues = (personalData.phone.primary === "mobile") ? personalData.phone.mobile.value : personalData.phone.cell.value;

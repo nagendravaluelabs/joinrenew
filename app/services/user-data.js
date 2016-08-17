@@ -15,14 +15,33 @@ export default Ember.Service.extend({
     var self= this;
     if(userkey !== null && userkey !== "") {
       Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=user&key=${userkey}`).then(function(data){
-        console.log(data.invoice);
-        if(typeof data !== undefined && typeof data.invoice !== undefined && typeof data.invoice.proforma !== undefined && parseInt(data.invoice.proforma) === 1 ) {
-          self.set("data", data);
+        var error = false;
+        if(typeof data !== undefined) {
+          if(typeof data.errormessage === "undefined") {
+            if(typeof data.invoice !== "undefined") {
+              if(typeof data.invoice.proforma !== "undefined" && parseInt(data.invoice.proforma) === 1) {
+                self.set("data", data);
+              } else {
+                error = "invalid-invoice";
+              }
+            } else {
+              error = "invalid-invoice";
+            }
+          } else {
+            error = "invoice-unavailable";
+          }
         } else {
-          self.get('auth').set("authState", "invalid-invoice");
+          error = "invoice-unavailable";
+        }
+        if(error) {
+          self.get('auth').set("authState", error);
           self.get('auth').logout();
           self.get('janrain').doLogout();
         }
+      },function(){
+        self.get('auth').set("authState", "invoice-unavailable");
+        self.get('auth').logout();
+        self.get('janrain').doLogout();
       });
     } else {
       self.set("data", "");

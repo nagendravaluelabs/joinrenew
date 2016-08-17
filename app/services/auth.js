@@ -98,8 +98,14 @@ export default Ember.Service.extend(RouteRefresherMixin, {
     return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => {
       if(response.status === 200) {
         return response.json().then(function(json) {
-          if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
-            return json;
+          if(json.stat === "ok") {
+            if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
+              return json;
+            } else {
+              return "invalid-user";
+            }
+          } else if(json.stat === "error") {
+            return ;
           } else {
             return "invalid-user";
           }
@@ -109,7 +115,9 @@ export default Ember.Service.extend(RouteRefresherMixin, {
   },
 
   logout() {
-    if(this.get("authState") !== "invalid-invoice" && this.get("authState") !== "no-access") {
+    var ignoreKeys = ["invalid-invoice", "no-access", "skip", "invoice-unavailable"];
+    var authState = this.get("authState");
+    if(ignoreKeys.indexOf(authState) === -1) {
       this.set("authState", "logout");
     }
     localStorage.removeItem('aia-user');

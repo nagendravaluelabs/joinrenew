@@ -5,10 +5,10 @@ $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
   var month = date.getMonth();
   var year = date.getFullYear();
-  var cardExpirationYear; 
-  var cardExpirationMonth;
-  var selectedYear = parseInt(cardExpirationYear.value);
-  var selectedMonth = parseInt(cardExpirationMonth.value);
+  var cardExpirationYear = $("#cardExpirationYear").val();
+  var cardExpirationMonth = $("#cardExpirationMonth").val();
+  var selectedYear = parseInt(cardExpirationYear); 
+  var selectedMonth = parseInt(cardExpirationMonth);   
   if(selectedMonth !== "") {
     if (year === selectedYear && selectedMonth <= month){
         return false;
@@ -228,7 +228,8 @@ export default Ember.Controller.extend({
                           },
                           bankroutingNumber:{
                              required: true,
-                             digits: true
+                             digits: true,
+                             minlength: 7
                           },
                           accountNumber: {
                              required: true,
@@ -245,7 +246,8 @@ export default Ember.Controller.extend({
                           },
                           bankroutingNumber:{
                             required: "Bank routing number is required",
-                            digits: "Please enter a valid routing number"
+                            digits: "Please enter a valid routing number",
+                            minlength : "Please enter a valid routing number"
                           },
                           accountNumber:{
                             required:"Account number is required",

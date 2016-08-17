@@ -50,6 +50,9 @@
                 <td>Supplemental dues</td>
                 <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
               </tr>
+              <tr>
+                {{archipac-donation}}                  
+              </tr>
               </tbody>
             </table>
           </div>
@@ -162,12 +165,34 @@
             
             <table class="duestable">
               <tbody>
-                {{#each-in duesData.data.invoice.dues as |key dues|}}
+                <!-- {{#each-in duesData.data.invoice.dues as |key dues|}}
                   <tr>
                     <td>{{dues.chapter}}</td>
                     <td id="{{key}}dues" class="value">$ {{format-currency dues.due}}</td>
                   </tr>
-                {{/each-in}}
+                {{/each-in}} -->
+				 {{#if duesData.data.invoice.dues.national}}
+			   	 <tr>
+                  <td>{{duesData.data.invoice.dues.national.chapter}}</td>
+                  <td id="nationaldues" class="value">$ {{format-currency duesData.data.invoice.dues.national.due}}</td>
+                </tr>
+			    {{/if}}
+			    {{#if duesData.data.invoice.dues.state}}
+				 <tr>
+                  <td>{{duesData.data.invoice.dues.state.chapter}}</td>
+                  <td id="statedues" class="value">$ {{format-currency duesData.data.invoice.dues.state.due}}</td>
+                </tr>
+				{{/if}}
+				{{#if duesData.data.invoice.dues.local}}
+				 <tr>
+                  <td>{{duesData.data.invoice.dues.local.chapter}}</td>
+                  <td id="localdues" class="value">$ {{format-currency duesData.data.invoice.dues.local.due}}</td>
+                </tr>
+				{{/if}}      
+							
+                
+                 {{archipac-donation}}                  
+                
                 <tr>
                   <td class="membership-dues-total">
                     {{duesData.data.membership.membershipyear}} individual dues total
@@ -178,7 +203,10 @@
                   <tr>
                     <td>Supplemental dues</td>
                     <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
-                  </tr>                
+                  </tr> 
+                  <tr>
+                    {{archipac-donation}}                  
+                  </tr>
                   <tr class="sum">
                     <td>Total due</td>
                     <td id="totaldue" class="value"><div id="the_grand_total">$ {{format-currency supplementalTotalDues}}</div></td>
@@ -186,16 +214,17 @@
                 {{/if}}
               </tbody>
             </table>
-            
-            <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
-            
-              <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
-              value="1" class="form-checkbox required">
-              <label class="option" for="edit-licensed-architect">
-                I attest that I am currently licensed to practice architecture in the U.S.          
-              </label>
-                
-            </div>
+            {{#if hasDuesCalculcator}}
+              <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
+              
+                <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
+                value="1" class="form-checkbox required">
+                <label class="option" for="edit-licensed-architect">
+                  I attest that I am currently licensed to practice architecture in the U.S.          
+                </label>
+                  
+              </div>
+            {{/if}}
             
             <div class="clearfix"></div>
             
@@ -231,16 +260,16 @@
                     <div class="form-item form-type-textfield form-item-text-fields">
                       <label for="{{supplemental.text}}_persons">#persons:</label>
                       {{#if supplemental.isRequired}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
+                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
                       {{else}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} />
+                        <input min="1" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only no-special-char" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="Please enter minimum 1 person."/>
                       {{/if}}
                     </div>
                     <div class="totals padding-total-top">
                       
                       Total:
                       <div class="totalnum" data-total="0">$ 0.00</div>
-                      
+
                     </div>
                     
                   </div>
@@ -249,14 +278,20 @@
                  
                 <div>
                   State:
-                  <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
-                  
-                  <span class="mobile-break"></span>
+                    {{#if duesData.data.invoice.supplementaldues.state}}
+                      <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
+                      <span class="mobile-break"></span>
+                  {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                  {{/if}}
                   Local:
-                  <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
-                  
+                    {{#if duesData.data.invoice.supplementaldues.local}}
+                      <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
+                    {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                    {{/if}}
                   <div class="totals">
-                    Total:
+                    Totals:
                     <div class="totalnum" data-total="0">$ 0.00</div>
                   </div>
                 </div>
@@ -274,6 +309,12 @@
           
         </div>
         
+      {{/if}}
+      
+      {{#if maxCapExceeded}}
+        <ul class="maxCapExceeded">
+        	<li>Supplemental dues cannot exceed $ {{format-currency duesData.data.invoice.supplementaldues.state.max}}. This is the max amount you’ll be charged.</li>
+        </ul>
       {{/if}}
       
       <div class="button-container membership-button-container hidden-xs">
@@ -301,7 +342,7 @@
             <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
           </div>
           <div class="clearfix"></div>
-          {{#if duesData.data.invoice.issupplementaldues}}
+          {{#if hasDuesCalculcator}}
           <div id="startoverbtn">
             <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
           </div>

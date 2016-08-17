@@ -27,6 +27,7 @@ module.exports = function(deployTarget) {
   if (deployTarget === 'development') {
     ENV.build.environment = 'development';
     ENV['s3-index'].bucket = 'aia-joinrenew-dev';
+    ENV['s3'].bucket = 'aia-joinrenew-dev';
   }
 
   if (deployTarget === 'staging') {
