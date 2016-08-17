@@ -344,7 +344,12 @@
       margin-top: 90px;
     }
   }
-
+  .maxCapExceeded {
+    color: #fa4132;
+    font-size: 16px;
+    width: 66.5%;
+    line-height: 22px;
+  }
 }
 
 #main-content{
@@ -458,7 +463,7 @@
 }
 .option{
   &.archipac-label{
-      margin-bottom:0px;
+      margin:0px;
       span{
         color:#f4473a;
       }
@@ -608,6 +613,13 @@ span{
             color: #a94442 !important;
             font-weight: bold !important;
         }
+    }
+    .alert-danger{
+      .error{
+        display: block;
+        padding: 3px 0;
+        clear: both;
+      }
     }
     
     .footer-btn-container {

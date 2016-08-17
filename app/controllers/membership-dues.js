@@ -8,6 +8,8 @@ export default Ember.Controller.extend(rememberScroll, {
     isTotalRenew: false,
     isDuesCalculator: false,
     duesData: Ember.inject.service('user-data'),
+    hasDuesCalculcator: true,
+    maxCapExceeded: false,
     updateDuesPage: function (renew, questionnaire, total, dues) {
         "use strict";
         this.set("isRenewSummary", renew);
@@ -40,10 +42,17 @@ export default Ember.Controller.extend(rememberScroll, {
     supptot:0,
     hasSupplementalDues: function () {
         "use strict";
-        var duesData = this.get("duesData");
+        var duesData, validDuesUser;
+        validDuesUser = ["Architect", "Architect Fellow"];
+        duesData = this.get("duesData");
+        
         if (duesData.data !== "undefined" && duesData.data !== "") {
-            if (duesData.data.invoice.issupplementaldues === 0) {
+            if (duesData.data.invoice.issupplementaldues === 1 && validDuesUser.indexOf(duesData.data.membership.membershiptype) !== -1) {
+                this.updateDuesPage(true, false, false, false);
+                this.set("hasDuesCalculcator", true);
+            } else {
                 this.updateDuesPage(false, false, true, false);
+                this.set("hasDuesCalculcator", false);
             }
         }
     },
@@ -119,7 +128,7 @@ export default Ember.Controller.extend(rememberScroll, {
                                     required: function () {
                                         return $("#edit-questionnaire-2").is(":checked");
                                     },
-                                    lettersonly: true
+                                    letterswithbasicpunc: true
                                 },
                                 questionnaire_memberid: {
                                     required: function () {
@@ -129,10 +138,13 @@ export default Ember.Controller.extend(rememberScroll, {
                                 }
                             },
                             messages: {
-                                questionnaire_membername: "Please enter Member name",
+                                questionnaire_membername: {
+                                  required : "Member name is required",
+                                  letterswithbasicpunc: "Please enter a valid member name"
+                                },
                                 questionnaire_memberid: {
-                                    required: "Please enter Member ID",
-                                    digits: "Please enter only numerics"
+                                    required: "Member ID number is required",
+                                    digits: "Please enter a valid member ID number"
                                 }
                             }
                         });
@@ -177,11 +189,15 @@ export default Ember.Controller.extend(rememberScroll, {
         },
         calculateSum: function (e) {
             "use strict";
-            var self, value, amount, total, suppduesTotal;
+            var self, value, amount, total, suppduesTotal,localAmount,stateAmount, duesData, maxCap;
+            duesData = this.get("duesData");
+            maxCap = parseFloat(duesData.data.invoice.supplementaldues.state.max);
             self = $(e.currentTarget);
             suppduesTotal = 0;
             value = (self.val() !== '') ? parseInt(self.val()) : 0;
-            amount = parseFloat(self.data("localAmount"));
+            localAmount = (self.data("localAmount")!== "") ? parseFloat(self.data("localAmount")) : 0;
+            stateAmount = (self.data("stateAmount")!== "") ? parseFloat(self.data("stateAmount")) : 0;				
+            amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
             self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
             self.closest("h3").find(".totals").find(".totalnum").data("total", total);
@@ -189,7 +205,13 @@ export default Ember.Controller.extend(rememberScroll, {
             $("#accordion").find("h3 .totalnum").each(function () {
                 suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
             });
-            //$("#suppdues_totalamount").html("$ " + parseFloat(suppduesTotal).toFixed(2));
+            this.set("maxCapExceeded", false);
+            if(maxCap > 0) {
+              if(suppduesTotal > maxCap) {
+                suppduesTotal = maxCap;
+                this.set("maxCapExceeded", true);
+              }              
+            }
             this.set("supplementalDuesTotal", suppduesTotal);
         },
         payNow: function () {
@@ -249,4 +271,11 @@ $(document).on("keypress", ".few-special-char", function (e) {
         $(this).next("label.error").remove();
     }
     return ret;
+});
+
+$(document).on("keypress", '.no-special-char', function(e){
+      "use strict";
+      var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+      var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
+      return ret;
 });

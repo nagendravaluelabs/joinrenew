@@ -100,6 +100,12 @@
               width: 100% !important;
             }
           }
+          &#postal_code {
+            width: 51%;
+            @media (max-width: 767px){
+              width: 100% !important;
+            }
+          }
         }
         .state {
           width: 35%;
