@@ -18,7 +18,7 @@ $.validator.addMethod( "creditcardMonth", function() {
 }, "Invalid expiration date." );
 
 export default Ember.Controller.extend({
-   primaryData: Ember.inject.service('user-data'),
+        primaryData: Ember.inject.service('user-data'),
         debitPayment: true,
         echeckPayment: false,
         insallmentsPayment: false,
@@ -83,8 +83,6 @@ export default Ember.Controller.extend({
           } 
         },
         validatePaymentInfo: function () {
-            
-            
             "use strict";
             var validate;
             validate = $("#form-card-payment").validate({
@@ -149,7 +147,7 @@ export default Ember.Controller.extend({
                 }
             });
             if(validate.form()) {
-               
+              this.saveRenewData();
             } 
         },
         
@@ -180,7 +178,7 @@ export default Ember.Controller.extend({
             }
             });
           if(validate.form()) {
-            
+            //this.saveRenewData();
           } 
         },
         calculateInstallmentsObserves: function() {
@@ -195,6 +193,11 @@ export default Ember.Controller.extend({
           var installNumber = value;
           installment = parseFloat(total/installNumber);
           this.set("installment", parseFloat(installment, 2));
+        },
+        saveRenewData : function () {
+          var formattedSaveData;
+          formattedSaveData = this.get("primaryData").reMapJSON(this.get("primaryData").data);
+          this.get("primaryData").saveRenewInfoToNF(formattedSaveData);
         },
         actions: {
           install : function(value){
@@ -270,11 +273,8 @@ export default Ember.Controller.extend({
                       }
                   });
                   if(validate.form()) {
-                      
+                      this.saveRenewData();
                   } 
               } 
         }
-  
-  
-  
 });

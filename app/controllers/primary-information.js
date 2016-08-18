@@ -55,19 +55,17 @@ export default Ember.Controller.extend({
           index += 1;
           userData[index] = {};
           primaryAddress=[];
-          if (personalData.address.primary === "home") {
-            primaryAddress[0]= personalData.address.home.line1;
-            primaryAddress[1]= personalData.address.home.line2;
-            primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;
-          } else {
+          if (personalData.address.primary === "office") {
             if(typeof personalData.address.office !== "undefined") {
               primaryAddress[0]= personalData.address.office.line1;
               primaryAddress[1]= personalData.address.office.line2;
               primaryAddress[2]= personalData.address.office.city + ", " + personalData.address.office.state.value + ", " + personalData.address.office.country.value + ", " + personalData.address.office.zip;
-            } else if(typeof personalData.address.billing !== "undefined"){
-              primaryAddress[0]= personalData.address.billing.line1;
-              primaryAddress[1]= personalData.address.billing.line2;
-              primaryAddress[2]= personalData.address.billing.city + ", " + personalData.address.billing.state.value + ", " + personalData.address.billing.country.value + ", " + personalData.address.billing.zip;
+            }
+          } else {
+            if(typeof personalData.address.home !== "undefined") {
+              primaryAddress[0]= personalData.address.home.line1;
+              primaryAddress[1]= personalData.address.home.line2;
+              primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;
             }
           }
           
@@ -81,6 +79,14 @@ export default Ember.Controller.extend({
             'use strict';
             var value = this.get("editContactInfo");
             this.set("editContactInfo", !value);
+        },
+        
+        savePersonalInfo: function (data, isRedirect) {
+            isRedirect = (isRedirect === undefined) ? false : isRedirect;
+            this.get("primaryData").saveUserData(data);
+            if(isRedirect) {
+              this.transitionToRoute('membership-dues');              
+            }
         }
     }
 });

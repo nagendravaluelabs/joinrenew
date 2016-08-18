@@ -3,10 +3,8 @@ import Ember from 'ember';
 
 export default Ember.Helper.helper(function ([value]) {
   "use strict";
-  if(value !== undefined && value !== null && value !== ""  && !isNaN(value)) {
-    value = parseFloat(value);    
-  } else {
+  if(value === undefined || value === null || value === ""  || isNaN(value)) {
     value = 0;
   }
-  return value.toLocaleString('en-US',{minimumFractionDigits:2});
+  return value;
 });
