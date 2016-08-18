@@ -58,7 +58,7 @@ export default Ember.Service.extend({
                       data.personal.phone.cell.key = "";
                       data.personal.phone.cell.value = "";
                     }
-                    
+                    data.personal.address.primary = (data.personal.address.primary === "billing") ? "home" : data.personal.address.primary;
                     if(!Ember.getWithDefault(data,'personal.address.home', false)) {
                       data.personal.address.home = {};
                       data.personal.address.home.key = "";
