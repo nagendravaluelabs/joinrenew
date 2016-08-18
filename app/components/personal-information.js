@@ -45,7 +45,9 @@ export default Ember.Component.extend(rememberScroll, {
             chapterType = (chapterType === "Billing") ? "Home" : chapterType;
             chapterType = (chapterType === "Office") ? "Work" : chapterType;
             self.chapterSelection(chapterType);
-            self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
+            if(!Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
+              self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());              
+            }
             self.set('contactAddressType', contactInfo.primary);
         }
     },
@@ -88,7 +90,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var self;
         self = this;
-        chapterType = (chapterType === "Directoffice") ?  "Work" : chapterType;
+        chapterType = (chapterType === "Directoffice" || chapterType === "Office") ?  "Work" : chapterType;
         self.set('primaryHomeAddress', false);
         self.set('primaryWorkAddress', false);
         self.set('createOrganization', false);

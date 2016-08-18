@@ -24,7 +24,8 @@ export default {
     "home": {
       "id": "home",
       "label": "Home",
-      "value": "home"
+      "value": "home",
+      "addressKey": "home"
     },
     "office": {
       "id": "work",
@@ -35,7 +36,8 @@ export default {
       "id": "work",
       "label": "Work",
       "value": "work",
-	  "key": "directoffice"
+      "key": "directoffice",
+      "addressKey": "office"
     },
     "cell": {
       "id": "mobile",
@@ -47,7 +49,7 @@ export default {
       "id": "mobile",
       "label": "Mobile",
       "value": "mobile",
-	  "key": "cell"
+      "key": "cell"
     },
     "directoffice": {
       "id": "work",

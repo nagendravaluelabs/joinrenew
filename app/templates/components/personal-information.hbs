@@ -105,7 +105,7 @@
       <ul class="form-radios clearfix">
         {{#each chaptersType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{radio-button class="form-radio" id=(concat "choose_chapter_" (i18N 'en' type 'id')) name="choose_chapter" value=(i18N 'en' type 'key') groupValue=personalInfo.personal.address.primary changed="chapterSelection"}}
+            {{radio-button class="form-radio" id=(concat "choose_chapter_" (i18N 'en' type 'id')) name="choose_chapter" value=(i18N 'en' type 'addressKey') groupValue=personalInfo.personal.address.primary changed="chapterSelection"}}
             <label class="option" for="choose_chapter_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'id'}}</label>
           </li>
         {{/each}}

@@ -61,10 +61,38 @@ export default Ember.Service.extend({
                     
                     if(!Ember.getWithDefault(data,'personal.address.home', false)) {
                       data.personal.address.home = {};
+                      data.personal.address.home.key = "";
+                      data.personal.address.home.line1 = "";
+                      data.personal.address.home.line2 = "";
+                      data.personal.address.home.line3 = "";
+                      data.personal.address.home.city = "";
+                      data.personal.address.home.state = {
+                        "key": "",
+                        "value": ""
+                      };
+                      data.personal.address.home.country =  {
+                        "key": "",
+                        "value": ""
+                      };
+                      data.personal.address.home.zip = "";
                     }
                     
                     if(!Ember.getWithDefault(data,'personal.address.office', false)) {
                       data.personal.address.office = {};
+                      data.personal.address.office.key = "";
+                      data.personal.address.office.line1 = "";
+                      data.personal.address.office.line2 = "";
+                      data.personal.address.office.line3 = "";
+                      data.personal.address.office.city = "";
+                      data.personal.address.office.state = {
+                        "key": "",
+                        "value": ""
+                      };
+                      data.personal.address.office.country =  {
+                        "key": "",
+                        "value": ""
+                      };
+                      data.personal.address.office.zip = "";
                     }
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
