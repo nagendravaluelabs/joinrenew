@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/aiadigitaltransformation/aia-joinrenew-web.svg?token=bjXcJzpiqQtCU7Vqmpfv&branch=master)](https://travis-ci.com/aiadigitaltransformation/aia-joinrenew-web)
 
 This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here...
+A short introduction of this app could easily go here.
 
 ## Prerequisites
 
