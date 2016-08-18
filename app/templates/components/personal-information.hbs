@@ -10,58 +10,41 @@
           <label for="{{i18N 'en' 'prefix' 'id'}}">{{i18N 'en' 'prefix' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          <select id="{{i18N 'en' 'prefix' 'id'}}" name="{{i18N 'en' 'prefix' 'id'}}" class="form-select required">
-            <option value="">Select</option>
+          {{#x-select name=(i18N 'en' 'prefix' 'id') id=(i18N 'en' 'prefix' 'id') value=personalInfo.personal.prefix class="form-select required"}}
+            {{#x-option value=''}}Select{{/x-option}}
             {{#each genericData.generic.prefix as |prefix|}}
               {{#if prefix.prf_code}}
-                {{#if (isEqualTo prefix.prf_code personalInfo.personal.prefix)}}
-                  <option value="{{prefix.prf_code}}" selected>{{prefix.prf_code}}</option>
-                {{else}}
-                  <option value="{{prefix.prf_code}}">{{prefix.prf_code}}</option>
-                {{/if}}
+                {{#x-option value=prefix.prf_code}}{{prefix.prf_code}}{{/x-option}}
               {{/if}}
             {{/each}}
-          </select>
+          {{/x-select}}
         </li>
         <li>
           <label for="{{i18N 'en' 'firstname' 'id'}}">{{i18N 'en' 'firstname' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          {{#if personalInfo.personal.firstname}}
-            <input class="form-text required" type="text" id="{{i18N 'en' 'firstname' 'id'}}" name="{{i18N 'en' 'firstname' 'id'}}" value="{{personalInfo.personal.firstname}}" size="60" maxlength="255" disabled  />
-          {{else}}
-            <input class="form-text required" type="text" id="{{i18N 'en' 'firstname' 'id'}}" name="{{i18N 'en' 'firstname' 'id'}}" size="60" maxlength="255"  />
-          {{/if}}
+          {{input type="text" classBinding=":form-text :required" id=(i18N 'en' 'firstname' 'id') name=(i18N 'en' 'firstname' 'id') value=personalInfo.personal.firstname size="60" maxlength="255" disabled=personalInfo.personal.firstname}}
         </li>
         <li>
           <label for="{{i18N 'en' 'middlename' 'id'}}">{{i18N 'en' 'middlename' 'label'}}</label>
-          {{#if personalInfo.personal.middlename}}
-            <input class="form-text input-middle-name" type="text" id="{{i18N 'en' 'middlename' 'id'}}" name="{{i18N 'en' 'middlename' 'id'}}" value="{{personalInfo.personal.middlename}}" size="1" maxlength="1" disabled />
-          {{else}}
-            <input class="form-text input-middle-name" type="text" id="{{i18N 'en' 'middlename' 'id'}}" name="{{i18N 'en' 'middlename' 'id'}}" size="1" maxlength="1"  />
-          {{/if}}
-          
+          {{input type="text" classBinding=":form-text :input-middle-name" id=(i18N 'en' 'middlename' 'id') name=(i18N 'en' 'middlename' 'id') value=personalInfo.personal.middlename size="1" maxlength="1" disabled=personalInfo.personal.middlename}}
         </li>
         <li>
           <label for="{{i18N 'en' 'lastname' 'id'}}">{{i18N 'en' 'lastname' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          <input class="form-text required text-capitalize" type="text" id="{{i18N 'en' 'lastname' 'id'}}" name="{{i18N 'en' 'lastname' 'id'}}" value="{{personalInfo.personal.lastname}}" size="60" maxlength="255" />
+          {{input type="text" classBinding=":form-text :required :text-capitalize" id=(i18N 'en' 'lastname' 'id') name=(i18N 'en' 'lastname' 'id') value=personalInfo.personal.lastname size="60" maxlength="255"}}          
         </li>
         <li>
           <label for="{{i18N 'en' 'suffix' 'id'}}">{{i18N 'en' 'suffix' 'label'}}</label>
-          <select id="{{i18N 'en' 'suffix' 'id'}}" name="{{i18N 'en' 'suffix' 'id'}}" class="form-select">
-            <option value="">Select</option>
+          {{#x-select name=(i18N 'en' 'suffix' 'id') id=(i18N 'en' 'suffix' 'id') value=personalInfo.personal.suffix class="form-select"}}
+            {{#x-option value=''}}Select{{/x-option}}
             {{#each genericData.generic.suffix as |suffix|}}
               {{#if suffix.sfx_code}}
-                {{#if (isEqualTo suffix.sfx_code personalInfo.personal.suffix)}}
-                  <option value="{{suffix.sfx_code}}" selected>{{suffix.sfx_code}}</option>
-                {{else}}
-                  <option value="{{suffix.sfx_code}}">{{suffix.sfx_code}}</option>
-                {{/if}}
+                {{#x-option value=suffix.sfx_code}}{{suffix.sfx_code}}{{/x-option}}
               {{/if}}
             {{/each}}
-          </select>
+          {{/x-select}}
         </li>
       </ul>
     </div>
@@ -76,11 +59,7 @@
         <ul class="form-radios clearfix">
           {{#each addressType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{#if (isEqualTo type (i18N 'en' personalInfo.personal.phone.primary 'id'))}}
-            <input type="radio" id="primary_number_{{i18N 'en' type 'id'}}" name="primary_number" value="{{i18N 'en' type 'value'}}" onchange={{action "updateContactInformation" value="target.value"}} class="form-radio" checked />
-            {{else}}
-              <input type="radio" id="primary_number_{{i18N 'en' type 'id'}}" name="primary_number" value="{{i18N 'en' type 'value'}}" onchange={{action 'updateContactInformation' value="target.value"}} class="form-radio" />
-            {{/if}}
+            {{radio-button class="form-radio" id=(concat "primary_number_" (i18N 'en' type 'id')) name="payment_type" value=(i18N 'en' type 'key') groupValue=personalInfo.personal.phone.primary changed="updateContactInformation"}}
             <label class="option" for="primary_number_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'label'}} </label>
           </li>
           {{/each}}
@@ -95,7 +74,7 @@
               <span class="form-required" title="This field is required.">*</span>
             {{/if}}
           </label>
-            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(jsStrings (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country')) 'lower')}}
+            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country')) mutable=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country'))) chosenValueChanged=chosenValueChanged}}
           </li>
           <li>
             <label for="{{type}}-number" class="text-capitalize">{{type}} phone
@@ -103,7 +82,7 @@
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
-            <input class="form-text required" type="text" id="{{type}}_number" name="{{type}}_number" value="{{get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.value')}}" size="60" maxlength="255" />
+            {{input type="text" classBinding=":form-text :required" id=(concat type '_number') name=(concat type '_number') value=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.value'))) size="60" maxlength="255"}}
           </li>
           <li class="clearfix"></li>
         {{/each}}
@@ -126,11 +105,7 @@
       <ul class="form-radios clearfix">
         {{#each chaptersType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{#if (isEqualTo type (i18N 'en' personalInfo.personal.address.primary 'value'))}}
-            <input type="radio" id="choose_chapter_{{i18N 'en' type 'id'}}" name="choose_chapter" value="{{i18N 'en' type 'id'}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} checked />
-            {{else}}
-              <input type="radio" id="choose_chapter_{{i18N 'en' type 'id'}}" name="choose_chapter" value="{{i18N 'en' type 'id'}}" class="choose_chapter_radio form-radio" onchange={{action "chapterSelection" value="target.value"}} />
-            {{/if}}
+            {{radio-button class="form-radio" id=(concat "choose_chapter_" (i18N 'en' type 'id')) name="choose_chapter" value=(i18N 'en' type 'key') groupValue=personalInfo.personal.address.primary changed="chapterSelection"}}
             <label class="option" for="choose_chapter_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'id'}}</label>
           </li>
         {{/each}}
@@ -162,35 +137,32 @@
                   <label for="primary_home_address_country">Country
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=(jsStrings (get personalInfo.personal.address 'home.country.key') 'lower') class="counrty required" actionHooks='setHomeStateStatus' setHomeStateStatus='setHomeStateStatus'}}
+                  {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=personalInfo.personal.address.home.country.key class="counrty required" actionHooks='setHomeStateStatus' setHomeStateStatus='setHomeStateStatus' mutable=(mut (get personalInfo.personal.address 'home.country.key')) chosenValueChanged=chosenValueChanged}}
                 </li>
                 <li>
                   <label for="primary_home_address1">Address line 1
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text few-special-char required" type="text" id="primary_home_address1" name="primary_home_address1" value="{{personalInfo.personal.address.home.line1}}" size="30" maxlength="255"/>
+                  {{input type="text" classBinding=":form-text :few-special-char :required" id="primary_home_address1" name="primary_home_address1" value=personalInfo.personal.address.home.line1 size="30" maxlength="255"}}
                 </li>
                 <li>
                   <label for="primary_home_address2">Address line 2</label>
-                  <input class="form-text few-special-char" type="text" id="primary_home_address2" name="primary_home_address2" value="{{personalInfo.personal.address.home.line2}}" size="30" maxlength="255"/>
+                  {{input type="text" classBinding=":form-text :few-special-char" id="primary_home_address2" name="primary_home_address2" value=personalInfo.personal.address.home.line2 size="30" maxlength="255"}}
                 </li>
                 <li>
                   <label for="primary_home_city">City
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="form-text few-special-char required" type="text" id="primary_home_city" name="primary_home_city" value="{{personalInfo.personal.address.home.city}}" size="30" maxlength="255"/>
+                  {{input type="text" classBinding=":form-text :few-special-char :required" id="primary_home_city" name="primary_home_city" value=personalInfo.personal.address.home.city size="30" maxlength="255"}}
                 </li>
                 {{#if homeShowState}} 
                   <li class="state" id="state">
                     <label for="administrative_area_state">State
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates}}
+                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged}}
                   </li>
                 {{/if}}
-                
-                
-                
                 
                 <!-- Zip code validation for United States -->
                {{#if homeShowState}} 
@@ -198,7 +170,7 @@
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required zipcodeUS" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10"/>
+                  {{input type="text" classBinding=":form-text :postal-code :zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -211,7 +183,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code</label>
-                  <input class="postal-code form-text required" type="text" id="primary_home_zipcode" name="primary_home_zipcode" value="{{personalInfo.personal.address.home.zip}}" size="30" />
+                  {{input type="text" classBinding=":form-text :postal-code :zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip size="30"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -223,12 +195,6 @@
                 </li>
                 {{/if}}
                <!--  zip code validation end here -->
-               
-               
-               
-               
-               
-               
               </ul>
             </fieldset>
           </div>
@@ -267,7 +233,7 @@
                   {{#if (isEqualTo type 'join')}}
                     <label for="company-search">Enter your work address, we&#039;ll help you find your company/organization</label>
                   {{else}}
-                    <label for="company-search">If you need to change your work address, we&#039;ll help you find your company/organization.</label>
+                    <label for="company-search">If you need to change your work address, we&#039;ll help you find your company/organization.<span class="form-required">*</span></label>
                   {{/if}}
                   <input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />
                 </li>
@@ -276,6 +242,9 @@
                   <span class="info-left">
                     <div id="company-lookup-address-block">
                         {{#if personalInfo.personal.address.office}}
+                          {{#if personalInfo.personal.organization.name}}
+                            {{personalInfo.personal.organization.name}}<br />
+                          {{/if}}
                           {{#if personalInfo.personal.address.office.line1}}
                             {{personalInfo.personal.address.office.line1}}<br />
                           {{/if}}
@@ -403,12 +372,6 @@
                  </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
-              
-              
-              
-              
-              
-              
               
               <li class="clear"></li>
               <li class="state" id="state">

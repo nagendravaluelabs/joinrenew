@@ -3,7 +3,7 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
 export default Ember.Service.extend({
-  generic: [],
+  generic: "",
   init: function () {
     "use strict";
     var self= this;

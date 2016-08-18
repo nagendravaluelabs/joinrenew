@@ -81,6 +81,14 @@ export default Ember.Controller.extend({
             'use strict';
             var value = this.get("editContactInfo");
             this.set("editContactInfo", !value);
+        },
+        
+        savePersonalInfo: function (data, isRedirect) {
+            isRedirect = (isRedirect === undefined) ? false : isRedirect;
+            this.get("primaryData").saveUserData(data);
+            if(isRedirect) {
+              this.transitionToRoute('membership-dues');              
+            }
         }
     }
 });

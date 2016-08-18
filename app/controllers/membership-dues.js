@@ -40,6 +40,10 @@ export default Ember.Controller.extend(rememberScroll, {
     supplementalTotalDues: 0,
     totalDues: 0,
     supptot:0,
+    resetSupplement: function() {
+      this.set("supplementalDuesTotal", 0);
+      this.set("supplementalTotalDues", 0);
+    },
     hasSupplementalDues: function () {
         "use strict";
         var duesData, validDuesUser;
@@ -179,6 +183,9 @@ export default Ember.Controller.extend(rememberScroll, {
             isDuesCalculator = this.get("isDuesCalculator");
             isTotalRenew = this.get("isTotalRenew");
             isQuestionnarie = this.get("isQuestionnarie");
+            this.set("duesData.data.membershipInfo.LiabilityCode", "");
+            this.set("duesData.data.membershipInfo.SupplementalDuesID", "");
+            this.set("duesData.data.membershipInfo.SupplementalDuesName", "");
             if (isQuestionnarie) {
                 this.updateDuesPage(true, false, false, false);
             } else if (isDuesCalculator || isTotalRenew) {
@@ -187,32 +194,44 @@ export default Ember.Controller.extend(rememberScroll, {
             this.set("supplementalDuesTotal", 0);
             return false;
         },
-        calculateSum: function (e) {
+        calculateSum: function (value, event) {
             "use strict";
-            var self, value, amount, total, suppduesTotal,localAmount,stateAmount, duesData, maxCap;
-            duesData = this.get("duesData");
-            maxCap = parseFloat(duesData.data.invoice.supplementaldues.state.max);
-            self = $(e.currentTarget);
+            var self,
+                amount,
+                totalsKey,
+                total,
+                suppduesTotal,
+                localAmount,
+                stateAmount,
+                tempKey,
+                keyValue,
+                duesData, 
+                maxCap;
+                duesData = this.get("duesData");
+                maxCap = parseFloat(duesData.data.invoice.supplementaldues.state.max);
+            self = this;
             suppduesTotal = 0;
-            value = (self.val() !== '') ? parseInt(self.val()) : 0;
-            localAmount = (self.data("localAmount")!== "") ? parseFloat(self.data("localAmount")) : 0;
-            stateAmount = (self.data("stateAmount")!== "") ? parseFloat(self.data("stateAmount")) : 0;				
+            localAmount = parseFloat(event.target.dataset.localAmount);
+            stateAmount = parseFloat(event.target.dataset.stateAmount);
+            totalsKey = event.target.dataset.totals;
             amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
-            self.closest("h3").find(".totals").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
-            self.closest("h3").find(".totals").find(".totalnum").data("total", total);
-            self.closest("h3").next("div").find(".totalnum").html("$ " + parseFloat(total).toLocaleString('en-US',{minimumFractionDigits:2}));
-            $("#accordion").find("h3 .totalnum").each(function () {
-                suppduesTotal = parseInt(suppduesTotal) + parseInt($(this).data('total'));
+            
+            this.set("duesData.data.membershipInfo.amount."+totalsKey, total);            
+            $("#accordion").find("h3 .inputpersons input").each(function () {
+                tempKey = $(this).data('totals');
+                keyValue = parseFloat(self.get("duesData.data.membershipInfo.amount."+tempKey));
+                keyValue = (keyValue === undefined || isNaN(keyValue)) ? 0 : keyValue;
+                suppduesTotal = parseFloat(suppduesTotal) + parseFloat(keyValue);
             });
-            this.set("maxCapExceeded", false);
+            self.set("maxCapExceeded", false);
             if(maxCap > 0) {
               if(suppduesTotal > maxCap) {
                 suppduesTotal = maxCap;
-                this.set("maxCapExceeded", true);
+                self.set("maxCapExceeded", true);
               }              
             }
-            this.set("supplementalDuesTotal", suppduesTotal);
+            self.set("supplementalDuesTotal", suppduesTotal);
         },
         payNow: function () {
             "use strict";
@@ -224,6 +243,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 errorLabelContainer: "#error-container"
             });
             if (validate.form()) {
+                this.get("duesData").saveUserData(this.get("duesData").data);
                 this.transitionToRoute('payment-information');
             }
         }
@@ -261,7 +281,6 @@ specialKeys.push(144); //Num Lock
 $(document).on("keypress", ".few-special-char", function (e) {
     "use strict";
     var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
-    console.log(keyCode);
     var ret = ((keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode === 61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
     if (!ret) {
         if ($(this).next("label.error").length === 0) {

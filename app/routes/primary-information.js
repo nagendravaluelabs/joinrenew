@@ -6,6 +6,13 @@ export default Ember.Route.extend({
     "use strict";
     this.controllerFor("application").set("model.class","no-sidebars page-primary-info personal-info-component");
   },
+  resetController: function(controller, isExiting) {
+      this._super.apply(this, arguments);
+
+      if (isExiting) {
+          controller.set("editContactInfo", false); // or whatever function you want to call
+      }
+  },
   model() {
     "use strict";
     return Ember.RSVP.hash({

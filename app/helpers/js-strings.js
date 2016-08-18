@@ -11,6 +11,9 @@ export default Ember.Helper.helper(function (params) {
     } else if(params[1]==="capitalize")
     {
       result = params[0].capitalize();
+    } else if(params[1]==="upper")
+    {
+      result = params[0].toUpperCase();
     }    
   }  
   return result;

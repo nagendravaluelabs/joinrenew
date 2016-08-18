@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   setAddress: function (){
     "use strict";
     var addressData = this.get("addressData");
-    if (typeof addressData.data !== "undefined" && addressData.data !== "") {
+    if (typeof addressData.data !== "undefined" && addressData.data !== "" && typeof addressData.data.chapter !== "undefined") {
       if(typeof addressData.data.chapter.local !== "undefined") {
         this.set("address", addressData.data.chapter.local);
       } else if (typeof addressData.data.chapter.state !== "undefined") {

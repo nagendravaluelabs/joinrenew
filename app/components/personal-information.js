@@ -88,6 +88,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var self;
         self = this;
+        chapterType = (chapterType === "Directoffice") ?  "Work" : chapterType;
         self.set('primaryHomeAddress', false);
         self.set('primaryWorkAddress', false);
         self.set('createOrganization', false);
@@ -335,7 +336,8 @@ export default Ember.Component.extend(rememberScroll, {
                 }
             });
             if (validate.form()) {
-                this.get('router').transitionTo('membership-dues');
+                this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
+                //this.get('router').transitionTo('membership-dues');
             } else {
                 if ($("#personal-contact").hasClass("hidden")) {
                     this.sendAction("showPersonalInfo");
@@ -389,6 +391,9 @@ export default Ember.Component.extend(rememberScroll, {
             } else {
               console.log("error");
             }
+        },
+        chosenValueChanged: function(value, param) {
+          param.set("value", value);
         }
     }
 });

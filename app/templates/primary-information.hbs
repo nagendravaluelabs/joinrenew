@@ -2,7 +2,6 @@
 <div class="row">
   <div class="col-sm-9">
     <h1 class="page-title">Personal and contact info</h1>
- 
     <h3 class="verify-subheading">Please verify your information</h3>
     <ul class="read-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
       {{#each userData as |info|}}
@@ -30,6 +29,6 @@
           <a class="edit-link" id="hide-info" href="#" {{action 'showPersonalInfo'}}>Edit contact information &gt;</a>
       </li>
     </ul>
-    {{personal-information info=model.page.primaryInformation personalInfo=primaryData.data type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo}}
+    {{personal-information info=model.page.primaryInformation personalInfo=primaryData.data type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo savePersonalInfo='savePersonalInfo' }}
   </div>
 </div>

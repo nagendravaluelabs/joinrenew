@@ -17,9 +17,9 @@
         <div id="payment-accordion">
            <h3>
             AIA membership dues:
-		<!-- 	<strong class="member-role">{{model.role}}</strong> -->
+		
             <span class="membership">
-		<!-- 	<strong class="member-role mobile-view">{{model.role}}</strong> -->
+		
               <span class="membership-type">
                 <span class="membership-total">${{format-currency subTotal}}</span></span>
               </span>
@@ -79,7 +79,8 @@
 
       <ul class="no-style">
       	<li>
-          <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          {{radio-button class="form-radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
+          
           <label for="pay-debit-credit">Debit or credit card </label>
           <div class="creditcardType">
             <div class="amexicon creditcardicon"></div>
@@ -90,11 +91,11 @@
           <div class="clearfix"></div>
         </li>
       	<li>
-          <input type="radio" id="pay-electronic-check" name="payment_type" value="Electronic check" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          {{radio-button class="form-radio" id="pay-electronic-check" name="payment_type" value="Electronic check" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
           <label for="pay-electronic-check">Electronic check</label>
         </li>
       	<li>
-          <input type="radio" id="pay-in-installments" name="payment_type" value="EMI" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          {{radio-button class="form-radio" id="pay-in-installments" name="payment_type" value="EMI" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
           <label for="pay-in-installments">Pay in installments</label>
         </li>
       </ul>
@@ -104,11 +105,11 @@
           {{#if primaryData.data.invoice.maxinstallments}}
             <div id="installmentnumber">
               Pay my dues in
-              <select class="select-installments form-select" id="select-installments" onchange={{action "install" value="target.value"}}>
+              {{#x-select name="select-installments" id="select-installments" class="select-installments form-select" action="install" value=(mut (get primaryData.data.paymentInfo "InstallmentCount"))}}
                 {{#each (for 3 primaryData.data.invoice.maxinstallments 1) as |installment|}}
-                  <option value="{{installment}}">{{installment}}</option>
+                  {{#x-option value=installment}}{{installment}}{{/x-option}}                  
                 {{/each}}
-              </select>              
+              {{/x-select}}
               <label for="select-installments">installments</label>
             </div>
             {{/if}}
@@ -124,7 +125,7 @@
             <div class="clearfix"></div>
             <div id="servicefee">
               <form action="#" id="install-agreement" method="post">
-                <input type="checkbox" id="installment_iagree" name="installment_iagree" value="I agree" class="form-checkbox installment_iagree" />
+                {{input type="checkbox" classBinding=":form-checkbox :installment_iagree" id="installment_iagree" name="installment_iagree" checked=(mut (get primaryData.data.paymentInfo "InstallmentAgreement"))}}
                 <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
               </form>
             </div>
@@ -144,15 +145,14 @@
                   Name on card 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full few-special-char form-text" type="text" id="cardName" name="cardName" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full :few-special-char" id="cardName" name="cardName" value=primaryData.data.paymentInfo.NameOnCard size="60" maxlength="255"}}
               </li>
               <li>
                 <label for="cardNumber">
                   Card number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="19"  />
-                
+                {{input type="text" classBinding=":form-text :text-full" id="cardNumber" name="cardNumber" value=primaryData.data.paymentInfo.CardNumber size="60" maxlength="19"}}                
               </li>
               <li>
                 <label for="cardExpirationMonth">
@@ -161,29 +161,29 @@
                 </label>
                 <div class="cardExpiration clearfix">
                   <div class="cardExpirations">
-                    <select id="cardExpirationMonth" name="cardExpirationMonth" class="form-select">
-                      <option value="">Month</option>
-                      <option value="1">Jan</option>
-                      <option value="2">Feb</option>
-                      <option value="3">Mar</option>
-                      <option value="4">Apr</option>
-                      <option value="5">May</option>
-                      <option value="6">Jun</option>
-                      <option value="7">Jul</option>
-                      <option value="8">Aug</option>
-                      <option value="9">Sep</option>
-                      <option value="10">Oct</option>
-                      <option value="11">Nov</option>
-                      <option value="12">Dec</option>
-                    </select>
+                    {{#x-select name="cardExpirationMonth" id="cardExpirationMonth" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationMonth"))}}
+                      {{#x-option value=""}}Month{{/x-option}}
+                      {{#x-option value="1"}}Jan{{/x-option}}
+                      {{#x-option value="2"}}Feb{{/x-option}}
+                      {{#x-option value="3"}}Mar{{/x-option}}
+                      {{#x-option value="4"}}Apr{{/x-option}}
+                      {{#x-option value="5"}}May{{/x-option}}
+                      {{#x-option value="6"}}Jun{{/x-option}}
+                      {{#x-option value="7"}}Jul{{/x-option}}
+                      {{#x-option value="8"}}Aug{{/x-option}}
+                      {{#x-option value="9"}}Sep{{/x-option}}
+                      {{#x-option value="10"}}Oct{{/x-option}}
+                      {{#x-option value="11"}}Nov{{/x-option}}
+                      {{#x-option value="12"}}Dec{{/x-option}}
+                    {{/x-select}}
                   </div>
                   <div class="cardExpirations">
-                    <select id="cardExpirationYear" name="cardExpirationYear" class="form-select">
-                      <option value="">Year</option>
-                        {{#each (for currentYear maxYearList 1) as | year |}}
-                            <option value="{{year}}">{{year}}</option>
-                        {{/each}}
-                    </select>
+                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" action="install" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
+                      {{#x-option value=""}}Year{{/x-option}}
+                      {{#each (for currentYear maxYearList 1) as | year |}}
+                        {{#x-option value=year}}{{year}}{{/x-option}}                  
+                      {{/each}}
+                    {{/x-select}}
                   </div>
                 </div>
               </li>
@@ -193,7 +193,7 @@
                     Security code 
                     <span class="form-required">*</span>
                   </label>
-                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" size="60" maxlength="4" />
+                  {{input type="text" classBinding=":form-text :text-full" id="cardSecurityCode" name="cardSecurityCode" value=primaryData.data.paymentInfo.SecurityCode size="60" maxlength="4"}}
                 </div>
                 <div class="gatewayimg"></div>
                 <div class="clearfix clear600"></div>
@@ -201,7 +201,8 @@
                 <div class="clearfix"></div>
               </li>
               <li class="terms">
-                <input type="checkbox" id="iagree_terms" name="iagree_terms" value="I agree" class="form-checkbox iagree_terms" />
+                {{input type="checkbox" classBinding=":form-checkbox :iagree_terms" id="iagree_terms" name="iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
+                
                 <label for="iagree_terms" class="agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
@@ -223,11 +224,11 @@
             <div class="pull-left echeckMode">
               <ul class="no-style">
                 <li>
-                  <input type="radio" id="ecChecking" name="echeckMode" value="Checking" checked="checked" class="form-radio" aria-required="true">
+                  {{radio-button class="form-radio" id="ecChecking" name="echeckMode" value="Checking" groupValue=primaryData.data.paymentInfo.eCheckMode}}
                   <label for="ecChecking">Checking</label>
                 </li>
                 <li>
-                  <input type="radio" id="ecSavings" name="echeckMode" value="Savings" class="form-radio" aria-required="true">
+                  {{radio-button class="form-radio" id="ecSavings" name="echeckMode" value="Savings" groupValue=primaryData.data.paymentInfo.eCheckMode}}
                   <label for="ecSavings">Savings</label>
                 </li>
               </ul>
@@ -242,7 +243,7 @@
                   Name on account 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full few-special-char form-text" type="text" id="accountName" name="accountName" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full :few-special-char" id="accountName" name="accountName" value=primaryData.data.paymentInfo.AccountName size="60" maxlength="255"}}
               </li>
               
               <li>
@@ -250,17 +251,18 @@
                   Bank routing number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="bankroutingNumber" name="bankroutingNumber" size="60" minlength="7" />
+                {{input type="text" classBinding=":form-text :text-full" id="bankroutingNumber" name="bankroutingNumber" value=primaryData.data.paymentInfo.RoutingNumber size="60" minlength="7"}}
               </li>
               <li>
                 <label for="accountNumber">
                   Account number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="accountNumber" name="accountNumber" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full" id="accountNumber" name="accountNumber" value=primaryData.data.paymentInfo.AccountNumber size="60" maxlength="255"}}
               </li>
               <li class="terms">
-                <input type="checkbox" id="check_iagree_terms" name="check_iagree_terms" value="I agree" class="form-checkbox check_iagree_terms" />
+                {{input type="checkbox" classBinding=":form-checkbox :check_iagree_terms" id="check_iagree_terms" name="check_iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
+                
                 <label for="check_iagree_terms" class="ele-agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>

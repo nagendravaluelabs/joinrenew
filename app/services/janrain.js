@@ -137,6 +137,7 @@ export default Service.extend(RouteRefresherMixin, {
   },
   doLogout() {
     localStorage.removeItem('aia-user');
+    localStorage.removeItem('aiaUserInfo');
     this.get("userData").setUserData(null);
     if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
       window.janrain.capture.ui.endCaptureSession();
