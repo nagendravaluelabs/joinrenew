@@ -155,7 +155,7 @@ export default Ember.Service.extend({
     mappedJSON = {};
     mappedJSON.action = "completeRenewTransaction";
     mappedJSON.input = {};
-    mappedJSON.input.membership = {};
+    //mappedJSON.input.membership = {};
     membershipInfo = {};
     membershipPackagesObj = {};
     phonesInfo = {};
@@ -348,7 +348,8 @@ export default Ember.Service.extend({
     
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
-    mappedJSON.input.membership = membershipInfo;
+    //mappedJSON.input.membership = membershipInfo;
+	  mappedJSON.input = membershipInfo;
     
     return mappedJSON;
   },
@@ -368,7 +369,7 @@ export default Ember.Service.extend({
     Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
         "type": 'POST', // HTTP method
         "dataType": 'JSON', // type of data expected from the API response
-        "data": saveRequestParams, // End data payload
+        "data": JSON.stringify(saveRequestParams), // End data payload
         "success": function (data) {
           console.log(data);
         },
