@@ -224,10 +224,10 @@ export default Ember.Service.extend({
     };*/
     
     /* For Join Process */
-    otherInfo.MagazineDeliveryType = 0;
+    /*otherInfo.MagazineDeliveryType = 0;
     otherInfo.LocationType = "Home";
     otherInfo.LocationCountry = "UNITED STATES";
-    otherInfo.LocationCity = "76244-6067";
+    otherInfo.LocationCity = "76244-6067";*/
     
     /* Personal Information */
     personalInfo.Prefix = Ember.getWithDefault(data,'personal.prefix', "");
