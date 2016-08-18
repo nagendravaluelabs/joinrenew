@@ -219,131 +219,135 @@ export default Ember.Component.extend(rememberScroll, {
         },
         validatePersonalInfo: function () {
             "use strict";
-            var validate;
-            validate = $("#personal-contact-form").validate({
-                rules: {
-                    firstname: {
-                        required: true,
-                        letterswithbasicpunc: true
-                    },
-                    middlename: {
-                        letterswithbasicpunc: true
-                    },
-                    lastname: {
-                        required: true,
-                        letterswithbasicpunc: true
-                    },
-                    contact_home_country: {
-                        required: true
-                    },
-                    contact_mobile_country: {
-                        required: function () {
-                            return $("#primary_number_mobile").is(":checked");
-                        }
-                    },
-                    contact_work_country: {
-                        required: function () {
-                            return $("#primary_number_work").is(":checked");
-                        }
-                    },
-                    home_number: {
-                        required: true,
-                        digits: true,
-                        maxlength: 15
-                    },
-                    mobile_number: {
-                        required: function () {
-                            return $("#primary_number_mobile").is(":checked");
-                        },
-                        digits: true,
-                        maxlength: 15
-                        
-                    },
-                    work_number: {
-                        required: function () {
-                            return $("#primary_number_work").is(":checked");
-                        },
-                        digits: true,
-                        maxlength: 15
-                    },
-                    primary_home_address_country: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_address1: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_city: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_zipcode: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-                        },
-                        alphanumeric:true,
-                        maxlength:10
-                    },
-                    administrative_area_state: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-                        }
-                    }
-                },
-                messages: {
-                    prefix: "Prefix is required",
-                    firstname: {
-                        required: "First name is required",
-                        letterswithbasicpunc: "Special characters not allowed for First name"
-                    },
-                    middlename: {
-                        letterswithbasicpunc: "Please enter a single letter for your middle initial"
-                    },
-                    lastname: {
-                        required: "Last name is required",
-                        letterswithbasicpunc: "Special characters not allowed for last name"
-                    },
-                    contact_home_country: "Country field is required",
-                    contact_mobile_country: "Country field is required",
-                    contact_work_country: "Country field is required",
-                    home_number: {
-                        required: "Home number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    mobile_number: {
-                        required: "Mobile number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    work_number: {
-                        required: "Work number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    primary_home_address_country: "Country field is required",
-                    primary_home_address1: "Address line1 is required",
-                    primary_home_city: "City is required",
-                    administrative_area_state: "State is required",
-                    primary_home_zipcode: {
-                      required : "Zip code is required",
-                      alphanumeric : "Please enter a valid zip code",
-                      maxlength: "Please enter a valid zip code"
-                    }
-                   
-                }
-            });
-            if (validate.form()) {
-                this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
-                //this.get('router').transitionTo('membership-dues');
+            if(this.get("editContactInfo")) {
+              var validate;
+              validate = $("#personal-contact-form").validate({
+                  rules: {
+                      firstname: {
+                          required: true,
+                          letterswithbasicpunc: true
+                      },
+                      middlename: {
+                          letterswithbasicpunc: true
+                      },
+                      lastname: {
+                          required: true,
+                          letterswithbasicpunc: true
+                      },
+                      contact_home_country: {
+                          required: true
+                      },
+                      contact_mobile_country: {
+                          required: function () {
+                              return $("#primary_number_mobile").is(":checked");
+                          }
+                      },
+                      contact_work_country: {
+                          required: function () {
+                              return $("#primary_number_work").is(":checked");
+                          }
+                      },
+                      home_number: {
+                          required: true,
+                          digits: true,
+                          maxlength: 15
+                      },
+                      mobile_number: {
+                          required: function () {
+                              return $("#primary_number_mobile").is(":checked");
+                          },
+                          digits: true,
+                          maxlength: 15
+                          
+                      },
+                      work_number: {
+                          required: function () {
+                              return $("#primary_number_work").is(":checked");
+                          },
+                          digits: true,
+                          maxlength: 15
+                      },
+                      primary_home_address_country: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_address1: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_city: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_zipcode: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                          },
+                          alphanumeric:true,
+                          maxlength:10
+                      },
+                      administrative_area_state: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                          }
+                      }
+                  },
+                  messages: {
+                      prefix: "Prefix is required",
+                      firstname: {
+                          required: "First name is required",
+                          letterswithbasicpunc: "Special characters not allowed for First name"
+                      },
+                      middlename: {
+                          letterswithbasicpunc: "Please enter a single letter for your middle initial"
+                      },
+                      lastname: {
+                          required: "Last name is required",
+                          letterswithbasicpunc: "Special characters not allowed for last name"
+                      },
+                      contact_home_country: "Country field is required",
+                      contact_mobile_country: "Country field is required",
+                      contact_work_country: "Country field is required",
+                      home_number: {
+                          required: "Home number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      mobile_number: {
+                          required: "Mobile number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      work_number: {
+                          required: "Work number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      primary_home_address_country: "Country field is required",
+                      primary_home_address1: "Address line1 is required",
+                      primary_home_city: "City is required",
+                      administrative_area_state: "State is required",
+                      primary_home_zipcode: {
+                        required : "Zip code is required",
+                        alphanumeric : "Please enter a valid zip code",
+                        maxlength: "Please enter a valid zip code"
+                      }
+                     
+                  }
+              });
+              if (validate.form()) {
+                  this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
+                  //this.get('router').transitionTo('membership-dues');
+              } else {
+                  if ($("#personal-contact").hasClass("hidden")) {
+                      this.sendAction("showPersonalInfo");
+                  }            
+              }
             } else {
-                if ($("#personal-contact").hasClass("hidden")) {
-                    this.sendAction("showPersonalInfo");
-                }            
+                this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
             }
         },
         addNewOrganization: function () {
