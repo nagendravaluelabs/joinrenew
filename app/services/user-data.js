@@ -66,7 +66,6 @@ export default Ember.Service.extend({
                     if(!Ember.getWithDefault(data,'personal.address.office', false)) {
                       data.personal.address.office = {};
                     }
-                    
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
                     self.set("data", data);

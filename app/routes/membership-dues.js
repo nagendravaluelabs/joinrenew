@@ -20,8 +20,8 @@ setupController: function(controller) {
       duesData.supplementalDuesTotal = 0;
       localStorage.aiaUserInfo = JSON.stringify(duesData);
       controller.get("duesData").saveUserData(duesData);
-      controller.resetSupplement();
     }
+    controller.resetSupplement();
 },
 resetController: function(controller, isExiting) {
     this._super.apply(this, arguments);

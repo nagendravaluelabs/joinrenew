@@ -331,13 +331,13 @@
         </div>
         
       {{/if}}
-      
-      {{#if maxCapExceeded}}
-        <ul class="maxCapExceeded">
-        	<li>Supplemental dues cannot exceed $ {{format-currency duesData.data.invoice.supplementaldues.state.max}}. This is the max amount you’ll be charged.</li>
-        </ul>
+      {{#if isDuesCalculator}}
+        {{#if maxCapExceeded}}
+          <ul class="maxCapExceeded">
+            <li>Supplemental dues cannot exceed $ {{format-currency duesData.data.invoice.supplementaldues.state.max}}. This is the max amount you’ll be charged.</li>
+          </ul>
+        {{/if}}
       {{/if}}
-      
       <div class="button-container membership-button-container hidden-xs">
         {{#if isRenewSummary}}
           <div class="renew-btn-container r-btn-container">

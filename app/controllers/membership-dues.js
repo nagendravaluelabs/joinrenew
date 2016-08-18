@@ -35,6 +35,7 @@ export default Ember.Controller.extend(rememberScroll, {
         "use strict";
         this.totalDuesFunc();
         this.hasSupplementalDues();
+        this.resetSupplement();
     },
     supplementalDuesTotal: 0,
     supplementalTotalDues: 0,
@@ -43,6 +44,14 @@ export default Ember.Controller.extend(rememberScroll, {
     resetSupplement: function() {
       this.set("supplementalDuesTotal", 0);
       this.set("supplementalTotalDues", 0);
+      this.set("maxCapExceeded", false);
+      
+      if(Ember.getWithDefault("duesData", "data.membershipInfo", false)) {
+        var membershipInfo = {};
+        membershipInfo.persons = {};
+        membershipInfo.amount = {};
+        this.set("duesData.data.membershipInfo", membershipInfo);
+      }
     },
     hasSupplementalDues: function () {
         "use strict";
@@ -179,13 +188,15 @@ export default Ember.Controller.extend(rememberScroll, {
         },
         membershipduesPrev: function () {
             "use strict";
-            var isDuesCalculator, isQuestionnarie, isTotalRenew;
+            var isDuesCalculator, isQuestionnarie, isTotalRenew, membershipInfo;
             isDuesCalculator = this.get("isDuesCalculator");
             isTotalRenew = this.get("isTotalRenew");
             isQuestionnarie = this.get("isQuestionnarie");
-            this.set("duesData.data.membershipInfo.LiabilityCode", "");
-            this.set("duesData.data.membershipInfo.SupplementalDuesID", "");
-            this.set("duesData.data.membershipInfo.SupplementalDuesName", "");
+            membershipInfo = {};
+            membershipInfo.persons = {};
+            membershipInfo.amount = {};
+            this.set("duesData.data.membershipInfo", membershipInfo);
+            this.set("maxCapExceeded", false);
             if (isQuestionnarie) {
                 this.updateDuesPage(true, false, false, false);
             } else if (isDuesCalculator || isTotalRenew) {
