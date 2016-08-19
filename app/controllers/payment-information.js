@@ -234,59 +234,59 @@ export default Ember.Controller.extend({
               
           },
           validatePaymentElectronicInfo: function () {
-                  "use strict";
-                  var validate;
-                  validate = $("#form-electronic-check").validate({
-                      rules:{
-                          accountName:{
-                             required: true
-                          },
-                          bankroutingNumber:{
-                             required: true,
-                             digits: true,
-                             minlength: 7
-                          },
-                          accountNumber: {
-                             required: true,
-                             digits: true
-                          },
-                          check_iagree_terms:{
-                            required: true
-                          }
+              "use strict";
+              var validate;
+              validate = $("#form-electronic-check").validate({
+                  rules:{
+                      accountName:{
+                         required: true
                       },
-                      messages: {
-                          accountName:{
-                            required: "Please enter name on account",
-                            lettersonly: "Please enter a name of the Account Holder"
-                          },
-                          bankroutingNumber:{
-                            required: "Bank routing number is required",
-                            digits: "Please enter a valid routing number",
-                            minlength : "Please enter a valid routing number"
-                          },
-                          accountNumber:{
-                            required:"Account number is required",
-                            digits: "Please enter a valid account number"
-                          },
-                          check_iagree_terms:{
-                            required: "You must agree to the terms and conditions"
-                          }
+                      bankroutingNumber:{
+                         required: true,
+                         digits: true,
+                         minlength: 7
                       },
-                      errorPlacement: function (error, element) {
-                          if (element.hasClass("chosen-select")) {
-                              error.insertAfter();
-                          } else {
-                              if (element.hasClass("check_iagree_terms")) {                          
-                                error.insertAfter($(element).next("label"));
-                              }else {
-                                error.insertAfter(element);
-                              }                        
-                          }
+                      accountNumber: {
+                         required: true,
+                         digits: true
+                      },
+                      check_iagree_terms:{
+                        required: true
                       }
-                  });
-                  if(validate.form()) {
-                      this.saveRenewData();
-                  } 
+                  },
+                  messages: {
+                      accountName:{
+                        required: "Please enter name on account",
+                        lettersonly: "Please enter a name of the Account Holder"
+                      },
+                      bankroutingNumber:{
+                        required: "Bank routing number is required",
+                        digits: "Please enter a valid routing number",
+                        minlength : "Please enter a valid routing number"
+                      },
+                      accountNumber:{
+                        required:"Account number is required",
+                        digits: "Please enter a valid account number"
+                      },
+                      check_iagree_terms:{
+                        required: "You must agree to the terms and conditions"
+                      }
+                  },
+                  errorPlacement: function (error, element) {
+                      if (element.hasClass("chosen-select")) {
+                          error.insertAfter();
+                      } else {
+                          if (element.hasClass("check_iagree_terms")) {                          
+                            error.insertAfter($(element).next("label"));
+                          }else {
+                            error.insertAfter(element);
+                          }                        
+                      }
+                  }
+              });
+              if(validate.form()) {
+                  this.saveRenewData();
               } 
+          } 
         }
 });

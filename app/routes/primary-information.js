@@ -25,12 +25,12 @@ export default Ember.Route.extend({
         {
           "title": "Step 2. Membership dues",
           "status": "",
-          "route": "membership-dues"
+          "route": "primary-information"
         },
         {
           "title": "Step 3. Payment",
           "status": "",
-          "route": "payment-information"
+          "route": "primary-information"
         }
       ]
     });
