@@ -27,6 +27,7 @@ export default Ember.Controller.extend({
         supplyTotal:0,
         installNumber:3,
         installment: 0,
+        paymentFailed: false,
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));
@@ -195,9 +196,20 @@ export default Ember.Controller.extend({
           this.set("installment", parseFloat(installment, 2));
         },
         saveRenewData : function () {
-          var formattedSaveData;
-          formattedSaveData = this.get("primaryData").reMapJSON(this.get("primaryData").data);
-          this.get("primaryData").saveRenewInfoToNF(formattedSaveData);
+          var formattedSaveData, paymentSaveCallback, paymentError, self;
+          self = this;
+          formattedSaveData = self.get("primaryData").reMapJSON(self.get("primaryData").data);
+          paymentSaveCallback = self.get("primaryData").saveRenewInfoToNF(formattedSaveData);
+          paymentSaveCallback.then(function(response){
+            if(response.Success === "true") {
+              
+            } else {
+              paymentError = Ember.getWithDefault(response, "errormessage", false);
+              paymentError = (paymentError) ? paymentError : "There was a problem while processing your payment. To learn more, please contact us: 1-800-242-3837, option 2 or memberservices@aia.org. We regret any inconvenience.";
+              self.set("paymentFailed", paymentError);
+              $("html, body").animate({scrollTop: "100px"}, 1000);
+            }
+          });
         },
         actions: {
           install : function(value){

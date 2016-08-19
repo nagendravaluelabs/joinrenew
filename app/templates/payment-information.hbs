@@ -1,6 +1,10 @@
 {{renew-steps steps=model.steps}}
+
 <div class="row">
   <div class="col-sm-9">
+    {{#if paymentFailed}}
+      <div id="paymentError" class="alert alert-danger">{{paymentFailed}}</div>
+    {{/if}}
     <h1 class="page-title">Payment information</h1>
     <div id="userprofileinfo">
       <ul class="no-style">
