@@ -1,20 +1,30 @@
 {{renew-steps steps=model.steps}}
+
 <div class="row">
   <div class="col-sm-9">
+    {{#if paymentFailed}}
+      <div id="paymentError" class="alert alert-danger">{{paymentFailed}}</div>
+    {{/if}}
     <h1 class="page-title">Payment information</h1>
     <div id="userprofileinfo">
       <ul class="no-style">
         {{#if (isEqualTo primaryData.data.personal.address.primary "home")}}
           <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
           <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
-          <li>{{primaryData.data.personal.address.home.city}}</li>
-          <li>{{primaryData.data.personal.address.home.country.value}},  {{primaryData.data.personal.address.home.state.value}} {{primaryData.data.personal.address.home.zip}}</li>
+          <li>{{primaryData.data.personal.address.home.city}},
+              {{#if (ifCond (isEqualTo primaryData.data.personal.address.home.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo primaryData.data.personal.address.home.country.value "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                       {{primaryData.data.personal.address.home.state.value}},
+              {{/if}} 
+          {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
         {{/if}}
         {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
           <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
           <li>{{primaryData.data.personal.address.office.line1}} {{primaryData.data.personal.address.office.line2}} {{primaryData.data.personal.address.office.line3}}</li>
-          <li>{{primaryData.data.personal.address.office.city}}</li>
-          <li>{{primaryData.data.personal.address.office.country.value}},  {{primaryData.data.personal.address.office.state.value}} {{primaryData.data.personal.address.office.zip}}</li>
+          <li>{{primaryData.data.personal.address.office.city}},
+            {{#if (ifCond (isEqualTo primaryData.data.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo primaryData.data.personal.address.office.country.value "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                       {{primaryData.data.personal.address.office.state.value}},
+              {{/if}}
+          {{primaryData.data.personal.address.office.country.value}}            {{primaryData.data.personal.address.office.zip}}</li>
         {{/if}}
       </ul>
     </div>
@@ -186,7 +196,7 @@
                     {{/x-select}}
                   </div>
                   <div class="cardExpirations">
-                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" action="install" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
+                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
                       {{#x-option value=""}}Year{{/x-option}}
                       {{#each (for currentYear maxYearList 1) as | year |}}
                         {{#x-option value=year}}{{year}}{{/x-option}}                  
@@ -214,6 +224,9 @@
                 <label for="iagree_terms" class="agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
+              </li>
+               <li>
+                 {{archipac-donation}}
               </li>
               <li>
                 <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>

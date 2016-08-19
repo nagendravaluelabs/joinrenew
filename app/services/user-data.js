@@ -133,6 +133,32 @@ export default Ember.Service.extend({
       this.set("data", data);
       localStorage.aiaUserInfo = JSON.stringify(data);
   },
+  getCardType: function(number) {
+    // visa
+    var re = new RegExp("^4");
+    if (number.match(re) != null) {
+      return "visa";
+    }
+
+    // Mastercard
+    re = new RegExp("^5[1-5]");
+    if (number.match(re) != null) {
+      return "master";
+    }
+
+    // AMEX
+    re = new RegExp("^3[47]");
+    if (number.match(re) != null) {
+      return "amex";
+    }
+
+    // Discover
+    re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+    if (number.match(re) != null) {
+      return "discover";
+    }
+    return "none";
+  },
   reMapJSON: function(data) {
     var mappedJSON, 
         genericData, 
@@ -155,7 +181,7 @@ export default Ember.Service.extend({
     mappedJSON = {};
     mappedJSON.action = "completeRenewTransaction";
     mappedJSON.input = {};
-    //mappedJSON.input.membership = {};
+    mappedJSON.input.membership = {};
     membershipInfo = {};
     membershipPackagesObj = {};
     phonesInfo = {};
@@ -184,15 +210,22 @@ export default Ember.Service.extend({
     LicensedToPractice = Ember.getWithDefault(data,'membershipInfo.LicensedToPractice', false);
     LicensedToPractice = (LicensedToPractice) ? 1 : 0;
     membershipInfo.LicensedToPractice = LicensedToPractice;
-    membershipInfo.LiabilityCode = Ember.getWithDefault(data,'membershipInfo.LiabilityCode', "");
+    membershipInfo.LiabilityCode = Ember.getWithDefault(data,'membershipInfo.LiabilityCode', 0);
     
     /* Payment */
+    paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
     paymentType = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
-    paymentType = (paymentType === "Debit/Credit Card" || paymentType=== "EMI") ? "credit" : "echeck";
-    paymentInfo.ThirdPartyVendors = 0;
+    
+    if(paymentType==="Electronic check") {
+      paymentType = Ember.getWithDefault(genericData,'phonetypekeys.echeck', "");
+    } else {
+      paymentType = this.getCardType(paymentInfo.CardNumber);
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentType, "");
+    }
+    
+    paymentInfo.ThirdPartyVendors = 0; // Need Clarification
     paymentInfo.PaymentTypeKey = paymentType;
     paymentInfo.NameOnCard = Ember.getWithDefault(data,'paymentInfo.NameOnCard', "");
-    paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
     paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
     paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
     paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
@@ -213,17 +246,9 @@ export default Ember.Service.extend({
         "MembershipPackageKey": value.packagekey
       };
     });
-    /*membershipPackagesObj.MembershipPackages.MembershipPackage[membershipPackagesObj.MembershipPackages.MembershipPackage.length] = {
-      "MembershipPackageKey": "61c9ce33-8244-4bd1-b505-7f5e5486cd78"
-    };
-    membershipPackagesObj.MembershipPackages.MembershipPackage[membershipPackagesObj.MembershipPackages.MembershipPackage.length] = {
-      "MembershipPackageKey": "7d320168-0f13-449a-ba6c-7918bb39b847"
-    };
-    membershipPackagesObj.MembershipPackages.MembershipPackage[membershipPackagesObj.MembershipPackages.MembershipPackage.length] = {
-      "MembershipPackageKey": "c57dcc7f-e5ba-4ba3-a4da-88b4d0abd81e"
-    };*/
     
     /* For Join Process */
+    
     /*otherInfo.MagazineDeliveryType = 0;
     otherInfo.LocationType = "Home";
     otherInfo.LocationCountry = "UNITED STATES";
@@ -334,8 +359,8 @@ export default Ember.Service.extend({
           addressKey = "";
         }
         addressInfo.Addresses.Address[addressLength] = {};
-        addressInfo.Addresses.Address[addressLength].CompanyKey = "";
-        addressInfo.Addresses.Address[addressLength].Type = "office";
+        addressInfo.Addresses.Address[addressLength].CompanyKey = Ember.getWithDefault(data.personal, "organization.key", "");
+        addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
         addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
         addressInfo.Addresses.Address[addressLength].Key = addressKey;
       }
@@ -348,8 +373,8 @@ export default Ember.Service.extend({
     
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
-    //mappedJSON.input.membership = membershipInfo;
-	  mappedJSON.input = membershipInfo;
+    mappedJSON.input.membership = membershipInfo;
+	  //mappedJSON.input = membershipInfo;
     
     return mappedJSON;
   },
@@ -366,16 +391,21 @@ export default Ember.Service.extend({
       body: saveRequestParams,
       mode: 'no-cors'
     };*/
-    Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
+    console.log(saveRequestParams);
+    return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
         "type": 'POST', // HTTP method
         "dataType": 'JSON', // type of data expected from the API response
         "data": JSON.stringify(saveRequestParams), // End data payload
-        "success": function (data) {
-          console.log(data);
+        /*"success": function (data) {
+          if(data.success === "true") {
+            
+          } else {
+            
+          }
         },
         "error": function (jqXHR) {
             window.console.log(jqXHR);
-        }
+        }*/
     });
 
   },

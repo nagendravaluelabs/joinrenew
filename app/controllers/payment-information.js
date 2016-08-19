@@ -27,6 +27,7 @@ export default Ember.Controller.extend({
         supplyTotal:0,
         installNumber:3,
         installment: 0,
+        paymentFailed: false,
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));
@@ -195,10 +196,25 @@ export default Ember.Controller.extend({
           this.set("installment", parseFloat(installment, 2));
         },
         saveRenewData : function () {
-          var formattedSaveData;
-          formattedSaveData = this.get("primaryData").reMapJSON(this.get("primaryData").data);
-          this.get("primaryData").saveRenewInfoToNF(formattedSaveData);
+          var formattedSaveData, paymentSaveCallback, paymentError, self;
+          self = this;
+          formattedSaveData = self.get("primaryData").reMapJSON(self.get("primaryData").data);
+          paymentSaveCallback = self.get("primaryData").saveRenewInfoToNF(formattedSaveData);
+          paymentSaveCallback.then(function(response){
+            if(response.Success === "true") {
+              localStorage.removeItem('aiaUserInfo');
+              self.transitionToRoute('complete');
+            } else {
+              paymentError = Ember.getWithDefault(response, "errormessage", false);
+              paymentError = (paymentError) ? paymentError : "There was a problem while processing your payment. To learn more, please contact us: 1-800-242-3837, option 2 or memberservices@aia.org. We regret any inconvenience.";
+              self.set("paymentFailed", paymentError);
+              $("html, body").animate({scrollTop: "100px"}, 1000);
+            }
+          });
         },
+		resetPayments: function() {
+			this.set("paymentFailed", false);
+		},
         actions: {
           install : function(value){
             "use strict";
@@ -222,59 +238,59 @@ export default Ember.Controller.extend({
               
           },
           validatePaymentElectronicInfo: function () {
-                  "use strict";
-                  var validate;
-                  validate = $("#form-electronic-check").validate({
-                      rules:{
-                          accountName:{
-                             required: true
-                          },
-                          bankroutingNumber:{
-                             required: true,
-                             digits: true,
-                             minlength: 7
-                          },
-                          accountNumber: {
-                             required: true,
-                             digits: true
-                          },
-                          check_iagree_terms:{
-                            required: true
-                          }
+              "use strict";
+              var validate;
+              validate = $("#form-electronic-check").validate({
+                  rules:{
+                      accountName:{
+                         required: true
                       },
-                      messages: {
-                          accountName:{
-                            required: "Please enter name on account",
-                            lettersonly: "Please enter a name of the Account Holder"
-                          },
-                          bankroutingNumber:{
-                            required: "Bank routing number is required",
-                            digits: "Please enter a valid routing number",
-                            minlength : "Please enter a valid routing number"
-                          },
-                          accountNumber:{
-                            required:"Account number is required",
-                            digits: "Please enter a valid account number"
-                          },
-                          check_iagree_terms:{
-                            required: "You must agree to the terms and conditions"
-                          }
+                      bankroutingNumber:{
+                         required: true,
+                         digits: true,
+                         minlength: 7
                       },
-                      errorPlacement: function (error, element) {
-                          if (element.hasClass("chosen-select")) {
-                              error.insertAfter();
-                          } else {
-                              if (element.hasClass("check_iagree_terms")) {                          
-                                error.insertAfter($(element).next("label"));
-                              }else {
-                                error.insertAfter(element);
-                              }                        
-                          }
+                      accountNumber: {
+                         required: true,
+                         digits: true
+                      },
+                      check_iagree_terms:{
+                        required: true
                       }
-                  });
-                  if(validate.form()) {
-                      this.saveRenewData();
-                  } 
+                  },
+                  messages: {
+                      accountName:{
+                        required: "Please enter name on account",
+                        lettersonly: "Please enter a name of the Account Holder"
+                      },
+                      bankroutingNumber:{
+                        required: "Bank routing number is required",
+                        digits: "Please enter a valid routing number",
+                        minlength : "Please enter a valid routing number"
+                      },
+                      accountNumber:{
+                        required:"Account number is required",
+                        digits: "Please enter a valid account number"
+                      },
+                      check_iagree_terms:{
+                        required: "You must agree to the terms and conditions"
+                      }
+                  },
+                  errorPlacement: function (error, element) {
+                      if (element.hasClass("chosen-select")) {
+                          error.insertAfter();
+                      } else {
+                          if (element.hasClass("check_iagree_terms")) {                          
+                            error.insertAfter($(element).next("label"));
+                          }else {
+                            error.insertAfter(element);
+                          }                        
+                      }
+                  }
+              });
+              if(validate.form()) {
+                  this.saveRenewData();
               } 
+          } 
         }
 });
