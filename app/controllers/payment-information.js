@@ -203,7 +203,7 @@ export default Ember.Controller.extend({
           paymentSaveCallback.then(function(response){
             if(response.Success === "true") {
               localStorage.removeItem('aiaUserInfo');
-              this.transitionToRoute('complete');
+              self.transitionToRoute('complete');
             } else {
               paymentError = Ember.getWithDefault(response, "errormessage", false);
               paymentError = (paymentError) ? paymentError : "There was a problem while processing your payment. To learn more, please contact us: 1-800-242-3837, option 2 or memberservices@aia.org. We regret any inconvenience.";
