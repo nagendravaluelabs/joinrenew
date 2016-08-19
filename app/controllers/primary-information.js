@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
               primaryAddress[0]= personalData.address.office.line1;
               primaryAddress[1]= personalData.address.office.line2;
               
-              if (personalData.address.office.country.key === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key === "BE685760-5492-4BA3-B105-868E2010FA34" ){
+              if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
               primaryAddress[2]= personalData.address.office.city + ", "+ personalData.address.office.state.value + ", " + personalData.address.office.country.value + " " + personalData.address.office.zip;
               } else {
               primaryAddress[2]= personalData.address.office.city + ", "+ personalData.address.office.country.value + " " + personalData.address.office.zip;
@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
             if(typeof personalData.address.home !== "undefined") {
               primaryAddress[0]= personalData.address.home.line1;
               primaryAddress[1]= personalData.address.home.line2;
-              if (personalData.address.home.country.key === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key === "BE685760-5492-4BA3-B105-868E2010FA34"){
+              if (personalData.address.home.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.home.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34"){
                primaryAddress[2]= personalData.address.home.city + ", "+ personalData.address.home.state.value + ", " + personalData.address.home.country.value + " " + personalData.address.home.zip;
             } else {
                primaryAddress[2]= personalData.address.home.city + ", "+ personalData.address.home.country.value + " " + personalData.address.home.zip;

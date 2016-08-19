@@ -210,7 +210,7 @@ export default Ember.Service.extend({
     LicensedToPractice = Ember.getWithDefault(data,'membershipInfo.LicensedToPractice', false);
     LicensedToPractice = (LicensedToPractice) ? 1 : 0;
     membershipInfo.LicensedToPractice = LicensedToPractice;
-    membershipInfo.LiabilityCode = Ember.getWithDefault(data,'membershipInfo.LiabilityCode', "");
+    membershipInfo.LiabilityCode = Ember.getWithDefault(data,'membershipInfo.LiabilityCode', 0);
     
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");

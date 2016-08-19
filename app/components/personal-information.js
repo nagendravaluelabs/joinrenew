@@ -108,9 +108,25 @@ export default Ember.Component.extend(rememberScroll, {
         }
       });
       countryCode = countryCode.filter(function(n){ return n !== null; }); 
-      
+      countryCode = countryCode[0];
       this.set("personalInfo.personal.address.home.country.value", countryCode);
     }.observes('personalInfo.personal.address.home.country.key'),
+    stateObserver: function() {
+      var stateKey, stateCode, genericData;
+      stateKey = this.get("personalInfo.personal.address.home.state.key");
+      genericData = this.get("genericData.generic.states");
+      genericData = genericData["UNITED STATES"];
+      stateCode = genericData.map(function(list){ 
+        if(list.statekey === stateKey) {
+          return list.statecode;
+        } else {
+          return null;
+        }
+      });
+      stateCode = stateCode.filter(function(n){ return n !== null; }); 
+      stateCode = stateCode[0];
+      this.set("personalInfo.personal.address.home.state.value", stateCode);
+    }.observes('personalInfo.personal.address.home.state.key'),
     setWorkStateStatusFn: function (value) {
         "use strict";
         var self, data;
@@ -190,41 +206,10 @@ export default Ember.Component.extend(rememberScroll, {
         setWorkStateStatus: function (value) {
             "use strict";
             this.setWorkStateStatusFn(value);
-            /*if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
-                self.set("workstates", data);
-                setTimeout(function(){
-                  $(".select-chosen").trigger("chosen:updated");
-                },100);
-              });
-            } else {
-              self.set("workstates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("workShowState", true);
-            } else {
-                this.set("workShowState", false);
-            }*/
         },
         setHomeStateStatus: function (value) {
             "use strict";
             this.setHomeStateStatusFn(value);
-            /*var self=this;
-            if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
-                self.set("Homestates", data);
-                setTimeout(function(){
-                  $(".select-chosen").trigger("chosen:updated");
-                },100);
-              });
-            } else {
-              self.set("Homestates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("homeShowState", true);
-            } else {
-                this.set("homeShowState", false);
-            }*/
         },
         updateContactInformation: function (value) {
             "use strict";
