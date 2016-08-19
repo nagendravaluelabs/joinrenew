@@ -190,7 +190,7 @@
                     {{/x-select}}
                   </div>
                   <div class="cardExpirations">
-                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" action="install" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
+                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
                       {{#x-option value=""}}Year{{/x-option}}
                       {{#each (for currentYear maxYearList 1) as | year |}}
                         {{#x-option value=year}}{{year}}{{/x-option}}                  
