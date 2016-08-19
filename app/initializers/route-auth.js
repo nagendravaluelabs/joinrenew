@@ -17,7 +17,7 @@ var AuthMixin = Ember.Mixin.create({
       let authUser = this.get("auth").get("user");
       if(authRoutes.indexOf(currenRoute) !== -1) {
         if(!authUser) {
-          localStorage['route'] = "renew-verify-membership";
+          localStorage['route'] = currenRoute;
           if(this.get("auth").get("authState") === "logout") {
             this.transitionTo('/renew');
             localStorage['route'] = "";

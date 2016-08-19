@@ -47,7 +47,7 @@ return Ember.RSVP.hash({
 	{
 	  "title": "Step 3. Payment",
 	  "status": "",
-	  "route": "membership-dues"
+	  "route": "payment-information"
 	}
   ]  
  });
