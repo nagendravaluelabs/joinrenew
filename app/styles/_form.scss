@@ -360,5 +360,22 @@ select {
     padding: 4px;
   }
 }
+p{
+  &.note{
+    padding-left:24px;
+    margin-bottom: 0 !important;
+    font-style: italic;
+    span{
+    font-style:normal;
+    }
+  }
+}
+
+.payment-archipac-table{
+  width: 70%;
+  @media screen and (max-width: 767px){
+    width: 100%;
+  }
+}
 
 /* Start: Select styles */

@@ -50,9 +50,6 @@
                 <td>Supplemental dues</td>
                 <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
               </tr>
-              <tr>
-                {{archipac-donation}}                  
-              </tr>
               </tbody>
             </table>
           </div>
@@ -185,10 +182,6 @@
                   <td id="localdues" class="value">$ {{format-currency duesData.data.invoice.dues.local.due}}</td>
                 </tr>
 				{{/if}}      
-							
-                
-                 {{archipac-donation}}
-                
                 <tr>
                   <td class="membership-dues-total">
                     {{duesData.data.membership.membershipyear}} individual dues total
@@ -199,9 +192,6 @@
                   <tr>
                     <td>Supplemental dues</td>
                     <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
-                  </tr> 
-                  <tr>
-                    {{archipac-donation}}                  
                   </tr>
                   <tr class="sum">
                     <td>Total due</td>
