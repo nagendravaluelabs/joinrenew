@@ -225,6 +225,8 @@ export default Ember.Controller.extend(rememberScroll, {
             localAmount = parseFloat(event.target.dataset.localAmount);
             stateAmount = parseFloat(event.target.dataset.stateAmount);
             totalsKey = event.target.dataset.totals;
+			localAmount = (isNaN(localAmount)) ? 0 : localAmount;
+			stateAmount = (isNaN(stateAmount)) ? 0 : stateAmount;
             amount =localAmount+stateAmount;
             total = parseFloat(value * amount).toFixed(2);
             
