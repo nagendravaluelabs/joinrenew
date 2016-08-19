@@ -45,7 +45,7 @@ export default Ember.Component.extend(rememberScroll, {
             chapterType = (chapterType === "Billing") ? "Home" : chapterType;
             chapterType = (chapterType === "Office") ? "Work" : chapterType;
             self.chapterSelection(chapterType);
-            if(!Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
+            if(Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
               self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());              
             }
             self.set('contactAddressType', contactInfo.primary);
@@ -96,6 +96,21 @@ export default Ember.Component.extend(rememberScroll, {
         self.set('createOrganization', false);
         self.set('primary' + chapterType + 'Address', true);
     },
+    countryObserver: function() {
+      var countryKey, countryCode, genericData;
+      countryKey = this.get("personalInfo.personal.address.home.country.key");
+      genericData = this.get("genericData.generic.country");
+      countryCode = genericData.map(function(list){ 
+        if(list.countrykey === countryKey) {
+          return list.countrycode;
+        } else {
+          return null;
+        }
+      });
+      countryCode = countryCode.filter(function(n){ return n !== null; }); 
+      
+      this.set("personalInfo.personal.address.home.country.value", countryCode);
+    }.observes('personalInfo.personal.address.home.country.key'),
     setWorkStateStatusFn: function (value) {
         "use strict";
         var self, data;
