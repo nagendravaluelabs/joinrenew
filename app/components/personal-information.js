@@ -101,7 +101,7 @@ export default Ember.Component.extend(rememberScroll, {
       countryKey = this.get("personalInfo.personal.address.home.country.key");
       genericData = this.get("genericData.generic.country");
       countryCode = genericData.map(function(list){ 
-        if(list.countrykey === countryKey) {
+        if(list.countrykey.toLowerCase() === countryKey.toLowerCase()) {
           return list.countrycode;
         } else {
           return null;
@@ -117,7 +117,7 @@ export default Ember.Component.extend(rememberScroll, {
       genericData = this.get("genericData.generic.states");
       genericData = genericData["UNITED STATES"];
       stateCode = genericData.map(function(list){ 
-        if(list.statekey === stateKey) {
+        if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
           return list.statecode;
         } else {
           return null;
@@ -178,7 +178,7 @@ export default Ember.Component.extend(rememberScroll, {
     actions: {
         showPersonalInfo: function () {
             "use strict";
-            this.sendAction("showPersonalInfo");
+            this.sendAction("showPersonalInfo", true);
             this.scrollToTop();
         },
         chapterSelection: function (value) {
