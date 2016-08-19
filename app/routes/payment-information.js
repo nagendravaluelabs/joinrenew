@@ -37,6 +37,16 @@ export default Ember.Route.extend({
         });
       });
   },
+	setupController: function(controller) {
+		this._super.apply(this, arguments);    
+		controller.resetPayments();
+	},
+	resetController: function(controller, isExiting) {
+		this._super.apply(this, arguments);
+		if (isExiting) {
+			controller.resetPayments();
+		}
+	},
   model(){
     "use strict";
     return Ember.RSVP.hash({

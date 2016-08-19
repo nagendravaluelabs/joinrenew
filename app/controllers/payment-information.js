@@ -212,6 +212,9 @@ export default Ember.Controller.extend({
             }
           });
         },
+		resetPayments: function() {
+			this.set("paymentFailed", false);
+		},
         actions: {
           install : function(value){
             "use strict";
