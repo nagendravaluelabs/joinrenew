@@ -44,7 +44,7 @@ var AuthMixin = Ember.Mixin.create({
             this.transitionTo("renew-verify-membership");
           }
           localStorage['route'] = "";
-        } else if(authUser && authUser.indexOf("invalid") !== -1) {
+        } else if(authUser && authUser.length>0 && authUser.indexOf("invalid") !== -1) {
           this.transitionTo("invalid-janrain");
         }
       } else if(routeIgnoreKeys.indexOf(currenRoute) !== -1) {
