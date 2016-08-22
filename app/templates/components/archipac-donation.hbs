@@ -1,14 +1,22 @@
 <table class="duestable payment-archipac-table">
   <tbody>
     <tr>
-      <td style="80%">
+      <td>
         {{input type="checkbox" classBinding=":form-checkbox" id="archipac-check" name="archipac_check" checked=(mut (get primaryData.data.paymentInfo "isArchiPAC"))}}
         
       <label class="option archipac-label" for="archipac-check">
       <span>Archipac</span> donation: a political action committee of the AIA.</label>
-      <p class="note">Note: this donation must be paid using a personal credit or debit card. <span><br>Read <a href="#">disclaimer</a></span>
+      <p class="note">Note: this donation must be paid using a personal credit or debit card. <span><br>Read <a href="#" onclick={{action "showArchipacDis"}}>disclaimer</a></span>
       </p></td>
-      <td align="right" style="width:20%;" id="archipac-value" class="value">&nbsp;&nbsp;&nbsp; $ 25.00</td>
+      <td align="right" id="archipac-value" class="value">&nbsp;&nbsp;&nbsp; $ 25.00</td>
     </tr>
   </tbody>
 </table>
+
+
+  
+    <div id="archipac_disclaiminfo">
+      <p>
+          Contributions to ArchiPAC are not tax deductible. Contributions are voluntary and will be used for political purposes; you may refuse to contribute without reprisal. Contribution guidelines are only suggestions, you may contribute more or less than the suggested amounts and you will not be favoured or disadvantaged based on the amount of your contribution or your decision not to contribute. All contributions must be from U.S. citizens or lawful permanent residents (e.g., green card holders), from personal funds, and may not be made by anyone who is a federal government contractor. Corporate contributions are prohibited by federal law. Federal law requires political committees to use their best efforts to collect and report the name, address, employer and occupation of individuals whose contributions exceed $200 in a calender year.
+      </p>
+  </div>

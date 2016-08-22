@@ -35,6 +35,25 @@ export default Ember.Route.extend({
         $('body').on("click", ".ui-widget-overlay", function () {
           $("#paymentplan_extrainfo").dialog("close");
         });
+        $('#archipac_disclaiminfo').dialog({
+          modal: true,
+          autoOpen: false,
+          draggable: false,
+          resizable: false,
+          width: $(window).width() > 850 ? 850 : '90%',
+          title: 'ArchiPAC disclaimer',
+          responsive: true,
+          closeText: '',
+          appendTo: "#main-content.page-sign-up-payment #archipac_dis_modal", 
+          show: false,
+          hide: false
+        });
+        $(window).resize(function () {
+          $("#archipac_disclaiminfo").dialog("option", "width", $(window).width() > 850 ? 850 : '90%');
+        });
+        $('body').on("click", ".ui-widget-overlay", function () {
+          $("#archipac_disclaiminfo").dialog("close");
+        });
       });
   },
 	setupController: function(controller) {

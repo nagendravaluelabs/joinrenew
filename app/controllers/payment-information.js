@@ -235,7 +235,6 @@ export default Ember.Controller.extend({
             if(this.get("insallmentsPayment")){
               this.validateInstallmentAgreeInfo();
             }
-              
           },
           validatePaymentElectronicInfo: function () {
               "use strict";

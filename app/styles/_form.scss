@@ -372,9 +372,15 @@ p{
 }
 
 .payment-archipac-table{
-  width: 70%;
+  width: 80%;
+  td:nth-child(2){
+      width:20%;
+    }
   @media screen and (max-width: 767px){
     width: 100%;
+    td:nth-child(2){
+      width:29% !important;
+    }
   }
 }
 
