@@ -135,12 +135,15 @@ export default Service.extend(RouteRefresherMixin, {
       }
     });
   },
-  doLogout() {
-    localStorage.removeItem('aia-user');
-    localStorage.removeItem('aiaUserInfo');
+  doLogout(isForceLogout) {
+    isForceLogout = (typeof isForceLogout === "undefined") ? false : isForceLogout;
     this.get("userData").setUserData(null);
-    if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
-      window.janrain.capture.ui.endCaptureSession();
+    if(!isForceLogout) {
+      localStorage.removeItem('aia-user');
+      localStorage.removeItem('aiaUserInfo'); 
+      if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
+        window.janrain.capture.ui.endCaptureSession();
+      }
     }
     this.reloadRoute();
   }

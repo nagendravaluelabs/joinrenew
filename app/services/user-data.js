@@ -19,7 +19,7 @@ export default Ember.Service.extend({
     this.setUserData(userKey);
   }.observes("genericData.generic"),
   setUserData: function(userkey) {
-    var self, generic;
+    var self, generic, logoutState;
     generic = this.get("genericData").generic;
     self= this;
     if(userkey !== null && userkey !== "") {
@@ -112,8 +112,9 @@ export default Ember.Service.extend({
             }
             if(error) {
               self.get('auth').set("authState", error);
-              self.get('auth').logout();
-              self.get('janrain').doLogout();
+              logoutState = (error != "invalid-invoice") ? false : true;
+              self.get('auth').logout(logoutState);
+              self.get('janrain').doLogout(logoutState);
             }
           },function(){
             self.get('auth').set("authState", "invoice-unavailable");
@@ -175,7 +176,8 @@ export default Ember.Service.extend({
         paymentType,
         installmentsAgreement,
         paymentAgreement,
-        LicensedToPractice;
+        LicensedToPractice,
+        isArchiPAC;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -229,7 +231,9 @@ export default Ember.Service.extend({
     paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
     paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
     paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
-    
+    isArchiPAC = Ember.getWithDefault(data,'paymentInfo.isArchiPAC', false);
+    isArchiPAC = (isArchiPAC) ? 1 : 0;
+    paymentInfo.isArchiPAC = isArchiPAC;
     installmentsAgreement = Ember.getWithDefault(data,'paymentInfo.InstallmentAgreement', false);
     installmentsAgreement = (installmentsAgreement) ? 1 : 0;
     paymentAgreement = Ember.getWithDefault(data,'paymentInfo.TermsConditionsAgreement', false);
@@ -382,31 +386,30 @@ export default Ember.Service.extend({
     var saveRequestData, saveRequestParams;
     saveRequestData = {};
     saveRequestParams = data;
-    //saveRequestParams = $.param( saveRequestParams );
-    /*saveRequestData = {
+    saveRequestParams = JSON.stringify( saveRequestParams );
+    saveRequestData = {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
       },
-      body: saveRequestParams,
-      mode: 'no-cors'
-    };*/
-    console.log(saveRequestParams);
-    return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
+      body: saveRequestParams
+    };
+    Ember.$('.ajax-spinner').show();
+    return fetch(`${ENV.AIA_SAVE_URL}`, saveRequestData).then(response => {
+      if(response.status === 200) {
+        return response.json();        
+      } else {
+        return {};
+      }
+    }).then((json) => {
+      Ember.$('.ajax-spinner').hide();
+      return json;
+    })
+    /*return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
         "type": 'POST', // HTTP method
         "dataType": 'JSON', // type of data expected from the API response
         "data": JSON.stringify(saveRequestParams), // End data payload
-        /*"success": function (data) {
-          if(data.success === "true") {
-            
-          } else {
-            
-          }
-        },
-        "error": function (jqXHR) {
-            window.console.log(jqXHR);
-        }*/
-    });
+    });*/
 
   },
   updateChosen: function(){

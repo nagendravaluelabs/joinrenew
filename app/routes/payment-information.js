@@ -38,7 +38,15 @@ export default Ember.Route.extend({
       });
   },
 	setupController: function(controller) {
-		this._super.apply(this, arguments);    
+		this._super.apply(this, arguments);
+    var paymentsData = localStorage.aiaUserInfo;
+    if(paymentsData !== undefined) {
+      paymentsData = JSON.parse(paymentsData);
+      paymentsData.paymentInfo = {};
+      paymentsData.paymentInfo.paymentType = "Debit/Credit Card";
+      localStorage.aiaUserInfo = JSON.stringify(paymentsData);
+      controller.get("primaryData").saveUserData(paymentsData);
+    }
 		controller.resetPayments();
 	},
 	resetController: function(controller, isExiting) {

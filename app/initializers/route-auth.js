@@ -10,29 +10,30 @@ var AuthMixin = Ember.Mixin.create({
   },
   authVerify: function() {    
     let currenRoute  = this.routeName;
-    let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page"];
+    let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page", "complete"];
     let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
+      let authState = this.get("auth").get("authState");
       if(authRoutes.indexOf(currenRoute) !== -1) {
-        if(!authUser) {
+        if(!authUser || authState === "invalid-invoice") {
           localStorage['route'] = "renew-verify-membership";
-          if(this.get("auth").get("authState") === "logout") {
+          if(authState === "logout") {
             this.transitionTo('/renew');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "invalid-invoice") {
+          } else if(authState === "invalid-invoice") {
             this.transitionTo('/invoice-invalid');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "invoice-unavailable") {
+          } else if(authState === "invoice-unavailable") {
             this.transitionTo('/invoice-unavailable');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "no-access") {
+          } else if(authState === "no-access") {
             this.transitionTo('/invalid-janrain');
             localStorage['route'] = "";
           } else {
             this.transitionTo('/not-authorized');
-          }        
+          }
         }
       } else if(nonAuthRoutes.indexOf(currenRoute) !== -1) {
         if(authUser && authUser.access_token !== undefined) {

@@ -1,7 +1,9 @@
 <table class="duestable payment-archipac-table">
   <tbody>
     <tr>
-      <td style="80%"><input type="checkbox" id="archipac-check" name="" value="1" class="form-checkbox" checked>
+      <td style="80%">
+        {{input type="checkbox" classBinding=":form-checkbox" id="archipac-check" name="archipac_check" checked=(mut (get primaryData.data.paymentInfo "isArchiPAC"))}}
+        
       <label class="option archipac-label" for="archipac-check">
       <span>Archipac</span> donation: a political action committee of the AIA.</label>
       <p class="note">Note: this donation must be paid using a personal credit or debit card. <span><br>Read <a href="#">disclaimer</a></span>
