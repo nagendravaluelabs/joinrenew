@@ -165,7 +165,7 @@
                 {{/if}}
                 
                 <!-- Zip code validation for United States -->
-               {{#if homeShowState}} 
+               {{#if (ifCond (isEqualTo personalInfo.personal.address.home.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.home.country.key "bc4b70f8-280e-4bb0-b935-9f728c50e183") "||")}}
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code
                     <span class="form-required" title="This field is required.">*</span>
@@ -183,7 +183,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code</label>
-                  {{input type="text" classBinding=":form-text :postal-code :zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip size="30"}}
+                  {{input type="text" classBinding=":form-text :postal-code" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip size="30"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">

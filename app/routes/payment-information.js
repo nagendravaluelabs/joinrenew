@@ -44,6 +44,7 @@ export default Ember.Route.extend({
       paymentsData = JSON.parse(paymentsData);
       paymentsData.paymentInfo = {};
       paymentsData.paymentInfo.paymentType = "Debit/Credit Card";
+      paymentsData.paymentInfo.isArchiPAC = 1;
       localStorage.aiaUserInfo = JSON.stringify(paymentsData);
       controller.get("primaryData").saveUserData(paymentsData);
     }

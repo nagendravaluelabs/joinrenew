@@ -46,7 +46,7 @@ export default Ember.Component.extend(rememberScroll, {
             chapterType = (chapterType === "Office") ? "Work" : chapterType;
             self.chapterSelection(chapterType);
             if(Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
-              self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());              
+              self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase(), true);
             }
             self.set('contactAddressType', contactInfo.primary);
         }
@@ -112,10 +112,16 @@ export default Ember.Component.extend(rememberScroll, {
       this.set("personalInfo.personal.address.home.country.value", countryCode);
     }.observes('personalInfo.personal.address.home.country.key'),
     stateObserver: function() {
-      var stateKey, stateCode, genericData;
+      var stateKey, stateCode, genericData, countryValue;
+      countryValue = this.get("personalInfo.personal.address.home.country.value");
       stateKey = this.get("personalInfo.personal.address.home.state.key");
       genericData = this.get("genericData.generic.states");
-      genericData = genericData["UNITED STATES"];
+      if(countryValue === "UNITED STATES") {
+        genericData = genericData["UNITED STATES"];        
+      }
+      else if(countryValue === "CANADA") {
+        genericData = genericData["CANADA"];        
+      }
       stateCode = genericData.map(function(list){ 
         if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
           return list.statecode;
@@ -129,10 +135,11 @@ export default Ember.Component.extend(rememberScroll, {
     }.observes('personalInfo.personal.address.home.state.key'),
     setWorkStateStatusFn: function (value) {
         "use strict";
-        var self, data;
+        var self, data, validCountries;
         self = this;
-        value = (typeof value === "undefined") ? "" : value;
-        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183", "be685760-5492-4ba3-b105-868e2010fa34"];
+        value = (typeof value === "undefined") ? "" : value.toLowerCase();
+        if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
           if(data.type === "data") {
             self.set("workstates", data.info);
@@ -145,18 +152,20 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
           self.set("workstates", []);
         }            
-        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        if (validCountries.indexOf(value) !== -1) {
             this.set("workShowState", true);
         } else {
             this.set("workShowState", false);
         }
     },
-    setHomeStateStatusFn: function (value) {
+    setHomeStateStatusFn: function (value, mode) {
         "use strict";
-        var self, data;
+        var self, data, validCountries;
         self = this;
-        value = (typeof value === "undefined") ? "" : value;
-        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        mode = (typeof mode === "undefined") ? false : mode;
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183", "be685760-5492-4ba3-b105-868e2010fa34"];
+        value = (typeof value === "undefined") ? "" : value.toLowerCase();
+        if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
           if(data.type === "data") {
             self.set("homeStates", data.info);
@@ -169,10 +178,14 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
           self.set("homeStates", []);
         }            
-        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        if (validCountries.indexOf(value) !== -1) {
             this.set("homeShowState", true);
         } else {
             this.set("homeShowState", false);
+        }
+        if(!mode) {
+          this.set("personalInfo.personal.address.home.state.key", "");
+          this.set("personalInfo.personal.address.home.state.value", "");
         }
     },
         validatePersonalInfo: function (mode) {
@@ -250,7 +263,7 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       administrative_area_state: {
                           required: function () {
-                              return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183"  || $("#primary_home_address_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
                           }
                       }
                   },
@@ -368,7 +381,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     work_administrative_state: {
                         required: function () {
-                            return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
                         }
                     },
                     org_company_phone: {

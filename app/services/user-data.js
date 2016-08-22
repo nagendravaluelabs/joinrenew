@@ -96,6 +96,7 @@ export default Ember.Service.extend({
                     }
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
+                    data.paymentInfo.isArchiPAC = 1;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
                   } else {
@@ -112,7 +113,7 @@ export default Ember.Service.extend({
             }
             if(error) {
               self.get('auth').set("authState", error);
-              logoutState = (error != "invalid-invoice") ? false : true;
+              logoutState = (error !== "invalid-invoice") ? false : true;
               self.get('auth').logout(logoutState);
               self.get('janrain').doLogout(logoutState);
             }
@@ -404,7 +405,7 @@ export default Ember.Service.extend({
     }).then((json) => {
       Ember.$('.ajax-spinner').hide();
       return json;
-    })
+    });
     /*return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
         "type": 'POST', // HTTP method
         "dataType": 'JSON', // type of data expected from the API response
