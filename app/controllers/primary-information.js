@@ -95,10 +95,10 @@ export default Ember.Controller.extend({
             mode = (typeof mode !== undefined) ? mode : false;
             var value = this.get("editContactInfo");
             this.set("editContactInfo", !value);
-            if(mode) {
+            /*if(mode) {
                 var localData = JSON.parse(localStorage.aiaUserInfo);
                 this.set("primaryData.data", localData);
-            }
+            }*/
         },
         
         savePersonalInfo: function (data, isRedirect) {

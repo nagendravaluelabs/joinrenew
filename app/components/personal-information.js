@@ -175,50 +175,9 @@ export default Ember.Component.extend(rememberScroll, {
             this.set("homeShowState", false);
         }
     },
-    actions: {
-        showPersonalInfo: function () {
+        validatePersonalInfo: function (mode) {
             "use strict";
-            this.sendAction("showPersonalInfo", true);
-            this.scrollToTop();
-        },
-        chapterSelection: function (value) {
-            "use strict";
-            var self;
-            self = this;
-            $(".primary-action-btn").removeClass("hidden");
-            self.set('createOrganization', false);
-            self.chapterSelection(value.capitalize());
-        },
-        createNewOrganization: function () {
-            "use strict";
-            var self, value;
-            self = this;
-            value = self.get('createOrganization');
-            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
-            if (value) {
-                $(".primary-action-btn").removeClass("hidden");
-                self.set('createOrganization', false);
-            } else {
-                $(".primary-action-btn").addClass("hidden");
-                self.set('createOrganization', true);
-            }
-        },
-        setWorkStateStatus: function (value) {
-            "use strict";
-            this.setWorkStateStatusFn(value);
-        },
-        setHomeStateStatus: function (value) {
-            "use strict";
-            this.setHomeStateStatusFn(value);
-        },
-        updateContactInformation: function (value) {
-            "use strict";
-            $(".your-contact-info .chosen-container").removeClass("error");
-            $(".your-contact-info .chosen-container + label.error").hide();
-            this.set('contactAddressType', value);
-        },
-        validatePersonalInfo: function () {
-            "use strict";
+            mode = (typeof mode !== undefined) ? mode : false;
             if(this.get("editContactInfo")) {
               var validate;
               validate = $("#personal-contact-form").validate({
@@ -339,8 +298,12 @@ export default Ember.Component.extend(rememberScroll, {
                   }
               });
               if (validate.form()) {
-                  this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
-                  //this.get('router').transitionTo('membership-dues');
+                  if(!mode) {
+                    this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
+                  } else {
+                    this.sendAction("savePersonalInfo", this.get("personalInfo"), false);
+                    this.sendAction("showPersonalInfo", true);
+                  }
               } else {
                   if ($("#personal-contact").hasClass("hidden")) {
                       this.sendAction("showPersonalInfo");
@@ -349,6 +312,51 @@ export default Ember.Component.extend(rememberScroll, {
             } else {
                 this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
             }
+        },
+    actions: {
+        showPersonalInfo: function () {
+            "use strict";
+            this.validatePersonalInfo(true);
+        },
+        chapterSelection: function (value) {
+            "use strict";
+            var self;
+            self = this;
+            $(".primary-action-btn").removeClass("hidden");
+            self.set('createOrganization', false);
+            self.chapterSelection(value.capitalize());
+        },
+        createNewOrganization: function () {
+            "use strict";
+            var self, value;
+            self = this;
+            value = self.get('createOrganization');
+            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+            if (value) {
+                $(".primary-action-btn").removeClass("hidden");
+                self.set('createOrganization', false);
+            } else {
+                $(".primary-action-btn").addClass("hidden");
+                self.set('createOrganization', true);
+            }
+        },
+        setWorkStateStatus: function (value) {
+            "use strict";
+            this.setWorkStateStatusFn(value);
+        },
+        setHomeStateStatus: function (value) {
+            "use strict";
+            this.setHomeStateStatusFn(value);
+        },
+        updateContactInformation: function (value) {
+            "use strict";
+            $(".your-contact-info .chosen-container").removeClass("error");
+            $(".your-contact-info .chosen-container + label.error").hide();
+            this.set('contactAddressType', value);
+        },
+        validatePersonalInfo: function () {
+            "use strict";
+            this.validatePersonalInfo();
         },
         addNewOrganization: function () {
             "use strict";
