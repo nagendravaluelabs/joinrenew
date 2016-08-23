@@ -11,7 +11,10 @@
         {{#if (isEqualTo primaryData.data.personal.address.primary "home")}}
           <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
           <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
-          <li>{{primaryData.data.personal.address.home.city}},
+          <li>
+            {{#if primaryData.data.personal.address.home.city}}
+              {{primaryData.data.personal.address.home.city}}, 
+            {{/if}}
               {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
                 {{#if primaryData.data.personal.address.home.state.value}}
                   {{primaryData.data.personal.address.home.state.value}},

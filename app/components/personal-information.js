@@ -118,10 +118,12 @@ export default Ember.Component.extend(rememberScroll, {
       genericData = this.get("genericData.generic.states");
       if(countryValue === "UNITED STATES") {
         genericData = genericData["UNITED STATES"];        
+      } else {
+        return {};
       }
-      else if(countryValue === "CANADA") {
+      /*else if(countryValue === "CANADA") {
         genericData = genericData["CANADA"];        
-      }
+      }*/
       stateCode = genericData.map(function(list){ 
         if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
           return list.statecode;
@@ -133,10 +135,11 @@ export default Ember.Component.extend(rememberScroll, {
       stateCode = stateCode[0];
       this.set("personalInfo.personal.address.home.state.value", stateCode);
     }.observes('personalInfo.personal.address.home.state.key'),
-    setWorkStateStatusFn: function (value) {
+    setWorkStateStatusFn: function (value, mode) {
         "use strict";
         var self, data, validCountries;
         self = this;
+        mode = (typeof mode === "undefined") ? false : mode;
         validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183"];
         value = (typeof value === "undefined") ? "" : value.toLowerCase();
         if(value !== "" && validCountries.indexOf(value) !== -1) {
@@ -156,6 +159,14 @@ export default Ember.Component.extend(rememberScroll, {
             this.set("workShowState", true);
         } else {
             this.set("workShowState", false);
+        }
+        
+        if(!mode) {
+          this.set("organizationInfo.addressLine1", "");
+          this.set("organizationInfo.addressLine2", "");
+          this.set("organizationInfo.locality", "");
+          this.set("organizationInfo.workState", "");
+          this.set("organizationInfo.postalCode", "");
         }
     },
     setHomeStateStatusFn: function (value, mode) {
@@ -186,6 +197,10 @@ export default Ember.Component.extend(rememberScroll, {
         if(!mode) {
           this.set("personalInfo.personal.address.home.state.key", "");
           this.set("personalInfo.personal.address.home.state.value", "");
+          this.set("personalInfo.personal.address.home.line1", "");
+          this.set("personalInfo.personal.address.home.line2", "");
+          this.set("personalInfo.personal.address.home.city", "");
+          this.set("personalInfo.personal.address.home.zip", "");
         }
     },
         validatePersonalInfo: function (mode) {

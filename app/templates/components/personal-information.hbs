@@ -254,9 +254,13 @@
                           {{#if personalInfo.personal.address.office.line3}}
                             {{personalInfo.personal.address.office.line3}}<br />
                           {{/if}}
-                          {{personalInfo.personal.address.office.city}}, 
+                          {{#if personalInfo.personal.address.office.city}}
+                            {{personalInfo.personal.address.office.city}},
+                          {{/if}}
                             {{#if (ifCond (isEqualTo personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.office.country.key "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                               {{personalInfo.personal.address.office.state.value}},
+                              {{#if personalInfo.personal.address.office.state.value}}
+                                {{personalInfo.personal.address.office.state.value}},
+                              {{/if}}
                             {{/if}} 
                           {{personalInfo.personal.address.office.country.value}}
                           {{personalInfo.personal.address.office.zip}}
@@ -308,7 +312,8 @@
                 <label for="label">Company type
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                {{#ember-chosen id='company_type' name="company_type" class='form-select required'}}
+                
+                {{#ember-chosen id='company_type' name="company_type" class='form-select required' value=(mut organizationInfo.companyType) chosenValueChanged=chosenValueChanged}}
                   <option value="">Select</option>
                   {{#each companyType as |type|}}
                     <option value="{{type}}">{{type}}</option>                
@@ -318,34 +323,30 @@
               <li>
                  <label for="contact_{{type}}_country">Country
                  <span class="form-required" title="This field is required.">*</span></label>
-                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' value="target.value"}}
+                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings organizationInfo.country 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' mutable=(mut organizationInfo.country) chosenValueChanged=chosenValueChanged}}
               </li>
               <li>
                 <label for="org_company_address1">Address line 1
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="thoroughfare few-special-char form-text required" autocomplete="address-line1"
-                type="text" id="org_company_address1" name="org_company_address1" value="" size="30" maxlength="255" />
+                {{input type="text" classBinding=":form-text :required :thoroughfare :few-special-char" id="org_company_address1" name="org_company_address1" value=organizationInfo.addressLine1 size="30" maxlength="255"}}
               </li>
               <li>
                 <label for="org_company_address2">Address line 2</label>
-                <input class="premise few-special-char form-text" autocomplete="address-line2"
-                type="text" id="org_company_address2" name="org_company_address2" value="" size="30" maxlength="255" />
+                {{input type="text" classBinding=":form-text :premise :few-special-char" id="org_company_address2" name="org_company_address2" value=organizationInfo.addressLine2 size="30" maxlength="255"}}
               </li>
               <li>
                 <label for="org_locality">City
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="locality few-special-char form-text required" autocomplete="&quot;address-level2"
-                type="text" id="org_locality" name="org_locality" value="" size="30" maxlength="255"
-                />
+                {{input type="text" classBinding=":form-text :required :locality :few-special-char" id="org_locality" name="org_locality" value=organizationInfo.locality size="30" maxlength="255"}}
               </li>
               {{#if workShowState}}
                 <li class="state" id="state-create">
                   <label for="work_administrative_state">State
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required" states=workstates}}
+                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required" states=workstates mutable=(mut organizationInfo.workState) chosenValueChanged=chosenValueChanged}}
                 </li>
               {{/if}}
             
@@ -355,7 +356,7 @@
                   <label for="postal-code">Zip code
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  <input class="postal-code form-text required zipcodeUS" type="text" id="postal_code" name="postal_code" value="{{personalInfo.personal.address.home.zip}}" size="30" minlength="5" maxlength="10"/>
+                  {{input type="text" classBinding=":form-text :required :postal-code :zipcodeUS" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -368,8 +369,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="state creative-zip">
                     <label for="postal_code">Zip code</label>
-                    <input class="postal-code form-text" autocomplete="postal_code"
-                    type="text" id="#" name="postal_code" value="" size="30"/>
+                    {{input type="text" classBinding=":form-text :postal-code" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
                  </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->

@@ -5,6 +5,10 @@ import ENV from '../config/environment';
 import inject from 'ember-service/inject';
 export default Ember.Service.extend({
   data: "",
+  organization: {
+    country: "bc4b70f8-280e-4bb0-b935-9f728c50e183",
+    countryCode: "bc4b70f8-280e-4bb0-b935-9f728c50e183"
+  },
   auth: inject(),
   janrain: inject(),
   genericData: inject(),
