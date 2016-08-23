@@ -121,7 +121,7 @@
           <label for="pay-in-installments">Pay in installments</label>
         </li>
       </ul>
-      {{#if insallmentsPayment}}
+      {{#if installmentsPayment}}
         <div id="installments" class="common-form">
           <div id="installmentsform">
           {{#if primaryData.data.invoice.maxinstallments}}
@@ -157,7 +157,7 @@
     </div>
     
     <div class="payments-container common-form">
-      {{#if (ifCond debitPayment insallmentsPayment '||')}}
+      {{#if (ifCond debitPayment installmentsPayment '||')}}
         <div class="card-payment">
           <h3>Enter your credit or debit card information<span class="required">*</span></h3>
           <form action="#" id="form-card-payment" method="post">

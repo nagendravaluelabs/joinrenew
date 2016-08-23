@@ -179,7 +179,9 @@ export default Ember.Service.extend({
         installmentsAgreement,
         paymentAgreement,
         LicensedToPractice,
-        isArchiPAC;
+        isArchiPAC,
+        installmentsInfo,
+        InstallmentProgram;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -195,6 +197,7 @@ export default Ember.Service.extend({
     otherInfo = {};
     personalInfo = {};
     organizationInfo= {};
+    installmentsInfo = {};
     
     /* Renew Details */
     membershipInfo.IsRenew = 1;
@@ -242,6 +245,21 @@ export default Ember.Service.extend({
     paymentAgreement = (paymentAgreement) ? 1 : 0;
     paymentInfo.InstallmentAgreement = installmentsAgreement;
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
+    
+    /* Installments */
+    installmentsInfo.Installments = {};
+    installmentsInfo.Installments.InstallmentAgreement = installmentsAgreement;
+    installmentsInfo.Installments.NumberOfInstallments = Ember.getWithDefault(data,'paymentInfo.InstallmentCount', "");
+    InstallmentProgram = Ember.get(genericData, "installmentkeys");
+    
+    InstallmentProgram = InstallmentProgram.filter(function(n){ 
+      return parseInt(n.ins_max_installments) === installmentsInfo.Installments.NumberOfInstallments; 
+    }); 
+    
+    InstallmentProgram = Ember.getWithDefault(InstallmentProgram,'0', {});
+    
+    installmentsInfo.Installments.InstallmentProgramKey = Ember.getWithDefault(InstallmentProgram,'ins_key', "");
+    installmentsInfo.Installments.InstallmentAdministrativeFee = Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "");
     
     /* Membership Packages */
     membershipPackagesObj.MembershipPackages = {};
@@ -377,10 +395,9 @@ export default Ember.Service.extend({
       "Key" : data.personal.organization.key
     };
     
-    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
+    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
     mappedJSON.input.membership = membershipInfo;
-	  //mappedJSON.input = membershipInfo;
     
     return mappedJSON;
   },
@@ -407,12 +424,6 @@ export default Ember.Service.extend({
       Ember.$('.ajax-spinner').hide();
       return json;
     });
-    /*return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
-        "type": 'POST', // HTTP method
-        "dataType": 'JSON', // type of data expected from the API response
-        "data": JSON.stringify(saveRequestParams), // End data payload
-    });*/
-
   },
   updateChosen: function(){
     setTimeout(function(){
