@@ -19,7 +19,7 @@ export default Ember.Service.extend({
     this.setUserData(userKey);
   }.observes("genericData.generic"),
   setUserData: function(userkey) {
-    var self, generic, logoutState;
+    var self, generic, logoutState, noLogouts;
     generic = this.get("genericData").generic;
     self= this;
     if(userkey !== null && userkey !== "") {
@@ -113,7 +113,8 @@ export default Ember.Service.extend({
             }
             if(error) {
               self.get('auth').set("authState", error);
-              logoutState = (error !== "invalid-invoice") ? false : true;
+              noLogouts = ["invalid-invoice", "invoice-unavailable"];
+              logoutState = (noLogouts.indexOf(error) === -1) ? false : true;
               self.get('auth').logout(logoutState);
               self.get('janrain').doLogout(logoutState);
             }

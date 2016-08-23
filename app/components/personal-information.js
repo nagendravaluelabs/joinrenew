@@ -137,7 +137,7 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var self, data, validCountries;
         self = this;
-        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183", "be685760-5492-4ba3-b105-868e2010fa34"];
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183"];
         value = (typeof value === "undefined") ? "" : value.toLowerCase();
         if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
@@ -163,7 +163,7 @@ export default Ember.Component.extend(rememberScroll, {
         var self, data, validCountries;
         self = this;
         mode = (typeof mode === "undefined") ? false : mode;
-        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183", "be685760-5492-4ba3-b105-868e2010fa34"];
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183"];
         value = (typeof value === "undefined") ? "" : value.toLowerCase();
         if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
@@ -263,7 +263,7 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       administrative_area_state: {
                           required: function () {
-                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183"  || $("#primary_home_address_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
                           }
                       }
                   },
@@ -381,7 +381,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     work_administrative_state: {
                         required: function () {
-                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
+                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
                         }
                     },
                     org_company_phone: {

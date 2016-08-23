@@ -11,13 +11,14 @@ var AuthMixin = Ember.Mixin.create({
   authVerify: function() {    
     let currenRoute  = this.routeName;
     let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page", "complete"];
+    let noLogouts = ["invalid-invoice", "invoice-unavailable"];
     let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
       let authState = this.get("auth").get("authState");
       if(authRoutes.indexOf(currenRoute) !== -1) {
-        if(!authUser || authState === "invalid-invoice") {
+        if(!authUser || noLogouts.indexOf(authState) !== -1) {
           localStorage['route'] = "renew-verify-membership";
           if(authState === "logout") {
             this.transitionTo('/renew');

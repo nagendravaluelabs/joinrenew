@@ -4,14 +4,19 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 export default Ember.Service.extend({
   generic: "",
+  routing: Ember.inject.service('-routing'),
   init: function () {
     "use strict";
     var self= this;
     self._super(...arguments);
     Ember.$('.ajax-spinner').show();
     Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=generic`).then(function(data){
-      self.set("generic", data);
-    });    
+      if(typeof data.errormessage === "undefined") {
+        self.set("generic", data);
+      } else {
+        self.get("routing").transitionTo("invoice-unavailable");
+      }
+    });
   },
   updateChosen: function (){
     "use strict";
