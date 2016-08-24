@@ -84,6 +84,7 @@ export default Ember.Service.extend({
                     if(!Ember.getWithDefault(data,'personal.address.office', false)) {
                       data.personal.address.office = {};
                       data.personal.address.office.key = "";
+                      data.personal.address.office.isExsist = false;
                       data.personal.address.office.line1 = "";
                       data.personal.address.office.line2 = "";
                       data.personal.address.office.line3 = "";
@@ -97,6 +98,8 @@ export default Ember.Service.extend({
                         "value": ""
                       };
                       data.personal.address.office.zip = "";
+                    }else{
+                      data.personal.address.office.isExsist = true;
                     }
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
