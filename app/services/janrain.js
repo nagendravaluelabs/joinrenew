@@ -141,6 +141,8 @@ export default Service.extend(RouteRefresherMixin, {
     if(!isForceLogout) {
       localStorage.removeItem('aia-user');
       localStorage.removeItem('aiaUserInfo'); 
+      localStorage.removeItem('janrainLastAuthMethod'); 
+      localStorage.removeItem('janrainLastAuthMethod_Expires'); 
       if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
         window.janrain.capture.ui.endCaptureSession();
       }

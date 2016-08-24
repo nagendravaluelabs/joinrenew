@@ -185,7 +185,8 @@ export default Ember.Service.extend({
         LicensedToPractice,
         isArchiPAC,
         installmentsInfo,
-        InstallmentProgram;
+        InstallmentProgram,
+        DonationInfo;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -202,6 +203,7 @@ export default Ember.Service.extend({
     personalInfo = {};
     organizationInfo= {};
     installmentsInfo = {};
+    DonationInfo = {};
     
     /* Renew Details */
     membershipInfo.IsRenew = 1;
@@ -249,6 +251,14 @@ export default Ember.Service.extend({
     paymentAgreement = (paymentAgreement) ? 1 : 0;
     paymentInfo.InstallmentAgreement = installmentsAgreement;
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
+    
+    /* Donation Information */
+    if(isArchiPAC === 1) {
+      DonationInfo.Donations = {};
+      DonationInfo.Donations.Donation = {};
+      DonationInfo.Donations.Donation.FundCode = "ArchiPac Contribution";
+      DonationInfo.Donations.Donation.Amount = 25.00;
+    }
     
     /* Installments */
     installmentsInfo.Installments = {};
@@ -399,7 +409,7 @@ export default Ember.Service.extend({
       "Key" : data.personal.organization.key
     };
     
-    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
+    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
     mappedJSON.input.membership = membershipInfo;
     
