@@ -1,4 +1,5 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
+/*global $*/
 import Ember from "ember";
 var fieldValidations = Ember.Mixin.create({
   initValidations: function() {
