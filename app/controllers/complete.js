@@ -2,7 +2,5 @@
 import Ember from "ember";
 import rememberScroll from "../mixins/remember-scroll";
 export default Ember.Controller.extend(rememberScroll, {
-    init: function () {
-        "use strict";
-    }
+    primaryData: Ember.inject.service('user-data')
 });

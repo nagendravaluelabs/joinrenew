@@ -14,8 +14,9 @@ export default Ember.Controller.extend({
     }.observes('primaryData.data'),
     userDataFunc: function () {
       "use strict";
-      var primaryData, personalData, name, primaryAddress, userData;
+      var primaryData, personalData, name, primaryAddress, userData, addressArr;
       userData = [];
+      addressArr = [];
       primaryData = this.get("primaryData");
       if (primaryData.data !== "undefined" && primaryData.data !== "") {
         personalData = primaryData.data.personal;
@@ -61,26 +62,38 @@ export default Ember.Controller.extend({
               primaryAddress[1]= personalData.address.office.line2;
               
               if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
-              primaryAddress[2]= personalData.address.office.city + ", "+ personalData.address.office.state.value + ", " + personalData.address.office.country.value + " " + personalData.address.office.zip;
+              addressArr[addressArr.length] = personalData.address.office.city;
+              addressArr[addressArr.length] = personalData.address.office.state.value;
+              addressArr[addressArr.length] = personalData.address.office.country.value;
               } else {
-              primaryAddress[2]= personalData.address.office.city + ", "+ personalData.address.office.country.value + " " + personalData.address.office.zip;
+              addressArr[addressArr.length] = personalData.address.office.city;
+              addressArr[addressArr.length] = personalData.address.office.country.value;
               }  
-              if (personalData.address.office.zip === ""){
-              primaryAddress[2]= personalData.address.office.city + ", "+ personalData.address.office.country.value; 
-              }  
+              addressArr = addressArr.filter(v=>v!=='');
+              addressArr = addressArr.join(", ");
+              if(personalData.address.office.zip !== "") {
+                addressArr += " "+personalData.address.office.zip;
+              }
+              primaryAddress[2]= addressArr;
             }
           } else {
             if(typeof personalData.address.home !== "undefined") {
               primaryAddress[0]= personalData.address.home.line1;
               primaryAddress[1]= personalData.address.home.line2;
               if (personalData.address.home.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.home.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34"){
-               primaryAddress[2]= personalData.address.home.city + ", "+ personalData.address.home.state.value + ", " + personalData.address.home.country.value + " " + personalData.address.home.zip;
+              addressArr[addressArr.length] = personalData.address.home.city;
+              addressArr[addressArr.length] = personalData.address.home.state.value;
+              addressArr[addressArr.length] = personalData.address.home.country.value;
             } else {
-               primaryAddress[2]= personalData.address.home.city + ", "+ personalData.address.home.country.value + " " + personalData.address.home.zip;
+              addressArr[addressArr.length] = personalData.address.home.city;
+              addressArr[addressArr.length] = personalData.address.home.country.value;
             }  
-            if (personalData.address.home.zip === ""){
-              primaryAddress[2]= personalData.address.home.city + ", "+ personalData.address.home.country.value; 
+            addressArr = addressArr.filter(v=>v!=='');
+            addressArr = addressArr.join(", ");
+            if(personalData.address.home.zip !== "") {
+              addressArr += " "+personalData.address.home.zip;
             }
+            primaryAddress[2]= addressArr;
             }
           }
           
@@ -95,10 +108,10 @@ export default Ember.Controller.extend({
             mode = (typeof mode !== undefined) ? mode : false;
             var value = this.get("editContactInfo");
             this.set("editContactInfo", !value);
-            if(mode) {
+            /*if(mode) {
                 var localData = JSON.parse(localStorage.aiaUserInfo);
                 this.set("primaryData.data", localData);
-            }
+            }*/
         },
         
         savePersonalInfo: function (data, isRedirect) {

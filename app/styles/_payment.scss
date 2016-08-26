@@ -610,3 +610,83 @@
     opacity: 0.9;
   }
 }
+
+#archipac_dis_modal {
+  p{
+    font-size: 17px;
+    line-height: 25px;
+  }
+  .ui-icon{
+  width: 22px;
+  height: 22px;
+  top: 19px;
+  left: 20px;
+  font-size:18px;
+  background-image: none !important;
+  color: #000;
+  text-indent: inherit;
+  @media (max-width:767px){
+      top:15px;
+  }
+  }
+  .ui-icon::after{
+    content:"X";
+    position:relative;
+    display: block;
+  }
+  .ui-button{
+    outline:none;
+    position: absolute;
+    top: -40px;
+    right:-120px !important;
+    border-radius:50% !important;
+    padding: 22px;
+    right: -60px;
+    background-color:#fff;
+    background-image:none;
+    @media (max-width: 1024px) {
+        right: -40px !important;
+        border: 1px #ccc solid;
+        top: -30px;
+    }
+  }
+  .ui-widget-overlay {
+        background: #222222;
+        opacity: 0.9;
+  }
+  .ui-dialog {
+    .ui-widget-header{
+     &.ui-dialog-titlebar{
+      padding:0 !important;
+      }
+    }
+  }
+  .ui-widget-content{
+    padding: 0 !important;
+    overflow: visible;
+  }
+  .ui-corner-all{
+    border-radius:0;
+  }
+  .ui-dialog-title { 
+  font-weight:bold;
+  font-size: 18px;
+  margin: 0 0 40px 0;
+  display: inline-block;
+  @media (max-width: 767px) {
+        font-size:20px;
+    }
+  }
+  .ui-dialog {
+    max-width: 850px !important;
+    padding:50px !important;
+    @media (max-width: 767px) {
+        width: 90% !important;
+        margin:0 10px; 
+    }
+    .disclaimer_infobox {
+       padding:10px;
+       line-height:22px;
+    }
+  }
+}

@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
         primaryData: Ember.inject.service('user-data'),
         debitPayment: true,
         echeckPayment: false,
-        insallmentsPayment: false,
+        installmentsPayment: false,
         subTotal: 0,
         total :0,
         supplyTotal:0,
@@ -72,15 +72,15 @@ export default Ember.Controller.extend({
           if (type === "Debit/Credit Card") {
             this.set("debitPayment", true);
             this.set("echeckPayment", false);
-            this.set("insallmentsPayment", false);
+            this.set("installmentsPayment", false);
           } else if(type === "Electronic check") {
             this.set("debitPayment", false);
             this.set("echeckPayment", true);
-            this.set("insallmentsPayment", false);
+            this.set("installmentsPayment", false);
           } else if(type === "EMI") {
             this.set("debitPayment", false);
             this.set("echeckPayment", false);
-            this.set("insallmentsPayment", true);
+            this.set("installmentsPayment", true);
           } 
         },
         validatePaymentInfo: function () {
@@ -93,7 +93,8 @@ export default Ember.Controller.extend({
                     },
                     cardNumber: {
                       required: true,
-                      digits: true
+                      digits: true,
+                      creditcard: true
                     },
                     cardExpirationMonth: {
                       required: true,
@@ -118,7 +119,8 @@ export default Ember.Controller.extend({
                     cardName: "Please enter name on credit card",
                     cardNumber: {
                       required: "Card number is required",
-                      digits: "Please enter a valid credit card number"
+                      digits: "Please enter a valid credit card number",
+                      creditcard: "Please enter a valid credit card number"
                     },
                     cardExpirationMonth: {
                       required: "Expiration month is required"
@@ -147,15 +149,13 @@ export default Ember.Controller.extend({
                     }
                 }
             });
-            if(validate.form()) {
-              this.saveRenewData();
-            } 
+            return validate.form();
         },
         
         validateInstallmentAgreeInfo: function () {
-        "use strict";
-        var validate;
-        validate = $("#install-agreement").validate({
+          "use strict";
+          var validate;
+          validate = $("#install-agreement").validate({
             rules:{
                 installment_iagree: {
                   required: true
@@ -177,10 +177,8 @@ export default Ember.Controller.extend({
                     }                        
                 }
             }
-            });
-          if(validate.form()) {
-            //this.saveRenewData();
-          } 
+          });
+          return validate.form();
         },
         calculateInstallmentsObserves: function() {
           "use strict";
@@ -214,6 +212,9 @@ export default Ember.Controller.extend({
         },
 		resetPayments: function() {
 			this.set("paymentFailed", false);
+			this.set("installmentsPayment", false);
+			this.set("debitPayment", true);
+      
 		},
         actions: {
           install : function(value){
@@ -231,11 +232,15 @@ export default Ember.Controller.extend({
           },
           callValidations: function() {
             "use strict";
-            this.validatePaymentInfo();
-            if(this.get("insallmentsPayment")){
-              this.validateInstallmentAgreeInfo();
+            var cardValidation, installmentsValidation;
+            installmentsValidation = !this.get("installmentsPayment");
+            cardValidation = this.validatePaymentInfo();
+            if(this.get("installmentsPayment")){
+              installmentsValidation = this.validateInstallmentAgreeInfo();
             }
-              
+            if(cardValidation && installmentsValidation) {
+                this.saveRenewData();
+            }
           },
           validatePaymentElectronicInfo: function () {
               "use strict";

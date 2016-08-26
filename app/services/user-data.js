@@ -5,6 +5,10 @@ import ENV from '../config/environment';
 import inject from 'ember-service/inject';
 export default Ember.Service.extend({
   data: "",
+  organization: {
+    country: "bc4b70f8-280e-4bb0-b935-9f728c50e183",
+    countryCode: "bc4b70f8-280e-4bb0-b935-9f728c50e183"
+  },
   auth: inject(),
   janrain: inject(),
   genericData: inject(),
@@ -19,7 +23,7 @@ export default Ember.Service.extend({
     this.setUserData(userKey);
   }.observes("genericData.generic"),
   setUserData: function(userkey) {
-    var self, generic;
+    var self, generic, logoutState, noLogouts;
     generic = this.get("genericData").generic;
     self= this;
     if(userkey !== null && userkey !== "") {
@@ -80,6 +84,7 @@ export default Ember.Service.extend({
                     if(!Ember.getWithDefault(data,'personal.address.office', false)) {
                       data.personal.address.office = {};
                       data.personal.address.office.key = "";
+                      data.personal.address.office.isExsist = false;
                       data.personal.address.office.line1 = "";
                       data.personal.address.office.line2 = "";
                       data.personal.address.office.line3 = "";
@@ -93,9 +98,12 @@ export default Ember.Service.extend({
                         "value": ""
                       };
                       data.personal.address.office.zip = "";
+                    }else{
+                      data.personal.address.office.isExsist = true;
                     }
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
+                    data.paymentInfo.isArchiPAC = 1;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
                   } else {
@@ -112,8 +120,10 @@ export default Ember.Service.extend({
             }
             if(error) {
               self.get('auth').set("authState", error);
-              self.get('auth').logout();
-              self.get('janrain').doLogout();
+              noLogouts = ["invalid-invoice", "invoice-unavailable"];
+              logoutState = (noLogouts.indexOf(error) === -1) ? false : true;
+              self.get('auth').logout(logoutState);
+              self.get('janrain').doLogout(logoutState);
             }
           },function(){
             self.get('auth').set("authState", "invoice-unavailable");
@@ -175,7 +185,11 @@ export default Ember.Service.extend({
         paymentType,
         installmentsAgreement,
         paymentAgreement,
-        LicensedToPractice;
+        LicensedToPractice,
+        isArchiPAC,
+        installmentsInfo,
+        InstallmentProgram,
+        DonationInfo;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -191,6 +205,8 @@ export default Ember.Service.extend({
     otherInfo = {};
     personalInfo = {};
     organizationInfo= {};
+    installmentsInfo = {};
+    DonationInfo = {};
     
     /* Renew Details */
     membershipInfo.IsRenew = 1;
@@ -229,13 +245,38 @@ export default Ember.Service.extend({
     paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
     paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
     paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
-    
+    isArchiPAC = Ember.getWithDefault(data,'paymentInfo.isArchiPAC', false);
+    isArchiPAC = (isArchiPAC) ? 1 : 0;
+    paymentInfo.isArchiPAC = isArchiPAC;
     installmentsAgreement = Ember.getWithDefault(data,'paymentInfo.InstallmentAgreement', false);
     installmentsAgreement = (installmentsAgreement) ? 1 : 0;
     paymentAgreement = Ember.getWithDefault(data,'paymentInfo.TermsConditionsAgreement', false);
     paymentAgreement = (paymentAgreement) ? 1 : 0;
     paymentInfo.InstallmentAgreement = installmentsAgreement;
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
+    
+    /* Donation Information */
+    if(isArchiPAC === 1) {
+      DonationInfo.Donations = {};
+      DonationInfo.Donations.Donation = {};
+      DonationInfo.Donations.Donation.FundCode = "ArchiPac Contribution";
+      DonationInfo.Donations.Donation.Amount = 25.00;
+    }
+    
+    /* Installments */
+    installmentsInfo.Installments = {};
+    installmentsInfo.Installments.InstallmentAgreement = installmentsAgreement;
+    installmentsInfo.Installments.NumberOfInstallments = Ember.getWithDefault(data,'paymentInfo.InstallmentCount', "");
+    InstallmentProgram = Ember.get(genericData, "installmentkeys");
+    
+    InstallmentProgram = InstallmentProgram.filter(function(n){ 
+      return parseInt(n.ins_max_installments) === installmentsInfo.Installments.NumberOfInstallments; 
+    }); 
+    
+    InstallmentProgram = Ember.getWithDefault(InstallmentProgram,'0', {});
+    
+    installmentsInfo.Installments.InstallmentProgramKey = Ember.getWithDefault(InstallmentProgram,'ins_key', "");
+    installmentsInfo.Installments.InstallmentAdministrativeFee = Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "");
     
     /* Membership Packages */
     membershipPackagesObj.MembershipPackages = {};
@@ -371,10 +412,9 @@ export default Ember.Service.extend({
       "Key" : data.personal.organization.key
     };
     
-    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
+    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
     mappedJSON.input.membership = membershipInfo;
-	  //mappedJSON.input = membershipInfo;
     
     return mappedJSON;
   },
@@ -382,32 +422,25 @@ export default Ember.Service.extend({
     var saveRequestData, saveRequestParams;
     saveRequestData = {};
     saveRequestParams = data;
-    //saveRequestParams = $.param( saveRequestParams );
-    /*saveRequestData = {
+    saveRequestParams = JSON.stringify( saveRequestParams );
+    saveRequestData = {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
       },
-      body: saveRequestParams,
-      mode: 'no-cors'
-    };*/
-    console.log(saveRequestParams);
-    return Ember.$.ajax(`${ENV.AIA_SAVE_URL}`, {
-        "type": 'POST', // HTTP method
-        "dataType": 'JSON', // type of data expected from the API response
-        "data": JSON.stringify(saveRequestParams), // End data payload
-        /*"success": function (data) {
-          if(data.success === "true") {
-            
-          } else {
-            
-          }
-        },
-        "error": function (jqXHR) {
-            window.console.log(jqXHR);
-        }*/
+      body: saveRequestParams
+    };
+    Ember.$('.ajax-spinner').show();
+    return fetch(`${ENV.AIA_SAVE_URL}`, saveRequestData).then(response => {
+      if(response.status === 200) {
+        return response.json();        
+      } else {
+        return {};
+      }
+    }).then((json) => {
+      Ember.$('.ajax-spinner').hide();
+      return json;
     });
-
   },
   updateChosen: function(){
     setTimeout(function(){

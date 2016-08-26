@@ -11,9 +11,14 @@
         {{#if (isEqualTo primaryData.data.personal.address.primary "home")}}
           <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
           <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
-          <li>{{primaryData.data.personal.address.home.city}},
-              {{#if (ifCond (isEqualTo primaryData.data.personal.address.home.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo primaryData.data.personal.address.home.country.value "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                       {{primaryData.data.personal.address.home.state.value}},
+          <li>
+            {{#if primaryData.data.personal.address.home.city}}
+              {{primaryData.data.personal.address.home.city}}, 
+            {{/if}}
+              {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                {{#if primaryData.data.personal.address.home.state.value}}
+                  {{primaryData.data.personal.address.home.state.value}},
+                {{/if}}
               {{/if}} 
           {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
         {{/if}}
@@ -21,8 +26,10 @@
           <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
           <li>{{primaryData.data.personal.address.office.line1}} {{primaryData.data.personal.address.office.line2}} {{primaryData.data.personal.address.office.line3}}</li>
           <li>{{primaryData.data.personal.address.office.city}},
-            {{#if (ifCond (isEqualTo primaryData.data.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo primaryData.data.personal.address.office.country.value "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                       {{primaryData.data.personal.address.office.state.value}},
+            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                {{#if primaryData.data.personal.address.office.state.value}}
+                  {{primaryData.data.personal.address.office.state.value}},
+                {{/if}}
               {{/if}}
           {{primaryData.data.personal.address.office.country.value}}            {{primaryData.data.personal.address.office.zip}}</li>
         {{/if}}
@@ -117,7 +124,7 @@
           <label for="pay-in-installments">Pay in installments</label>
         </li>
       </ul>
-      {{#if insallmentsPayment}}
+      {{#if installmentsPayment}}
         <div id="installments" class="common-form">
           <div id="installmentsform">
           {{#if primaryData.data.invoice.maxinstallments}}
@@ -153,7 +160,7 @@
     </div>
     
     <div class="payments-container common-form">
-      {{#if (ifCond debitPayment insallmentsPayment '||')}}
+      {{#if (ifCond debitPayment installmentsPayment '||')}}
         <div class="card-payment">
           <h3>Enter your credit or debit card information<span class="required">*</span></h3>
           <form action="#" id="form-card-payment" method="post">
@@ -220,19 +227,15 @@
               </li>
               <li class="terms">
                 {{input type="checkbox" classBinding=":form-checkbox :iagree_terms" id="iagree_terms" name="iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
-                
                 <label for="iagree_terms" class="agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
                <li>
-                 {{archipac-donation}}
+                 {{archipac-donation primaryData=primaryData}}
               </li>
               <li>
                 <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>
-                <!--<input type="button" value="Submit payment" class="form-submit"  
-                {{action 'validatePaymentInfo'}} {{action 'validateInstallmentAgreeInfo'}}  /> -->
-                
               </li>
             </ul>
           </form>
@@ -283,12 +286,10 @@
               </li>
               <li class="terms">
                 {{input type="checkbox" classBinding=":form-checkbox :check_iagree_terms" id="check_iagree_terms" name="check_iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
-                
                 <label for="check_iagree_terms" class="ele-agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
-              
               <li>
                 <input type="button" value="Submit payment" class="form-submit" {{action 'validatePaymentElectronicInfo'}}>
               </li>

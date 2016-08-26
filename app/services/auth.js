@@ -114,14 +114,20 @@ export default Ember.Service.extend(RouteRefresherMixin, {
     });
   },
 
-  logout() {
+  logout(isForceLogout) {
+    isForceLogout = (typeof isForceLogout === "undefined") ? false : isForceLogout;
     var ignoreKeys = ["invalid-invoice", "no-access", "skip", "invoice-unavailable"];
     var authState = this.get("authState");
     if(ignoreKeys.indexOf(authState) === -1) {
       this.set("authState", "logout");
     }
-    localStorage.removeItem('aia-user');
-    this.set('user', null);
+    if(isForceLogout) {
+      this.set('user', {});
+      this.set("authState", "force-logout");
+    } else {
+      localStorage.removeItem('aia-user');
+      this.set('user', null);
+    }
     this.reloadRoute();
   },
 

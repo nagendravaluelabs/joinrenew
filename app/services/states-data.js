@@ -23,7 +23,6 @@ export default Ember.Service.extend({
   updateChosen: function (){
     "use strict";
     setTimeout(function (){
-      alert();
       $(".select-chosen").trigger("chosen:updated");
     },100);
   }.observes("data")
