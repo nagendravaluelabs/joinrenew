@@ -165,12 +165,14 @@
                 {{/if}}
                 
                 <!-- Zip code validation for United States -->
-               {{#if (ifCond (isEqualTo personalInfo.personal.address.home.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.home.country.key "bc4b70f8-280e-4bb0-b935-9f728c50e183") "||")}}
+               
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code
-                    <span class="form-required" title="This field is required.">*</span>
+                    {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                      <span class="form-required" title="This field is required.">*</span>
+                    {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :postal-code :zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
+                  {{input type="text" classBinding=":form-text :postal-code isHomeCanada:zipcodeCA isHomeUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -179,21 +181,6 @@
                     </div>
                   {{/if}}
                 </li>
-                {{else}}
-                 <!-- No validation for zipcode for other countries -->
-                 <li class="inline-bl">
-                  <label for="primary_home_zipcode">Zip code</label>
-                  {{input type="text" classBinding=":form-text :postal-code" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip size="30"}}
-                  {{#if (isEqualTo type 'join')}}
-                    <div class="calc-button">
-                      <span class="button-to-link">
-                        <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"
-                        />
-                      </span>
-                    </div>
-                  {{/if}}
-                </li>
-                {{/if}}
                <!--  zip code validation end here -->
               </ul>
             </fieldset>
@@ -238,7 +225,7 @@
                   <!--<input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />-->
                   
                   {{hyper-search
-                      endpoint=(read-env 'AIA_EMPLOYMENT_LOOKUP_URL')
+                      endpoint="http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations"
                       resultKey="attributes.name"
                       placeholder="Enter your work address"
                       selectResult="selectedCompanyDetails"
@@ -359,11 +346,13 @@
             
                 <!-- Work mode -  Zip code validation for United States -->
                 {{#if workShowState}}
-                 <li class="inline-bl">
-                  <label for="postal-code">Zip code
-                    <span class="form-required" title="This field is required.">*</span>
+                  <li class="inline-bl">
+                  <label for="primary_home_zipcode">Zip code
+                    {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                      <span class="form-required" title="This field is required.">*</span>
+                    {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :required :postal-code :zipcodeUS" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
+                  {{input type="text" classBinding=":form-text :postal-code isHomeCanada:zipcodeCA isHomeUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -372,12 +361,6 @@
                     </div>
                   {{/if}}
                 </li>
-                {{else}}
-                 <!-- No validation for zipcode for other countries -->
-                 <li class="state creative-zip">
-                    <label for="postal_code">Zip code</label>
-                    {{input type="text" classBinding=":form-text :postal-code" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
-                 </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
               
