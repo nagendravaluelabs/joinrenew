@@ -22,7 +22,8 @@ module.exports = function(environment) {
     AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//54.87.233.155/netforum/web/update.php',
     AIA_API_URL: 'https://american-institute-of-architects-dev.us-dev.janraincapture.com',
     AIA_API_CLIENT_ID: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
-    AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
+    AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq',
+	AIA_EMPLOYMENT_LOOKUP_URL : 'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations'
 
   };
 
