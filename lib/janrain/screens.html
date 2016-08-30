@@ -35,11 +35,11 @@
             
             <p class="terms-txt">
               By signing, you agree to AIA.org's 
-              <a href="#" target="_blank">Terms of Use</a> and <a href="#" target="_blank">Privacy Policy.</a>
+              <a href="http://www.aia.org/about_privacy/index.htm" target="_blank">Terms of Use and Privacy Policy.</a>
             </p>
             <div class="login-footer">
               <p>» Don't have an AIA.org login?
-                <a href="#" id="capture_signIn_createAccountButton" data-capturescreen="traditionalRegistration" class="capture_secondary capture_createAccountButton capture_btn capture_primary">Sign up</a>.
+                <a href="https://ams.aia.org/eweb/dynamicpage.aspx?webcode=gettingstarted#Header" id="capture_signIn_createAccountButton" target="_blank" class="capture_secondary capture_createAccountButton capture_btn capture_primary">Sign up</a>.
               </p>
           </div>
           </div>
@@ -204,13 +204,18 @@
     <div style="display:none;" id="forgotPassword">
         <div class="header">
             <h1>Reset your password</h1>
+            <h2>Enter your email</h2>
         </div>
-        <h2>We'll send you a link to create a new password.</h2>
+        <h3>We'll send you a link to change your password.</h3>
         {* #forgotPasswordForm *}
             {* signInEmailAddress *}
             {* recaptcha *}
+            
+            <div class="aia_capture_action">
+              <input value="Send now &raquo;" type="submit" class="capture_btn capture_primary">
+            </div>
             <div class="login-footer">
-                <p>If you're still having trouble: call <a href="tel:8002423837">800-242-3837&#8203;</a> or <a href="#">Chat</a></p>
+              <p>If you're still having trouble: call <a href="tel:8002423837">800-242-3837​</a> or <a href="#">Chat</a></p>
             </div>
         {* /forgotPasswordForm *}
     </div>

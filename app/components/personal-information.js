@@ -13,6 +13,11 @@ jQuery.validator.addMethod( "zipcodeUS", function( value, element ) {
 	  return this.optional( element ) || /^\d{5}(-\d{4})?$/.test( value );
 },  "Please enter a valid US zip code. The format should be either 00000 or 00000-0000." );
 
+jQuery.validator.addMethod("zipcodeCA", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\A-Z0-9\-\s]+$/i.test(value
+    );
+}, "Please enter a valid zip code" );
+
 jQuery.validator.addMethod( "alphanumeric", function( value, element ) {
 	return this.optional( element ) || /^[a-z0-9\-\s]+$/i.test( value );
 }, "Special characters not allowed" );
@@ -28,6 +33,10 @@ export default Ember.Component.extend(rememberScroll, {
     statesData: Ember.inject.service('states-data'),
     workstates: {},
     homeStates: [],
+    isHomeUSA: false,
+    isHomeCanada: false,
+    isWorkUSA: false,
+    isWorkCanada: false,
     init: function () {
         "use strict";
         this._super(...arguments);
@@ -118,8 +127,8 @@ export default Ember.Component.extend(rememberScroll, {
       genericData = this.get("genericData.generic.states");
       if(countryValue === "UNITED STATES") {
         genericData = genericData["UNITED STATES"];        
-      } else {
-        return {};
+      }else if(countryValue === "CANADA") {
+        genericData = genericData["CANADA"]; 
       }
       /*else if(countryValue === "CANADA") {
         genericData = genericData["CANADA"];        
@@ -140,7 +149,7 @@ export default Ember.Component.extend(rememberScroll, {
         var self, data, validCountries;
         self = this;
         mode = (typeof mode === "undefined") ? false : mode;
-        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183"];
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183","be685760-5492-4ba3-b105-868e2010fa34"];
         value = (typeof value === "undefined") ? "" : value.toLowerCase();
         if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
@@ -154,7 +163,17 @@ export default Ember.Component.extend(rememberScroll, {
           }
         } else {
           self.set("workstates", []);
-        }            
+        }
+        if(value === "be685760-5492-4ba3-b105-868e2010fa34") {
+          self.set("isWorkCanada", true);
+          self.set("isWorkUSA", false);
+        } else if(value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          self.set("isWorkCanada", false);
+          self.set("isWorkUSA", true);
+        } else {
+          self.set("isWorkCanada", false);
+          self.set("isWorkUSA", false);
+        }        
         if (validCountries.indexOf(value) !== -1) {
             this.set("workShowState", true);
         } else {
@@ -174,7 +193,7 @@ export default Ember.Component.extend(rememberScroll, {
         var self, data, validCountries;
         self = this;
         mode = (typeof mode === "undefined") ? false : mode;
-        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183"];
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183","be685760-5492-4ba3-b105-868e2010fa34"];
         value = (typeof value === "undefined") ? "" : value.toLowerCase();
         if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
@@ -188,7 +207,17 @@ export default Ember.Component.extend(rememberScroll, {
           }
         } else {
           self.set("homeStates", []);
-        }            
+        }
+        if(value === "be685760-5492-4ba3-b105-868e2010fa34") {
+          self.set("isHomeCanada", true);
+          self.set("isHomeUSA", false);
+        } else if(value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          self.set("isHomeCanada", false);
+          self.set("isHomeUSA", true);
+        } else {
+          self.set("isHomeCanada", false);
+          self.set("isHomeUSA", false);
+        }
         if (validCountries.indexOf(value) !== -1) {
             this.set("homeShowState", true);
         } else {
@@ -271,14 +300,20 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       primary_home_zipcode: {
                           required: function () {
-                              return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                              return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
                           },
                           alphanumeric:true,
                           maxlength:10
+                          /*zipcodeUS: function() {
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+                          },*/
+                          /*zipcodeCA: function() {
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
+                          }*/
                       },
                       administrative_area_state: {
                           required: function () {
-                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
                           }
                       }
                   },
@@ -396,7 +431,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     work_administrative_state: {
                         required: function () {
-                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
                         }
                     },
                     org_company_phone: {
@@ -436,6 +471,9 @@ export default Ember.Component.extend(rememberScroll, {
         },
         chosenValueChanged: function(value, param) {
           param.set("value", value);
+        },
+        selectedCompanyDetails: function(value) {
+          console.info(value);
         }
     }
 });
