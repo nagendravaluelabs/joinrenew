@@ -3,11 +3,11 @@
 <div class="renew-page-benefits">
   <div class="renew-container">
     <div class="col-xs-12 explore-benefits">
-      <h2>Explore the benefits</h2>
+      <h2>Explore the benefits 1</h2>
       <div class="custom-explore-benefits">
         <h3 class="status">I'm</h3>
         <div class="actions">
-          <div class="viewport">Select your status</div>                  
+          <div class="viewport">Select your status</div>
           <select id="select-explore-benefits" class="form-select" onchange={{action "changeExploreBenefits" value="target.value"}}>
             {{#each model.benefits as |option key|}}
               {{#if key}}
@@ -16,7 +16,7 @@
                 <option value="{{option.nid}}" selected>{{option.title}}</option>
               {{/if}}
             {{/each}}
-          </select>                  
+          </select>
         </div>
       </div>
     </div>
