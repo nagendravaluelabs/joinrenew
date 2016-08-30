@@ -235,7 +235,14 @@
                   {{else}}
                     <label for="company-search">If you need to change your work address, we&#039;ll help you find your company/organization.<span class="form-required">*</span></label>
                   {{/if}}
-                  <input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />
+                  <!--<input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />-->
+                  
+                  {{hyper-search
+                      endpoint="http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations"
+                      resultKey="attributes.name"
+                      placeholder="Enter your work address"
+                      selectResult="selectedCompanyDetails"
+                  }}
                 </li>
               </ul>
                 <div class="auto-address clearfix">
