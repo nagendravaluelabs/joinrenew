@@ -18,8 +18,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//54.197.6.159/netforum/web/getdata',
-    AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//54.197.6.159/netforum/web/update.php',
+    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//54.87.233.155/netforum/web/getdata',
+    AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//54.87.233.155/netforum/web/update.php',
     AIA_API_URL: 'https://american-institute-of-architects-dev.us-dev.janraincapture.com',
     AIA_API_CLIENT_ID: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
     AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
