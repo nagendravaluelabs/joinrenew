@@ -1,6 +1,6 @@
 <div class="renew-page">
   <div class="renew-container">
-    
+
     <div class="hidden-xs hidden-sm{{ternary (isEqualTo model.page.title 'Join') ' col-lg-8' ' col-lg-7'}} col-md-7">
       <div class="landing-page-image">
         <img src="{{{model.page.field_aia_image}}}" alt="{{model.page.title}}" class="img-responsive" />
@@ -17,7 +17,7 @@
           <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
         {{else}}
           {{#using-janrain as |enabled janrain|}}
-            <a href="#" {{action janrain.login}} id="edit-next" class="sign_in">Sign in to renew</a>          
+            <a href="#" {{action janrain.login}} id="edit-next" class="sign_in">Sign in to renew</a>
           {{/using-janrain}}
         {{/if}}
       </div>
