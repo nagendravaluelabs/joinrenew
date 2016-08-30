@@ -33,7 +33,11 @@
             <div class="chapter">
               <p>Contact your chapter:</p>
               <address class="text address-indent">
-                <p class="chapter-name"> {{address.chaptername}}</p>
+                {{#if (isEqualTo address.email 'zzinfocentral@aia.orgzz')}}
+                  <p class="chapter-name">American Institute of Architects</p>
+                  {{else}}
+                  <p class="chapter-name">{{address.chaptername}}</p>
+                {{/if}}
                 <p>{{address.address1}}</p>
                 <p>{{address.city}}, {{address.state}} {{address.postalcode}}</p>
                 <p>{{address.phone}}</p>

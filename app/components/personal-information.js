@@ -436,6 +436,9 @@ export default Ember.Component.extend(rememberScroll, {
         },
         chosenValueChanged: function(value, param) {
           param.set("value", value);
+        },
+        selectedCompanyDetails: function(value) {
+          console.info(value);
         }
     }
 });
