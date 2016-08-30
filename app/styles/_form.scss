@@ -390,4 +390,36 @@ p{
   }
 }
 
-/* Start: Select styles */
+/* Hyper Search start */
+ul{
+  &.hypersearch-results{
+    background: #fff;
+    border: 1px #ccc solid;
+    margin-top: -1px;
+    width: 67%;
+    height: 250px;
+    overflow-y: auto;
+    li.hypersearch-result{
+      border-bottom:1px #ccc solid;
+      padding:7px 15px;
+      margin:0;
+      display: block;
+      cursor: pointer;
+      &:hover{
+      background: #0072b9;
+      color:#fff;
+      }
+    }
+  }
+}
+
+.hypersearch-input {
+  border: 1px #ccc solid;
+  background-image: url(http://aiadev2.prod.acquia-sites.com/misc/throbber-inactive.png);
+  background-position: 100% center; /* LTR */
+  background-repeat: no-repeat;
+}
+.hypersearch-loading{
+  background-image: url(http://aiadev2.prod.acquia-sites.com/misc/throbber-active.gif);
+  background-position: 100% center; /* LTR */
+}
