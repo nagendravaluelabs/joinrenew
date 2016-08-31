@@ -225,7 +225,7 @@
                   <!--<input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />-->
                   
                   {{hyper-search
-                      endpoint="http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations"
+                      endpoint=(read-env 'AIA_EMPLOYMENT_LOOKUP_URL')
                       resultKey="attributes.name"
                       placeholder="Enter your work address"
                       selectResult="selectedCompanyDetails"
@@ -352,7 +352,7 @@
                       <span class="form-required" title="This field is required.">*</span>
                     {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :postal-code isHomeCanada:zipcodeCA isHomeUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
+                  {{input type="text" classBinding=":form-text :postal-code isWorkCanada:zipcodeCA isWorkUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=organizationInfo.postalCode minlength="5" size="30" maxlength="10"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">
@@ -361,6 +361,12 @@
                     </div>
                   {{/if}}
                 </li>
+                {{else}}
+                 <!-- No validation for zipcode for other countries -->
+                 <li class="state creative-zip">
+                    <label for="postal_code">Zip code</label>
+                    {{input type="text" classBinding=":form-text :postal-code" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
+                 </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
               
