@@ -118,6 +118,12 @@
     a{
       color:#ee4034;
       font-family: "architype-light", sans-serif;
+      &#recaptcha_audio_play_again {
+        color: blue;
+        margin-bottom: 5px;
+        display: inline-block;
+      }
+      
     }
     p{
       &.terms-txt{
@@ -136,6 +142,9 @@
 		  margin-bottom:0;
       font-size: 15px;
       font-family: "architype-light", sans-serif;
+      a:hover{
+        text-decoration: underline;
+      }
 		}
 		.icon-key {
 		  margin-right: 5px;
