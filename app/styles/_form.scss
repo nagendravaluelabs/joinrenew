@@ -397,17 +397,22 @@ ul{
     border: 1px #ccc solid;
     margin-top: -1px;
     width: 67%;
-    height: 250px;
+    max-height: 250px;
     overflow-y: auto;
+    position: absolute;
+    top: 79px;
     li.hypersearch-result{
-      border-bottom:1px #ccc solid;
-      padding:7px 15px;
-      margin:0;
-      display: block;
-      cursor: pointer;
-      &:hover{
-      background: #0072b9;
-      color:#fff;
+      margin: 0;
+      span {
+        border-bottom:1px #ccc solid;
+        padding:7px 15px;
+        margin:0;
+        display: block;
+        cursor: pointer;
+        &:hover{
+        background: #0072b9;
+        color:#fff;
+        }
       }
     }
   }

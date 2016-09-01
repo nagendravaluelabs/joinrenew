@@ -189,7 +189,8 @@ export default Ember.Service.extend({
         isArchiPAC,
         installmentsInfo,
         InstallmentProgram,
-        DonationInfo;
+        DonationInfo,
+        address_owner_key;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -400,18 +401,31 @@ export default Ember.Service.extend({
           addressKey = "";
         }
         addressInfo.Addresses.Address[addressLength] = {};
-        addressInfo.Addresses.Address[addressLength].CompanyKey = Ember.getWithDefault(data.personal, "organization.key", "");
+        address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
+        if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+          if(!Ember.getWithDefault(data.personal, "organization.is_new_org", false)) {
+            addressInfo.Addresses.Address[addressLength].CompanyKey = address_owner_key;
+          } else {
+            addressInfo.Addresses.Address[addressLength].CompanyKey = Ember.getWithDefault(data.personal, "organization.Type", "");
+          }
+        }
         addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
         addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
         addressInfo.Addresses.Address[addressLength].Key = addressKey;
       }
     });
-    
-    organizationInfo.RelatedOrganizations = {};
-    organizationInfo.RelatedOrganizations.RelatedOrganization = {
-      "Key" : data.personal.organization.key
-    };
-    
+    if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+      organizationInfo.RelatedOrganizations = {};
+      if(!Ember.getWithDefault(data.personal, "organization.is_new_org", false)) {
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Key" : data.personal.organization.key
+        };
+      } else {
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Key" : data.personal.organization.key
+        };
+      }
+    }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
     mappedJSON.input.membership = membershipInfo;

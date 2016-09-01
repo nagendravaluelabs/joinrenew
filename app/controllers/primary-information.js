@@ -57,24 +57,28 @@ export default Ember.Controller.extend({
           userData[index] = {};
           primaryAddress=[];
           if (personalData.address.primary === "office") {
-            if(typeof personalData.address.office !== "undefined") {
-              primaryAddress[0]= personalData.address.office.line1;
-              primaryAddress[1]= personalData.address.office.line2;
-              
-              if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
-              addressArr[addressArr.length] = personalData.address.office.city;
-              addressArr[addressArr.length] = personalData.address.office.state.value;
-              addressArr[addressArr.length] = personalData.address.office.country.value;
-              } else {
-              addressArr[addressArr.length] = personalData.address.office.city;
-              addressArr[addressArr.length] = personalData.address.office.country.value;
-              }  
-              addressArr = addressArr.filter(v=>v!=='');
-              addressArr = addressArr.join(", ");
-              if(personalData.address.office.zip !== "") {
-                addressArr += " "+personalData.address.office.zip;
+            if(!Ember.getWithDefault(personalData, "organization.isLinkedAccount", false)) {
+              if(typeof personalData.address.office !== "undefined") {
+                primaryAddress[0]= personalData.address.office.line1;
+                primaryAddress[1]= personalData.address.office.line2;
+                
+                if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
+                addressArr[addressArr.length] = personalData.address.office.city;
+                addressArr[addressArr.length] = personalData.address.office.state.value;
+                addressArr[addressArr.length] = personalData.address.office.country.value;
+                } else {
+                addressArr[addressArr.length] = personalData.address.office.city;
+                addressArr[addressArr.length] = personalData.address.office.country.value;
+                }  
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(personalData.address.office.zip !== "") {
+                  addressArr += " "+personalData.address.office.zip;
+                }
+                primaryAddress[2]= addressArr;
               }
-              primaryAddress[2]= addressArr;
+            } else {
+              primaryAddress[0] = Ember.getWithDefault(personalData, "organization.linkedAddress", "Test");
             }
           } else {
             if(typeof personalData.address.home !== "undefined") {

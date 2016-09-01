@@ -239,25 +239,31 @@
                           {{#if personalInfo.personal.organization.name}}
                             {{personalInfo.personal.organization.name}}<br />
                           {{/if}}
-                          {{#if personalInfo.personal.address.office.line1}}
-                            {{personalInfo.personal.address.office.line1}}<br />
+                          {{#if personalInfo.personal.organization.isLinkedAccount}}
+                            {{#if personalInfo.personal.organization.linkedAddress}}
+                              {{personalInfo.personal.organization.linkedAddress}}
+                            {{/if}}
+                          {{else}}                          
+                            {{#if personalInfo.personal.address.office.line1}}
+                              {{personalInfo.personal.address.office.line1}}<br />
+                            {{/if}}
+                            {{#if personalInfo.personal.address.office.line2}}
+                              {{personalInfo.personal.address.office.line2}}<br />
+                            {{/if}}
+                            {{#if personalInfo.personal.address.office.line3}}
+                              {{personalInfo.personal.address.office.line3}}<br />
+                            {{/if}}
+                            {{#if personalInfo.personal.address.office.city}}
+                              {{personalInfo.personal.address.office.city}},
+                            {{/if}}
+                              {{#if (ifCond (isEqualTo personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.office.country.key "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                                {{#if personalInfo.personal.address.office.state.value}}
+                                  {{personalInfo.personal.address.office.state.value}},
+                                {{/if}}
+                              {{/if}} 
+                            {{personalInfo.personal.address.office.country.value}}
+                            {{personalInfo.personal.address.office.zip}}
                           {{/if}}
-                          {{#if personalInfo.personal.address.office.line2}}
-                            {{personalInfo.personal.address.office.line2}}<br />
-                          {{/if}}
-                          {{#if personalInfo.personal.address.office.line3}}
-                            {{personalInfo.personal.address.office.line3}}<br />
-                          {{/if}}
-                          {{#if personalInfo.personal.address.office.city}}
-                            {{personalInfo.personal.address.office.city}},
-                          {{/if}}
-                            {{#if (ifCond (isEqualTo personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.office.country.key "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                              {{#if personalInfo.personal.address.office.state.value}}
-                                {{personalInfo.personal.address.office.state.value}},
-                              {{/if}}
-                            {{/if}} 
-                          {{personalInfo.personal.address.office.country.value}}
-                          {{personalInfo.personal.address.office.zip}}
                         {{/if}}
                     </div>
                   </span>
@@ -295,12 +301,11 @@
                 <label for="organization_name">Company/organization name
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                <input class="text-full form-text required" type="text" id="organization_name" name="organization_name"
-                value="" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full :required" id="organization_name" name="organization_name" value=organizationInfo.Name size="60" maxlength="255"}}
               </li>
               <li>
                 <label for="org_website">Website</label>
-                <input class="text-full form-text" type="text" id="org_website" name="org_website" value="" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full" id="org_website" name="org_website" value=organizationInfo.Website size="60" maxlength="255"}}
               </li>
               <li>
                 <label for="label">Company type
@@ -347,12 +352,12 @@
                 <!-- Work mode -  Zip code validation for United States -->
                 {{#if workShowState}}
                   <li class="inline-bl">
-                  <label for="primary_home_zipcode">Zip code
-                    {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                  <label for="primary_work_zipcode">Zip code
+                    {{#if (ifCond (isEqualTo (jsStrings organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
                       <span class="form-required" title="This field is required.">*</span>
                     {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :postal-code isWorkCanada:zipcodeCA isWorkUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=organizationInfo.postalCode minlength="5" size="30" maxlength="10"}}
+                  {{input type="text" classBinding=":form-text :postal-code isWorkCanada:zipcodeCA isWorkUSA:zipcodeUS" id="primary_work_zipcode" name="primary_work_zipcode" value=organizationInfo.PostalCode minlength="5" size="30" maxlength="10"}}
                   {{#if (isEqualTo type 'join')}}
                     <div class="calc-button">
                       <span class="button-to-link">

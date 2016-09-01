@@ -473,7 +473,12 @@ export default Ember.Component.extend(rememberScroll, {
           param.set("value", value);
         },
         selectedCompanyDetails: function(value) {
-          console.info(value);
+          Ember.$(".hypersearch-input").val('');
+          this.set("personalInfo.personal.organization.name", Ember.getWithDefault(value, "attributes.name", ""));
+          this.set("personalInfo.personal.organization.key", Ember.getWithDefault(value, "id", ""));
+          this.set("personalInfo.personal.organization.isLinkedAccount", true);
+          this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes.address", ""));
+          this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "attributes.address_key", "2BBFE3AA-3242-4105-9E89-6E880FC87518"));
         }
     }
 });
