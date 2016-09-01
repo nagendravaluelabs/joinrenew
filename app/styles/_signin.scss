@@ -15,7 +15,7 @@
     h1{
       display: inline-block;
       font-size: 24px !important;
-          margin-left: 20px !important;
+      margin-left: 20px !important;
     }
   }
   h2{
@@ -118,6 +118,12 @@
     a{
       color:#ee4034;
       font-family: "architype-light", sans-serif;
+      &#recaptcha_audio_play_again {
+        color: blue;
+        margin-bottom: 5px;
+        display: inline-block;
+      }
+      
     }
     p{
       &.terms-txt{
@@ -131,10 +137,14 @@
 	  padding:15px 0;
 	  background-color: #f6f6f6 !important;
 	  box-shadow: 0 9px 9px -9px rgba(0,0,0,0.1) inset; 
+    text-align:center;
 		p{
 		  margin-bottom:0;
       font-size: 15px;
       font-family: "architype-light", sans-serif;
+      a:hover{
+        text-decoration: underline;
+      }
 		}
 		.icon-key {
 		  margin-right: 5px;
@@ -156,24 +166,16 @@
     height: auto !important
   }
   .capture_btn {
-    font-size:20px;
+    font-size: 20px;
     padding: 13px 40px;
-    background-color: #ef4135;
-    margin-right:20px;
-    margin-left: 20px;
     box-shadow: none;
     border-radius: 0;
+    background: #ee4034 !important;
+    color: #fff !important;
     &.capture_processing{
       color:#fff;
     }
   }
-
-  #forgotPassword{
-    .aia_capture_action{
-        margin-bottom: 15px;
-    }
-  }
-  
   .janrain-capture-ui{
     &.capture-ui-content{
       width: 100%;
