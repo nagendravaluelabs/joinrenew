@@ -101,9 +101,11 @@ export default Ember.Service.extend({
                     }else{
                       data.personal.address.office.isExsist = true;
                     }
+                    data.personal.organizationInfo = {};
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
                     data.paymentInfo.isArchiPAC = 1;
+                    data.organizationInfo = {};
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
                   } else {
@@ -392,37 +394,54 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
-          addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
-          isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
-          addressKey = addressObj.key;
-        } else {
-          isPrimary = 0;
-          addressKey = "";
-        }
-        addressInfo.Addresses.Address[addressLength] = {};
-        address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
-        if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
-          if(!Ember.getWithDefault(data.personal, "organization.is_new_org", false)) {
-            addressInfo.Addresses.Address[addressLength].CompanyKey = address_owner_key;
+        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+          if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
+            addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
+            isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
+            addressKey = addressObj.key;
           } else {
-            addressInfo.Addresses.Address[addressLength].CompanyKey = Ember.getWithDefault(data.personal, "organization.Type", "");
+            isPrimary = 0;
+            addressKey = "";
           }
+          addressInfo.Addresses.Address[addressLength] = {};
+          address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
+          if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+            if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+              addressInfo.Addresses.Address[addressLength].CompanyKey = data.personal.organization.key;
+            }
+          }
+          addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
+          addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
+          addressInfo.Addresses.Address[addressLength].Key = addressKey;
         }
-        addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
-        addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
-        addressInfo.Addresses.Address[addressLength].Key = addressKey;
       }
     });
     if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
       organizationInfo.RelatedOrganizations = {};
-      if(!Ember.getWithDefault(data.personal, "organization.is_new_org", false)) {
+      if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
         organizationInfo.RelatedOrganizations.RelatedOrganization = {
           "Key" : data.personal.organization.key
         };
       } else {
         organizationInfo.RelatedOrganizations.RelatedOrganization = {
-          "Key" : data.personal.organization.key
+          "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
+          "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
+          "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
+          "OrganizationAddress": {
+            "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
+            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country", ""),
+            "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
+            "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
+            "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
+            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState", ""),
+            "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
+            "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
+          },
+          "OrganizationPhone": {
+            "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+            "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
+            "Number": Ember.getWithDefault(data.personal, "organization.orgPhone", "")
+          }
         };
       }
     }

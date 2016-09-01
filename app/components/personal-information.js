@@ -179,14 +179,14 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
             this.set("workShowState", false);
         }
-        
+        /*
         if(!mode) {
           this.set("organizationInfo.addressLine1", "");
           this.set("organizationInfo.addressLine2", "");
           this.set("organizationInfo.locality", "");
           this.set("organizationInfo.workState", "");
           this.set("organizationInfo.postalCode", "");
-        }
+        }*/
     },
     setHomeStateStatusFn: function (value, mode) {
         "use strict";
@@ -394,7 +394,22 @@ export default Ember.Component.extend(rememberScroll, {
             var self, value;
             self = this;
             value = self.get('createOrganization');
-            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+            if(!self.getWithDefault("organizationInfo", "isNewOrganization", false)) {
+              self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.Name", "");
+              self.set("organizationInfo.Website", "");
+              self.set("organizationInfo.companyType", "");
+              self.set("organizationInfo.orgPhone", "");
+              self.set("organizationInfo.country", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              
+              self.set("organizationInfo.addressLine1", "");
+              self.set("organizationInfo.addressLine2", "");
+              self.set("organizationInfo.locality", "");
+              self.set("organizationInfo.workState", "");
+              self.set("organizationInfo.PostalCode", "");
+              self.set("organizationInfo.isNewOrganization", false);
+            }
             if (value) {
                 $(".primary-action-btn").removeClass("hidden");
                 self.set('createOrganization', false);
@@ -464,9 +479,8 @@ export default Ember.Component.extend(rememberScroll, {
                 }
             });
             if (validator.form()) {
-                console.log("success");
-            } else {
-              console.log("error");
+                this.set("organizationInfo.isNewOrganization", true);
+                this.send("createNewOrganization", true);
             }
         },
         chosenValueChanged: function(value, param) {
@@ -479,6 +493,21 @@ export default Ember.Component.extend(rememberScroll, {
           this.set("personalInfo.personal.organization.isLinkedAccount", true);
           this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes.address", ""));
           this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "attributes.address_key", "2BBFE3AA-3242-4105-9E89-6E880FC87518"));
+          this.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.Name", "");
+          this.set("organizationInfo.Website", "");
+          this.set("organizationInfo.companyType", "");
+          this.set("organizationInfo.orgPhone", "");
+          this.set("organizationInfo.country", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          this.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.addressLine1", "");
+          this.set("organizationInfo.addressLine2", "");
+          this.set("organizationInfo.locality", "");
+          this.set("organizationInfo.workState", "");
+          this.set("organizationInfo.PostalCode", "");
+          this.set("organizationInfo.isNewOrganization", false);
         }
     }
 });

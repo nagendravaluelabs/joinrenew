@@ -268,7 +268,13 @@
                     </div>
                   </span>
                   <span class="info-link">Can’t find your work address?
-                    <a class="create-org" href="javascript:void(0)" {{action 'createNewOrganization'}}>Create a new organization</a>
+                    <a class="create-org" href="javascript:void(0)" {{action 'createNewOrganization'}}>
+                      {{#if organizationInfo.isNewOrganization}}
+                      Edit organization
+                      {{else}} 
+                      Create a new organization
+                      {{/if}}
+                    </a>
                   </span>
                 </div>
             </fieldset>
@@ -315,7 +321,7 @@
                 {{#ember-chosen id='company_type' name="company_type" class='form-select required' value=(mut organizationInfo.companyType) chosenValueChanged=chosenValueChanged}}
                   <option value="">Select</option>
                   {{#each companyType as |type|}}
-                    <option value="{{type}}">{{type}}</option>                
+                    <option value="{{type}}" selected="{{if (isEqualTo organizationInfo.companyType type) 'selected' '' }}">{{type}}</option>                
                   {{/each}}
                 {{/ember-chosen}}
               </li>
@@ -345,7 +351,7 @@
                   <label for="work_administrative_state">State
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected="" class="state required" states=workstates mutable=(mut organizationInfo.workState) chosenValueChanged=chosenValueChanged}}
+                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState) chosenValueChanged=chosenValueChanged}}
                 </li>
               {{/if}}
             
@@ -370,7 +376,7 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="state creative-zip zipcode-len">
                     <label for="postal_code">Zip code</label>
-                    {{input type="text" classBinding=":form-text :postal-code" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
+                    {{input type="text" classBinding=":form-text :postal-code" id="primary_work_zipcode" name="primary_work_zipcode" value=organizationInfo.PostalCode size="30" maxlength="255" minlength="5"}}
                  </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
@@ -378,12 +384,12 @@
               <li class="clear"></li>
               <li class="state" id="state">
                 <label for="create_org_code_code">Country code</label>
-                {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=(jsStrings "bc4b70f8-280e-4bb0-b935-9f728c50e183" 'lower')}}
+                {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=(jsStrings organizationInfo.countryCode 'lower')  mutable=(mut organizationInfo.countryCode) chosenValueChanged=chosenValueChanged}}
               </li>
               <li class="state creative-zip">
                 <label for="org_company_phone">Company phone</label>
-                <input class="text-full form-text" type="text" id="org_company_phone"
-                name="org_company_phone" value="" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full" id="org_company_phone" name="org_company_phone" value=organizationInfo.orgPhone size="30" maxlength="255"}}
+                
               </li>  
               <li class="clear"></li>
             </ul>
