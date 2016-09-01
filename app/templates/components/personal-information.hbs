@@ -363,7 +363,7 @@
                 </li>
                 {{else}}
                  <!-- No validation for zipcode for other countries -->
-                 <li class="state creative-zip">
+                 <li class="state creative-zip zipcode-len">
                     <label for="postal_code">Zip code</label>
                     {{input type="text" classBinding=":form-text :postal-code" id="postal_code" name="postal_code" value=organizationInfo.postalCode size="30" maxlength="255" minlength="5"}}
                  </li> 
