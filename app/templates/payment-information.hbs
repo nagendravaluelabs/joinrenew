@@ -46,14 +46,14 @@
       <div id="ordersummaryinfo">
         <h3>Invoice summary</h3>
         <div id="payment-accordion">
-           <h3>
+           <h3 class="ui-state-active" style="display: block;">
             AIA membership dues:
 		
-            <span class="membership">
+            <!--<span class="membership">
 		
               <span class="membership-type">
                 <span class="membership-total">${{format-currency subTotal}}</span></span>
-              </span>
+              </span>-->
           </h3>
           <div class="newaiamembership">
             <div class="result">
@@ -62,44 +62,56 @@
                   {{#if primaryData.data.invoice.dues.national}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
-                      <td>${{format-currency primaryData.data.invoice.dues.national.due}}</td>
+                      <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.national.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.state}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
-                      <td>${{format-currency primaryData.data.invoice.dues.state.due}}</td>
+                      <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.state.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.local}}
                   <tr>
                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
-                    <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
+                    <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.local.due}}</span></td>
                   </tr>
                   {{/if}}
-                  {{#if primaryData.data.membership.membershipyear}}
-                    <tr class="sum">
-                      <td class="title">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</td>
-                      <td class="due-total">${{format-currency subTotal}}</td>
-                    </tr>
-                  {{/if}}
+                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        {{#if primaryData.data.membership.membershipyear}}
+        <div class="spl_dues_bottom">
+          <div class="sup-title total_label">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</div>
+          <div class="sup-due-total paymentdue"><span class="right-space">${{format-currency subTotal}}</span></div> 
+        </div>
+        {{/if}}
         {{#if primaryData.data.supplementalDuesTotal}}
         <div class="spl_dues_bottom">
           <div class="sup-title total_label">Supplemental dues</div>
-          <div class="sup-due-total paymentdue">${{format-currency primaryData.data.supplementalDuesTotal}}</div> 
+          <div class="sup-due-total paymentdue"><span class="right-space">${{format-currency primaryData.data.supplementalDuesTotal}}</span></div> 
         </div>
          {{/if}}
-        <div id="accordion_bottom">
-          <div class="total_label">Total</div>
+         
+         
+        <div class="spl_dues_bottom total-dues-box">
+          <div class="sup-title total_label"><strong>Total membership dues</strong></div>
+          <div class="sup-due-total paymentdue"><span class="right-space"><strong>$ 2199.00</strong></span></div> 
+        </div>
+        
+         <div class="spl_dues_bottom archipac-box">
+          {{archipac-donation primaryData=primaryData}}
+         </div>
+         
+        <div class="spl_dues_bottom total-dues-box" id="accordion_bottom">
+          <div class="total_label"><strong>Total</strong></div>
           {{#if primaryData.data.supplementalDuesTotal}}
-          <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency supplyTotal}}</strong></span></div>
           {{else}}
-          <div id="paymentdue" class="paymentdue">${{format-currency subTotal}}</div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency subTotal}}</strong></span></div>
           {{/if}}
         </div>
       </div>
@@ -237,9 +249,9 @@
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
-               <li>
+               <!--<li>
                  {{archipac-donation primaryData=primaryData}}
-              </li>
+              </li>-->
               <li>
                 <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>
               </li>
