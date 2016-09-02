@@ -715,3 +715,11 @@ span{
     }
   }
 }
+.aia-error + .error {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+  position: absolute;
+}

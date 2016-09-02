@@ -18,7 +18,7 @@
           &.inline-bl{
             float: left;
             display: inline-block;
-            width:50%;
+            width:65%;
             @media (min-width: 768px) and (max-width: 1023px){
               width:50%;
             }
@@ -95,13 +95,13 @@
               width: 100% !important;
             }
           &#primary_home_zipcode {
-            width: 63.75%;
+            width: 49%;
             @media (max-width: 767px){
               width: 100% !important;
             }
           }
           &#postal_code, &#primary_work_zipcode {
-            width: 51%;
+            width: 67%;
             @media (max-width: 767px){
               width: 100% !important;
             }
@@ -272,7 +272,7 @@
           min-height: 110px;
           margin: 7px 0 56px 0px;
           padding: 14px 20px;
-          width: 55%;
+          width: 67%;
           line-height: 20px;
           clear: both;
           @media (min-width: 768px) and (max-width: 1023px){

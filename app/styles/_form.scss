@@ -380,6 +380,7 @@ p{
   .archipac-text {
     padding-left:25px;
     padding-top: 4px;
+    color: #000;
     @media screen and (max-width: 767px){
       padding-top: 0px;
     }
@@ -399,7 +400,9 @@ ul{
     max-height: 250px;
     overflow-y: auto;
     position: absolute;
-    top: 79px;
+    @media screen and (max-width: 1024px){
+      width: 100%;
+    }
     li.hypersearch-result{
       margin: 0;
       span {
@@ -418,6 +421,7 @@ ul{
 }
 
 .hypersearch-input {
+  position: relative;
   border: 1px #ccc solid;
   background-image: url(http://aiadev2.prod.acquia-sites.com/misc/throbber-inactive.png);
   background-position: 100% center; /* LTR */
