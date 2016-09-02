@@ -110,7 +110,7 @@ export default Ember.Service.extend({
                     data.personal.organizationInfo.workState.value= "";
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
-                    data.paymentInfo.isArchiPAC = 1;
+                    data.paymentInfo.isArchiPAC = true;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
                   } else {

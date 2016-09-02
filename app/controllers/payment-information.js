@@ -25,6 +25,8 @@ export default Ember.Controller.extend({
         subTotal: 0,
         total :0,
         supplyTotal:0,
+        subTotalWithArchipac: 0,
+        supplyTotalWithArchipac: 0,
         installNumber:3,
         installment: 0,
         paymentFailed: false,
@@ -46,10 +48,12 @@ export default Ember.Controller.extend({
         }.property(),
         subTotalObserves: function () {
           "use strict";
-          var primaryData = this.get("primaryData");
-          var subTotal = 0;
-          var total = 0;
-          var supplyTotal = 0;
+          var primaryData, subTotal, total, supplyTotal, archipacValue;
+          primaryData = this.get("primaryData");
+          subTotal = 0;
+          total = 0;
+          supplyTotal = 0;
+          archipacValue = 0;
           if (primaryData.data !== "undefined" && primaryData.data !== "") {
             $.map(primaryData.data.invoice.dues, function (payment) {
               subTotal += parseFloat(payment.due);          
@@ -60,13 +64,18 @@ export default Ember.Controller.extend({
               supplyTotal = parseFloat(subTotal) + parseFloat(primaryData.data.supplementalDuesTotal);
               total += parseFloat(primaryData.data.supplementalDuesTotal);
             }  
-
+            total = parseFloat(total);
             this.set("subTotal", parseFloat(subTotal, 2));
-            this.set("total", parseFloat(total, 2));
             this.set("supplyTotal", parseFloat(supplyTotal, 2));
+            archipacValue = (this.get("primaryData.data.paymentInfo.isArchiPAC")) ? 25 : 0;
+            this.set("total", parseFloat(total, 2));
+            //this.set("total", parseFloat(total+archipacValue, 2));
+            this.set("supplyTotalWithArchipac", parseFloat(supplyTotal+archipacValue, 2));
+            this.set("subTotalWithArchipac", parseFloat(subTotal+archipacValue, 2));
+            
             this.calculateInstallments(this.get("installNumber"));
           }
-        }.observes('primaryData.data'),
+        }.observes('primaryData.data', 'primaryData.data.paymentInfo.isArchiPAC'),       
         updatePaymentType: function(type) {
           "use strict";
           if (type === "Debit/Credit Card") {
