@@ -27,13 +27,24 @@ var fieldValidations = Ember.Mixin.create({
         var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
         var ret = ((keyCode >= 32 && keyCode <= 35) || (keyCode >= 37 && keyCode <= 59) || (keyCode === 61) || (keyCode >= 63 && keyCode <= 125) || (specialKeys.indexOf(e.keyCode) !== -1 && e.charCode !== e.keyCode));
         if (!ret) {
-            if ($(this).next("label.error").length === 0) {
-                $('<label class="error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
+            if ($(this).next("label.error.aia-error").length === 0) {
+                $('<label class="error aia-error">Special Characters $, &lt;, &gt; not allowed</label>').insertAfter($(this));
             }
         } else {
-            $(this).next("label.error").remove();
+            $(this).next("label.error.aia-error").remove();
         }
         return ret;
+    });
+    
+    Ember.$(document).on("keyup", ".few-special-char", function (e) {
+        "use strict";
+        var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
+        var pattern = /^[^\$^\<^\>]*$/;
+        if(keyCode === 8) {
+          if( $(this).val() === "" || pattern.test($(this).val())) {
+              $(this).next("label.error.aia-error").remove();
+          }
+        }
     });
 
     Ember.$(document).on("keypress", '.no-special-char', function(e){
