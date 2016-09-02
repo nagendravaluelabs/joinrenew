@@ -102,10 +102,15 @@ export default Ember.Service.extend({
                       data.personal.address.office.isExsist = true;
                     }
                     data.personal.organizationInfo = {};
+                    data.personal.organizationInfo.country = {};
+                    data.personal.organizationInfo.country.key = "";
+                    data.personal.organizationInfo.country.value= "";
+                    data.personal.organizationInfo.workState = {};
+                    data.personal.organizationInfo.workState.key = "";
+                    data.personal.organizationInfo.workState.value= "";
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
                     data.paymentInfo.isArchiPAC = 1;
-                    data.organizationInfo = {};
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
                   } else {

@@ -209,6 +209,7 @@
               <label class="required required-field">Required
                 <span class="form-required">*</span>
               </label>
+              {{input type="hidden" value=personalInfo.personal.address.office.key name="org_work_address" id="org_work_address"}}
               <ul class="work-address" id="work-address">
                 {{#if (isEqualTo type 'join')}}
                   <li>
@@ -235,13 +236,32 @@
                 <div class="auto-address clearfix">
                   <span class="info-left">
                     <div id="company-lookup-address-block">
-                        {{#if personalInfo.personal.address.office.isExsist}}
+                        {{#if (ifCond personalInfo.personal.address.office.isExsist (ifCond personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization '||') '||')}}
                           {{#if personalInfo.personal.organization.name}}
                             {{personalInfo.personal.organization.name}}<br />
                           {{/if}}
-                          {{#if personalInfo.personal.organization.isLinkedAccount}}
+                          {{#if (ifCond personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization '||')}}
+                            {{#if personalInfo.personal.organization.isLinkedAccount}}
                             {{#if personalInfo.personal.organization.linkedAddress}}
                               {{personalInfo.personal.organization.linkedAddress}}
+                            {{/if}}
+                            {{else}}
+                              {{#if organizationInfo.addressLine1}}
+                                {{organizationInfo.addressLine1}}<br />
+                              {{/if}}
+                              {{#if organizationInfo.addressLine2}}
+                                {{organizationInfo.addressLine2}}<br />
+                              {{/if}}
+                              {{#if organizationInfo.locality}}
+                                {{organizationInfo.locality}},
+                              {{/if}}
+                              {{#if (ifCond (isEqualTo (jsStrings organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                                {{#if organizationInfo.workState.value}}
+                                  {{organizationInfo.workState.value}},
+                                {{/if}}
+                              {{/if}} 
+                              {{organizationInfo.country.value}}
+                              {{organizationInfo.PostalCode}}
                             {{/if}}
                           {{else}}                          
                             {{#if personalInfo.personal.address.office.line1}}
@@ -256,7 +276,7 @@
                             {{#if personalInfo.personal.address.office.city}}
                               {{personalInfo.personal.address.office.city}},
                             {{/if}}
-                              {{#if (ifCond (isEqualTo personalInfo.personal.address.office.country.key "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo personalInfo.personal.address.office.country.key "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                              {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
                                 {{#if personalInfo.personal.address.office.state.value}}
                                   {{personalInfo.personal.address.office.state.value}},
                                 {{/if}}
@@ -328,7 +348,7 @@
               <li>
                  <label for="contact_{{type}}_country">Country
                  <span class="form-required" title="This field is required.">*</span></label>
-                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings organizationInfo.country 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' mutable=(mut organizationInfo.country) chosenValueChanged=chosenValueChanged}}
+                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings organizationInfo.country.key 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' mutable=(mut organizationInfo.country.key) chosenValueChanged=chosenValueChanged}}
               </li>
               <li>
                 <label for="org_company_address1">Address line 1
@@ -346,12 +366,13 @@
                 </label>
                 {{input type="text" classBinding=":form-text :required :locality :few-special-char" id="org_locality" name="org_locality" value=organizationInfo.locality size="30" maxlength="255"}}
               </li>
+
               {{#if workShowState}}
                 <li class="state" id="state-create">
                   <label for="work_administrative_state">State
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                   {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState) chosenValueChanged=chosenValueChanged}}
+                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged}}
                 </li>
               {{/if}}
             
@@ -375,7 +396,7 @@
                 {{else}}
                  <!-- No validation for zipcode for other countries -->
                  <li class="state creative-zip zipcode-len">
-                    <label for="postal_code">Zip code</label>
+                    <label for="primary_work_zipcode">Zip code</label>
                     {{input type="text" classBinding=":form-text :postal-code" id="primary_work_zipcode" name="primary_work_zipcode" value=organizationInfo.PostalCode size="30" maxlength="255" minlength="5"}}
                  </li> 
                 {{/if}}

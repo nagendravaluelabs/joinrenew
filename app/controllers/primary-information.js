@@ -57,7 +57,7 @@ export default Ember.Controller.extend({
           userData[index] = {};
           primaryAddress=[];
           if (personalData.address.primary === "office") {
-            if(!Ember.getWithDefault(personalData, "organization.isLinkedAccount", false)) {
+            if(!Ember.getWithDefault(personalData, "organization.isLinkedAccount", false) && !Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
               if(typeof personalData.address.office !== "undefined") {
                 primaryAddress[0]= personalData.address.office.line1;
                 primaryAddress[1]= personalData.address.office.line2;
@@ -78,7 +78,27 @@ export default Ember.Controller.extend({
                 primaryAddress[2]= addressArr;
               }
             } else {
-              primaryAddress[0] = Ember.getWithDefault(personalData, "organization.linkedAddress", "Test");
+              if(Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
+                primaryAddress[0]= personalData.organizationInfo.addressLine1;
+                primaryAddress[1]= personalData.organizationInfo.addressLine2;
+
+                if (personalData.organizationInfo.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.organizationInfo.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
+                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
+                  addressArr[addressArr.length] = personalData.organizationInfo.workState.value;
+                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                } else {
+                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
+                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                }
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(personalData.organizationInfo.PostalCode !== "") {
+                  addressArr += " "+personalData.organizationInfo.PostalCode;
+                }
+                primaryAddress[2]= addressArr;
+              } else {
+                primaryAddress[0] = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+              }
             }
           } else {
             if(typeof personalData.address.home !== "undefined") {

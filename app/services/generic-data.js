@@ -9,14 +9,19 @@ export default Ember.Service.extend({
     "use strict";
     var self= this;
     self._super(...arguments);
-    Ember.$('.ajax-spinner').show();
-    Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=generic`).then(function(data){
-      if(typeof data.errormessage === "undefined") {
-        self.set("generic", data);
-      } else {
-        self.get("routing").transitionTo("invoice-unavailable");
-      }
-    });
+    if(localStorage.aiaGenericData !== undefined) {
+      self.set("generic", JSON.parse(localStorage.aiaGenericData));
+    } else {
+      Ember.$('.ajax-spinner').show();
+      Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=generic`).then(function(data){
+        if(typeof data.errormessage === "undefined") {
+          self.set("generic", data);
+          localStorage.aiaGenericData = JSON.stringify(data);
+        } else {
+          self.get("routing").transitionTo("invoice-unavailable");
+        }
+      });
+    }
   },
   updateChosen: function (){
     "use strict";
