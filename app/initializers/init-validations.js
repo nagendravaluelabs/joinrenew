@@ -39,7 +39,7 @@ var fieldValidations = Ember.Mixin.create({
     Ember.$(document).on("keyup", ".few-special-char", function (e) {
         "use strict";
         var keyCode = e.keyCode === 0 ? e.charCode : e.keyCode;
-        var pattern = /^[^\$^\<^\>]*$/;
+        var pattern = /^[^\$^\\<^\\>]*$/;
         if(keyCode === 8) {
           if( $(this).val() === "" || pattern.test($(this).val())) {
               $(this).next("label.error.aia-error").remove();
