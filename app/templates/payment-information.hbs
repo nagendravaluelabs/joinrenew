@@ -121,11 +121,10 @@
           <div class="sup-title total_label"><strong>Total membership dues</strong></div>
           <div class="sup-due-total paymentdue"><span class="right-space"><strong>$ 2199.00</strong></span></div> 
         </div>
-        
+        {{#if (isEqualTo echeckPayment false)}}
          <div class="spl_dues_bottom archipac-box">
           {{archipac-donation primaryData=primaryData}}
-         </div>
-         
+         </div>       
         <div class="spl_dues_bottom total-dues-box" id="accordion_bottom">
           <div class="total_label"><strong>Total</strong></div>
           {{#if primaryData.data.supplementalDuesTotal}}
@@ -134,6 +133,7 @@
           <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency subTotal}}</strong></span></div>
           {{/if}}
         </div>
+		{{/if}}
       </div>
     </div>
     
