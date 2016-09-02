@@ -22,10 +22,30 @@
               {{/if}} 
           {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
         {{/if}}
-        {{#if primaryData.data.personal.organization.isLinkedAccount}}
-          {{#if primaryData.data.personal.organization.linkedAddress}}
-            {{primaryData.data.personal.organization.linkedAddress}}
-          {{/if}}
+        
+        {{#if (ifCond primaryData.data.personal.organization.isLinkedAccount primaryData.data.personal.organizationInfo.isNewOrganization '||')}}
+          {{#if primaryData.data.personal.organization.isLinkedAccount}}
+            {{#if primaryData.data.personal.organization.linkedAddress}}
+              {{primaryData.data.personal.organization.linkedAddress}}
+            {{/if}}
+          {{else}}
+            {{#if primaryData.data.personal.organizationInfo.addressLine1}}
+              {{primaryData.data.personal.organizationInfo.addressLine1}}<br />
+            {{/if}}
+            {{#if primaryData.data.personal.organizationInfo.addressLine2}}
+              {{primaryData.data.personal.organizationInfo.addressLine2}}<br />
+            {{/if}}
+            {{#if primaryData.data.personal.organizationInfo.locality}}
+              {{primaryData.data.personal.organizationInfo.locality}},
+            {{/if}}
+            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+              {{#if primaryData.data.personal.organizationInfo.workState.value}}
+                {{primaryData.data.personal.organizationInfo.workState.value}},
+              {{/if}}
+            {{/if}} 
+            {{primaryData.data.personal.organizationInfo.country.value}}
+            {{primaryData.data.personal.organizationInfo.PostalCode}}
+          {{/if}}          
         {{else}}        
           {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
             <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
@@ -46,7 +66,7 @@
       <div id="ordersummaryinfo">
         <h3>Invoice summary</h3>
         <div id="payment-accordion">
-           <h3 class="ui-state-active" style="display: block;">
+           <h3>
             AIA membership dues:
 		
             <!--<span class="membership">
@@ -99,21 +119,27 @@
          
         <div class="spl_dues_bottom total-dues-box">
           <div class="sup-title total_label"><strong>Total membership dues</strong></div>
-          <div class="sup-due-total paymentdue"><span class="right-space"><strong>$ 2199.00</strong></span></div> 
+          <div class="sup-due-total paymentdue"><span class="right-space"><strong>
+            {{#if primaryData.data.supplementalDuesTotal}}
+              $ {{format-currency supplyTotal}}
+            {{else}}
+              ${{format-currency subTotal}}
+            {{/if}}
+          </strong></span></div> 
         </div>
-        
+        {{#if (isEqualTo echeckPayment false)}}
          <div class="spl_dues_bottom archipac-box">
           {{archipac-donation primaryData=primaryData}}
-         </div>
-         
+         </div>       
         <div class="spl_dues_bottom total-dues-box" id="accordion_bottom">
-          <div class="total_label"><strong>Total</strong></div>
+          <div class="total_label"><strong>Total amount due</strong></div>
           {{#if primaryData.data.supplementalDuesTotal}}
-          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency supplyTotal}}</strong></span></div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency supplyTotalWithArchipac}}</strong></span></div>
           {{else}}
-          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency subTotal}}</strong></span></div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency subTotalWithArchipac}}</strong></span></div>
           {{/if}}
         </div>
+		{{/if}}
       </div>
     </div>
     

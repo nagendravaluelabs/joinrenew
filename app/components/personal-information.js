@@ -130,9 +130,6 @@ export default Ember.Component.extend(rememberScroll, {
       }else if(countryValue === "CANADA") {
         genericData = genericData["CANADA"]; 
       }
-      /*else if(countryValue === "CANADA") {
-        genericData = genericData["CANADA"];        
-      }*/
       stateCode = genericData.map(function(list){ 
         if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
           return list.statecode;
@@ -144,6 +141,44 @@ export default Ember.Component.extend(rememberScroll, {
       stateCode = stateCode[0];
       this.set("personalInfo.personal.address.home.state.value", stateCode);
     }.observes('personalInfo.personal.address.home.state.key'),
+    workCountryObserver: function() {
+      var countryKey, countryCode, genericData;
+      countryKey = this.get("organizationInfo.country.key");
+      genericData = this.get("genericData.generic.country");
+      countryCode = genericData.map(function(list){ 
+        if(list.countrykey.toLowerCase() === countryKey.toLowerCase()) {
+          return list.countrycode;
+        } else {
+          return null;
+        }
+      });
+      countryCode = countryCode.filter(function(n){ return n !== null; }); 
+      countryCode = countryCode[0];
+      this.set("organizationInfo.country.value", countryCode);
+    }.observes('organizationInfo.country.key'),
+    workStateObserver: function() {
+      var stateKey, stateCode, genericData, countryValue;
+      countryValue = this.get("organizationInfo.country.value");
+      stateKey = this.get("organizationInfo.workState.key");
+      if(stateKey !== undefined && stateKey !== "") {
+        genericData = this.get("genericData.generic.states");
+        if(countryValue === "UNITED STATES") {
+          genericData = genericData["UNITED STATES"];        
+        }else if(countryValue === "CANADA") {
+          genericData = genericData["CANADA"]; 
+        }
+        stateCode = genericData.map(function(list){ 
+          if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
+            return list.statecode;
+          } else {
+            return null;
+          }
+        });
+        stateCode = stateCode.filter(function(n){ return n !== null; }); 
+        stateCode = stateCode[0];
+        this.set("organizationInfo.workState.value", stateCode);
+      }
+    }.observes('organizationInfo.workState.key'),
     setWorkStateStatusFn: function (value, mode) {
         "use strict";
         var self, data, validCountries;
@@ -164,6 +199,7 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
           self.set("workstates", []);
         }
+        self.set("organizationInfo.workState", {value: "", key: ""});
         if(value === "be685760-5492-4ba3-b105-868e2010fa34") {
           self.set("isWorkCanada", true);
           self.set("isWorkUSA", false);
@@ -173,20 +209,20 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
           self.set("isWorkCanada", false);
           self.set("isWorkUSA", false);
-        }        
+        }
         if (validCountries.indexOf(value) !== -1) {
             this.set("workShowState", true);
         } else {
             this.set("workShowState", false);
         }
-        
+        /*
         if(!mode) {
           this.set("organizationInfo.addressLine1", "");
           this.set("organizationInfo.addressLine2", "");
           this.set("organizationInfo.locality", "");
           this.set("organizationInfo.workState", "");
           this.set("organizationInfo.postalCode", "");
-        }
+        }*/
     },
     setHomeStateStatusFn: function (value, mode) {
         "use strict";
@@ -315,6 +351,11 @@ export default Ember.Component.extend(rememberScroll, {
                           required: function () {
                             return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
                           }
+                      },
+                      org_work_address: {
+                        required: function () {
+                            return $("#choose_chapter_work").is(":checked");
+                          }
                       }
                   },
                   messages: {
@@ -356,8 +397,10 @@ export default Ember.Component.extend(rememberScroll, {
                         required : "Zip code is required",
                         alphanumeric : "Please enter a valid zip code",
                         maxlength: "Please enter a valid zip code"
-                      }
-                     
+                      },
+                      org_work_address: {
+                        required : "Please Add / select your Organization details",
+                      }                     
                   }
               });
               if (validate.form()) {
@@ -394,7 +437,22 @@ export default Ember.Component.extend(rememberScroll, {
             var self, value;
             self = this;
             value = self.get('createOrganization');
-            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+            if(!self.get("organizationInfo.isNewOrganization")) {
+              self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.Name", "");
+              self.set("organizationInfo.Website", "");
+              self.set("organizationInfo.companyType", "");
+              self.set("organizationInfo.orgPhone", "");
+              self.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              
+              self.set("organizationInfo.addressLine1", "");
+              self.set("organizationInfo.addressLine2", "");
+              self.set("organizationInfo.locality", "");
+              self.set("organizationInfo.workState", {value:"", key: ""});
+              self.set("organizationInfo.PostalCode", "");
+              self.set("organizationInfo.isNewOrganization", false);
+            }
             if (value) {
                 $(".primary-action-btn").removeClass("hidden");
                 self.set('createOrganization', false);
@@ -438,7 +496,7 @@ export default Ember.Component.extend(rememberScroll, {
                         digits: true
                         
                     },
-                    postal_code: {
+                    primary_work_zipcode: {
                       required: function () {
                             return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                       },
@@ -456,7 +514,7 @@ export default Ember.Component.extend(rememberScroll, {
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
                     },
-                    postal_code:{
+                    primary_work_zipcode:{
                       required : "Zip code is required",
                       alphanumeric : "Please enter a valid zip code",
                       maxlength: "Please enter a valid zip code"
@@ -464,9 +522,13 @@ export default Ember.Component.extend(rememberScroll, {
                 }
             });
             if (validator.form()) {
-                console.log("success");
-            } else {
-              console.log("error");
+                this.set("personalInfo.personal.organization.name", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.organization.key", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.address.office.key", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.organization.isLinkedAccount", false);
+                this.set("personalInfo.personal.organization.linkedAddress", "");
+                this.set("organizationInfo.isNewOrganization", true);
+                this.send("createNewOrganization", true);
             }
         },
         chosenValueChanged: function(value, param) {
@@ -474,11 +536,29 @@ export default Ember.Component.extend(rememberScroll, {
         },
         selectedCompanyDetails: function(value) {
           Ember.$(".hypersearch-input").val('');
+          this.set('createOrganization', false);
           this.set("personalInfo.personal.organization.name", Ember.getWithDefault(value, "attributes.name", ""));
           this.set("personalInfo.personal.organization.key", Ember.getWithDefault(value, "id", ""));
+          //this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "id", ""));
           this.set("personalInfo.personal.organization.isLinkedAccount", true);
           this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes.address", ""));
           this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "attributes.address_key", "2BBFE3AA-3242-4105-9E89-6E880FC87518"));
+          this.set("personalInfo.personal.address.office.address_owner_key", Ember.getWithDefault(value, "id", ""));
+          this.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.Name", "");
+          this.set("organizationInfo.Website", "");
+          this.set("organizationInfo.companyType", "");
+          this.set("organizationInfo.orgPhone", "");
+          this.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          this.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.addressLine1", "");
+          this.set("organizationInfo.addressLine2", "");
+          this.set("organizationInfo.locality", "");
+          this.set("organizationInfo.workState", {value: "", key: ""});
+          this.set("organizationInfo.PostalCode", "");
+          this.set("organizationInfo.isNewOrganization", false);
         }
     }
 });

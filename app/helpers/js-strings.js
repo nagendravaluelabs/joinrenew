@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Ember.Helper.helper(function (params) {
   "use strict";
   var result="";
-  if (params.length === 2 && typeof params[0] !== "undefined") {
+  if (params.length === 2 && params[0] !== undefined && params[0] !== "") {
     if(params[1]==="lower")
     {
       result = params[0].toLowerCase();
@@ -15,6 +15,6 @@ export default Ember.Helper.helper(function (params) {
     {
       result = params[0].toUpperCase();
     }    
-  }  
+  }
   return result;
 });
