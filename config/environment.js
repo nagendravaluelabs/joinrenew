@@ -18,7 +18,7 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update.php',
+    AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//54.87.233.155/netforum/web/update.php',
 		AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata',
     AIA_API_URL: 'https://american-institute-of-architects-dev.us-dev.janraincapture.com',
     AIA_API_CLIENT_ID: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
