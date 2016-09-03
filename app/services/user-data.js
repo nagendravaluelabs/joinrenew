@@ -260,7 +260,7 @@ export default Ember.Service.extend({
     installmentsAgreement = (installmentsAgreement) ? 1 : 0;
     paymentAgreement = Ember.getWithDefault(data,'paymentInfo.TermsConditionsAgreement', false);
     paymentAgreement = (paymentAgreement) ? 1 : 0;
-    paymentInfo.InstallmentAgreement = installmentsAgreement;
+    //paymentInfo.InstallmentAgreement = installmentsAgreement;
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
     
     /* Donation Information */
@@ -272,20 +272,21 @@ export default Ember.Service.extend({
     }
     
     /* Installments */
-    installmentsInfo.Installments = {};
-    installmentsInfo.Installments.InstallmentAgreement = installmentsAgreement;
-    installmentsInfo.Installments.NumberOfInstallments = Ember.getWithDefault(data,'paymentInfo.InstallmentCount', "");
-    InstallmentProgram = Ember.get(genericData, "installmentkeys");
-    
-    InstallmentProgram = InstallmentProgram.filter(function(n){ 
-      return parseInt(n.ins_max_installments) === installmentsInfo.Installments.NumberOfInstallments; 
-    }); 
-    
-    InstallmentProgram = Ember.getWithDefault(InstallmentProgram,'0', {});
-    
-    installmentsInfo.Installments.InstallmentProgramKey = Ember.getWithDefault(InstallmentProgram,'ins_key', "");
-    installmentsInfo.Installments.InstallmentAdministrativeFee = Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "");
-    
+    if(installmentsAgreement && Ember.getWithDefault(data,'paymentInfo.paymentType', "") === "EMI") {
+      installmentsInfo.Installments = {};
+      installmentsInfo.Installments.InstallmentAgreement = installmentsAgreement;
+      installmentsInfo.Installments.NumberOfInstallments = Ember.getWithDefault(data,'paymentInfo.InstallmentCount', "");
+      InstallmentProgram = Ember.get(genericData, "installmentkeys");
+      
+      InstallmentProgram = InstallmentProgram.filter(function(n){ 
+        return parseInt(n.ins_max_installments) === installmentsInfo.Installments.NumberOfInstallments; 
+      }); 
+      
+      InstallmentProgram = Ember.getWithDefault(InstallmentProgram,'0', {});
+      
+      installmentsInfo.Installments.InstallmentProgramKey = Ember.getWithDefault(InstallmentProgram,'ins_key', "");
+      installmentsInfo.Installments.InstallmentAdministrativeFee = Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "");
+    }
     /* Membership Packages */
     membershipPackagesObj.MembershipPackages = {};
     membershipPackagesObj.MembershipPackages.MembershipPackage = [];
@@ -434,18 +435,18 @@ export default Ember.Service.extend({
           "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
           "OrganizationAddress": {
             "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
-            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country", ""),
+            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
             "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
             "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
             "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
-            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState", ""),
+            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState.value", ""),
             "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
             "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
           },
           "OrganizationPhone": {
             "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
             "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
-            "Number": Ember.getWithDefault(data.personal, "organization.orgPhone", "")
+            "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
           }
         };
       }
