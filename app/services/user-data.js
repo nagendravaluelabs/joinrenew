@@ -410,16 +410,16 @@ export default Ember.Service.extend({
             isPrimary = 0;
             addressKey = "";
           }
-          addressInfo.Addresses.Address[addressLength] = {};
           address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
           if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+            addressInfo.Addresses.Address[addressLength] = {};
             if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
               addressInfo.Addresses.Address[addressLength].CompanyKey = data.personal.organization.key;
             }
+            addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
+            addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
+            addressInfo.Addresses.Address[addressLength].Key = addressKey;
           }
-          addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
-          addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
-          addressInfo.Addresses.Address[addressLength].Key = addressKey;
         }
       }
     });
