@@ -353,6 +353,7 @@
         font-size: 11px;
         color: #808080;
         margin: 20px 0px;
+		line-height:18px;
       }
       #servicefee {
         margin-top: 3px;
@@ -578,6 +579,7 @@
       #payment_plan_info_table {
         border: #e1e1e1 1px solid;
         width: 100%;
+		margin-bottom:10px;
         tr {
           padding: 6px 6px;
           font-weight: normal;
@@ -594,6 +596,7 @@
         }
       } 
     }
+	.arc-don-amt {float:left; margin-bottom:27px;}
   }
   .ui-dialog-titlebar {
     padding: 0 !important
