@@ -113,6 +113,7 @@ export default Ember.Service.extend({
                     data.paymentInfo.isArchiPAC = true;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
+                    self.get("auth").userNotifier();
                   } else {
                     error = "invalid-invoice";
                   }

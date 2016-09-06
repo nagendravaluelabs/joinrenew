@@ -17,6 +17,8 @@ var AuthMixin = Ember.Mixin.create({
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
       let authState = this.get("auth").get("authState");
+      let authUserInfo = localStorage.aiaUserInfo;
+      authUserInfo = (authUserInfo !== undefined) ? JSON.parse(authUserInfo) : {};
       if(authRoutes.indexOf(currenRoute) !== -1) {
         if(!authUser || noLogouts.indexOf(authState) !== -1) {
           localStorage['route'] = "renew-verify-membership";
@@ -42,7 +44,16 @@ var AuthMixin = Ember.Mixin.create({
           if(transitionToRoute) {
             this.transitionTo(transitionToRoute);
           } else {
-            this.transitionTo("renew-verify-membership");
+            if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+              this.transitionTo("renew-verify-membership");
+            } else if(authState === 'invalid-invoice') {
+              this.transitionTo("invoice-invalid");
+            } else if(authState === 'invoice-unavailable') {
+              this.transitionTo("invoice-unavailable");
+            } else if(authState === "logout") {
+              this.transitionTo('/renew');
+              localStorage['route'] = "";
+            }
           }
           localStorage['route'] = "";
         } else if(authUser && authUser.length>0 && authUser.indexOf("invalid") !== -1) {
@@ -55,7 +66,21 @@ var AuthMixin = Ember.Mixin.create({
             this.transitionTo(transitionToRoute);
             localStorage['route'] = "";
           } else {
-            this.transitionTo("renew-verify-membership");
+            if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+              this.transitionTo("renew-verify-membership");
+            } else if(authState === 'invalid-invoice') {
+              this.transitionTo("invoice-invalid");
+            } else if(authState === 'invoice-unavailable') {
+              this.transitionTo("invoice-unavailable");
+            } else if(authState === "logout") {
+              this.transitionTo('/renew');
+              localStorage['route'] = "";
+            }
+          }
+        } else {
+          if(authState === "logout") {
+            this.transitionTo('/renew');
+            localStorage['route'] = "";
           }
         }
       } else {

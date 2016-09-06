@@ -100,7 +100,7 @@ export default Service.extend(RouteRefresherMixin, {
           if(response.status === 200) {
             return response.json().then(function(json){
               $('.ajax-spinner').hide();
-              if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
+              if(Ember.getWithDefault(json, "result.nfIndividualKey", false)) {
                 self.get("userData").setUserData(json.result.nfIndividualKey);
                 self.get("auth").set("authState", "");
                 self.reloadRoute();

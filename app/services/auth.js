@@ -10,6 +10,9 @@ export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
   janrain: inject(),
   authState: "",
+  userNotifier: function() {
+    this.notifyPropertyChange("user");
+  },
   _refreshOnWakeFromSleep() {
     let lastTime = (new Date()).getTime();
 
