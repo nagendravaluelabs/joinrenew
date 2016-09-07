@@ -12,7 +12,7 @@ var AuthMixin = Ember.Mixin.create({
     let currenRoute  = this.routeName;
     let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page", "complete"];
     let noLogouts = ["invalid-invoice", "invoice-unavailable"];
-    let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable"];
+    let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable", "page-not-found"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
