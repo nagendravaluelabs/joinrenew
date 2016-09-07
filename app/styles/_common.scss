@@ -95,3 +95,18 @@ select::-ms-expand {
     margin-top: 20px;
   }
 }
+
+@media all and (-ms-high-contrast: active) {  
+  /* Remove purple highlight in HC mode */  
+  .form-select:focus::-ms-value{
+    background-color: transparent;  /*make the select background transparent in ie */
+    color: white;
+   }
+  }
+  @media all and (-ms-high-contrast: none) {  
+  /* Remove blue highlight in Normal mode*/  
+  .form-select:focus::-ms-value{
+    background-color: transparent;  
+    color: black;
+  }
+}
