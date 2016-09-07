@@ -24,9 +24,8 @@ export default Ember.Controller.extend({
 			  this.set("dipslayFlag", "display:none");
 		  } 
       }  
-      this.set("changeMembershipLink", " https://aiad8dev.prod.acquia-sites.com/sites/default/files/2016-07/2016%20Associate%20to%20Architect%20Form.pdf");
-      
-      this.set("changeChapterLink", " https://aiad8dev.prod.acquia-sites.com/sites/default/files/2016-07/2016%20Chapter%20Transfer%20Request%20Form.pdf");	
+      this.set("changeMembershipLink", " http://aia.org");
+      this.set("changeChapterLink", " http://aia.org");
     }	
   },
   addressObserver: function (){
