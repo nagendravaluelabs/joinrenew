@@ -28,7 +28,7 @@
             <div class="form-group">
               {* currentPassword *}
             </div>
-            <button class="capture_btn" type="submit">
+            <button class="capture_btn sign-in" type="submit">
               <span class="janrain-icon-16 janrain-icon-key"></span> Sign In
             </button>
             <a href="#" data-capturescreen="forgotPassword">Reset password?</a>
@@ -81,7 +81,7 @@
                 {* signInEmailAddress *}
                 {* currentPassword *}
                 
-                    <button class="capture_btn" type="submit"><span class="janrain-icon-16 janrain-icon-key"></span> Sign In</button>
+                    <button class="capture_btn sign-in" type="submit"><span class="janrain-icon-16 janrain-icon-key"></span> Sign In</button>
                     <a href="#" data-cancelcapturereturnexperience="true">Use another account</a>
             {* /signInForm *}
             
@@ -133,7 +133,7 @@
             </p>
             <div class="login-footer">
               <p>» Don't have an AIA.org login?
-                <a href="#" id="capture_signIn_createAccountButton" data-capturescreen="traditionalRegistration" class="capture_secondary capture_createAccountButton capture_btn capture_primary">Sign up</a>.
+                <a href="#" id="capture_signIn_createAccountButton" data-capturescreen="traditionalRegistration" class="capture_secondary capture_createAccountButton capture_btn">Sign up</a>.
               </p>
           </div>
         {* /socialRegistrationForm *}
@@ -158,7 +158,7 @@
             </p>
             <div class="login-footer">
               <p>» Already have an AIA account?
-                <a href="#" id="capture_signIn_createAccountButton" data-capturescreen="signIn" class="capture_secondary capture_createAccountButton capture_btn capture_primary">Sign in</a>.
+                <a href="#" id="capture_signIn_createAccountButton" data-capturescreen="signIn" class="capture_secondary capture_createAccountButton capture_btn">Sign in</a>.
               </p>
           </div>
             
@@ -177,9 +177,9 @@
         <div class="header">
             <h1>Thank you for registering!</h1>
         </div>
-        <p>We have sent a confirmation email to {* emailAddressData *}. Please check your email and click on the link to activate your account.</p>
-        <div class="login-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</a>
+        <h2>We have sent a confirmation email to {* emailAddressData *}. Please check your email and click on the link to activate your account.</h2>
+        <div class="login-footer reset-footer">
+            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 
@@ -204,7 +204,7 @@
     <div style="display:none;" id="forgotPassword">
         <div class="header">
             <h1>Reset your password</h1>
-            <h2>Enter your email</h2>
+            <p>Enter your email</p>
         </div>
         <h3>We'll send you a link to change your password.</h3>
         {* #forgotPasswordForm *}
@@ -212,7 +212,7 @@
             {* recaptcha *}
             
             <div class="aia_capture_action">
-              <input value="Send now &raquo;" type="submit" class="capture_btn capture_primary">
+              <input value="Send now &raquo;" type="submit" class="capture_btn">
             </div>
             <div class="login-footer">
               <p>If you're still having trouble: call <a>800-242-3837​</a> or <a href="https://s3.parature.com/ics/support/chat/chatstart.asp?deptID=5310" target="_blank">Chat</a></p>
@@ -233,7 +233,7 @@
             <p>We just sent an email to you at {* signInEmailAddress *}</p>
             <br><br><br>
         <div class="login-footer reset-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary close-btn">Close</a>
+            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 
@@ -342,7 +342,7 @@
                         {* backButton *}
                     </div>
                     <div class="capture_right">
-                        <button class="capture_secondary capture_btn capture_primary" type="submit"><span class="janrain-icon-16 janrain-icon-key"></span> Sign In</button>
+                        <button class="capture_secondary capture_btn" type="submit"><span class="janrain-icon-16 janrain-icon-key"></span> Sign In</button>
                     </div>
                 </div>
              {* /signInForm *}
@@ -388,7 +388,7 @@
         {* #resendVerificationForm *}
             {* signInEmailAddress *}
             <div class="login-footer">
-                <input value="Submit" type="submit" class="capture_btn capture_primary">
+                <input value="Submit" type="submit" class="capture_btn">
             </div>
          {* /resendVerificationForm *}
     </div>
@@ -404,7 +404,7 @@
         <div class="hr"></div>
         <p>Check your email for a link to reset your password.</p>
         <div class="login-footer">
-            <a href="/renew" class="capture_btn capture_primary">Sign in</a>
+            <a href="/renew" class="capture_btn">Sign in</a>
         </div>
     </div>
 
@@ -419,7 +419,7 @@
         </div>
         <p>Thank you for verifiying your email address.
         <div class="login-footer">
-            <a href="/renew" class="capture_btn capture_primary">Sign in</a>
+            <a href="/renew" class="capture_btn">Sign in</a>
         </div>
     </div>
 
@@ -449,15 +449,24 @@
     -->
     <div style="display:none;" id="resetPassword">
         <div class="header">
-            <h1>Change password</h1>
+        <h1>Reset your password</h1>
+        <h3>Enter your new password</h3>
+    </div>
+    {* #changePasswordFormNoAuth *}
+        {* newPassword *}
+        <p class="terms-txt">Use at least 8 characters. You can mix numbers and letters.</p>
+        
+        {* newPasswordConfirm *}
+        <p class="terms-txt">You password must match the one above.</p>
+        
+        <div class="aia_capture_action">
+            <input value="Change Password &amp; Sign in" type="submit" class="capture_btn">
         </div>
-        {* #changePasswordFormNoAuth *}
-            {* newPassword *}
-            {* newPasswordConfirm *}
-            <div class="login-footer">
-                <input value="Submit" type="submit" class="capture_btn capture_primary">
-            </div>
-        {* /changePasswordFormNoAuth *}
+        
+        <div class="login-footer">
+            <p>If you're still having trouble: call <a href="tel:8002423837">800-242-3837​</a> or <a href="#">Chat</a></p>
+        </div>
+    {* /changePasswordFormNoAuth *}
     </div>
     <!-- resetPasswordSuccess:
         This screen is rendered when the user successfully changes their
@@ -469,7 +478,7 @@
         </div>
         <p>Password has been successfully updated.</p>
         <div class="login-footer">
-            <a href="/renew" class="capture_btn capture_primary">Sign in</a>
+            <a href="/renew" class="capture_btn">Sign in</a>
         </div>
     </div>
     <!-- resetPasswordRequestCode:
@@ -485,11 +494,12 @@
         <div class="header">
             <h1>Create a new password</h1>
         </div>
-        <p>We didn't recognize that password reset code. Enter your email address to get a new one.</p>
+        <h2>We didn't recognize that password reset code. Enter your email address to get a new one.</h2>
         {* #resetPasswordForm *}
             {* signInEmailAddress *}
-            <div class="login-footer">
-                <input value="Send" type="submit" class="capture_btn capture_primary">
+            <br><br><br>
+            <div class="login-footer reset-footer">
+                <input value="Send" type="submit" class="capture_btn close-btn">
             </div>
         {* /resetPasswordForm *}
     </div>
@@ -502,9 +512,9 @@
         <div class="header">
             <h1>Create a new password</h1>
         </div>
-            <p>We've sent an email with instructions to create a new password. Your existing password has not been changed.</p>
-        <div class="login-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</a>
+            <h2>We've sent an email with instructions to create a new password. Your existing password has not been changed.</h2>
+        <div class="login-footer reset-footer">
+            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 
@@ -582,7 +592,7 @@
                                     {* addressState *}
                                     {* addressCountry *}
                                     <div class="capture_form_item">
-                                        <input value="Save" type="submit" class="capture_btn capture_primary">
+                                        <input value="Save" type="submit" class="capture_btn">
                                         {* savedProfileMessage *}
                                     </div>
                                 {* /editProfileForm *}
@@ -608,7 +618,7 @@
             {* newPassword *}
             {* newPasswordConfirm *}
             <div class="login-footer">
-                <input value="Save" type="submit" class="capture_btn capture_primary">
+                <input value="Save" type="submit" class="capture_btn">
             </div>
         {* /changePasswordForm *}
     </div>
@@ -626,8 +636,8 @@
             <p>Are you sure you want to deactivate your account? You will no longer have access to your profile.</p>
             {* deactivateAccountForm *}
             <div class="login-footer">
-                <input value="Yes" type="submit" class="capture_btn capture_primary">
-                <a href="#" id="capture_confirmAccountDeactivation_noButton" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">No</a>
+                <input value="Yes" type="submit" class="capture_btn">
+                <a href="#" id="capture_confirmAccountDeactivation_noButton" onclick="janrain.capture.ui.modal.close()" class="capture_btn">No</a>
             </div>
         </div>
         {* /deactivateAccountForm *}
@@ -652,7 +662,7 @@
         </p>
         <div class="login-footer">
             {* #termsAgreementForm *}
-            <input value="Agree" type="submit" class="capture_btn capture_primary">
+            <input value="Agree" type="submit" class="capture_btn">
             {* /termsAgreementForm *}
         </div>
     </div>
