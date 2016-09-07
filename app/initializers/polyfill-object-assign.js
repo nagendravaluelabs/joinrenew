@@ -1,12 +1,11 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
-/*global $*/
 import Ember from "ember";
 var polyfillObjectAssign = Ember.Mixin.create({
   initPolyfill: function() {
-    if (typeof Object.assign != 'function') {
+    if (typeof Object.assign !== 'function') {
       Object.assign = function(target) {
         'use strict';
-        if (target == null) {
+        if (target === null) {
           throw new TypeError('Cannot convert undefined or null to object');
         }
 
