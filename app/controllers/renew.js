@@ -45,7 +45,11 @@ export default Ember.Controller.extend({
                 window.janrain.capture.ui.createCaptureSession(json.access_token);
                 setTimeout(function(){
                     window.janrain.capture.ui.renderScreen("resetPassword");
-                },1000);                
+                },1000);
+              } else {
+                setTimeout(function(){
+                    window.janrain.capture.ui.renderScreen("resetPasswordRequestCode");
+                },1000);
               }
             });
           }
