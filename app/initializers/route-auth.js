@@ -21,7 +21,11 @@ var AuthMixin = Ember.Mixin.create({
       authUserInfo = (authUserInfo !== undefined) ? JSON.parse(authUserInfo) : {};
       if(authRoutes.indexOf(currenRoute) !== -1) {
         if(!authUser || noLogouts.indexOf(authState) !== -1) {
-          localStorage['route'] = "renew-verify-membership";
+          if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+            localStorage['route'] = "renew-verify-membership";
+          } else {
+            localStorage['route'] = "renew";
+          }
           if(authState === "logout") {
             this.transitionTo('/renew');
             localStorage['route'] = "";

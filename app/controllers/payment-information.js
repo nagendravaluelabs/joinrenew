@@ -200,7 +200,7 @@ export default Ember.Controller.extend({
           this.set('installNumber',value);
           var installNumber = value;
           installment = parseFloat(total/installNumber);
-          this.set("installment", parseFloat(installment, 2));
+          this.set("installment", parseFloat(installment.toFixed(2)));
         },
         saveRenewData : function () {
           var formattedSaveData, paymentSaveCallback, paymentError, self;
@@ -208,7 +208,7 @@ export default Ember.Controller.extend({
           formattedSaveData = self.get("primaryData").reMapJSON(self.get("primaryData").data);
           paymentSaveCallback = self.get("primaryData").saveRenewInfoToNF(formattedSaveData);
           paymentSaveCallback.then(function(response){
-            if(response.Success === "true") {
+            if(response.Success === "true" && response.InvoiceNumber !== "") {
               localStorage.removeItem('aiaUserInfo');
               self.transitionToRoute('complete');
             } else {

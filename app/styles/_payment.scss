@@ -65,7 +65,7 @@
         background: #FFFFFF;
         margin-top: 0px;
         padding:25px 0 25px 28px;
-        font-family: Verdana,Arial,sans-serif;
+        font-family: $header-font-family;
         font-size: 1.8rem;
         line-height:20px;
         color: #000;
@@ -248,9 +248,9 @@
       .spl_dues_bottom{
         font-family: 'Architype-Light',sans-serif;
         border-top:0;
-        font-size: 18px !important;
-        padding-bottom: 35px;
-        padding-top: 25px;
+        font-size: 16px !important;
+        padding-bottom: 45px;
+        padding-top: 15px;
         margin-left:28px;
         border-top: 2px solid #e1e1e1;
         @media (max-width: 767px) {
@@ -368,7 +368,7 @@
     .payments-container {
       border-top: 1px solid #e1e1e1;
       margin-top: 50px;
-      padding: 30px 0 25px 0;
+      padding: 30px 0 0 0;
       ul {
         margin: 25px 0 0 20px;  
         @media (max-width: 767px) {

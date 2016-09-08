@@ -110,6 +110,7 @@ export default Ember.Service.extend({
                     data.personal.organizationInfo.workState.value= "";
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
+                    data.paymentInfo.eCheckMode = "C";
                     data.paymentInfo.isArchiPAC = true;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
@@ -191,6 +192,7 @@ export default Ember.Service.extend({
         captureProfileData, 
         organizationInfo,
         paymentType,
+        paymentMode,
         installmentsAgreement,
         paymentAgreement,
         LicensedToPractice,
@@ -239,10 +241,10 @@ export default Ember.Service.extend({
     
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
-    paymentType = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
-    
-    if(paymentType==="Electronic check") {
-      paymentType = Ember.getWithDefault(genericData,'phonetypekeys.echeck', "");
+    paymentMode = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
+    paymentType = paymentMode;
+    if(paymentMode==="Electronic check") {
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.echeck', "");
     } else {
       paymentType = this.getCardType(paymentInfo.CardNumber);
       paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentType, "");
@@ -250,13 +252,19 @@ export default Ember.Service.extend({
     
     paymentInfo.ThirdPartyVendors = 0; // Need Clarification
     paymentInfo.PaymentTypeKey = paymentType;
-    paymentInfo.NameOnCard = Ember.getWithDefault(data,'paymentInfo.NameOnCard', "");
-    paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
-    paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
-    paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
+    if(paymentMode === "Electronic check") {
+      paymentInfo.AccountNumber = Ember.getWithDefault(data,'paymentInfo.AccountNumber', "");
+      paymentInfo.NameOnAccount = Ember.getWithDefault(data,'paymentInfo.AccountName', "");
+      paymentInfo.AccountType = Ember.getWithDefault(data,'paymentInfo.eCheckMode', "");
+      paymentInfo.RoutingNumber = Ember.getWithDefault(data,'paymentInfo.RoutingNumber', "");
+    } else {
+      paymentInfo.NameOnCard = Ember.getWithDefault(data,'paymentInfo.NameOnCard', "");
+      paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
+      paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
+      paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
+    }
     isArchiPAC = Ember.getWithDefault(data,'paymentInfo.isArchiPAC', false);
     isArchiPAC = (isArchiPAC) ? 1 : 0;
-    paymentInfo.isArchiPAC = isArchiPAC;
     installmentsAgreement = Ember.getWithDefault(data,'paymentInfo.InstallmentAgreement', false);
     installmentsAgreement = (installmentsAgreement) ? 1 : 0;
     paymentAgreement = Ember.getWithDefault(data,'paymentInfo.TermsConditionsAgreement', false);
@@ -265,7 +273,8 @@ export default Ember.Service.extend({
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
     
     /* Donation Information */
-    if(isArchiPAC === 1) {
+    if(paymentMode !== "Electronic check" && isArchiPAC === 1) {
+      paymentInfo.isArchiPAC = isArchiPAC;
       DonationInfo.Donations = {};
       DonationInfo.Donations.Donation = {};
       DonationInfo.Donations.Donation.FundCode = "ArchiPac Contribution";
@@ -401,7 +410,7 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
@@ -423,33 +432,35 @@ export default Ember.Service.extend({
         }
       }
     });
-    if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
-      organizationInfo.RelatedOrganizations = {};
-      if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
-        organizationInfo.RelatedOrganizations.RelatedOrganization = {
-          "Key" : data.personal.organization.key
-        };
-      } else {
-        organizationInfo.RelatedOrganizations.RelatedOrganization = {
-          "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
-          "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
-          "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
-          "OrganizationAddress": {
-            "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
-            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
-            "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
-            "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
-            "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
-            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState.value", ""),
-            "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
-            "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
-          },
-          "OrganizationPhone": {
-            "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
-            "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
-            "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
-          }
-        };
+    if(Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) || Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) {
+      if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+        organizationInfo.RelatedOrganizations = {};
+        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+          organizationInfo.RelatedOrganizations.RelatedOrganization = {
+            "Key" : data.personal.organization.key
+          };
+        } else {
+          organizationInfo.RelatedOrganizations.RelatedOrganization = {
+            "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
+            "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
+            "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
+            "OrganizationAddress": {
+              "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
+              "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
+              "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
+              "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
+              "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
+              "State": Ember.getWithDefault(data.personal, "organizationInfo.workState.value", ""),
+              "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
+              "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
+            },
+            "OrganizationPhone": {
+              "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+              "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
+              "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
+            }
+          };
+        }
       }
     }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
