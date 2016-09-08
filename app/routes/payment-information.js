@@ -21,7 +21,7 @@ export default Ember.Route.extend({
           autoOpen: false,
           draggable: false,
           resizable: false,
-          width: $(window).width() > 500 ? 600 : '90%',
+          width: $(window).width() > 700 ? 600 : '90%',
           title: '',
           responsive: true,
           closeText: 'Close',
@@ -30,7 +30,7 @@ export default Ember.Route.extend({
           hide: false
         });
         $(window).resize(function () {
-          $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 500 ? 600 : '90%');
+          $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 700 ? 600 : '90%');
         });
         $('body').on("click", ".ui-widget-overlay", function () {
           $("#paymentplan_extrainfo").dialog("close");
@@ -44,7 +44,7 @@ export default Ember.Route.extend({
       paymentsData = JSON.parse(paymentsData);
       paymentsData.paymentInfo = {};
       paymentsData.paymentInfo.paymentType = "Debit/Credit Card";
-      paymentsData.paymentInfo.isArchiPAC = 1;
+      paymentsData.paymentInfo.isArchiPAC = 0;
       localStorage.aiaUserInfo = JSON.stringify(paymentsData);
       controller.get("primaryData").saveUserData(paymentsData);
     }
