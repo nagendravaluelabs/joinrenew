@@ -84,7 +84,7 @@ export default Ember.Controller.extend(rememberScroll, {
         if (duesData.data !== "undefined" && duesData.data !== "") {
             if (typeof duesData.data.invoice !== "undefined") {
                 Ember.$.each(duesData.data.invoice.dues, function (key, value) {
-                    totalDues += parseInt(value.due);
+                    totalDues += parseFloat(value.due);
                 });
                 this.set("totalDues", totalDues.toFixed(2));
             }
@@ -103,7 +103,7 @@ export default Ember.Controller.extend(rememberScroll, {
           duesData.data["supplementalDuesTotal"] = supplementalDuesTotal;
           this.get("duesData").set("data", duesData.data);
         }
-        this.set("supplementalTotalDues", parseInt(supplementalDuesTotal) + parseInt(totalDues));
+        this.set("supplementalTotalDues", parseFloat(supplementalDuesTotal) + parseFloat(totalDues));
     },
     supplementalList: function () {
         "use strict";
