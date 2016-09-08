@@ -253,7 +253,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 messages: {
                     licensed_architect: "You must agree to the affidavit"
                 },
-                errorLabelContainer: "#error-container"
+                errorLabelContainer: "#error-container-new"
             });
             if (validate.form()) {
                 this.get("duesData").saveUserData(this.get("duesData").data);
