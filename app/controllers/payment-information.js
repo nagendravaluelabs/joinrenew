@@ -1,6 +1,8 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $*/
 /*global Ember*/
+import Ember from 'ember';
+import fetch from 'ember-network/fetch';
 $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
   var month = date.getMonth();
