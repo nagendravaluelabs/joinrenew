@@ -179,7 +179,7 @@
         </div>
         <h2>We have sent a confirmation email to {* emailAddressData *}. Please check your email and click on the link to activate your account.</h2>
         <div class="login-footer reset-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
+            <a href="javascript:void(0)" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 
@@ -233,7 +233,7 @@
             <p>We just sent an email to you at {* signInEmailAddress *}</p>
             <br><br><br>
         <div class="login-footer reset-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
+            <a href="javascript:void(0)" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 
@@ -464,7 +464,7 @@
         </div>
         
         <div class="login-footer">
-            <p>If you're still having trouble: call <a href="tel:8002423837">800-242-3837​</a> or <a href="#">Chat</a></p>
+            <p>If you're still having trouble: call <a>800-242-3837​</a> or <a href="https://s3.parature.com/ics/support/chat/chatstart.asp?deptID=5310" target="_blank">Chat</a></p>
         </div>
     {* /changePasswordFormNoAuth *}
     </div>
@@ -476,9 +476,9 @@
         <div class="header">
             <h1>Your password has been changed</h1>
         </div>
-        <p>Password has been successfully updated.</p>
-        <div class="login-footer">
-            <a href="/renew" class="capture_btn">Sign in</a>
+        <h2>Password has been successfully updated.</h2>
+        <div class="login-footer reset-footer">
+            <a href="/renew" class="capture_btn close-btn">Sign in</a>
         </div>
     </div>
     <!-- resetPasswordRequestCode:
@@ -510,11 +510,14 @@
     -->
     <div style="display:none;" id="resetPasswordRequestCodeSuccess">
         <div class="header">
-            <h1>Create a new password</h1>
+            <h1>Reset your password</h1>
+            <p>Check your email</p>
         </div>
-            <h2>We've sent an email with instructions to create a new password. Your existing password has not been changed.</h2>
+            <h2>Please check your inbox, and follow the instructions to reset your password.</h2>
+            <p>We just sent an email to you at {* signInEmailAddress *}</p>
+            <br><br><br>
         <div class="login-footer reset-footer">
-            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
+            <a href="javascript: void(0)" onclick="janrain.capture.ui.modal.close()" class="capture_btn close-btn">Close</a>
         </div>
     </div>
 

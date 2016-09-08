@@ -58,10 +58,14 @@ export default HyperSearch.reopen({
       .then((results) => this.cache(query, results))
       .catch((error) => reject(error));
   },
+  clearResults() {
+    get(this, 'results').clear();
+    this.notifyPropertyChange('results');
+  },
   actions: {
     selectResult(result) {
       this._handleAction('selectResult', result);
-      get(this, 'results').clear();
+      this.clearResults();
     }
   }
 });

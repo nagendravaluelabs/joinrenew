@@ -2,6 +2,7 @@
 /*global $*/
 import Ember from 'ember';
 import ENV from '../config/environment';
+import fetch from 'ember-network/fetch';
 import inject from 'ember-service/inject';
 export default Ember.Service.extend({
   data: "",
@@ -100,6 +101,9 @@ export default Ember.Service.extend({
                       data.personal.address.office.zip = "";
                     }else{
                       data.personal.address.office.isExsist = true;
+                    }
+                    if(!Ember.getWithDefault(data,'personal.organization', false)) {
+                      data.personal.organization = {};
                     }
                     data.personal.organizationInfo = {};
                     data.personal.organizationInfo.country = {};
