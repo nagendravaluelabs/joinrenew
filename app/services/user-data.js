@@ -110,6 +110,7 @@ export default Ember.Service.extend({
                     data.personal.organizationInfo.workState.value= "";
                     data.paymentInfo = {};
                     data.paymentInfo.paymentType = "Debit/Credit Card";
+                    data.paymentInfo.eCheckMode = "C";
                     data.paymentInfo.isArchiPAC = true;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
@@ -191,6 +192,7 @@ export default Ember.Service.extend({
         captureProfileData, 
         organizationInfo,
         paymentType,
+        paymentMode,
         installmentsAgreement,
         paymentAgreement,
         LicensedToPractice,
@@ -239,24 +241,30 @@ export default Ember.Service.extend({
     
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
-    paymentType = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
-    
-    if(paymentType==="Electronic check") {
-      paymentType = Ember.getWithDefault(genericData,'phonetypekeys.echeck', "");
+    paymentMode = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
+    paymentType = paymentMode;
+    if(paymentMode==="Electronic check") {
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.echeck', "");
     } else {
       paymentType = this.getCardType(paymentInfo.CardNumber);
-      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentType, "");
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentMode, "");
     }
     
     paymentInfo.ThirdPartyVendors = 0; // Need Clarification
     paymentInfo.PaymentTypeKey = paymentType;
-    paymentInfo.NameOnCard = Ember.getWithDefault(data,'paymentInfo.NameOnCard', "");
-    paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
-    paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
-    paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
+    if(paymentMode === "Electronic check") {
+      paymentInfo.AccountNumber = Ember.getWithDefault(data,'paymentInfo.AccountNumber', "");
+      paymentInfo.NameOnAccount = Ember.getWithDefault(data,'paymentInfo.AccountName', "");
+      paymentInfo.AccountType = Ember.getWithDefault(data,'paymentInfo.eCheckMode', "");
+      paymentInfo.RoutingNumber = Ember.getWithDefault(data,'paymentInfo.RoutingNumber', "");
+    } else {
+      paymentInfo.NameOnCard = Ember.getWithDefault(data,'paymentInfo.NameOnCard', "");
+      paymentInfo.ExpirationMonth = Ember.getWithDefault(data,'paymentInfo.ExpirationMonth', "");
+      paymentInfo.ExpirationYear = Ember.getWithDefault(data,'paymentInfo.ExpirationYear', "");
+      paymentInfo.SecurityCode = Ember.getWithDefault(data,'paymentInfo.SecurityCode', "");
+    }
     isArchiPAC = Ember.getWithDefault(data,'paymentInfo.isArchiPAC', false);
     isArchiPAC = (isArchiPAC) ? 1 : 0;
-    paymentInfo.isArchiPAC = isArchiPAC;
     installmentsAgreement = Ember.getWithDefault(data,'paymentInfo.InstallmentAgreement', false);
     installmentsAgreement = (installmentsAgreement) ? 1 : 0;
     paymentAgreement = Ember.getWithDefault(data,'paymentInfo.TermsConditionsAgreement', false);
@@ -265,7 +273,8 @@ export default Ember.Service.extend({
     paymentInfo.TermsConditionsAgreement = paymentAgreement;
     
     /* Donation Information */
-    if(isArchiPAC === 1) {
+    if(paymentMode !== "Electronic check" && isArchiPAC === 1) {
+      paymentInfo.isArchiPAC = isArchiPAC;
       DonationInfo.Donations = {};
       DonationInfo.Donations.Donation = {};
       DonationInfo.Donations.Donation.FundCode = "ArchiPac Contribution";

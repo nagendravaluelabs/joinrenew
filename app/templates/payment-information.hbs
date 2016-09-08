@@ -82,19 +82,19 @@
                   {{#if primaryData.data.invoice.dues.national}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
-                      <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.national.due}}</span></td>
+                      <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.national.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.state}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
-                      <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.state.due}}</span></td>
+                      <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.state.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.local}}
                   <tr>
                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
-                    <td><span class="right-space">${{format-currency primaryData.data.invoice.dues.local.due}}</span></td>
+                    <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.local.due}}</span></td>
                   </tr>
                   {{/if}}
                   
@@ -106,13 +106,13 @@
         {{#if primaryData.data.membership.membershipyear}}
         <div class="spl_dues_bottom">
           <div class="sup-title total_label">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</div>
-          <div class="sup-due-total paymentdue"><span class="right-space">${{format-currency subTotal}}</span></div> 
+          <div class="sup-due-total paymentdue"><span class="right-space">$ {{format-currency subTotal}}</span></div> 
         </div>
         {{/if}}
         {{#if primaryData.data.supplementalDuesTotal}}
         <div class="spl_dues_bottom">
           <div class="sup-title total_label">Supplemental dues</div>
-          <div class="sup-due-total paymentdue"><span class="right-space">${{format-currency primaryData.data.supplementalDuesTotal}}</span></div> 
+          <div class="sup-due-total paymentdue"><span class="right-space">$ {{format-currency primaryData.data.supplementalDuesTotal}}</span></div> 
         </div>
          {{/if}}
          
@@ -123,7 +123,7 @@
             {{#if primaryData.data.supplementalDuesTotal}}
               $ {{format-currency supplyTotal}}
             {{else}}
-              ${{format-currency subTotal}}
+              $ {{format-currency subTotal}}
             {{/if}}
           </strong></span></div> 
         </div>
@@ -134,9 +134,9 @@
         <div class="spl_dues_bottom total-dues-box" id="accordion_bottom">
           <div class="total_label"><strong>Total amount due</strong></div>
           {{#if primaryData.data.supplementalDuesTotal}}
-          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency supplyTotalWithArchipac}}</strong></span></div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>$ {{format-currency supplyTotalWithArchipac}}</strong></span></div>
           {{else}}
-          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>${{format-currency subTotalWithArchipac}}</strong></span></div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>$ {{format-currency subTotalWithArchipac}}</strong></span></div>
           {{/if}}
         </div>
 		{{/if}}
@@ -182,7 +182,7 @@
               <label for="select-installments">installments</label>
             </div>
             {{/if}}
-            <div id="firstinstallment">Total for first installment: <span>${{format-currency installment}}</span>
+            <div id="firstinstallment">Total for first installment: <span>$ {{format-currency installment}}</span>
             <span id="paymentplan_info_but">
               <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
             </span></div>
@@ -292,11 +292,11 @@
             <div class="pull-left echeckMode">
               <ul class="no-style">
                 <li>
-                  {{radio-button class="form-radio" id="ecChecking" name="echeckMode" value="Checking" groupValue=primaryData.data.paymentInfo.eCheckMode}}
+                  {{radio-button class="form-radio" id="ecChecking" name="echeckMode" value="C" groupValue=primaryData.data.paymentInfo.eCheckMode}}
                   <label for="ecChecking">Checking</label>
                 </li>
                 <li>
-                  {{radio-button class="form-radio" id="ecSavings" name="echeckMode" value="Savings" groupValue=primaryData.data.paymentInfo.eCheckMode}}
+                  {{radio-button class="form-radio" id="ecSavings" name="echeckMode" value="S" groupValue=primaryData.data.paymentInfo.eCheckMode}}
                   <label for="ecSavings">Savings</label>
                 </li>
               </ul>
@@ -354,9 +354,9 @@
           <tr>
             <th scope="row">Member dues</th>
             {{#if primaryData.data.supplementalDuesTotal}}
-            <td class="price">${{format-currency supplyTotal}}</td>
+            <td class="price">$ {{format-currency supplyTotal}}</td>
             {{else}}
-            <td class="price">${{format-currency subTotal}}</td>
+            <td class="price">$ {{format-currency subTotal}}</td>
             {{/if}}
           </tr>
           <tr> 
@@ -365,7 +365,7 @@
           </tr>
           <tr>
             <th scope="row">Total</th>
-            <td class="price">${{format-currency total}}</td>
+            <td class="price">$ {{format-currency total}}</td>
           </tr>
           <tr>
             <th scope="row">Number of payments</th>
@@ -381,7 +381,7 @@
             {{#each (for 1 installNumber 1) as |key|}}
               <tr class="installments_tbl_tr">
                 <td class="install_num">{{key}} </td>
-                <td class="install_payment">${{format-currency installment}}</td>
+                <td class="install_payment">$ {{format-currency installment}}</td>
               </tr>
             {{/each}}
           </tbody>

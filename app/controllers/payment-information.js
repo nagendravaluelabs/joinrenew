@@ -208,7 +208,7 @@ export default Ember.Controller.extend({
           formattedSaveData = self.get("primaryData").reMapJSON(self.get("primaryData").data);
           paymentSaveCallback = self.get("primaryData").saveRenewInfoToNF(formattedSaveData);
           paymentSaveCallback.then(function(response){
-            if(response.Success === "true") {
+            if(response.Success === "true" && response.PaymentConfirmationNumber != "") {
               localStorage.removeItem('aiaUserInfo');
               self.transitionToRoute('complete');
             } else {
