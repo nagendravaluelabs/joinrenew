@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import fetch from 'ember-network/fetch';
 import HyperSearch from 'ember-hypersearch';
 const {
   A: emberArray,
