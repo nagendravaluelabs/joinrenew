@@ -247,7 +247,7 @@ export default Ember.Service.extend({
       paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.echeck', "");
     } else {
       paymentType = this.getCardType(paymentInfo.CardNumber);
-      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentMode, "");
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentType, "");
     }
     
     paymentInfo.ThirdPartyVendors = 0; // Need Clarification
