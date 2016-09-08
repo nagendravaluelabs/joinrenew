@@ -318,7 +318,7 @@ label {
   input[type="reset"], 
   input[type="button"],
   .link-to-button a  {
-    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 6px;
+    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 0;
     border: 0 none;
     border-radius: 0;
     color: $button-color !important;
@@ -331,6 +331,7 @@ label {
     transition: all 0.25s ease-in-out 0s;
     display:inline-block;
     margin-top:18px;
+    line-height: 24px;
     &:hover {
       background-color: $button-bg-hover-color;
       border: 0 none;
