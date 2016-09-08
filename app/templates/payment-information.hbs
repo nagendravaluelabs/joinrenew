@@ -182,7 +182,7 @@
               <label for="select-installments">installments</label>
             </div>
             {{/if}}
-            <div id="firstinstallment">Total for first installment: <span>$ {{format-currency installment}}</span>
+            <div id="firstinstallment">Total for first installment: <span>$ {{format-currency installment}} (This includes Archipac donation) </span>
             <span id="paymentplan_info_but">
               <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
             </span></div>
@@ -389,7 +389,7 @@
       </div>
     </div>
   </div>
-  <span class="arc-don-amt">ArchiPAC contribution $25 cannot be paid as part of the payment plan.</span>
+  <span class="arc-don-amt">ArchiPAC donation cannot be paid as part of the payment plan.</span>
 </div>
 
 <!-- Disclamer Start-->
