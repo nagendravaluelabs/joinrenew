@@ -200,7 +200,7 @@ export default Ember.Controller.extend({
           this.set('installNumber',value);
           var installNumber = value;
           installment = parseFloat(total/installNumber);
-          this.set("installment", parseFloat(installment, 2));
+          this.set("installment", parseFloat(installment.toFixed(2)));
         },
         saveRenewData : function () {
           var formattedSaveData, paymentSaveCallback, paymentError, self;
