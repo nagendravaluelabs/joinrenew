@@ -49,6 +49,7 @@ input[type="button"] {
         width: 100%;
         span {
           color: #000;
+          font-size: 16px;
         }
         div {
           width: 48px;
@@ -211,7 +212,7 @@ label {
   }
   label {
     color: #000;
-    font: 1.6rem 'Architype-Light',sans-serif normal;
+    font: 1.6rem 'Architype-Light',sans-serif, normal;
     margin-bottom: 18px;
     max-width: 100%;
     display:block;
@@ -317,7 +318,7 @@ label {
   input[type="reset"], 
   input[type="button"],
   .link-to-button a  {
-    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 0;
+    background: $button-bg-color url(../images/arrow-right.png) no-repeat right 6px;
     border: 0 none;
     border-radius: 0;
     color: $button-color !important;
