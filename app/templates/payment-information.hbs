@@ -182,7 +182,14 @@
               <label for="select-installments">installments</label>
             </div>
             {{/if}}
-            <div id="firstinstallment">Total for first installment: <span>$ {{format-currency installment}} (This includes Archipac donation) </span>
+            <div id="firstinstallment">Total for first installment: 
+            <span>
+              {{#if primaryData.data.paymentInfo.isArchiPAC}}
+                $ {{format-currency (mathOp installment 25 '+')}} (This includes Archipac donation)
+              {{else}}
+                $ {{format-currency installment}}
+              {{/if}}
+            </span>
             <span id="paymentplan_info_but">
               <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
             </span></div>
@@ -381,7 +388,17 @@
             {{#each (for 1 installNumber 1) as |key|}}
               <tr class="installments_tbl_tr">
                 <td class="install_num">{{key}} </td>
-                <td class="install_payment">$ {{format-currency installment}}</td>
+                <td class="install_payment">
+                  {{#if (ifCond key 1 "==")}}
+                    {{#if primaryData.data.paymentInfo.isArchiPAC}}
+                      $ {{format-currency (mathOp installment 25 '+')}}
+                    {{else}}
+                      $ {{format-currency installment}}
+                    {{/if}}
+                  {{else}}
+                    $ {{format-currency installment}}
+                  {{/if}}
+                </td>
               </tr>
             {{/each}}
           </tbody>
@@ -398,7 +415,7 @@
   <div class="renew-container">
     <div class="disclaimer-txt">
       <div class="col-xs-12">
-      <strong>Archipac Disclaimer</strong>
+      <strong>ArchiPAC Disclaimer</strong>
       <div>Contributions to ArchiPAC are not tax deductible. Contributions are voluntary and will be used for political purposes; you may refuse to contribute without reprisal. Contribution guidelines are only suggestions, you may contribute more or less than the suggested amounts and you will not be favoured or disadvantaged based on the amount of your contribution or your decision not to contribute. All contributions must be from U.S. citizens or lawful permanent residents (e.g., green card holders), from personal funds, and may not be made by anyone who is a federal government contractor. Corporate contributions are prohibited by federal law. Federal law requires political committees to use their best efforts to collect and report the name, address, employer and occupation of individuals whose contributions exceed $200 in a calender year.
       </div>
       </div>
