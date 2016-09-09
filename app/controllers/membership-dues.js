@@ -222,7 +222,7 @@ export default Ember.Controller.extend(rememberScroll, {
                 maxCap = parseFloat(duesData.data.invoice.supplementaldues.state.max);
             self = this;
             suppduesTotal = 0;
-            event.target.getAttribute("data-state-amount")
+            event.target.getAttribute("data-state-amount");
             localAmount = parseFloat(event.target.getAttribute("data-local-amount"));
             stateAmount = parseFloat(event.target.getAttribute("data-state-amount"));
             totalsKey = event.target.getAttribute("data-totals");
