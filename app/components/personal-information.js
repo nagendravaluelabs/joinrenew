@@ -50,10 +50,12 @@ export default Ember.Component.extend(rememberScroll, {
         primaryAddress = self.get('personalInfo');
         if (typeof primaryAddress.personal !== "undefined") {
             primaryAddress = primaryAddress.personal.address;
-            chapterType = primaryAddress.primary.capitalize();
-            chapterType = (chapterType === "Billing") ? "Home" : chapterType;
-            chapterType = (chapterType === "Office") ? "Work" : chapterType;
-            self.chapterSelection(chapterType);
+            if(primaryAddress.primary) {
+              chapterType = primaryAddress.primary.capitalize();
+              chapterType = (chapterType === "Billing") ? "Home" : chapterType;
+              chapterType = (chapterType === "Office") ? "Work" : chapterType;
+              self.chapterSelection(chapterType);
+            }
             if(Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
               self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase(), true);
             }

@@ -47,6 +47,7 @@ export default Ember.Service.extend({
                     }
                     if(!Ember.getWithDefault(data,'personal.address', false)) {
                       data.personal.address = {};
+                      data.personal.address.primary = "home";
                     }
                     if(!Ember.getWithDefault(data,'personal.phone.directoffice', false)) {
                       data.personal.phone.directoffice = {};
