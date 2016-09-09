@@ -163,50 +163,54 @@
           {{radio-button class="form-radio" id="pay-electronic-check" name="payment_type" value="Electronic check" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
           <label for="pay-electronic-check">Electronic check</label>
         </li>
-      	<li>
-          {{radio-button class="form-radio" id="pay-in-installments" name="payment_type" value="EMI" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
-          <label for="pay-in-installments">Pay in installments</label>
-        </li>
+        {{#if maxInstallmentsProperty}}
+          <li>
+            {{radio-button class="form-radio" id="pay-in-installments" name="payment_type" value="EMI" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
+            <label for="pay-in-installments">Pay in installments</label>
+          </li>
+        {{/if}}
       </ul>
-      {{#if installmentsPayment}}
-        <div id="installments" class="common-form">
-          <div id="installmentsform">
-          {{#if primaryData.data.invoice.maxinstallments}}
-            <div id="installmentnumber">
-              Pay my dues in
-              {{#x-select name="select-installments" id="select-installments" class="select-installments form-select" action="install" value=(mut (get primaryData.data.paymentInfo "InstallmentCount"))}}
-                {{#each (for 3 primaryData.data.invoice.maxinstallments 1) as |installment|}}
-                  {{#x-option value=installment}}{{installment}}{{/x-option}}                  
-                {{/each}}
-              {{/x-select}}
-              <label for="select-installments">installments</label>
-            </div>
-            {{/if}}
-            <div id="firstinstallment">Total for first installment: 
-            <span>
-              {{#if primaryData.data.paymentInfo.isArchiPAC}}
-                $ {{format-currency (mathOp installment 25 '+')}} (This includes Archipac donation)
-              {{else}}
-                $ {{format-currency installment}}
+      {{#if maxInstallmentsProperty}}
+        {{#if installmentsPayment}}
+          <div id="installments" class="common-form">
+            <div id="installmentsform">
+            {{#if maxInstallmentsProperty}}
+              <div id="installmentnumber">
+                Pay my dues in
+                {{#x-select name="select-installments" id="select-installments" class="select-installments form-select" action="install" value=(mut (get primaryData.data.paymentInfo "InstallmentCount"))}}
+                  {{#each (for 3 maxInstallmentsProperty 1) as |installment|}}
+                    {{#x-option value=installment}}{{installment}}{{/x-option}}                  
+                  {{/each}}
+                {{/x-select}}
+                <label for="select-installments">installments</label>
+              </div>
               {{/if}}
-            </span>
-            <span id="paymentplan_info_but">
-              <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
-            </span></div>
-            
-            <div class="clearfix"></div>
-            <div class="servicefee_info">
-              A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments. Only membership dues can be paid in installments.
-            </div>
-            <div class="clearfix"></div>
-            <div id="servicefee">
-              <form action="#" id="install-agreement" method="post">
-                {{input type="checkbox" classBinding=":form-checkbox :installment_iagree" id="installment_iagree" name="installment_iagree" checked=(mut (get primaryData.data.paymentInfo "InstallmentAgreement"))}}
-                <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
-              </form>
+              <div id="firstinstallment">Total for first installment: 
+              <span>
+                {{#if primaryData.data.paymentInfo.isArchiPAC}}
+                  $ {{format-currency (mathOp installment 25 '+')}} (This includes Archipac donation)
+                {{else}}
+                  $ {{format-currency installment}}
+                {{/if}}
+              </span>
+              <span id="paymentplan_info_but">
+                <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
+              </span></div>
+              
+              <div class="clearfix"></div>
+              <div class="servicefee_info">
+                A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments. Only membership dues can be paid in installments.
+              </div>
+              <div class="clearfix"></div>
+              <div id="servicefee">
+                <form action="#" id="install-agreement" method="post">
+                  {{input type="checkbox" classBinding=":form-checkbox :installment_iagree" id="installment_iagree" name="installment_iagree" checked=(mut (get primaryData.data.paymentInfo "InstallmentAgreement"))}}
+                  <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        {{/if}}
       {{/if}}
     </div>
     

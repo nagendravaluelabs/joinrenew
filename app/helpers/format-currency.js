@@ -8,5 +8,5 @@ export default Ember.Helper.helper(function ([value]) {
   } else {
     value = 0;
   }
-  return value.toLocaleString('en-US',{minimumFractionDigits:2});
+  return value.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits: 2});
 });
