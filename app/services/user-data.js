@@ -42,7 +42,12 @@ export default Ember.Service.extend({
                     data.membershipInfo = {};
                     data.membershipInfo.persons = {};
                     data.membershipInfo.amount = {};
-                    
+                    if(!Ember.getWithDefault(data,'personal.phone', false)) {
+                      data.personal.phone = {};
+                    }
+                    if(!Ember.getWithDefault(data,'personal.address', false)) {
+                      data.personal.address = {};
+                    }
                     if(!Ember.getWithDefault(data,'personal.phone.directoffice', false)) {
                       data.personal.phone.directoffice = {};
                       data.personal.phone.directoffice.country = "";
