@@ -631,7 +631,14 @@
     opacity: 0.9;
   }
 }
-
+.archipac-notsupported {
+  margin-bottom: 20px;
+}
+.electronic-check {
+  &.text-muted {
+    cursor: not-allowed !important;
+  }
+}
 #archipac_dis_modal {
   p{
     font-size: 17px;
