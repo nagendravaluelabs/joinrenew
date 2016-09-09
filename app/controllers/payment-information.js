@@ -1,5 +1,5 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
-/*global $*/
+/*global $, moment*/
 import Ember from 'ember';
 $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
           var installmentKeys, resultInstallmentKeys, currentDate, startDate, cutOFFDate;
           installmentKeys = this.getWithDefault("genericData.generic.installmentkeys", "",{});
           resultInstallmentKeys = 0;
-          installmentKeys.forEach(function(value, key){
+          installmentKeys.forEach(function(value){
             currentDate = moment(moment().format("DD/MM/YYYY"),"DD/MM/YYYY");
             startDate = moment(moment(value.startdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
             cutOFFDate = moment(moment(value.cutoffdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
