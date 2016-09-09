@@ -31,6 +31,8 @@ export default Ember.Service.extend({
         } else {
           self.get("routing").transitionTo("invoice-unavailable");
         }
+      }, function(){
+        self.get("routing").transitionTo("invoice-unavailable");
       });
     }
   },
