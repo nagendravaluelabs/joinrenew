@@ -1,5 +1,5 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
-/*global $*/
+/*global $, moment*/
 import Ember from 'ember';
 $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
@@ -19,6 +19,7 @@ $.validator.addMethod( "creditcardMonth", function() {
 
 export default Ember.Controller.extend({
         primaryData: Ember.inject.service('user-data'),
+        genericData: Ember.inject.service('generic-data'),
         debitPayment: true,
         echeckPayment: false,
         installmentsPayment: false,
@@ -30,6 +31,21 @@ export default Ember.Controller.extend({
         installNumber:3,
         installment: 0,
         paymentFailed: false,
+        maxInstallmentsProperty: function() {
+          var installmentKeys, resultInstallmentKeys, currentDate, startDate, cutOFFDate;
+          installmentKeys = this.getWithDefault("genericData.generic.installmentkeys", "",{});
+          resultInstallmentKeys = 0;
+          installmentKeys.forEach(function(value){
+            currentDate = moment(moment().format("DD/MM/YYYY"),"DD/MM/YYYY");
+            startDate = moment(moment(value.startdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+            cutOFFDate = moment(moment(value.cutoffdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+            if(currentDate.isBetween(startDate, cutOFFDate) || currentDate.isSame(startDate) || currentDate.isSame(cutOFFDate)
+              ) {
+                resultInstallmentKeys = value.ins_max_installments;
+              }
+          });
+          return resultInstallmentKeys;
+        }.property("genericData.generic.installmentkeys"),
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));

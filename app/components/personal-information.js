@@ -129,6 +129,8 @@ export default Ember.Component.extend(rememberScroll, {
         genericData = genericData["UNITED STATES"];        
       }else if(countryValue === "CANADA") {
         genericData = genericData["CANADA"]; 
+      } else {
+        genericData = [];
       }
       stateCode = genericData.map(function(list){ 
         if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {

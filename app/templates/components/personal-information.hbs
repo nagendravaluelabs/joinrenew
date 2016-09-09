@@ -235,7 +235,16 @@
               </ul>
                 <div class="auto-address clearfix">
                   <span class="info-left">
-                    <div id="company-lookup-address-block">
+                    {{#if 
+                      (ifCond personalInfo.personal.address.office.isExsist 
+                        (ifCond 
+                          personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization 
+                          '||'
+                        ) 
+                        '||'
+                      )
+                    }}
+                      <div id="company-lookup-address-block">                      
                         {{#if (ifCond personalInfo.personal.address.office.isExsist (ifCond personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization '||') '||')}}
                           {{#if personalInfo.personal.organization.name}}
                             {{personalInfo.personal.organization.name}}<br />
@@ -285,7 +294,8 @@
                             {{personalInfo.personal.address.office.zip}}
                           {{/if}}
                         {{/if}}
-                    </div>
+                      </div>
+                    {{/if}}
                   </span>
                   <span class="info-link">Can’t find your work address?
                     <a class="create-org" href="javascript:void(0)" {{action 'createNewOrganization'}}>

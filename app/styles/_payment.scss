@@ -622,6 +622,9 @@
     border: 0;
     outline: none;
     text-indent:-99999px;
+    .ui-icon-closethick {
+      background: rgba(0,0,0,0);
+    }
   }
   .ui-widget-overlay {
     background: #222222;
