@@ -26,7 +26,10 @@
         {{#if (ifCond primaryData.data.personal.organization.isLinkedAccount primaryData.data.personal.organizationInfo.isNewOrganization '||')}}
           {{#if primaryData.data.personal.organization.isLinkedAccount}}
             {{#if primaryData.data.personal.organization.linkedAddress}}
-              {{primaryData.data.personal.organization.linkedAddress}}
+              {{#if primaryData.data.personal.organization.name}}
+                {{primaryData.data.personal.organization.name}}<br />
+              {{/if}}
+              {{{nl2br (explodeImplode primaryData.data.personal.organization.linkedAddress ",")}}}
             {{/if}}
           {{else}}
             {{#if primaryData.data.personal.organizationInfo.addressLine1}}
@@ -164,7 +167,7 @@
           <label for="pay-electronic-check" class="electronic-check {{if primaryData.data.paymentInfo.isArchiPAC 'text-muted'}}">
             Electronic check
             {{#if primaryData.data.paymentInfo.isArchiPAC}}
-              - We are currently unable to accept your method of payment because you have selected to donate to ArchiPAC against the Electronic check option.
+               - ArchiPAC donation may only be paid with a credit/debit card. Please select an alternative payment method.
             {{/if}}
           </label>
         </li>

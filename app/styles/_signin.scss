@@ -102,6 +102,9 @@
         }
       a{
         font-size: 15px;
+        &:hover {
+          text-decoration: underline;
+        }
       }
 			p.terms-txt{
 			   margin:15px 0 15px 0;
@@ -205,6 +208,9 @@
       h2{
         font-weight: normal;
         font-size: 15px;
+      }
+      h3 {
+        font-weight: normal;
       }
     }
     .capture_form_item{

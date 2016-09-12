@@ -13,11 +13,10 @@
     {{#each results as |result|}}
       <li class="hypersearch-result">
         <span {{action "selectResult" result on="click"}}>
-          {{#if resultKey}}
-            {{get result resultKey}}
-          {{else}}
-            {{result}}
+          {{#if (get result 'attributes.name')}}
+            {{get result 'attributes.name'}}, 
           {{/if}}
+          {{get result 'attributes.address'}}
         </span>
       </li>
     {{/each}}
