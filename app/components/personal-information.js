@@ -219,6 +219,7 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
             this.set("workShowState", false);
         }
+        Ember.$("#work_administrative_state").trigger("change");
         /*
         if(!mode) {
           this.set("organizationInfo.addressLine1", "");
@@ -248,10 +249,10 @@ export default Ember.Component.extend(rememberScroll, {
         } else {
           self.set("homeStates", []);
         }
-        if(value === "be685760-5492-4ba3-b105-868e2010fa34") {
+        if(value.toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34") {
           self.set("isHomeCanada", true);
           self.set("isHomeUSA", false);
-        } else if(value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        } else if(value.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
           self.set("isHomeCanada", false);
           self.set("isHomeUSA", true);
         } else {
@@ -271,6 +272,7 @@ export default Ember.Component.extend(rememberScroll, {
           this.set("personalInfo.personal.address.home.city", "");
           this.set("personalInfo.personal.address.home.zip", "");
         }
+        Ember.$("#administrative_area_state").trigger("change");
     },
         validatePersonalInfo: function (mode) {
             "use strict";
@@ -396,7 +398,15 @@ export default Ember.Component.extend(rememberScroll, {
                       primary_home_address_country: "Country field is required",
                       primary_home_address1: "Address line1 is required",
                       primary_home_city: "City is required",
-                      administrative_area_state: "State is required",
+                      administrative_area_state:  {
+                        required: function() {
+                          if($("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34") {
+                            return "Province is required";
+                          } else {
+                            return "State is required";
+                          }
+                        }
+                      },
                       primary_home_zipcode: {
                         required : "Zip code is required",
                         alphanumeric : "Please enter a valid zip code",
@@ -514,7 +524,15 @@ export default Ember.Component.extend(rememberScroll, {
                     create_org_country: "Country is required",
                     org_company_address1: "Address line1 is required",
                     org_locality: "City is required",
-                    work_administrative_state: "State is required",
+                    work_administrative_state: {
+                      required: function() {
+                        if($("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34") {
+                          return "Province is required";
+                        } else {
+                          return "State is required";
+                        }
+                      }
+                    },
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
                     },
