@@ -7,10 +7,9 @@ export default Ember.Controller.extend({
     queryParams: ['url_type', 'code'],
     code: null,
     url_type: null,
-    auth: Ember.inject.service('auth'),
     init: function() {
       this._super.apply(this, arguments);
-      if(!this.get("auth").get("user")) {
+      if(!localStorage.janrainCaptureToken) {
         Ember.run.schedule("afterRender", this, function () {
           if(this.get("url_type") && this.get("url_type") === "forgot") {
             var authCode, tokenParams, tokenReqData;
