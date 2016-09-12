@@ -157,10 +157,15 @@
                 </li>
                 {{#if homeShowState}} 
                   <li class="state" id="state">
-                    <label for="administrative_area_state">State
+                    <label for="administrative_area_state">
+                      {{#if (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
+                      Province
+                      {{else}}
+                      State
+                      {{/if}}
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged}}
+                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged selectedCountry=personalInfo.personal.address.home.country.key}}
                   </li>
                 {{/if}}
                 
@@ -379,10 +384,15 @@
 
               {{#if workShowState}}
                 <li class="state" id="state-create">
-                  <label for="work_administrative_state">State
+                  <label for="work_administrative_state">
+                    {{#if (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
+                    Province
+                    {{else}}
+                    State
+                    {{/if}}
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged}}
+                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged selectedCountry=organizationInfo.country.key}}
                 </li>
               {{/if}}
             

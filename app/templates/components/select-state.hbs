@@ -1,6 +1,12 @@
 {{#ember-chosen id=(concat idPrefix '_state') name=(concat namePrefix '_state') class=(concat class ' form-select select-chosen') value=mutable chosenValueChanged=chosenValueChanged}}
   <option value="">Select</option>
   {{#each states as |state|}}
-    <option value="{{state.statekey}}" selected={{isEqualTo state.statekey selected}}>{{state.statename}}</option>
+    <option value="{{state.statekey}}" selected={{isEqualTo state.statekey selected}}>
+      {{#if (isEqualTo (jsStrings selectedCountry "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
+        {{state.statecode}}
+      {{else}}
+        {{state.statename}}
+      {{/if}}
+    </option>
   {{/each}}
 {{/ember-chosen}}
