@@ -26,6 +26,9 @@
         {{#if (ifCond primaryData.data.personal.organization.isLinkedAccount primaryData.data.personal.organizationInfo.isNewOrganization '||')}}
           {{#if primaryData.data.personal.organization.isLinkedAccount}}
             {{#if primaryData.data.personal.organization.linkedAddress}}
+              {{#if primaryData.data.personal.organization.name}}
+                {{primaryData.data.personal.organization.name}}<br />
+              {{/if}}
               {{{nl2br (explodeImplode primaryData.data.personal.organization.linkedAddress ",")}}}
             {{/if}}
           {{else}}
