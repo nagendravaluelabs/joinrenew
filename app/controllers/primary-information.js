@@ -97,7 +97,12 @@ export default Ember.Controller.extend({
                 }
                 primaryAddress[2]= addressArr;
               } else {
-                primaryAddress[0] = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+                var string, stringToArray, delimiter, glue;
+                string = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+                delimiter = ",";
+                glue = "<br />";
+                stringToArray = string.split(delimiter);
+                primaryAddress[0] = stringToArray.join(glue);
               }
             }
           } else {
