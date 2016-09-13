@@ -302,9 +302,9 @@ var polyfills = Ember.Mixin.create({
         };
 
         Number.prototype.toLocaleString = function(locale, options) {
-            if (locale && locale.length < 2)
-                throw new RangeError("Invalid language tag: " + locale);
-
+            if (locale && locale.length < 2) {
+              throw new RangeError("Invalid language tag: " + locale);
+            }
             var sNum;
 
             if (options && options.minimumFractionDigits) {
