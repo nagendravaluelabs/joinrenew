@@ -14,7 +14,7 @@ export default Service.extend(RouteRefresherMixin, {
     this.set('_loginCallback', callback);
   },
   doLogin(token, authorizationCode) {
-    var janrainProfileData, tokenParams, tokenReqData, self;
+    var authParams, authReqData, janrainProfileData, tokenParams, tokenReqData, self;
     self = this;
     if (!token) {
       self.get("auth").set("authState", "skip");
@@ -125,6 +125,7 @@ export default Service.extend(RouteRefresherMixin, {
       self.get("auth").set("authState", "");
       self.reloadRoute();
     }
+    let auth = self.get('auth');
     self.reloadRoute();
     let loginCallback = self.get('_loginCallback');
     if (loginCallback && typeof loginCallback === 'function') {
