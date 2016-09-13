@@ -1,5 +1,4 @@
 {{renew-steps steps=model.steps}}
-
 <div class="row"> 
 	<div class="col-sm-9">
 	  <h1 class="page-title">Your membership invoice</h1>
@@ -10,6 +9,7 @@
     
 	  <div class="membership-dues-container">
       {{#if isRenewSummary}}
+        {{title "Membership invoice | AIA"}}
         <div class="common-form membership-dues-pages" id="contact-info-form">
           <div class="renew-suppdue">
             <h3 class="sign-up-subheading">{{duesData.data.membership.membershipyear}} dues</h3>
@@ -57,6 +57,7 @@
       {{/if}}
       <div class="clearfix"></div>
       {{#if isQuestionnarie}}
+        {{title "Supplemental Dues Questionnaire | AIA"}}
         <div class="renew-questionnaire  membership-dues-pages">
           <h3>Supplemental dues</h3>
           <div>
@@ -145,7 +146,7 @@
       {{/if}}
       
       {{#if isTotalRenew}}
-        
+        {{title "Membership invoice | AIA"}}
         <form action="#" id="form-totalRenew" method="post">
         	
           <div class="total-no-renew-suppdue renew-container membership-dues-pages common-form">
@@ -220,7 +221,7 @@
       {{/if}}
       
       {{#if isDuesCalculator}}
-      
+        {{title "Supplemental Dues Calculator | AIA"}}
         <div class="common-form renew-calculator membership-dues-pages renew-container">
         
           <h3>Supplemental dues calculator</h3>
@@ -277,9 +278,8 @@
                         }}
                       {{/if}}
                     </div>
-                    <div class="totals padding-total-top">                      
-                      Total:
-                      <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}">$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
+                    <div class="totals padding-total-top">
+                      <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}"><span>Total:</span>$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
                       
                     </div>
                     
@@ -302,8 +302,7 @@
                       <span class="membership-value">$ 0.00</span>
                     {{/if}}
                   <div class="totals">
-                    Total:
-                    <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}">$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
+                    <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}"><span>Total:</span>$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
                   </div>
                 </div>
               {{/each}}

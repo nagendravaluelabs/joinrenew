@@ -165,7 +165,7 @@
                       {{/if}}
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged selectedCountry=personalInfo.personal.address.home.country.key}}
+                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged}}
                   </li>
                 {{/if}}
                 
@@ -392,7 +392,7 @@
                     {{/if}}
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged selectedCountry=organizationInfo.country.key}}
+                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged}}
                 </li>
               {{/if}}
             

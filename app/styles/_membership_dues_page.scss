@@ -543,7 +543,9 @@ span{
   float: right;
   text-align: right;
   width: auto;
-  margin-left: 15px;
+  span {
+    margin-right: 15px;
+  }
 }
 #suppdues_totalamount {
   display: block;
