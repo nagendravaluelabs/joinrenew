@@ -2,11 +2,7 @@
   <option value="">Select</option>
   {{#each states as |state|}}
     <option value="{{state.statekey}}" selected={{isEqualTo state.statekey selected}}>
-      {{#if (isEqualTo (jsStrings selectedCountry "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
-        {{state.statecode}}
-      {{else}}
-        {{state.statename}}
-      {{/if}}
+      {{state.statename}}
     </option>
   {{/each}}
 {{/ember-chosen}}
