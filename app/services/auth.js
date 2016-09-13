@@ -44,9 +44,7 @@ export default Ember.Service.extend(RouteRefresherMixin, {
       },
       body: $.param( body )
     };
-    $('.ajax-spinner').show();
     return fetch(`${ENV.AIA_API_URL}/oauth/token`, tokenReqData).then(response => {
-      $('.ajax-spinner').hide();
       switch (response.status) {
       case 200:
         return response.json().then(json => {
@@ -100,9 +98,7 @@ export default Ember.Service.extend(RouteRefresherMixin, {
       },
       body: fetchParams
     };
-    $('.ajax-spinner').show();
     return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => {
-      $('.ajax-spinner').hide();
       if(response.status === 200) {
         return response.json().then(function(json) {
           if(json.stat === "ok") {
@@ -142,12 +138,14 @@ export default Ember.Service.extend(RouteRefresherMixin, {
     if (typeof localStorage === 'undefined') {
       return;
     }
+
     let json = localStorage['aia-user'];
     if (!json) {
       return;
     }
     try {
       let user = JSON.parse(json);
+
       this.verify(user.access_token).then(valid => {
         if (!valid) {
           if (user.refresh_token) {
