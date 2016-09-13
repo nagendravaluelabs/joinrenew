@@ -13,6 +13,11 @@ jQuery.validator.addMethod( "zipcodeUS", function( value, element ) {
 	  return this.optional( element ) || /^\d{5}(-\d{4})?$/.test( value );
 },  "Please enter a valid US zip code. The format should be either 00000 or 00000-0000." );
 
+jQuery.validator.addMethod("zipcodeCA", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\A-Z0-9\-\s]+$/i.test(value
+    );
+}, "Please enter a valid zip code" );
+
 jQuery.validator.addMethod( "alphanumeric", function( value, element ) {
 	return this.optional( element ) || /^[a-z0-9\-\s]+$/i.test( value );
 }, "Special characters not allowed" );
@@ -28,6 +33,10 @@ export default Ember.Component.extend(rememberScroll, {
     statesData: Ember.inject.service('states-data'),
     workstates: {},
     homeStates: [],
+    isHomeUSA: false,
+    isHomeCanada: false,
+    isWorkUSA: false,
+    isWorkCanada: false,
     init: function () {
         "use strict";
         this._super(...arguments);
@@ -41,11 +50,15 @@ export default Ember.Component.extend(rememberScroll, {
         primaryAddress = self.get('personalInfo');
         if (typeof primaryAddress.personal !== "undefined") {
             primaryAddress = primaryAddress.personal.address;
-            chapterType = primaryAddress.primary.capitalize();
-            chapterType = (chapterType === "Billing") ? "Home" : chapterType;
-            chapterType = (chapterType === "Office") ? "Work" : chapterType;
-            self.chapterSelection(chapterType);
-            self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase());
+            if(primaryAddress.primary) {
+              chapterType = primaryAddress.primary.capitalize();
+              chapterType = (chapterType === "Billing") ? "Home" : chapterType;
+              chapterType = (chapterType === "Office") ? "Work" : chapterType;
+              self.chapterSelection(chapterType);
+            }
+            if(Ember.getWithDefault(primaryAddress, "home.country.key", false)) {
+              self.setHomeStateStatusFn(primaryAddress.home.country.key.toLowerCase(), true);
+            }
             self.set('contactAddressType', contactInfo.primary);
         }
     },
@@ -88,17 +101,96 @@ export default Ember.Component.extend(rememberScroll, {
         "use strict";
         var self;
         self = this;
+        chapterType = (chapterType === "Directoffice" || chapterType === "Office") ?  "Work" : chapterType;
         self.set('primaryHomeAddress', false);
         self.set('primaryWorkAddress', false);
         self.set('createOrganization', false);
         self.set('primary' + chapterType + 'Address', true);
     },
-    setWorkStateStatusFn: function (value) {
+    countryObserver: function() {
+      var countryKey, countryCode, genericData;
+      countryKey = this.get("personalInfo.personal.address.home.country.key");
+      genericData = this.get("genericData.generic.country");
+      countryCode = genericData.map(function(list){ 
+        if(list.countrykey.toLowerCase() === countryKey.toLowerCase()) {
+          return list.countrycode;
+        } else {
+          return null;
+        }
+      });
+      countryCode = countryCode.filter(function(n){ return n !== null; }); 
+      countryCode = countryCode[0];
+      this.set("personalInfo.personal.address.home.country.value", countryCode);
+    }.observes('personalInfo.personal.address.home.country.key'),
+    stateObserver: function() {
+      var stateKey, stateCode, genericData, countryValue;
+      countryValue = this.get("personalInfo.personal.address.home.country.value");
+      stateKey = this.get("personalInfo.personal.address.home.state.key");
+      genericData = this.get("genericData.generic.states");
+      if(countryValue === "UNITED STATES") {
+        genericData = genericData["UNITED STATES"];        
+      }else if(countryValue === "CANADA") {
+        genericData = genericData["CANADA"]; 
+      } else {
+        genericData = [];
+      }
+      stateCode = genericData.map(function(list){ 
+        if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
+          return list.statecode;
+        } else {
+          return null;
+        }
+      });
+      stateCode = stateCode.filter(function(n){ return n !== null; }); 
+      stateCode = stateCode[0];
+      this.set("personalInfo.personal.address.home.state.value", stateCode);
+    }.observes('personalInfo.personal.address.home.state.key'),
+    workCountryObserver: function() {
+      var countryKey, countryCode, genericData;
+      countryKey = this.get("organizationInfo.country.key");
+      genericData = this.get("genericData.generic.country");
+      countryCode = genericData.map(function(list){ 
+        if(list.countrykey.toLowerCase() === countryKey.toLowerCase()) {
+          return list.countrycode;
+        } else {
+          return null;
+        }
+      });
+      countryCode = countryCode.filter(function(n){ return n !== null; }); 
+      countryCode = countryCode[0];
+      this.set("organizationInfo.country.value", countryCode);
+    }.observes('organizationInfo.country.key'),
+    workStateObserver: function() {
+      var stateKey, stateCode, genericData, countryValue;
+      countryValue = this.get("organizationInfo.country.value");
+      stateKey = this.get("organizationInfo.workState.key");
+      if(stateKey !== undefined && stateKey !== "") {
+        genericData = this.get("genericData.generic.states");
+        if(countryValue === "UNITED STATES") {
+          genericData = genericData["UNITED STATES"];        
+        }else if(countryValue === "CANADA") {
+          genericData = genericData["CANADA"]; 
+        }
+        stateCode = genericData.map(function(list){ 
+          if(list.statekey.toLowerCase() === stateKey.toLowerCase()) {
+            return list.statecode;
+          } else {
+            return null;
+          }
+        });
+        stateCode = stateCode.filter(function(n){ return n !== null; }); 
+        stateCode = stateCode[0];
+        this.set("organizationInfo.workState.value", stateCode);
+      }
+    }.observes('organizationInfo.workState.key'),
+    setWorkStateStatusFn: function (value, mode) {
         "use strict";
-        var self, data;
+        var self, data, validCountries;
         self = this;
-        value = (typeof value === "undefined") ? "" : value;
-        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        mode = (typeof mode === "undefined") ? false : mode;
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183","be685760-5492-4ba3-b105-868e2010fa34"];
+        value = (typeof value === "undefined") ? "" : value.toLowerCase();
+        if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
           if(data.type === "data") {
             self.set("workstates", data.info);
@@ -110,19 +202,41 @@ export default Ember.Component.extend(rememberScroll, {
           }
         } else {
           self.set("workstates", []);
-        }            
-        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        }
+        self.set("organizationInfo.workState", {value: "", key: ""});
+        if(value === "be685760-5492-4ba3-b105-868e2010fa34") {
+          self.set("isWorkCanada", true);
+          self.set("isWorkUSA", false);
+        } else if(value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          self.set("isWorkCanada", false);
+          self.set("isWorkUSA", true);
+        } else {
+          self.set("isWorkCanada", false);
+          self.set("isWorkUSA", false);
+        }
+        if (validCountries.indexOf(value) !== -1) {
             this.set("workShowState", true);
         } else {
             this.set("workShowState", false);
         }
+        Ember.$("#work_administrative_state").trigger("change");
+        /*
+        if(!mode) {
+          this.set("organizationInfo.addressLine1", "");
+          this.set("organizationInfo.addressLine2", "");
+          this.set("organizationInfo.locality", "");
+          this.set("organizationInfo.workState", "");
+          this.set("organizationInfo.postalCode", "");
+        }*/
     },
-    setHomeStateStatusFn: function (value) {
+    setHomeStateStatusFn: function (value, mode) {
         "use strict";
-        var self, data;
+        var self, data, validCountries;
         self = this;
-        value = (typeof value === "undefined") ? "" : value;
-        if(value !== "" && value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        mode = (typeof mode === "undefined") ? false : mode;
+        validCountries = ["bc4b70f8-280e-4bb0-b935-9f728c50e183","be685760-5492-4ba3-b105-868e2010fa34"];
+        value = (typeof value === "undefined") ? "" : value.toLowerCase();
+        if(value !== "" && validCountries.indexOf(value) !== -1) {
           data = self.get("statesData").getStateData(value);
           if(data.type === "data") {
             self.set("homeStates", data.info);
@@ -134,18 +248,195 @@ export default Ember.Component.extend(rememberScroll, {
           }
         } else {
           self.set("homeStates", []);
-        }            
-        if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+        }
+        if(value.toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34") {
+          self.set("isHomeCanada", true);
+          self.set("isHomeUSA", false);
+        } else if(value.toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
+          self.set("isHomeCanada", false);
+          self.set("isHomeUSA", true);
+        } else {
+          self.set("isHomeCanada", false);
+          self.set("isHomeUSA", false);
+        }
+        if (validCountries.indexOf(value) !== -1) {
             this.set("homeShowState", true);
         } else {
             this.set("homeShowState", false);
         }
+        if(!mode) {
+          this.set("personalInfo.personal.address.home.state.key", "");
+          this.set("personalInfo.personal.address.home.state.value", "");
+          this.set("personalInfo.personal.address.home.line1", "");
+          this.set("personalInfo.personal.address.home.line2", "");
+          this.set("personalInfo.personal.address.home.city", "");
+          this.set("personalInfo.personal.address.home.zip", "");
+        }
+        Ember.$("#administrative_area_state").trigger("change");
     },
+        validatePersonalInfo: function (mode) {
+            "use strict";
+            mode = (typeof mode !== undefined) ? mode : false;
+            if(this.get("editContactInfo")) {
+              var validate;
+              validate = $("#personal-contact-form").validate({
+                  rules: {
+                      firstname: {
+                          required: true,
+                          letterswithbasicpunc: true
+                      },
+                      middlename: {
+                          letterswithbasicpunc: true
+                      },
+                      lastname: {
+                          required: true,
+                          letterswithbasicpunc: true
+                      },
+                      contact_home_country: {
+                          required: true
+                      },
+                      contact_mobile_country: {
+                          required: function () {
+                              return $("#primary_number_mobile").is(":checked");
+                          }
+                      },
+                      contact_work_country: {
+                          required: function () {
+                              return $("#primary_number_work").is(":checked");
+                          }
+                      },
+                      home_number: {
+                          required: true,
+                          digits: true,
+                          maxlength: 15
+                      },
+                      mobile_number: {
+                          required: function () {
+                              return $("#primary_number_mobile").is(":checked");
+                          },
+                          digits: true,
+                          maxlength: 15
+                          
+                      },
+                      work_number: {
+                          required: function () {
+                              return $("#primary_number_work").is(":checked");
+                          },
+                          digits: true,
+                          maxlength: 15
+                      },
+                      primary_home_address_country: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_address1: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_city: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked");
+                          }
+                      },
+                      primary_home_zipcode: {
+                          required: function () {
+                              return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
+                          },
+                          alphanumeric:true,
+                          maxlength:10
+                          /*zipcodeUS: function() {
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+                          },*/
+                          /*zipcodeCA: function() {
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
+                          }*/
+                      },
+                      administrative_area_state: {
+                          required: function () {
+                            return $("#choose_chapter_home").is(":checked") && ($("#primary_home_address_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34");
+                          }
+                      },
+                      org_work_address: {
+                        required: function () {
+                            return $("#choose_chapter_work").is(":checked");
+                          }
+                      }
+                  },
+                  messages: {
+                      prefix: "Prefix is required",
+                      firstname: {
+                          required: "First name is required",
+                          letterswithbasicpunc: "Special characters not allowed for First name"
+                      },
+                      middlename: {
+                          letterswithbasicpunc: "Please enter a single letter for your middle initial"
+                      },
+                      lastname: {
+                          required: "Last name is required",
+                          letterswithbasicpunc: "Special characters not allowed for last name"
+                      },
+                      contact_home_country: "Country field is required",
+                      contact_mobile_country: "Country field is required",
+                      contact_work_country: "Country field is required",
+                      home_number: {
+                          required: "Home number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      mobile_number: {
+                          required: "Mobile number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      work_number: {
+                          required: "Work number is required",
+                          digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
+                          maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
+                      },
+                      primary_home_address_country: "Country field is required",
+                      primary_home_address1: "Address line1 is required",
+                      primary_home_city: "City is required",
+                      administrative_area_state:  {
+                        required: function() {
+                          if($("#primary_home_address_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34") {
+                            return "Province is required";
+                          } else {
+                            return "State is required";
+                          }
+                        }
+                      },
+                      primary_home_zipcode: {
+                        required : "Zip code is required",
+                        alphanumeric : "Please enter a valid zip code",
+                        maxlength: "Please enter a valid zip code"
+                      },
+                      org_work_address: {
+                        required : "Please Add / select your Organization details",
+                      }                     
+                  }
+              });
+              if (validate.form()) {
+                  if(!mode) {
+                    this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
+                  } else {
+                    this.sendAction("savePersonalInfo", this.get("personalInfo"), false);
+                    this.sendAction("showPersonalInfo", true);
+                  }
+              } else {
+                  if ($("#personal-contact").hasClass("hidden")) {
+                      this.sendAction("showPersonalInfo");
+                  }            
+              }
+            } else {
+                this.sendAction("savePersonalInfo", this.get("personalInfo"), true);
+            }
+        },
     actions: {
         showPersonalInfo: function () {
             "use strict";
-            this.sendAction("showPersonalInfo");
-            this.scrollToTop();
+            this.validatePersonalInfo(true);
         },
         chapterSelection: function (value) {
             "use strict";
@@ -160,7 +451,22 @@ export default Ember.Component.extend(rememberScroll, {
             var self, value;
             self = this;
             value = self.get('createOrganization');
-            self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+            if(!self.get("organizationInfo.isNewOrganization")) {
+              self.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.Name", "");
+              self.set("organizationInfo.Website", "");
+              self.set("organizationInfo.companyType", "");
+              self.set("organizationInfo.orgPhone", "");
+              self.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              self.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              
+              self.set("organizationInfo.addressLine1", "");
+              self.set("organizationInfo.addressLine2", "");
+              self.set("organizationInfo.locality", "");
+              self.set("organizationInfo.workState", {value:"", key: ""});
+              self.set("organizationInfo.PostalCode", "");
+              self.set("organizationInfo.isNewOrganization", false);
+            }
             if (value) {
                 $(".primary-action-btn").removeClass("hidden");
                 self.set('createOrganization', false);
@@ -172,41 +478,10 @@ export default Ember.Component.extend(rememberScroll, {
         setWorkStateStatus: function (value) {
             "use strict";
             this.setWorkStateStatusFn(value);
-            /*if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
-                self.set("workstates", data);
-                setTimeout(function(){
-                  $(".select-chosen").trigger("chosen:updated");
-                },100);
-              });
-            } else {
-              self.set("workstates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("workShowState", true);
-            } else {
-                this.set("workShowState", false);
-            }*/
         },
         setHomeStateStatus: function (value) {
             "use strict";
             this.setHomeStateStatusFn(value);
-            /*var self=this;
-            if(value) {
-              Ember.$.getJSON(`${ENV.AIA_DRUPAL_URL}?datatype=state&key=${value}`).then(function(data){
-                self.set("Homestates", data);
-                setTimeout(function(){
-                  $(".select-chosen").trigger("chosen:updated");
-                },100);
-              });
-            } else {
-              self.set("Homestates", []);
-            }
-            if (value === "bc4b70f8-280e-4bb0-b935-9f728c50e183") {
-                this.set("homeShowState", true);
-            } else {
-                this.set("homeShowState", false);
-            }*/
         },
         updateContactInformation: function (value) {
             "use strict";
@@ -216,131 +491,7 @@ export default Ember.Component.extend(rememberScroll, {
         },
         validatePersonalInfo: function () {
             "use strict";
-            var validate;
-            validate = $("#personal-contact-form").validate({
-                rules: {
-                    firstname: {
-                        required: true,
-                        letterswithbasicpunc: true
-                    },
-                    middlename: {
-                        letterswithbasicpunc: true
-                    },
-                    lastname: {
-                        required: true,
-                        letterswithbasicpunc: true
-                    },
-                    contact_home_country: {
-                        required: true
-                    },
-                    contact_mobile_country: {
-                        required: function () {
-                            return $("#primary_number_mobile").is(":checked");
-                        }
-                    },
-                    contact_work_country: {
-                        required: function () {
-                            return $("#primary_number_work").is(":checked");
-                        }
-                    },
-                    home_number: {
-                        required: true,
-                        digits: true,
-                        maxlength: 15
-                    },
-                    mobile_number: {
-                        required: function () {
-                            return $("#primary_number_mobile").is(":checked");
-                        },
-                        digits: true,
-                        maxlength: 15
-                        
-                    },
-                    work_number: {
-                        required: function () {
-                            return $("#primary_number_work").is(":checked");
-                        },
-                        digits: true,
-                        maxlength: 15
-                    },
-                    primary_home_address_country: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_address1: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_city: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked");
-                        }
-                    },
-                    primary_home_zipcode: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-                        },
-                        alphanumeric:true,
-                        maxlength:10
-                    },
-                    administrative_area_state: {
-                        required: function () {
-                            return $("#choose_chapter_home").is(":checked") && $("#primary_home_address_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
-                        }
-                    }
-                },
-                messages: {
-                    prefix: "Prefix is required",
-                    firstname: {
-                        required: "First name is required",
-                        letterswithbasicpunc: "Special characters not allowed for First name"
-                    },
-                    middlename: {
-                        letterswithbasicpunc: "Please enter a single letter for your middle initial"
-                    },
-                    lastname: {
-                        required: "Last name is required",
-                        letterswithbasicpunc: "Special characters not allowed for last name"
-                    },
-                    contact_home_country: "Country field is required",
-                    contact_mobile_country: "Country field is required",
-                    contact_work_country: "Country field is required",
-                    home_number: {
-                        required: "Home number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    mobile_number: {
-                        required: "Mobile number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    work_number: {
-                        required: "Work number is required",
-                        digits: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555",
-                        maxlength: "Please enter a valid phone number with no special characters or spaces. Example: 555555555555555"
-                    },
-                    primary_home_address_country: "Country field is required",
-                    primary_home_address1: "Address line1 is required",
-                    primary_home_city: "City is required",
-                    administrative_area_state: "State is required",
-                    primary_home_zipcode: {
-                      required : "Zip code is required",
-                      alphanumeric : "Please enter a valid zip code",
-                      maxlength: "Please enter a valid zip code"
-                    }
-                   
-                }
-            });
-            if (validate.form()) {
-                this.get('router').transitionTo('membership-dues');
-            } else {
-                if ($("#personal-contact").hasClass("hidden")) {
-                    this.sendAction("showPersonalInfo");
-                }            
-            }
+            this.validatePersonalInfo();
         },
         addNewOrganization: function () {
             "use strict";
@@ -352,14 +503,14 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     work_administrative_state: {
                         required: function () {
-                            return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                            return ($("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34");
                         }
                     },
                     org_company_phone: {
                         digits: true
                         
                     },
-                    postal_code: {
+                    primary_work_zipcode: {
                       required: function () {
                             return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
                       },
@@ -373,11 +524,19 @@ export default Ember.Component.extend(rememberScroll, {
                     create_org_country: "Country is required",
                     org_company_address1: "Address line1 is required",
                     org_locality: "City is required",
-                    work_administrative_state: "State is required",
+                    work_administrative_state: {
+                      required: function() {
+                        if($("#create_org_country").val() === "be685760-5492-4ba3-b105-868e2010fa34") {
+                          return "Province is required";
+                        } else {
+                          return "State is required";
+                        }
+                      }
+                    },
                     org_company_phone: {
                         digits: "Please enter a valid Company phone number"
                     },
-                    postal_code:{
+                    primary_work_zipcode:{
                       required : "Zip code is required",
                       alphanumeric : "Please enter a valid zip code",
                       maxlength: "Please enter a valid zip code"
@@ -385,10 +544,43 @@ export default Ember.Component.extend(rememberScroll, {
                 }
             });
             if (validator.form()) {
-                console.log("success");
-            } else {
-              console.log("error");
+                this.set("personalInfo.personal.organization.name", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.organization.key", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.address.office.key", this.get("organizationInfo.Name"));
+                this.set("personalInfo.personal.organization.isLinkedAccount", false);
+                this.set("personalInfo.personal.organization.linkedAddress", "");
+                this.set("organizationInfo.isNewOrganization", true);
+                this.send("createNewOrganization", true);
             }
+        },
+        chosenValueChanged: function(value, param) {
+          param.set("value", value);
+        },
+        selectedCompanyDetails: function(value) {
+          Ember.$(".hypersearch-input").val('');
+          this.set('createOrganization', false);
+          this.set("personalInfo.personal.organization.name", Ember.getWithDefault(value, "attributes.name", ""));
+          this.set("personalInfo.personal.organization.key", Ember.getWithDefault(value, "id", ""));
+          //this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "id", ""));
+          this.set("personalInfo.personal.organization.isLinkedAccount", true);
+          this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes.address", ""));
+          this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "attributes.address_key", "2BBFE3AA-3242-4105-9E89-6E880FC87518"));
+          this.set("personalInfo.personal.address.office.address_owner_key", Ember.getWithDefault(value, "id", ""));
+          this.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.Name", "");
+          this.set("organizationInfo.Website", "");
+          this.set("organizationInfo.companyType", "");
+          this.set("organizationInfo.orgPhone", "");
+          this.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          this.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          
+          this.set("organizationInfo.addressLine1", "");
+          this.set("organizationInfo.addressLine2", "");
+          this.set("organizationInfo.locality", "");
+          this.set("organizationInfo.workState", {value: "", key: ""});
+          this.set("organizationInfo.PostalCode", "");
+          this.set("organizationInfo.isNewOrganization", false);
         }
     }
 });

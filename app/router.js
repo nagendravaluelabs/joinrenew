@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('invoice-invalid');
   this.route('invalid-janrain');
   this.route('invoice-unavailable');
+  this.route('complete', {path: '/renew/complete' });
 });
 
 export default Router;

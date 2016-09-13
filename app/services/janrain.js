@@ -100,7 +100,7 @@ export default Service.extend(RouteRefresherMixin, {
           if(response.status === 200) {
             return response.json().then(function(json){
               $('.ajax-spinner').hide();
-              if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
+              if(Ember.getWithDefault(json, "result.nfIndividualKey", false)) {
                 self.get("userData").setUserData(json.result.nfIndividualKey);
                 self.get("auth").set("authState", "");
                 self.reloadRoute();
@@ -135,11 +135,18 @@ export default Service.extend(RouteRefresherMixin, {
       }
     });
   },
-  doLogout() {
-    localStorage.removeItem('aia-user');
+  doLogout(isForceLogout) {
+    isForceLogout = (typeof isForceLogout === "undefined") ? false : isForceLogout;
     this.get("userData").setUserData(null);
-    if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
-      window.janrain.capture.ui.endCaptureSession();
+    if(!isForceLogout) {
+      localStorage.removeItem('aia-user');
+      localStorage.removeItem('aiaUserInfo'); 
+      localStorage.removeItem('aiaGenericData'); 
+      localStorage.removeItem('janrainLastAuthMethod'); 
+      localStorage.removeItem('janrainLastAuthMethod_Expires'); 
+      if (window.janrain && window.janrain.capture && window.janrain.capture.ui) {
+        window.janrain.capture.ui.endCaptureSession();
+      }
     }
     this.reloadRoute();
   }

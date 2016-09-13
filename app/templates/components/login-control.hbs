@@ -3,7 +3,7 @@
     <li><a href="#" {{action "logout"}}>Sign out</a></li>
   {{else}}
     {{#using-janrain as |enabled janrain|}}
-      <li><a href="#" {{action janrain.login}}>Login</a></li>
+      <li><a href="#" {{action janrain.login}}>Sign in</a></li>
     {{/using-janrain}}
   {{/if}}
 </ul>

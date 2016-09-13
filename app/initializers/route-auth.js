@@ -10,29 +10,37 @@ var AuthMixin = Ember.Mixin.create({
   },
   authVerify: function() {    
     let currenRoute  = this.routeName;
-    let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page"];
-    let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable"];
+    let authRoutes = ["renew-verify-membership", "primary-information", "membership-dues", "payment-information", "thankyou-page", "complete"];
+    let noLogouts = ["invalid-invoice", "invoice-unavailable"];
+    let routeIgnoreKeys = ["not-authorized", "invoice-invalid", "invalid-janrain", "invoice-unavailable", "page-not-found"];
     let nonAuthRoutes = ["renew", "index"];
     if(currenRoute !== "application") {
       let authUser = this.get("auth").get("user");
+      let authState = this.get("auth").get("authState");
+      let authUserInfo = localStorage.aiaUserInfo;
+      authUserInfo = (authUserInfo !== undefined) ? JSON.parse(authUserInfo) : {};
       if(authRoutes.indexOf(currenRoute) !== -1) {
-        if(!authUser) {
-          localStorage['route'] = currenRoute;
-          if(this.get("auth").get("authState") === "logout") {
+        if(!authUser || noLogouts.indexOf(authState) !== -1) {
+          if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+            localStorage['route'] = "renew-verify-membership";
+          } else {
+            localStorage['route'] = "renew";
+          }
+          if(authState === "logout") {
             this.transitionTo('/renew');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "invalid-invoice") {
+          } else if(authState === "invalid-invoice") {
             this.transitionTo('/invoice-invalid');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "invoice-unavailable") {
+          } else if(authState === "invoice-unavailable") {
             this.transitionTo('/invoice-unavailable');
             localStorage['route'] = "";
-          } else if(this.get("auth").get("authState") === "no-access") {
+          } else if(authState === "no-access") {
             this.transitionTo('/invalid-janrain');
             localStorage['route'] = "";
           } else {
             this.transitionTo('/not-authorized');
-          }        
+          }
         }
       } else if(nonAuthRoutes.indexOf(currenRoute) !== -1) {
         if(authUser && authUser.access_token !== undefined) {
@@ -40,10 +48,19 @@ var AuthMixin = Ember.Mixin.create({
           if(transitionToRoute) {
             this.transitionTo(transitionToRoute);
           } else {
-            this.transitionTo("renew-verify-membership");
+            if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+              this.transitionTo("renew-verify-membership");
+            } else if(authState === 'invalid-invoice') {
+              this.transitionTo("invoice-invalid");
+            } else if(authState === 'invoice-unavailable') {
+              this.transitionTo("invoice-unavailable");
+            } else if(authState === "logout") {
+              this.transitionTo('/renew');
+              localStorage['route'] = "";
+            }
           }
           localStorage['route'] = "";
-        } else if(authUser && authUser.indexOf("invalid") !== -1) {
+        } else if(authUser && authUser.length>0 && authUser.indexOf("invalid") !== -1) {
           this.transitionTo("invalid-janrain");
         }
       } else if(routeIgnoreKeys.indexOf(currenRoute) !== -1) {
@@ -53,7 +70,21 @@ var AuthMixin = Ember.Mixin.create({
             this.transitionTo(transitionToRoute);
             localStorage['route'] = "";
           } else {
-            this.transitionTo("renew-verify-membership");
+            if(Ember.getWithDefault(authUserInfo, "invoice", false)) {
+              this.transitionTo("renew-verify-membership");
+            } else if(authState === 'invalid-invoice') {
+              this.transitionTo("invoice-invalid");
+            } else if(authState === 'invoice-unavailable') {
+              this.transitionTo("invoice-unavailable");
+            } else if(authState === "logout") {
+              this.transitionTo('/renew');
+              localStorage['route'] = "";
+            }
+          }
+        } else {
+          if(authState === "logout") {
+            this.transitionTo('/renew');
+            localStorage['route'] = "";
           }
         }
       } else {

@@ -3,7 +3,6 @@
 /*global window*/
 
 import Ember from 'ember';
-
 export default Ember.Route.extend({
     activate() {
       "use strict";
@@ -16,12 +15,13 @@ export default Ember.Route.extend({
             active: false,
             heightStyle: "content"
         });
+       $("#payment-accordion h3:eq(0)").trigger('click');
         $('#paymentplan_extrainfo').dialog({
           modal: true,
           autoOpen: false,
           draggable: false,
           resizable: false,
-          width: $(window).width() > 500 ? 450 : '90%',
+          width: $(window).width() > 700 ? 600 : '90%',
           title: '',
           responsive: true,
           closeText: 'Close',
@@ -30,13 +30,33 @@ export default Ember.Route.extend({
           hide: false
         });
         $(window).resize(function () {
-          $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 500 ? 450 : '90%');
+          $("#paymentplan_extrainfo").dialog("option", "width", $(window).width() > 700 ? 600 : '90%');
         });
         $('body').on("click", ".ui-widget-overlay", function () {
           $("#paymentplan_extrainfo").dialog("close");
         });
       });
   },
+	setupController: function(controller) {
+		this._super.apply(this, arguments);
+    var paymentsData = localStorage.aiaUserInfo;
+    if(paymentsData !== undefined) {
+      paymentsData = JSON.parse(paymentsData);
+      paymentsData.paymentInfo = {};
+      paymentsData.paymentInfo.paymentType = "Debit/Credit Card";
+      paymentsData.paymentInfo.eCheckMode = "C";
+      paymentsData.paymentInfo.isArchiPAC = 0;
+      localStorage.aiaUserInfo = JSON.stringify(paymentsData);
+      controller.get("primaryData").saveUserData(paymentsData);
+    }
+		controller.resetPayments();
+	},
+	resetController: function(controller, isExiting) {
+		this._super.apply(this, arguments);
+		if (isExiting) {
+			controller.resetPayments();
+		}
+	},
   model(){
     "use strict";
     return Ember.RSVP.hash({

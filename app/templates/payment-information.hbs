@@ -1,13 +1,68 @@
+{{title "Payment information | AIA"}}
 {{renew-steps steps=model.steps}}
+
 <div class="row">
   <div class="col-sm-9">
+    {{#if paymentFailed}}
+      <div id="paymentError" class="alert alert-danger">{{paymentFailed}}</div>
+    {{/if}}
     <h1 class="page-title">Payment information</h1>
     <div id="userprofileinfo">
       <ul class="no-style">
-      	<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
-        <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
-        <li>{{primaryData.data.personal.address.home.city}}</li>
-        <li>{{primaryData.data.personal.address.home.country.value}},  {{primaryData.data.personal.address.home.state.value}} {{primaryData.data.personal.address.home.zip}}</li>
+        {{#if (isEqualTo primaryData.data.personal.address.primary "home")}}
+          <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
+          <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
+          <li>
+            {{#if primaryData.data.personal.address.home.city}}
+              {{primaryData.data.personal.address.home.city}}, 
+            {{/if}}
+              {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                {{#if primaryData.data.personal.address.home.state.value}}
+                  {{primaryData.data.personal.address.home.state.value}},
+                {{/if}}
+              {{/if}} 
+          {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
+        {{/if}}
+        
+        {{#if (ifCond primaryData.data.personal.organization.isLinkedAccount primaryData.data.personal.organizationInfo.isNewOrganization '||')}}
+          {{#if primaryData.data.personal.organization.isLinkedAccount}}
+            {{#if primaryData.data.personal.organization.linkedAddress}}
+              {{#if primaryData.data.personal.organization.name}}
+                {{primaryData.data.personal.organization.name}}<br />
+              {{/if}}
+              {{{nl2br (explodeImplode primaryData.data.personal.organization.linkedAddress ",")}}}
+            {{/if}}
+          {{else}}
+            {{#if primaryData.data.personal.organizationInfo.addressLine1}}
+              {{primaryData.data.personal.organizationInfo.addressLine1}}<br />
+            {{/if}}
+            {{#if primaryData.data.personal.organizationInfo.addressLine2}}
+              {{primaryData.data.personal.organizationInfo.addressLine2}}<br />
+            {{/if}}
+            {{#if primaryData.data.personal.organizationInfo.locality}}
+              {{primaryData.data.personal.organizationInfo.locality}},
+            {{/if}}
+            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+              {{#if primaryData.data.personal.organizationInfo.workState.value}}
+                {{primaryData.data.personal.organizationInfo.workState.value}},
+              {{/if}}
+            {{/if}} 
+            {{primaryData.data.personal.organizationInfo.country.value}}
+            {{primaryData.data.personal.organizationInfo.PostalCode}}
+          {{/if}}          
+        {{else}}        
+          {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
+            <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
+            <li>{{primaryData.data.personal.address.office.line1}} {{primaryData.data.personal.address.office.line2}} {{primaryData.data.personal.address.office.line3}}</li>
+            <li>{{primaryData.data.personal.address.office.city}},
+              {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                  {{#if primaryData.data.personal.address.office.state.value}}
+                    {{primaryData.data.personal.address.office.state.value}},
+                  {{/if}}
+                {{/if}}
+            {{primaryData.data.personal.address.office.country.value}}            {{primaryData.data.personal.address.office.zip}}</li>
+          {{/if}}
+        {{/if}}
       </ul>
     </div>
     
@@ -17,12 +72,12 @@
         <div id="payment-accordion">
            <h3>
             AIA membership dues:
-		<!-- 	<strong class="member-role">{{model.role}}</strong> -->
-            <span class="membership">
-		<!-- 	<strong class="member-role mobile-view">{{model.role}}</strong> -->
+		
+            <!--<span class="membership">
+		
               <span class="membership-type">
                 <span class="membership-total">${{format-currency subTotal}}</span></span>
-              </span>
+              </span>-->
           </h3>
           <div class="newaiamembership">
             <div class="result">
@@ -31,46 +86,64 @@
                   {{#if primaryData.data.invoice.dues.national}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.national.chapter}}</td>
-                      <td>${{format-currency primaryData.data.invoice.dues.national.due}}</td>
+                      <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.national.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.state}}
                     <tr>
                       <td>{{primaryData.data.invoice.dues.state.chapter}}</td>
-                      <td>${{format-currency primaryData.data.invoice.dues.state.due}}</td>
+                      <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.state.due}}</span></td>
                     </tr>
                   {{/if}}
                   {{#if primaryData.data.invoice.dues.local}}
                   <tr>
                     <td>{{primaryData.data.invoice.dues.local.chapter}}</td>
-                    <td>${{format-currency primaryData.data.invoice.dues.local.due}}</td>
+                    <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.local.due}}</span></td>
                   </tr>
                   {{/if}}
-                  {{#if primaryData.data.membership.membershipyear}}
-                    <tr class="sum">
-                      <td class="title">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</td>
-                      <td class="due-total">${{format-currency subTotal}}</td>
-                    </tr>
-                  {{/if}}
+                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        {{#if primaryData.data.membership.membershipyear}}
+        <div class="spl_dues_bottom">
+          <div class="sup-title total_label">{{primaryData.data.membership.membershipyear}} Individual dues subtotal</div>
+          <div class="sup-due-total paymentdue"><span class="right-space">$ {{format-currency subTotal}}</span></div> 
+        </div>
+        {{/if}}
         {{#if primaryData.data.supplementalDuesTotal}}
         <div class="spl_dues_bottom">
           <div class="sup-title total_label">Supplemental dues</div>
-          <div class="sup-due-total paymentdue">${{format-currency primaryData.data.supplementalDuesTotal}}</div> 
+          <div class="sup-due-total paymentdue"><span class="right-space">$ {{format-currency primaryData.data.supplementalDuesTotal}}</span></div> 
         </div>
          {{/if}}
-        <div id="accordion_bottom">
-          <div class="total_label">Total</div>
+         
+         
+        <div class="spl_dues_bottom total-dues-box">	
+          <div class="sup-title total_label"><strong>Total membership dues</strong></div>
+          <div class="sup-due-total paymentdue"><span class="right-space"><strong>
+            {{#if primaryData.data.supplementalDuesTotal}}
+              $ {{format-currency supplyTotal}}
+            {{else}}
+              $ {{format-currency subTotal}}
+            {{/if}}
+          </strong></span></div> 
+        </div>
+        
+         <div class="spl_dues_bottom archipac-box">
+          {{archipac-donation primaryData=primaryData}}
+         </div>       
+        <div class="spl_dues_bottom total-dues-box" id="accordion_bottom">
+          <div class="total_label"><strong>Total amount due</strong></div>
           {{#if primaryData.data.supplementalDuesTotal}}
-          <div id="paymentdue" class="paymentdue">${{format-currency supplyTotal}}</div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>$ {{format-currency supplyTotalWithArchipac}}</strong></span></div>
           {{else}}
-          <div id="paymentdue" class="paymentdue">${{format-currency subTotal}}</div>
+          <div id="paymentdue" class="paymentdue"><span class="right-space"><strong>$ {{format-currency subTotalWithArchipac}}</strong></span></div>
           {{/if}}
         </div>
+		
       </div>
     </div>
     
@@ -79,7 +152,8 @@
 
       <ul class="no-style">
       	<li>
-          <input type="radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" checked="checked" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
+          {{radio-button class="form-radio" id="pay-debit-credit" name="payment_type" value="Debit/Credit Card" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
+          
           <label for="pay-debit-credit">Debit or credit card </label>
           <div class="creditcardType">
             <div class="amexicon creditcardicon"></div>
@@ -90,51 +164,67 @@
           <div class="clearfix"></div>
         </li>
       	<li>
-          <input type="radio" id="pay-electronic-check" name="payment_type" value="Electronic check" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
-          <label for="pay-electronic-check">Electronic check</label>
-        </li>
-      	<li>
-          <input type="radio" id="pay-in-installments" name="payment_type" value="EMI" class="form-radio" onchange={{action "updatePaymentType" value="target.value"}}>
-          <label for="pay-in-installments">Pay in installments</label>
-        </li>
-      </ul>
-      {{#if insallmentsPayment}}
-        <div id="installments" class="common-form">
-          <div id="installmentsform">
-          {{#if primaryData.data.invoice.maxinstallments}}
-            <div id="installmentnumber">
-              Pay my dues in
-              <select class="select-installments form-select" id="select-installments" onchange={{action "install" value="target.value"}}>
-                {{#each (for 3 primaryData.data.invoice.maxinstallments 1) as |installment|}}
-                  <option value="{{installment}}">{{installment}}</option>
-                {{/each}}
-              </select>              
-              <label for="select-installments">installments</label>
-            </div>
+          {{radio-button class="form-radio" id="pay-electronic-check" name="payment_type" value="Electronic check" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType" disabled=primaryData.data.paymentInfo.isArchiPAC}}
+          <label for="pay-electronic-check" class="electronic-check {{if primaryData.data.paymentInfo.isArchiPAC 'text-muted'}}">
+            Electronic check
+            {{#if primaryData.data.paymentInfo.isArchiPAC}}
+               - ArchiPAC donation may only be paid with a credit/debit card. Please select an alternative payment method.
             {{/if}}
-            <div id="firstinstallment">Total for first installment: <span>${{format-currency installment}}</span>
-            <span id="paymentplan_info_but">
-              <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
-            </span></div>
-            
-            <div class="clearfix"></div>
-            <div class="servicefee_info">
-              A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments.
-            </div>
-            <div class="clearfix"></div>
-            <div id="servicefee">
-              <form action="#" id="install-agreement" method="post">
-                <input type="checkbox" id="installment_iagree" name="installment_iagree" value="I agree" class="form-checkbox installment_iagree" />
-                <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
-              </form>
+          </label>
+        </li>
+        {{#if maxInstallmentsProperty}}
+          <li>
+            {{radio-button class="form-radio" id="pay-in-installments" name="payment_type" value="EMI" groupValue=primaryData.data.paymentInfo.paymentType changed="updatePaymentType"}}
+            <label for="pay-in-installments">Pay in installments</label>
+          </li>
+        {{/if}}
+      </ul>
+      {{#if maxInstallmentsProperty}}
+        {{#if installmentsPayment}}
+          <div id="installments" class="common-form">
+            <div id="installmentsform">
+            {{#if maxInstallmentsProperty}}
+              <div id="installmentnumber">
+                Pay my dues in
+                {{#x-select name="select-installments" id="select-installments" class="select-installments form-select" action="install" value=(mut (get primaryData.data.paymentInfo "InstallmentCount"))}}
+                  {{#each (for 3 maxInstallmentsProperty 1) as |installment|}}
+                    {{#x-option value=installment}}{{installment}}{{/x-option}}                  
+                  {{/each}}
+                {{/x-select}}
+                <label for="select-installments">installments</label>
+              </div>
+              {{/if}}
+              <div id="firstinstallment">Total for first installment: 
+              <span>
+                {{#if primaryData.data.paymentInfo.isArchiPAC}}
+                  $ {{format-currency (mathOp installment 25 '+')}} (This includes Archipac donation)
+                {{else}}
+                  $ {{format-currency installment}}
+                {{/if}}
+              </span>
+              <span id="paymentplan_info_but">
+                <a class="extrainfo_icon" onclick={{action "showPaymentPlan"}}></a>
+              </span></div>
+              
+              <div class="clearfix"></div>
+              <div class="servicefee_info">
+                A $40 service fee will be charged. You will be charged today and the last business day of each month. You must use a credit card for installment payments. Only membership dues can be paid in installments.
+              </div>
+              <div class="clearfix"></div>
+              <div id="servicefee">
+                <form action="#" id="install-agreement" method="post">
+                  {{input type="checkbox" classBinding=":form-checkbox :installment_iagree" id="installment_iagree" name="installment_iagree" checked=(mut (get primaryData.data.paymentInfo "InstallmentAgreement"))}}
+                  <label for="installment_iagree" class="installment-agreement">I agree to pay all installments until membership is paid in full <span class="form-required">*</span></label>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        {{/if}}
       {{/if}}
     </div>
     
     <div class="payments-container common-form">
-      {{#if (ifCond debitPayment insallmentsPayment '||')}}
+      {{#if (ifCond debitPayment installmentsPayment '||')}}
         <div class="card-payment">
           <h3>Enter your credit or debit card information<span class="required">*</span></h3>
           <form action="#" id="form-card-payment" method="post">
@@ -144,15 +234,14 @@
                   Name on card 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full few-special-char form-text" type="text" id="cardName" name="cardName" size="60" maxlength="255" />
+                {{input type="text" classBinding=":form-text :text-full :few-special-char" id="cardName" name="cardName" value=primaryData.data.paymentInfo.NameOnCard size="60" maxlength="255"}}
               </li>
               <li>
                 <label for="cardNumber">
                   Card number 
                   <span class="form-required">*</span>
                 </label>
-                <input class="text-full form-text" type="text" id="cardNumber" name="cardNumber" size="60" maxlength="19"  />
-                
+                {{input type="text" classBinding=":form-text :text-full" id="cardNumber" name="cardNumber" value=primaryData.data.paymentInfo.CardNumber size="60" maxlength="19"}}                
               </li>
               <li>
                 <label for="cardExpirationMonth">
@@ -161,29 +250,29 @@
                 </label>
                 <div class="cardExpiration clearfix">
                   <div class="cardExpirations">
-                    <select id="cardExpirationMonth" name="cardExpirationMonth" class="form-select">
-                      <option value="">Month</option>
-                      <option value="1">Jan</option>
-                      <option value="2">Feb</option>
-                      <option value="3">Mar</option>
-                      <option value="4">Apr</option>
-                      <option value="5">May</option>
-                      <option value="6">Jun</option>
-                      <option value="7">Jul</option>
-                      <option value="8">Aug</option>
-                      <option value="9">Sep</option>
-                      <option value="10">Oct</option>
-                      <option value="11">Nov</option>
-                      <option value="12">Dec</option>
-                    </select>
+                    {{#x-select name="cardExpirationMonth" id="cardExpirationMonth" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationMonth"))}}
+                      {{#x-option value=""}}Month{{/x-option}}
+                      {{#x-option value="1"}}Jan{{/x-option}}
+                      {{#x-option value="2"}}Feb{{/x-option}}
+                      {{#x-option value="3"}}Mar{{/x-option}}
+                      {{#x-option value="4"}}Apr{{/x-option}}
+                      {{#x-option value="5"}}May{{/x-option}}
+                      {{#x-option value="6"}}Jun{{/x-option}}
+                      {{#x-option value="7"}}Jul{{/x-option}}
+                      {{#x-option value="8"}}Aug{{/x-option}}
+                      {{#x-option value="9"}}Sep{{/x-option}}
+                      {{#x-option value="10"}}Oct{{/x-option}}
+                      {{#x-option value="11"}}Nov{{/x-option}}
+                      {{#x-option value="12"}}Dec{{/x-option}}
+                    {{/x-select}}
                   </div>
                   <div class="cardExpirations">
-                    <select id="cardExpirationYear" name="cardExpirationYear" class="form-select">
-                      <option value="">Year</option>
-                        {{#each (for currentYear maxYearList 1) as | year |}}
-                            <option value="{{year}}">{{year}}</option>
-                        {{/each}}
-                    </select>
+                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
+                      {{#x-option value=""}}Year{{/x-option}}
+                      {{#each (for currentYear maxYearList 1) as | year |}}
+                        {{#x-option value=year}}{{year}}{{/x-option}}                  
+                      {{/each}}
+                    {{/x-select}}
                   </div>
                 </div>
               </li>
@@ -193,7 +282,7 @@
                     Security code 
                     <span class="form-required">*</span>
                   </label>
-                  <input class="text-full form-text" type="text" id="cardSecurityCode" name="cardSecurityCode" size="60" maxlength="4" />
+                  {{input type="text" classBinding=":form-text :text-full" id="cardSecurityCode" name="cardSecurityCode" value=primaryData.data.paymentInfo.SecurityCode size="60" maxlength="4"}}
                 </div>
                 <div class="gatewayimg"></div>
                 <div class="clearfix clear600"></div>
@@ -201,16 +290,16 @@
                 <div class="clearfix"></div>
               </li>
               <li class="terms">
-                <input type="checkbox" id="iagree_terms" name="iagree_terms" value="I agree" class="form-checkbox iagree_terms" />
+                {{input type="checkbox" classBinding=":form-checkbox :iagree_terms" id="iagree_terms" name="iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
                 <label for="iagree_terms" class="agreement">
                   I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
                 </label>
               </li>
+               <!--<li>
+                 {{archipac-donation primaryData=primaryData}}
+              </li>-->
               <li>
                 <input type="button" value="Submit payment" class="form-submit" {{action 'callValidations'}}>
-                <!--<input type="button" value="Submit payment" class="form-submit"  
-                {{action 'validatePaymentInfo'}} {{action 'validateInstallmentAgreeInfo'}}  /> -->
-                
               </li>
             </ul>
           </form>
@@ -218,59 +307,60 @@
       {{/if}}
       {{#if echeckPayment}}
         <div class="electronic-check">
-          <h3>Enter your ACH information<span class="required" aria-required="true">*</span></h3>
-          <form action="#" id="form-electronic-check" method="post">
-            <div class="pull-left echeckMode">
+          {{#unless primaryData.data.paymentInfo.isArchiPAC}}
+            <h3>Enter your ACH information<span class="required" aria-required="true">*</span></h3>
+            <form action="#" id="form-electronic-check" method="post">
+              <div class="pull-left echeckMode">
+                <ul class="no-style">
+                  <li>
+                    {{radio-button class="form-radio" id="ecChecking" name="echeckMode" value="C" groupValue=primaryData.data.paymentInfo.eCheckMode}}
+                    <label for="ecChecking">Checking</label>
+                  </li>
+                  <li>
+                    {{radio-button class="form-radio" id="ecSavings" name="echeckMode" value="S" groupValue=primaryData.data.paymentInfo.eCheckMode}}
+                    <label for="ecSavings">Savings</label>
+                  </li>
+                </ul>
+              </div>
+              <div class="gatewayimg"></div>
+              <div class="clearfix clear600"></div>
+              <div class="electronicCheckImg"></div>
+              <div class="clearfix"></div>
               <ul class="no-style">
                 <li>
-                  <input type="radio" id="ecChecking" name="echeckMode" value="Checking" checked="checked" class="form-radio" aria-required="true">
-                  <label for="ecChecking">Checking</label>
+                  <label for="accountName">
+                    Name on account 
+                    <span class="form-required">*</span>
+                  </label>
+                  {{input type="text" classBinding=":form-text :text-full :few-special-char" id="accountName" name="accountName" value=primaryData.data.paymentInfo.AccountName size="60" maxlength="255"}}
+                </li>
+                
+                <li>
+                  <label for="bankroutingNumber">
+                    Bank routing number 
+                    <span class="form-required">*</span>
+                  </label>
+                  {{input type="text" classBinding=":form-text :text-full" id="bankroutingNumber" name="bankroutingNumber" value=primaryData.data.paymentInfo.RoutingNumber size="60" minlength="7"}}
                 </li>
                 <li>
-                  <input type="radio" id="ecSavings" name="echeckMode" value="Savings" class="form-radio" aria-required="true">
-                  <label for="ecSavings">Savings</label>
+                  <label for="accountNumber">
+                    Account number 
+                    <span class="form-required">*</span>
+                  </label>
+                  {{input type="text" classBinding=":form-text :text-full" id="accountNumber" name="accountNumber" value=primaryData.data.paymentInfo.AccountNumber size="60" maxlength="255"}}
+                </li>
+                <li class="terms">
+                  {{input type="checkbox" classBinding=":form-checkbox :check_iagree_terms" id="check_iagree_terms" name="check_iagree_terms" checked=(mut (get primaryData.data.paymentInfo "TermsConditionsAgreement"))}}
+                  <label for="check_iagree_terms" class="ele-agreement">
+                    I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
+                  </label>
+                </li>
+                <li>
+                  <input type="button" value="Submit payment" class="form-submit" {{action 'validatePaymentElectronicInfo'}}>
                 </li>
               </ul>
-            </div>
-            <div class="gatewayimg"></div>
-            <div class="clearfix clear600"></div>
-            <div class="electronicCheckImg"></div>
-            <div class="clearfix"></div>
-            <ul class="no-style">
-              <li>
-                <label for="accountName">
-                  Name on account 
-                  <span class="form-required">*</span>
-                </label>
-                <input class="text-full few-special-char form-text" type="text" id="accountName" name="accountName" size="60" maxlength="255" />
-              </li>
-              
-              <li>
-                <label for="bankroutingNumber">
-                  Bank routing number 
-                  <span class="form-required">*</span>
-                </label>
-                <input class="text-full form-text" type="text" id="bankroutingNumber" name="bankroutingNumber" size="60" minlength="7" />
-              </li>
-              <li>
-                <label for="accountNumber">
-                  Account number 
-                  <span class="form-required">*</span>
-                </label>
-                <input class="text-full form-text" type="text" id="accountNumber" name="accountNumber" size="60" maxlength="255" />
-              </li>
-              <li class="terms">
-                <input type="checkbox" id="check_iagree_terms" name="check_iagree_terms" value="I agree" class="form-checkbox check_iagree_terms" />
-                <label for="check_iagree_terms" class="ele-agreement">
-                  I agree to the <a href="http://tiny.cc/y7fy4x" target="_blank">terms &amp; conditions</a>, <a href="http://tiny.cc/6pxi2x" target="_blank">ethics statement</a> and the<a href="http://tiny.cc/dtxi2x" target="_blank"> privacy policy</a> of aia.org. <span class="form-required">*</span>
-                </label>
-              </li>
-              
-              <li>
-                <input type="button" value="Submit payment" class="form-submit" {{action 'validatePaymentElectronicInfo'}}>
-              </li>
-            </ul>
-          </form>
+            </form>
+          {{/unless}}
         </div>
       {{/if}}
     </div>
@@ -286,9 +376,9 @@
           <tr>
             <th scope="row">Member dues</th>
             {{#if primaryData.data.supplementalDuesTotal}}
-            <td class="price">${{format-currency supplyTotal}}</td>
+            <td class="price">$ {{format-currency supplyTotal}}</td>
             {{else}}
-            <td class="price">${{format-currency subTotal}}</td>
+            <td class="price">$ {{format-currency subTotal}}</td>
             {{/if}}
           </tr>
           <tr> 
@@ -297,7 +387,7 @@
           </tr>
           <tr>
             <th scope="row">Total</th>
-            <td class="price">${{format-currency total}}</td>
+            <td class="price">$ {{format-currency total}}</td>
           </tr>
           <tr>
             <th scope="row">Number of payments</th>
@@ -313,12 +403,39 @@
             {{#each (for 1 installNumber 1) as |key|}}
               <tr class="installments_tbl_tr">
                 <td class="install_num">{{key}} </td>
-                <td class="install_payment">${{format-currency installment}}</td>
+                <td class="install_payment">
+                  {{#if (ifCond key 1 "==")}}
+                    {{#if primaryData.data.paymentInfo.isArchiPAC}}
+                      $ {{format-currency (mathOp installment 25 '+')}}
+                    {{else}}
+                      $ {{format-currency installment}}
+                    {{/if}}
+                  {{else}}
+                    $ {{format-currency installment}}
+                  {{/if}}
+                </td>
               </tr>
             {{/each}}
           </tbody>
         </table>
       </div>
     </div>
+  </div>
+  <span class="arc-don-amt">ArchiPAC donation cannot be paid as part of the payment plan.</span>
+</div>
+
+<!-- Disclamer Start-->
+
+<div class="renew-disclaimer">
+  <div class="renew-container">
+    <div class="disclaimer-txt">
+      <div class="col-xs-12">
+        <strong>ArchiPAC Disclaimer</strong>
+        <div>
+          Contributions to ArchiPAC are not tax deductible. Contributions are voluntary and will be used for political purposes; you may refuse to contribute without reprisal. Contribution guidelines are only suggestions, you may contribute more or less than the suggested amounts and you will not be favoured or disadvantaged based on the amount of your contribution or your decision not to contribute. All contributions must be from U.S. citizens or lawful permanent residents (e.g., green card holders), from personal funds, and may not be made by anyone who is a federal government contractor. Corporate contributions are prohibited by federal law. Federal law requires political committees to use their best efforts to collect and report the name, address, employer and occupation of individuals whose contributions exceed $200 in a calender year.
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </div>

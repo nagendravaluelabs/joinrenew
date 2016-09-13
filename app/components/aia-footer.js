@@ -1,9 +1,10 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true*/
 import Ember from 'ember';
+import ENV from '../config/environment';
 
 export default Ember.Component.extend({
     list: [{
-        "text": "&copy; " + new Date().getFullYear() + " AIA",
+        "text": "&copy; " + ENV.AIA_NEXT_YEAR + " AIA",
         "route": false
     },
             {

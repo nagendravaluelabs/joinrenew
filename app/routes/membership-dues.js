@@ -9,6 +9,27 @@ activate() {
     
   });
 },
+setupController: function(controller) {
+    this._super.apply(this, arguments);    
+    var duesData = localStorage.aiaUserInfo;
+    if(duesData !== undefined) {
+      duesData = JSON.parse(duesData);
+      duesData.membershipInfo = {};
+      duesData.membershipInfo.persons = {};
+      duesData.membershipInfo.amount = {};
+      duesData.supplementalDuesTotal = 0;
+      localStorage.aiaUserInfo = JSON.stringify(duesData);
+      controller.get("duesData").saveUserData(duesData);
+    }
+    controller.resetSupplement();
+},
+resetController: function(controller, isExiting) {
+    this._super.apply(this, arguments);
+
+    if (isExiting) {
+        controller.updateDuesPage(true, false, false, false); // or whatever function you want to call
+    }
+},
 model(){
   "use strict";
 return Ember.RSVP.hash({
@@ -26,7 +47,7 @@ return Ember.RSVP.hash({
 	{
 	  "title": "Step 3. Payment",
 	  "status": "",
-	  "route": "payment-information"
+	  "route": "membership-dues"
 	}
   ]  
  });

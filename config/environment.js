@@ -17,11 +17,13 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-
-    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//54.197.6.159/netforum/web/getdata',
-    AIA_API_URL: 'https://american-institute-of-architects-dev.us-dev.janraincapture.com',
+    AIA_NEXT_YEAR: "2017",	
+    AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//ec2-52-23-241-241.compute-1.amazonaws.com/http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update',
+    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//ec2-52-23-241-241.compute-1.amazonaws.com/http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata',
+    AIA_API_URL: '//ec2-52-23-241-241.compute-1.amazonaws.com/https://american-institute-of-architects-dev.us-dev.janraincapture.com',
     AIA_API_CLIENT_ID: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
-    AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
+    AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq',
+    AIA_EMPLOYMENT_LOOKUP_URL : '//ec2-52-23-241-241.compute-1.amazonaws.com/http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations'
 
   };
 
@@ -31,6 +33,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+	 AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update.php';
+	 AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
   }
 
   if (environment === 'test') {
@@ -45,8 +49,14 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'staging' || environment === 'production') {
+  if (environment === 'staging') {	  
+	 AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewbkgewmdslx.devcloud.acquia-sites.com/renewjson/getdata';
+	 AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewbkgewmdslx.devcloud.acquia-sites.com/renewjson/update.php';
+  }
+  if (environment === 'uat') {
 
+  }  
+  if (environment === 'production') {
   }
 
   return ENV;

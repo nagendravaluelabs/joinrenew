@@ -49,6 +49,7 @@ input[type="button"] {
         width: 100%;
         span {
           color: #000;
+          font-size: 16px;
         }
         div {
           width: 48px;
@@ -124,7 +125,7 @@ input[type="checkbox"] {
     cursor: pointer;
     padding:0 0 0 25px;
     position: relative;
-    margin:5px 0 25px 0;
+    margin:5px 0 0 0;
     line-height:23px;
     &:before {
       background-color: #fff;
@@ -211,7 +212,7 @@ label {
   }
   label {
     color: #000;
-    font: 1.6rem 'Architype-Light',sans-serif normal;
+    font: 1.6rem 'Architype-Light',sans-serif, normal;
     margin-bottom: 18px;
     max-width: 100%;
     display:block;
@@ -329,6 +330,8 @@ label {
     text-align: left;
     transition: all 0.25s ease-in-out 0s;
     display:inline-block;
+    margin-top:18px;
+    line-height: 24px;
     &:hover {
       background-color: $button-bg-hover-color;
       border: 0 none;
@@ -360,5 +363,75 @@ select {
     padding: 4px;
   }
 }
+p{
+  &.note{
+    padding-left:24px;
+    margin-bottom: 0 !important;
+    font-style: italic;
+    span{
+    font-style:normal;
+    }
+  }
+}
 
-/* Start: Select styles */
+.payment-archipac-table{
+  width: 100%;
+
+  @media screen and (max-width: 767px){
+    width: 100%;
+  }
+  .archipac-text {
+    padding-left: 30px;
+    padding-top: 6px;
+    color: #000;
+    @media screen and (max-width: 767px){
+      padding-top: 0px;
+    }
+    span {
+      color:#fa4132;
+    }
+  }
+}
+
+/* Hyper Search start */
+ul{
+  &.hypersearch-results{
+    background: #fff;
+    border: 1px #ccc solid;
+    margin-top: -1px;
+    width: 67%;
+    max-height: 250px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 9999;
+    @media screen and (max-width: 1024px){
+      width: 100%;
+    }
+    li.hypersearch-result{
+      margin: 0;
+      span {
+        border-bottom:1px #ccc solid;
+        padding:7px 15px;
+        margin:0;
+        display: block;
+        cursor: pointer;
+        &:hover{
+        background: #0072b9;
+        color:#fff;
+        }
+      }
+    }
+  }
+}
+
+.hypersearch-input {
+  position: relative;
+  border: 1px #ccc solid;
+  background-image: url(../images/throbber-inactive.png);
+  background-position: 100% center; /* LTR */
+  background-repeat: no-repeat;
+}
+.hypersearch-loading{
+  background-image: url(../images/throbber-active.gif);
+  background-position: 100% center; /* LTR */
+}

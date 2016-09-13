@@ -8,6 +8,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: $font-light;
  /* font-size: 100%;
   font: inherit;*/
   vertical-align: baseline;
@@ -19,6 +20,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 body {
   line-height: 1;
+  font-family: $font-light;
 }
 
 ol, ul {
@@ -46,7 +48,7 @@ body {
   nowhitespace: afterproperty;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
- /* font: 14px/1.6 'Architype-Light',sans-serif;*/
+  font: 16px/1.6 'Architype-Light',sans-serif;
   color: #000;
 }
 
@@ -184,7 +186,7 @@ ul.li,ol.li{
 /* edited by m.t.n */
 /* Headings */
 h1,h2,h3,h4,h5,h6 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: $font-light;
   clear: both;
   line-height: 1.4em;
   word-spacing: -1px;

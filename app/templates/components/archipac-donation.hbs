@@ -1,6 +1,22 @@
-<tr style="display:none">
-  <td><input type="checkbox" id="archipac-check" name="" value="1" class="form-checkbox required" checked>
-  <label class="option archipac-label" for="archipac-check">
-  <span>Archipac</span>, a political action committee of the AIA, donation</label></td>
-  <td id="archipac-value" class="value">$ 25.00</td>
-</tr>
+<table class="duestable payment-archipac-table result">
+  <tbody>
+    <tr>
+      <td>
+        {{input type="checkbox" classBinding=":form-checkbox" id="archipac-check" name="archipac_check" checked=(mut (get primaryData.data.paymentInfo "isArchiPAC"))}}
+        <label class="option archipac-label" for="archipac-check"></label>
+        <p class="archipac-text"><strong>ArchiPAC donation</strong><br>
+        I would like to donate $25.00 to ArchiPAC, the AIA's federal political action committee, and I am paying with personal funds or a personal credit card.<br>
+        <em>Note: ArchiPAC is prohibited from accepting business funds or contributions by company credit card.</em><br>
+        <!--Read <a href="#" onclick={{action "showArchipacDis"}}>disclaimer.</a>-->
+        </p>
+      </td>
+      <td align="right" id="archipac-value" class="value"><span class="right-space">{{#if primaryData.data.paymentInfo.isArchiPAC}}$ 25.00{{/if}}</span></td>
+    </tr>
+  </tbody>
+</table>
+<!--<div id="archipac_dis_modal"></div>
+  <div id="archipac_disclaiminfo">
+    <p>
+        Contributions to ArchiPAC are not tax deductible. Contributions are voluntary and will be used for political purposes; you may refuse to contribute without reprisal. Contribution guidelines are only suggestions, you may contribute more or less than the suggested amounts and you will not be favoured or disadvantaged based on the amount of your contribution or your decision not to contribute. All contributions must be from U.S. citizens or lawful permanent residents (e.g., green card holders), from personal funds, and may not be made by anyone who is a federal government contractor. Corporate contributions are prohibited by federal law. Federal law requires political committees to use their best efforts to collect and report the name, address, employer and occupation of individuals whose contributions exceed $200 in a calender year.
+    </p>
+</div>-->

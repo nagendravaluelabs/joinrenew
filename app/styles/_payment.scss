@@ -38,8 +38,8 @@
           width: 100% !important;
         }
        .ui-accordion-content table tr td {
-          padding-top:5px;
-          padding-bottom:5px;
+          padding-top:15px !important;
+          padding-bottom:15px !important;
           padding-left:0 !important;
           padding-right:0 !important;
        }
@@ -65,7 +65,7 @@
         background: #FFFFFF;
         margin-top: 0px;
         padding:25px 0 25px 28px;
-        font-family: Verdana,Arial,sans-serif;
+        font-family: $header-font-family;
         font-size: 1.8rem;
         line-height:20px;
         color: #000;
@@ -131,6 +131,9 @@
           tr {
             border-bottom: 2px solid #e1e1e1;
             color: #000;
+            &:last-child{
+              border-bottom: none;
+            }
             &.sum{ 
               font-weight: normal !important;
               border:0 none;
@@ -213,11 +216,6 @@
               span:last-child {
                 text-align:right;
                 float:right;
-                margin-right:30px;
-                @media (max-width: 767px) {
-                    margin-right:0px !important;
-                }
-                
               }
               .pro-rate-val {
                 margin-right:0px !important;
@@ -226,13 +224,10 @@
           }
         }
       }
-      #accordion_bottom, .spl_dues_bottom  {
+      .spl_dues_bottom  {
         border-top: 2px solid #e1e1e1;
-        color: #000;
         padding: 28px 0 15px 28px;
         display: block;
-        margin-top: 2px;
-        min-height: 0;
         font-weight: 400;
         color: #555;
         font: inherit;
@@ -251,8 +246,18 @@
         }
       }
       .spl_dues_bottom{
+        font-family: 'Architype-Light',sans-serif;
         border-top:0;
-        padding-bottom:40px;
+        font-size: 16px !important;
+        padding-bottom: 45px;
+        padding-top: 15px;
+        margin-left:28px;
+        border-top: 2px solid #e1e1e1;
+        @media (max-width: 767px) {
+          padding-bottom: 45px;
+          padding-top: 15px;
+          font-size: 15px !important;
+        }
       }
     }
     .payment_method {
@@ -311,7 +316,7 @@
       }
       #installmentnumber {
         select { 
-          width: 70px !important;
+          width: 75px !important;
           text-align: left;
           padding-left: 10px;
           display: inline-block;
@@ -340,7 +345,7 @@
           width: 26px;
           height: 26px;
           background: url(../images/circle-info.png) no-repeat;
-          margin-top: 11px;
+          margin-top: 7px;
           display: inline-block;
         }
       }
@@ -348,6 +353,7 @@
         font-size: 11px;
         color: #808080;
         margin: 20px 0px;
+		line-height:18px;
       }
       #servicefee {
         margin-top: 3px;
@@ -362,7 +368,7 @@
     .payments-container {
       border-top: 1px solid #e1e1e1;
       margin-top: 50px;
-      padding: 30px 0 25px 0;
+      padding: 30px 0 0 0;
       ul {
         margin: 25px 0 0 20px;  
         @media (max-width: 767px) {
@@ -520,6 +526,10 @@
       color: #FF0000;
       vertical-align: 4px;
     }
+    #paymentError {
+      margin: 20px 0;
+      line-height: 20px;
+    }
   }
 }
 #paymentplan_modal{
@@ -531,14 +541,18 @@
     .extrainfo_box {
       .leftblock {
         float: left;
+        width: 55%;
         @media (max-width: 767px) {
           float: none;
+          width: 100%;
         }
       }
       .rightblock {
         float: right;
+        width: 42%;
         @media (max-width: 767px) {
           float: none;
+          width: 100%;
         }
       }
       #payment_tbl {
@@ -547,16 +561,21 @@
           border-spacing: 1px;
           td:first-child {
             width: 30%;
-            padding-left: 10px;
+            padding-left: 8px;
+            padding-right:4px;
+            border-right: 1px #e1e1e1 solid;
+          }
+          td{
+            padding-left: 8px;
           }
           @media (max-width: 767px) {
-            border: #0B8205 1px solid !important;
+            border: #e1e1e1 1px solid !important;
           }
         }
       }
       #installment_payment_sum_list {
-        border: #0B8205 1px solid;
-        width: 120px;
+        border: #e1e1e1 1px solid;
+        margin-top: 5px;
         @media (max-width: 767px) {
           width: 100%;
         }
@@ -569,6 +588,8 @@
       #payment_plan_info_table {
         border: #e1e1e1 1px solid;
         width: 100%;
+        margin-bottom:10px;
+        margin-top: 5px;
         tr {
           padding: 6px 6px;
           font-weight: normal;
@@ -585,6 +606,7 @@
         }
       } 
     }
+	.arc-don-amt {float:left; margin-bottom:27px;}
   }
   .ui-dialog-titlebar {
     padding: 0 !important
@@ -600,9 +622,127 @@
     border: 0;
     outline: none;
     text-indent:-99999px;
+    .ui-icon-closethick {
+      background: rgba(0,0,0,0);
+    }
   }
   .ui-widget-overlay {
     background: #222222;
     opacity: 0.9;
   }
+}
+.archipac-notsupported {
+  margin-bottom: 20px;
+}
+.electronic-check {
+  &.text-muted {
+    cursor: not-allowed !important;
+  }
+}
+#archipac_dis_modal {
+  p{
+    font-size: 17px;
+    line-height: 25px;
+  }
+  .ui-icon{
+  width: 22px;
+  height: 22px;
+  top: 19px;
+  left: 20px;
+  font-size:18px;
+  background-image: none !important;
+  color: #000;
+  text-indent: inherit;
+  @media (max-width:767px){
+      top:15px;
+  }
+  }
+  .ui-icon::after{
+    content:"X";
+    position:relative;
+    display: block;
+  }
+  .ui-button{
+    outline:none;
+    position: absolute;
+    top: -40px;
+    right:-120px !important;
+    border-radius:50% !important;
+    padding: 22px;
+    right: -60px;
+    background-color:#fff;
+    background-image:none;
+    @media (max-width: 1024px) {
+        right: -40px !important;
+        border: 1px #ccc solid;
+        top: -30px;
+    }
+  }
+  .ui-widget-overlay {
+        background: #222222;
+        opacity: 0.9;
+  }
+  .ui-dialog {
+    .ui-widget-header{
+     &.ui-dialog-titlebar{
+      padding:0 !important;
+      }
+    }
+  }
+  .ui-widget-content{
+    padding: 0 !important;
+    overflow: visible;
+  }
+  .ui-corner-all{
+    border-radius:0;
+  }
+  .ui-dialog-title { 
+  font-weight:bold;
+  font-size: 18px;
+  margin: 0 0 40px 0;
+  display: inline-block;
+  @media (max-width: 767px) {
+        font-size:20px;
+    }
+  }
+  .ui-dialog {
+    max-width: 850px !important;
+    padding:50px !important;
+    @media (max-width: 767px) {
+        width: 90% !important;
+        margin:0 10px; 
+    }
+    .disclaimer_infobox {
+       padding:10px;
+       line-height:22px;
+    }
+  }
+}
+.total-dues-box{
+  background-color:#e1e1e1;
+  padding: 10px;
+}
+.archipac-box{
+  padding:5px !important;
+  table{
+    margin-bottom:0 !important;
+  }
+}
+span{
+  &.right-space{
+    display: inline-block;
+    margin-right:20px;
+    color:#333 !important;
+    @media screen and (max-width: 767px){
+      font-size: 15px !important;
+    }
+  }
+}
+.aia-error + .error {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+  position: absolute;
 }

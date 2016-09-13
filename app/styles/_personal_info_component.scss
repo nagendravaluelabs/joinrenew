@@ -100,8 +100,8 @@
               width: 100% !important;
             }
           }
-          &#postal_code {
-            width: 51%;
+          &#postal_code, &#primary_work_zipcode {
+            width: 67%;
             @media (max-width: 767px){
               width: 100% !important;
             }
@@ -147,6 +147,16 @@
             @media (max-width: 767px){
               width: 100% !important;
               padding-right: 0 !important;
+            }
+          }
+          .zipcode-len {
+            width:50% !important;
+            @media (max-width: 767px){
+              width:100% !important;
+            }
+            @media (min-width: 768px) and (max-width: 1023px){ 
+               width:100% !important;
+               padding-right: 0px !important;
             }
           }
           .state {
@@ -262,7 +272,7 @@
           min-height: 110px;
           margin: 7px 0 56px 0px;
           padding: 14px 20px;
-          width: 55%;
+          width: 67%;
           line-height: 20px;
           clear: both;
           @media (min-width: 768px) and (max-width: 1023px){

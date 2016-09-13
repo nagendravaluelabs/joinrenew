@@ -1,3 +1,4 @@
+{{title "AIA" replace=true}}
 {{home-page model=model}}
 
 <div class="renew-page-benefits">
@@ -7,7 +8,7 @@
       <div class="custom-explore-benefits">
         <h3 class="status">I'm</h3>
         <div class="actions">
-          <div class="viewport">Select your status</div>                  
+          <div class="viewport">Select your status</div>
           <select id="select-explore-benefits" class="form-select" onchange={{action "changeExploreBenefits" value="target.value"}}>
             {{#each model.benefits as |option key|}}
               {{#if key}}
@@ -16,7 +17,7 @@
                 <option value="{{option.nid}}" selected>{{option.title}}</option>
               {{/if}}
             {{/each}}
-          </select>                  
+          </select>
         </div>
       </div>
     </div>

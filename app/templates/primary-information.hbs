@@ -1,8 +1,8 @@
+{{title "Personal and contact info | AIA"}}
 {{renew-steps steps=model.steps}}
 <div class="row">
   <div class="col-sm-9">
     <h1 class="page-title">Personal and contact info</h1>
- 
     <h3 class="verify-subheading">Please verify your information</h3>
     <ul class="read-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
       {{#each userData as |info|}}
@@ -20,7 +20,7 @@
           <li class="address">
             {{#each info.value as |address key|}}
             <p class="address{{key}}">
-              <span class="address{{key}}">{{address}}</span>
+              <span class="address{{key}}">{{{address}}}</span>
             </p>
             {{/each}}
           </li>
@@ -30,6 +30,6 @@
           <a class="edit-link" id="hide-info" href="#" {{action 'showPersonalInfo'}}>Edit contact information &gt;</a>
       </li>
     </ul>
-    {{personal-information info=model.page.primaryInformation personalInfo=primaryData.data type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo}}
+    {{personal-information personalInfo=primaryData.data organizationInfo=primaryData.data.personal.organizationInfo type='renew' showPersonalInfo='showPersonalInfo' editContactInfo=editContactInfo savePersonalInfo='savePersonalInfo' }}
   </div>
 </div>
