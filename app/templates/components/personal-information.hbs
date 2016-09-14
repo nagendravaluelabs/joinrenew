@@ -7,10 +7,20 @@
           <span class="form-required">*</span>
         </label>
         <li>
-          <label for="{{i18N 'en' 'prefix' 'id'}}">{{i18N 'en' 'prefix' 'label'}}
+          <label for="{{i18N 'en' 'prefix' 'id'}}">
+            {{i18N 
+              'en' 
+              'prefix' 
+              'label'
+            }}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          {{#x-select name=(i18N 'en' 'prefix' 'id') id=(i18N 'en' 'prefix' 'id') value=personalInfo.personal.prefix class="form-select required"}}
+          {{#x-select 
+            name=(i18N 'en' 'prefix' 'id') 
+            id=(i18N 'en' 'prefix' 'id') 
+            value=personalInfo.personal.prefix 
+            class="form-select required"
+          }}
             {{#x-option value=''}}Select{{/x-option}}
             {{#each genericData.generic.prefix as |prefix|}}
               {{#if prefix.prf_code}}
@@ -23,21 +33,52 @@
           <label for="{{i18N 'en' 'firstname' 'id'}}">{{i18N 'en' 'firstname' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          {{input type="text" classBinding=":form-text :required" id=(i18N 'en' 'firstname' 'id') name=(i18N 'en' 'firstname' 'id') value=personalInfo.personal.firstname size="60" maxlength="255" disabled=personalInfo.personal.firstname}}
+          {{input 
+            type="text" 
+            classBinding=":form-text :required" 
+            id=(i18N 'en' 'firstname' 'id') 
+            name=(i18N 'en' 'firstname' 'id') 
+            value=personalInfo.personal.firstname 
+            size="60" 
+            maxlength="255" 
+            disabled=personalInfo.personal.firstname
+          }}
         </li>
         <li>
           <label for="{{i18N 'en' 'middlename' 'id'}}">{{i18N 'en' 'middlename' 'label'}}</label>
-          {{input type="text" classBinding=":form-text :input-middle-name" id=(i18N 'en' 'middlename' 'id') name=(i18N 'en' 'middlename' 'id') value=personalInfo.personal.middlename size="1" maxlength="1" disabled=personalInfo.personal.middlename}}
+          {{input 
+            type="text" 
+            classBinding=":form-text :input-middle-name" 
+            id=(i18N 'en' 'middlename' 'id') 
+            name=(i18N 'en' 'middlename' 'id') 
+            value=personalInfo.personal.middlename 
+            size="1" 
+            maxlength="1" 
+            disabled=personalInfo.personal.middlename
+          }}
         </li>
         <li>
           <label for="{{i18N 'en' 'lastname' 'id'}}">{{i18N 'en' 'lastname' 'label'}}
             <span class="form-required" title="This field is required.">*</span>
           </label>
-          {{input type="text" classBinding=":form-text :required :text-capitalize" id=(i18N 'en' 'lastname' 'id') name=(i18N 'en' 'lastname' 'id') value=personalInfo.personal.lastname size="60" maxlength="255"}}          
+          {{input 
+            type="text" 
+            classBinding=":form-text :required :text-capitalize" 
+            id=(i18N 'en' 'lastname' 'id') 
+            name=(i18N 'en' 'lastname' 'id') 
+            value=personalInfo.personal.lastname 
+            size="60" 
+            maxlength="255"
+          }}          
         </li>
         <li>
           <label for="{{i18N 'en' 'suffix' 'id'}}">{{i18N 'en' 'suffix' 'label'}}</label>
-          {{#x-select name=(i18N 'en' 'suffix' 'id') id=(i18N 'en' 'suffix' 'id') value=personalInfo.personal.suffix class="form-select"}}
+          {{#x-select 
+            name=(i18N 'en' 'suffix' 'id') 
+            id=(i18N 'en' 'suffix' 'id') 
+            value=personalInfo.personal.suffix 
+            class="form-select"
+          }}
             {{#x-option value=''}}Select{{/x-option}}
             {{#each genericData.generic.suffix as |suffix|}}
               {{#if suffix.sfx_code}}
@@ -59,7 +100,14 @@
         <ul class="form-radios clearfix">
           {{#each addressType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{radio-button class="form-radio" id=(concat "primary_number_" (i18N 'en' type 'id')) name="payment_type" value=(i18N 'en' type 'key') groupValue=personalInfo.personal.phone.primary changed="updateContactInformation"}}
+            {{radio-button 
+              class="form-radio" 
+              id=(concat "primary_number_" (i18N 'en' type 'id')) 
+              name="payment_type" 
+              value=(i18N 'en' type 'key') 
+              groupValue=personalInfo.personal.phone.primary 
+              changed="updateContactInformation"
+            }}
             <label class="option" for="primary_number_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'label'}} </label>
           </li>
           {{/each}}
@@ -68,21 +116,66 @@
       <ul class="field-options-select clearfix">
         {{#each addressType as |type|}}
           <li>
-            <label for="contact_{{type}}_country">Country
-            
-            {{#if (ifCond (isEqualTo type (i18N 'en' contactAddressType 'id')) (isEqualTo type "home") "||")}}
+            <label for="contact_{{type}}_country">Country            
+            {{#if 
+              (ifCond 
+                (isEqualTo 
+                  type 
+                  (i18N 
+                    'en' 
+                    contactAddressType 
+                    'id'
+                  )
+                ) 
+                (isEqualTo 
+                  type 
+                  "home"
+                ) 
+                "||"
+              )
+            }}
               <span class="form-required" title="This field is required.">*</span>
             {{/if}}
           </label>
-            {{select-country idPrefix=(concat 'contact_' type) namePrefix=(concat 'contact_' type) selected=(get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country')) mutable=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country'))) chosenValueChanged=chosenValueChanged}}
+            {{select-country 
+              idPrefix=(concat 'contact_' type) 
+              namePrefix=(concat 'contact_' type) 
+              selected=(get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country')) 
+              mutable=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.country')))
+              chosenValueChanged=chosenValueChanged
+            }}
           </li>
           <li>
-            <label for="{{type}}-number" class="text-capitalize">{{type}} phone
-              {{#if (ifCond (isEqualTo type (i18N 'en' contactAddressType 'id')) (isEqualTo type "home") "||")}}
+            <label for="{{type}}_number" class="text-capitalize">{{type}} phone
+              {{#if 
+                (ifCond 
+                  (isEqualTo 
+                    type 
+                    (i18N 
+                      'en' 
+                      contactAddressType 
+                      'id'
+                    )
+                  ) 
+                  (isEqualTo 
+                    type 
+                    "home"
+                  ) 
+                  "||"
+                )
+              }}
               <span class="form-required" title="This field is required.">*</span>
               {{/if}}
             </label>
-            {{input type="text" classBinding=":form-text :required" id=(concat type '_number') name=(concat type '_number') value=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.value'))) size="60" maxlength="255"}}
+            {{input 
+              type="text" 
+              classBinding=":form-text :required" 
+              id=(concat type '_number') 
+              name=(concat type '_number') 
+              value=(mut (get personalInfo.personal.phone (concat (i18N 'en' type 'key') '.value'))) 
+              size="60" 
+              maxlength="255"
+            }}
           </li>
           <li class="clearfix"></li>
         {{/each}}
@@ -90,7 +183,12 @@
     </div>
     <div class="clearfix"></div>
     <!-- Choose chapter information -->
-    {{#if (isEqualTo type 'join')}}
+    {{#if 
+      (isEqualTo 
+        type 
+        'join'
+      )
+    }}
       <h3 class="sign-up-subheading">Choose your chapter
         <span class="form-r equired">*</span>
       </h3>
@@ -98,14 +196,26 @@
       <h3 class="sign-up-subheading">Your primary address</h3>
     {{/if}}
     <div class="all-info">
-      {{#if (isEqualTo type 'join')}}
+      {{#if 
+        (isEqualTo 
+          type 
+          'join'
+        )
+      }}
         <span>We calculate chapter dues based on your location. Select your location below.</span>
       {{/if}}
       <!--Choose chapter-->
       <ul class="form-radios clearfix">
         {{#each chaptersType as |type|}}
           <li class="form-type-radio text-capitalize">
-            {{radio-button class="form-radio" id=(concat "choose_chapter_" (i18N 'en' type 'id')) name="choose_chapter" value=(i18N 'en' type 'addressKey') groupValue=personalInfo.personal.address.primary changed="chapterSelection"}}
+            {{radio-button 
+              class="form-radio" 
+              id=(concat "choose_chapter_" (i18N 'en' type 'id')) 
+              name="choose_chapter" 
+              value=(i18N 'en' type 'addressKey') 
+              groupValue=personalInfo.personal.address.primary 
+              changed="chapterSelection"
+            }}
             <label class="option" for="choose_chapter_{{i18N 'en' type 'id'}}">{{i18N 'en' type 'id'}}</label>
           </li>
         {{/each}}
@@ -116,7 +226,12 @@
       {{#if primaryHomeAddress}}
         <div class="homeAddress-container address-container">
           <div id="home-address" class="back-grey block">
-            {{#if (isEqualTo type 'join')}}
+            {{#if 
+              (isEqualTo 
+                type 
+                'join'
+              )
+            }}
               <h3>Home address</h3>
             {{else}}
               <h3>Your home address</h3>
@@ -126,7 +241,12 @@
                 <span class="form-required">*</span>
               </label>
               <ul>
-                {{#if (isEqualTo type 'join')}}
+                {{#if 
+                  (isEqualTo 
+                    type 
+                    'join'
+                  )
+                }}
                   <li>
                     <input type="checkbox" id="home-address-primary" name="home_address" value="1"
                     checked="checked" class="form-checkbox" />
@@ -137,35 +257,84 @@
                   <label for="primary_home_address_country">Country
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-country idPrefix='primary_home_address' namePrefix='primary_home_address' selected=personalInfo.personal.address.home.country.key class="counrty required" actionHooks='setHomeStateStatus' setHomeStateStatus='setHomeStateStatus' mutable=(mut (get personalInfo.personal.address 'home.country.key')) chosenValueChanged=chosenValueChanged}}
+                  {{select-country 
+                    idPrefix='primary_home_address' 
+                    namePrefix='primary_home_address' 
+                    selected=personalInfo.personal.address.home.country.key 
+                    class="counrty required" 
+                    actionHooks='setHomeStateStatus' 
+                    setHomeStateStatus='setHomeStateStatus' 
+                    mutable=(mut (get personalInfo.personal.address 'home.country.key'))
+                    chosenValueChanged=chosenValueChanged
+                  }}
                 </li>
                 <li>
                   <label for="primary_home_address1">Address line 1
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{input type="text" classBinding=":form-text :few-special-char :required" id="primary_home_address1" name="primary_home_address1" value=personalInfo.personal.address.home.line1 size="30" maxlength="255"}}
+                  {{input 
+                    type="text" 
+                    classBinding=":form-text :few-special-char :required" 
+                    id="primary_home_address1" 
+                    name="primary_home_address1" 
+                    value=personalInfo.personal.address.home.line1 
+                    size="30" 
+                    maxlength="255"
+                  }}
                 </li>
                 <li>
                   <label for="primary_home_address2">Address line 2</label>
-                  {{input type="text" classBinding=":form-text :few-special-char" id="primary_home_address2" name="primary_home_address2" value=personalInfo.personal.address.home.line2 size="30" maxlength="255"}}
+                  {{input 
+                    type="text" 
+                    classBinding=":form-text :few-special-char" 
+                    id="primary_home_address2" 
+                    name="primary_home_address2" 
+                    value=personalInfo.personal.address.home.line2 
+                    size="30" 
+                    maxlength="255"
+                  }}
                 </li>
                 <li>
                   <label for="primary_home_city">City
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{input type="text" classBinding=":form-text :few-special-char :required" id="primary_home_city" name="primary_home_city" value=personalInfo.personal.address.home.city size="30" maxlength="255"}}
+                  {{input 
+                    type="text" 
+                    classBinding=":form-text :few-special-char :required" 
+                    id="primary_home_city" 
+                    name="primary_home_city" 
+                    value=personalInfo.personal.address.home.city 
+                    size="30" 
+                    maxlength="255"
+                  }}
                 </li>
                 {{#if homeShowState}} 
                   <li class="state" id="state">
                     <label for="administrative_area_state">
-                      {{#if (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
-                      Province
+                      {{#if 
+                        (isEqualTo 
+                          (jsStrings 
+                            personalInfo.personal.address.home.country.key 
+                            "upper"
+                          ) 
+                          "BE685760-5492-4BA3-B105-868E2010FA34"
+                        )
+                      }}
+                        Province
                       {{else}}
-                      State
+                        State
                       {{/if}}
                       <span class="form-required" title="This field is required.">*</span>
                     </label>
-                    {{select-state idPrefix='administrative_area' namePrefix='administrative_area' selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower') class="state required" states=homeStates  mutable=(mut (get personalInfo.personal.address 'home.state.key')) chosenValueChanged=chosenValueChanged}}
+                    {{select-state 
+                      idPrefix='administrative_area' 
+                      namePrefix='administrative_area' 
+                      selected=(jsStrings (get personalInfo.personal.address 'home.state.key') 'lower')
+                      class="state required" 
+                      states=homeStates  
+                      mutable=(mut (get personalInfo.personal.address 'home.state.key'))
+                      chosenValueChanged=chosenValueChanged
+                    }}
                   </li>
                 {{/if}}
                 
@@ -173,12 +342,44 @@
                
                  <li class="inline-bl">
                   <label for="primary_home_zipcode">Zip code
-                    {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                    {{#if 
+                      (ifCond 
+                        (isEqualTo 
+                          (jsStrings 
+                            personalInfo.personal.address.home.country.key 
+                            "upper"
+                          ) 
+                          "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                        ) 
+                        (isEqualTo 
+                          (jsStrings 
+                            personalInfo.personal.address.home.country.key 
+                            "upper"
+                          ) 
+                          "BE685760-5492-4BA3-B105-868E2010FA34"
+                        ) 
+                        "||"
+                      )
+                    }}
                       <span class="form-required" title="This field is required.">*</span>
                     {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :postal-code isHomeCanada:zipcodeCA isHomeUSA:zipcodeUS" id="primary_home_zipcode" name="primary_home_zipcode" value=personalInfo.personal.address.home.zip minlength="5" size="30" maxlength="10"}}
-                  {{#if (isEqualTo type 'join')}}
+                  {{input 
+                    type="text" 
+                    classBinding=":form-text :postal-code isHomeCanada:zipcodeCA isHomeUSA:zipcodeUS"
+                    id="primary_home_zipcode" 
+                    name="primary_home_zipcode" 
+                    value=personalInfo.personal.address.home.zip 
+                    minlength="5" 
+                    size="30" 
+                    maxlength="10"
+                  }}
+                  {{#if 
+                    (isEqualTo 
+                      type 
+                      'join'
+                    )
+                  }}
                     <div class="calc-button">
                       <span class="button-to-link">
                         <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"/>
@@ -191,7 +392,12 @@
             </fieldset>
           </div>
           <div class="clear"></div>
-          {{#if (isEqualTo type 'join')}}
+          {{#if 
+            (isEqualTo 
+              type 
+              'join'
+            )
+          }}
           <div class="common-form">
             <div class="due-add-my-work-address">
               <input type="checkbox" id="add-my-work-address" name="add_my_work_address"
@@ -205,7 +411,12 @@
       {{#if primaryWorkAddress}}
         <div class="workAddress-container address-container">
           <div id="work-address" class="back-grey block">
-            {{#if (isEqualTo type 'join')}}
+            {{#if 
+              (isEqualTo 
+                type 
+                'join'
+              )
+            }}
             <h3>Work address</h3>
             {{else}}
             <h3>Your work address</h3>
@@ -214,23 +425,38 @@
               <label class="required required-field">Required
                 <span class="form-required">*</span>
               </label>
-              {{input type="hidden" value=personalInfo.personal.address.office.key name="org_work_address" id="org_work_address"}}
+              {{input 
+                type="hidden" 
+                value=personalInfo.personal.address.office.key 
+                name="org_work_address" 
+                id="org_work_address"
+              }}
               <ul class="work-address" id="work-address">
-                {{#if (isEqualTo type 'join')}}
+                {{#if 
+                  (isEqualTo 
+                    type 
+                    'join'
+                  )
+                }}
                   <li>
                     <input type="checkbox" id="work-address-primary" name="" value="1" class="form-checkbox" />
                     <label class="option" for="work-address-primary">This is my primary mailing address.</label>
                   </li>
                 {{/if}}
                 <li>
-                  {{#if (isEqualTo type 'join')}}
+                  {{#if 
+                    (isEqualTo 
+                      type 
+                      'join'
+                    )
+                  }}
                     <label for="company-search">Enter your work address, we&#039;ll help you find your company/organization</label>
                   {{else}}
                     <label for="company-search">If you need to change your work address, we&#039;ll help you find your company/organization.<span class="form-required">*</span></label>
                   {{/if}}
-                  <!--<input type="text" id="company-search" name="company_search" value="" size="60" maxlength="60" class="form-text form-autocomplete" placeholder="Enter your work address" />-->
                   
                   {{hyper-search
+                      minQueryLength=1 
                       endpoint=(read-env 'AIA_EMPLOYMENT_LOOKUP_URL')
                       resultKey="attributes"
                       placeholder="Enter your work address"
@@ -250,14 +476,88 @@
                       )
                     }}
                       <div id="company-lookup-address-block">                      
-                        {{#if (ifCond personalInfo.personal.address.office.isExsist (ifCond personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization '||') '||')}}
+                        <!-- Check if user has work address / Linked Address / Created new organization -->
+                        {{#if 
+                          (ifCond 
+                            personalInfo.personal.address.office.isExsist 
+                            (ifCond 
+                              personalInfo.personal.organization.isLinkedAccount 
+                              personalInfo.personal.organizationInfo.isNewOrganization 
+                              '||'
+                            ) 
+                            '||'
+                          )
+                        }}
+                          <!-- Display Organization Name (If Exists) -->
                           {{#if personalInfo.personal.organization.name}}
                             {{personalInfo.personal.organization.name}}<br />
                           {{/if}}
-                          {{#if (ifCond personalInfo.personal.organization.isLinkedAccount personalInfo.personal.organizationInfo.isNewOrganization '||')}}
+                          <!-- Check if user has linked new organization / created new organization -->
+                          {{#if 
+                            (ifCond 
+                              personalInfo.personal.organization.isLinkedAccount
+                              personalInfo.personal.organizationInfo.isNewOrganization 
+                              '||'
+                            )
+                          }}
+                            <!-- Check if user has linked new organization -->
                             {{#if personalInfo.personal.organization.isLinkedAccount}}
+                            <!-- Check if user has linked organization address exists -->
                             {{#if personalInfo.personal.organization.linkedAddress}}
-                              {{{nl2br (explodeImplode personalInfo.personal.organization.linkedAddress ",")}}}
+                              <!-- Address Line1 -->
+                              {{#if personalInfo.personal.organization.linkedAddress.line1}}
+                                {{personalInfo.personal.organization.linkedAddress.line1}}<br />
+                              {{/if}}
+                              <!-- Address Line2 -->
+                              {{#if personalInfo.personal.organization.linkedAddress.line2}}
+                                {{personalInfo.personal.organization.linkedAddress.line2}}<br />
+                              {{/if}}
+                              <!-- City -->
+                              {{#if personalInfo.personal.organization.linkedAddress.city}}
+                                {{personalInfo.personal.organization.linkedAddress.city}},
+                              {{/if}}
+                              <!-- State displayed only if country is united states / canada -->
+                              {{#if 
+                                (ifCond 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.organization.linkedAddress.country "upper"
+                                    ) 
+                                      "UNITED STATES"
+                                    ) 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.organization.linkedAddress.country "upper"
+                                    ) 
+                                      "CANADA"
+                                  ) 
+                                  "||"
+                                )
+                              }}
+                                {{#if personalInfo.personal.organization.linkedAddress.state}}
+                                  {{personalInfo.personal.organization.linkedAddress.state}},
+                                {{/if}}
+                              {{/if}}
+                              {{#unless 
+                                (ifCond 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.organization.linkedAddress.country "upper"
+                                    ) 
+                                      "UNITED STATES"
+                                    ) 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.organization.linkedAddress.country "upper"
+                                    ) 
+                                      "CANADA"
+                                  ) 
+                                  "||"
+                                )
+                              }}
+                                {{personalInfo.personal.organization.linkedAddress.country}}
+                              {{/unless}}
+                              {{personalInfo.personal.organization.linkedAddress.zip}}
                             {{/if}}
                             {{else}}
                               {{#if organizationInfo.addressLine1}}
@@ -269,12 +569,50 @@
                               {{#if organizationInfo.locality}}
                                 {{organizationInfo.locality}},
                               {{/if}}
-                              {{#if (ifCond (isEqualTo (jsStrings organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                              {{#if 
+                                (ifCond 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      organizationInfo.country.key 
+                                      "upper"
+                                    ) 
+                                    "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                                  ) 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      organizationInfo.country.key 
+                                      "upper"
+                                    ) 
+                                    "BE685760-5492-4BA3-B105-868E2010FA34"
+                                  ) 
+                                  "||"
+                                )
+                              }}
                                 {{#if organizationInfo.workState.value}}
                                   {{organizationInfo.workState.value}},
                                 {{/if}}
-                              {{/if}} 
-                              {{organizationInfo.country.value}}
+                              {{/if}}
+                              {{#unless 
+                                (ifCond 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      organizationInfo.country.key 
+                                      "upper"
+                                    ) 
+                                    "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                                  ) 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      organizationInfo.country.key 
+                                      "upper"
+                                    ) 
+                                    "BE685760-5492-4BA3-B105-868E2010FA34"
+                                  ) 
+                                  "||"
+                                )
+                              }}
+                                {{organizationInfo.country.value}}
+                              {{/unless}}
                               {{organizationInfo.PostalCode}}
                             {{/if}}
                           {{else}}                          
@@ -290,12 +628,50 @@
                             {{#if personalInfo.personal.address.office.city}}
                               {{personalInfo.personal.address.office.city}},
                             {{/if}}
-                              {{#if (ifCond (isEqualTo (jsStrings personalInfo.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings personalInfo.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                              {{#if 
+                                (ifCond 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.address.office.country.key 
+                                      "upper"
+                                    ) 
+                                    "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                                  ) 
+                                  (isEqualTo 
+                                    (jsStrings 
+                                      personalInfo.personal.address.office.country.key 
+                                      "upper"
+                                    ) 
+                                    "BE685760-5492-4BA3-B105-868E2010FA34"
+                                  ) 
+                                  "||"
+                                )
+                              }}
                                 {{#if personalInfo.personal.address.office.state.value}}
                                   {{personalInfo.personal.address.office.state.value}},
                                 {{/if}}
                               {{/if}} 
-                            {{personalInfo.personal.address.office.country.value}}
+                            {{#unless 
+                              (ifCond 
+                                (isEqualTo 
+                                  (jsStrings 
+                                    personalInfo.personal.address.office.country.key 
+                                    "upper"
+                                  ) 
+                                  "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                                ) 
+                                (isEqualTo 
+                                  (jsStrings 
+                                    personalInfo.personal.address.office.country.key 
+                                    "upper"
+                                  ) 
+                                  "BE685760-5492-4BA3-B105-868E2010FA34"
+                                ) 
+                                "||"
+                              )
+                            }}
+                              {{personalInfo.personal.address.office.country.value}}
+                            {{/unless}}
                             {{personalInfo.personal.address.office.zip}}
                           {{/if}}
                         {{/if}}
@@ -315,7 +691,12 @@
             </fieldset>
           </div>
           <div class="clear"></div>
-          {{#if (isEqualTo type 'join')}}
+          {{#if 
+            (isEqualTo 
+              type 
+              'join'
+            )
+          }}
             <div class="common-form">
               <div class="due-add-my-home-address">
                 <input type="checkbox" id="add-my-home-address" name="add_my_home_address"
@@ -342,18 +723,40 @@
                 <label for="organization_name">Company/organization name
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                {{input type="text" classBinding=":form-text :text-full :required" id="organization_name" name="organization_name" value=organizationInfo.Name size="60" maxlength="255"}}
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :text-full :required" 
+                  id="organization_name" 
+                  name="organization_name" 
+                  value=organizationInfo.Name 
+                  size="60" 
+                  maxlength="255"
+                }}
               </li>
               <li>
                 <label for="org_website">Website</label>
-                {{input type="text" classBinding=":form-text :text-full" id="org_website" name="org_website" value=organizationInfo.Website size="60" maxlength="255"}}
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :text-full" 
+                  id="org_website" 
+                  name="org_website" 
+                  value=organizationInfo.Website 
+                  size="60" 
+                  maxlength="255"
+                }}
               </li>
               <li>
                 <label for="label">Company type
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
                 
-                {{#ember-chosen id='company_type' name="company_type" class='form-select required' value=(mut organizationInfo.companyType) chosenValueChanged=chosenValueChanged}}
+                {{#ember-chosen 
+                  id='company_type' 
+                  name="company_type" 
+                  class='form-select required' 
+                  value=(mut organizationInfo.companyType) 
+                  chosenValueChanged=chosenValueChanged
+                }}
                   <option value="">Select</option>
                   {{#each companyType as |type|}}
                     <option value="{{type}}" selected="{{if (isEqualTo organizationInfo.companyType type) 'selected' '' }}">{{type}}</option>                
@@ -363,36 +766,85 @@
               <li>
                  <label for="contact_{{type}}_country">Country
                  <span class="form-required" title="This field is required.">*</span></label>
-                {{select-country idPrefix='create_org' namePrefix='create_org' selected=(jsStrings organizationInfo.country.key 'lower') class="counrty required" actionHooks='setWorkStateStatus' setWorkStateStatus='setWorkStateStatus' mutable=(mut organizationInfo.country.key) chosenValueChanged=chosenValueChanged}}
+                {{select-country 
+                  idPrefix='create_org' 
+                  namePrefix='create_org' 
+                  selected=(jsStrings organizationInfo.country.key 'lower') 
+                  class="counrty required" 
+                  actionHooks='setWorkStateStatus' 
+                  setWorkStateStatus='setWorkStateStatus' 
+                  mutable=(mut organizationInfo.country.key) 
+                  chosenValueChanged=chosenValueChanged
+                }}
               </li>
               <li>
                 <label for="org_company_address1">Address line 1
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                {{input type="text" classBinding=":form-text :required :thoroughfare :few-special-char" id="org_company_address1" name="org_company_address1" value=organizationInfo.addressLine1 size="30" maxlength="255"}}
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :required :thoroughfare :few-special-char"
+                  id="org_company_address1" 
+                  name="org_company_address1" 
+                  value=organizationInfo.addressLine1 
+                  size="30" 
+                  maxlength="255"
+                }}
               </li>
               <li>
                 <label for="org_company_address2">Address line 2</label>
-                {{input type="text" classBinding=":form-text :premise :few-special-char" id="org_company_address2" name="org_company_address2" value=organizationInfo.addressLine2 size="30" maxlength="255"}}
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :premise :few-special-char" 
+                  id="org_company_address2" 
+                  name="org_company_address2" 
+                  value=organizationInfo.addressLine2 
+                  size="30" 
+                  maxlength="255"
+                }}
               </li>
               <li>
                 <label for="org_locality">City
                   <span class="form-required" title="This field is required.">*</span>
                 </label>
-                {{input type="text" classBinding=":form-text :required :locality :few-special-char" id="org_locality" name="org_locality" value=organizationInfo.locality size="30" maxlength="255"}}
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :required :locality :few-special-char" 
+                  id="org_locality" 
+                  name="org_locality" 
+                  value=organizationInfo.locality 
+                  size="30" 
+                  maxlength="255"
+                }}
               </li>
 
               {{#if workShowState}}
                 <li class="state" id="state-create">
                   <label for="work_administrative_state">
-                    {{#if (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34")}}
-                    Province
+                    {{#if 
+                      (isEqualTo 
+                        (jsStrings 
+                          organizationInfo.country.key 
+                          "upper"
+                        ) 
+                        "BE685760-5492-4BA3-B105-868E2010FA34"
+                      )
+                    }}
+                      Province
                     {{else}}
-                    State
+                      State
                     {{/if}}
                     <span class="form-required" title="This field is required.">*</span>
                   </label>
-                  {{select-state idPrefix='work_administrative' namePrefix='work_administrative' selected=(jsStrings organizationInfo.workState.key 'lower') class="state required" states=workstates mutable=(mut organizationInfo.workState.key) chosenValueChanged=chosenValueChanged}}
+                  {{select-state 
+                    idPrefix='work_administrative' 
+                    namePrefix='work_administrative' 
+                    selected=(jsStrings organizationInfo.workState.key 'lower') 
+                    class="state required" 
+                    states=workstates 
+                    mutable=(mut organizationInfo.workState.key) 
+                    chosenValueChanged=chosenValueChanged
+                  }}
                 </li>
               {{/if}}
             
@@ -400,12 +852,43 @@
                 {{#if workShowState}}
                   <li class="inline-bl zipcode-len">
                   <label for="primary_work_zipcode">Zip code
-                    {{#if (ifCond (isEqualTo (jsStrings organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+                    {{#if 
+                      (ifCond 
+                        (isEqualTo 
+                          (jsStrings 
+                            organizationInfo.country.key 
+                            "upper"
+                          ) 
+                          "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                        ) 
+                        (isEqualTo 
+                          (jsStrings 
+                            organizationInfo.country.key "upper"
+                          ) 
+                          "BE685760-5492-4BA3-B105-868E2010FA34"
+                        ) 
+                        "||"
+                      )
+                    }}
                       <span class="form-required" title="This field is required.">*</span>
                     {{/if}}
                   </label>
-                  {{input type="text" classBinding=":form-text :postal-code isWorkCanada:zipcodeCA isWorkUSA:zipcodeUS" id="primary_work_zipcode" name="primary_work_zipcode" value=organizationInfo.PostalCode minlength="5" size="30" maxlength="10"}}
-                  {{#if (isEqualTo type 'join')}}
+                  {{input 
+                    type="text" 
+                    classBinding=":form-text :postal-code isWorkCanada:zipcodeCA isWorkUSA:zipcodeUS"
+                    id="primary_work_zipcode" 
+                    name="primary_work_zipcode" 
+                    value=organizationInfo.PostalCode 
+                    minlength="5" 
+                    size="30" 
+                    maxlength="10"
+                  }}
+                  {{#if 
+                    (isEqualTo 
+                      type 
+                      'join'
+                    )
+                  }}
                     <div class="calc-button">
                       <span class="button-to-link">
                         <input type="submit" id="#" name="op" value="Calculate Dues" class="form-submit"/>
@@ -417,7 +900,16 @@
                  <!-- No validation for zipcode for other countries -->
                  <li class="state creative-zip zipcode-len">
                     <label for="primary_work_zipcode">Zip code</label>
-                    {{input type="text" classBinding=":form-text :postal-code" id="primary_work_zipcode" name="primary_work_zipcode" value=organizationInfo.PostalCode size="30" maxlength="255" minlength="5"}}
+                    {{input 
+                      type="text" 
+                      classBinding=":form-text :postal-code" 
+                      id="primary_work_zipcode" 
+                      name="primary_work_zipcode" 
+                      value=organizationInfo.PostalCode 
+                      size="30" 
+                      maxlength="255" 
+                      minlength="5"
+                    }}
                  </li> 
                 {{/if}}
                <!-- Work mode -  zip code validation end here -->
@@ -425,12 +917,25 @@
               <li class="clear"></li>
               <li class="state" id="state">
                 <label for="create_org_code_code">Country code</label>
-                {{select-country idPrefix='create_org_code_' namePrefix='create_org_code_' selected=(jsStrings organizationInfo.countryCode 'lower')  mutable=(mut organizationInfo.countryCode) chosenValueChanged=chosenValueChanged}}
+                {{select-country 
+                  idPrefix='create_org_code_' 
+                  namePrefix='create_org_code_' 
+                  selected=(jsStrings organizationInfo.countryCode 'lower') 
+                  mutable=(mut organizationInfo.countryCode) 
+                  chosenValueChanged=chosenValueChanged
+                }}
               </li>
               <li class="state creative-zip">
                 <label for="org_company_phone">Company phone</label>
-                {{input type="text" classBinding=":form-text :text-full" id="org_company_phone" name="org_company_phone" value=organizationInfo.orgPhone size="30" maxlength="255"}}
-                
+                {{input 
+                  type="text" 
+                  classBinding=":form-text :text-full" 
+                  id="org_company_phone" 
+                  name="org_company_phone" 
+                  value=organizationInfo.orgPhone 
+                  size="30" 
+                  maxlength="255"
+                }}                
               </li>  
               <li class="clear"></li>
             </ul>
