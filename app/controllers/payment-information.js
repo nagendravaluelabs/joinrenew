@@ -33,17 +33,19 @@ export default Ember.Controller.extend({
         paymentFailed: false,
         maxInstallmentsProperty: function() {
           var installmentKeys, resultInstallmentKeys, currentDate, startDate, cutOFFDate;
-          installmentKeys = this.getWithDefault("genericData.generic.installmentkeys", "",{});
+          installmentKeys = this.getWithDefault("genericData.generic.installmentkeys", "", false);
           resultInstallmentKeys = 0;
-          installmentKeys.forEach(function(value){
-            currentDate = moment(moment().format("DD/MM/YYYY"),"DD/MM/YYYY");
-            startDate = moment(moment(value.startdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
-            cutOFFDate = moment(moment(value.cutoffdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
-            if(currentDate.isBetween(startDate, cutOFFDate) || currentDate.isSame(startDate) || currentDate.isSame(cutOFFDate)
-              ) {
-                resultInstallmentKeys = value.ins_max_installments;
-              }
-          });
+          if(installmentKeys) {
+            installmentKeys.forEach(function(value){
+              currentDate = moment(moment().format("DD/MM/YYYY"),"DD/MM/YYYY");
+              startDate = moment(moment(value.startdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+              cutOFFDate = moment(moment(value.cutoffdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+              if(currentDate.isBetween(startDate, cutOFFDate) || currentDate.isSame(startDate) || currentDate.isSame(cutOFFDate)
+                ) {
+                  resultInstallmentKeys = value.ins_max_installments;
+                }
+            });
+          }
           return resultInstallmentKeys;
         }.property("genericData.generic.installmentkeys"),
         init: function () {
