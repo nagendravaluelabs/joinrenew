@@ -97,22 +97,23 @@ export default Ember.Controller.extend({
                 }
                 primaryAddress[2]= addressArr;
               } else {
-                var linkedAddress = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+                var linkedAddress, lACountry;
+                linkedAddress = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
                 
-                primaryAddress[0]= linkedAddress.line1;
-                primaryAddress[1]= linkedAddress.line2;
-                
-                if (linkedAddress.country.toUpperCase() === "UNITED STATES" || linkedAddress.country.toUpperCase() === "CANADA" ){
-                addressArr[addressArr.length] = linkedAddress.city;
-                addressArr[addressArr.length] = linkedAddress.state;
+                primaryAddress[0]= Ember.getWithDefault(linkedAddress, "line1", "");
+                primaryAddress[1]= Ember.getWithDefault(linkedAddress, "line2", "");
+                lACountry = Ember.getWithDefault(linkedAddress, "country", "");
+                if (lACountry.toUpperCase() === "UNITED STATES" || lACountry.toUpperCase() === "CANADA" ){
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "state", "");
                 } else {
-                addressArr[addressArr.length] = linkedAddress.city;
-                addressArr[addressArr.length] = linkedAddress.country;
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = lACountry;
                 }
                 addressArr = addressArr.filter(v=>v!=='');
                 addressArr = addressArr.join(", ");
-                if(linkedAddress.zip !== "") {
-                  addressArr += " "+linkedAddress.zip;
+                if(Ember.getWithDefault(linkedAddress, "zip", "") !== "") {
+                  addressArr += " "+Ember.getWithDefault(linkedAddress, "zip", "");
                 }
                 primaryAddress[2]= addressArr;
               }
