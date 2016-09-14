@@ -563,7 +563,7 @@ export default Ember.Component.extend(rememberScroll, {
           this.set("personalInfo.personal.organization.key", Ember.getWithDefault(value, "id", ""));
           //this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "id", ""));
           this.set("personalInfo.personal.organization.isLinkedAccount", true);
-          this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes.address", ""));
+          this.set("personalInfo.personal.organization.linkedAddress", Ember.getWithDefault(value, "attributes", ""));
           this.set("personalInfo.personal.address.office.key", Ember.getWithDefault(value, "attributes.address_key", "2BBFE3AA-3242-4105-9E89-6E880FC87518"));
           this.set("personalInfo.personal.address.office.address_owner_key", Ember.getWithDefault(value, "id", ""));
           this.setWorkStateStatusFn("bc4b70f8-280e-4bb0-b935-9f728c50e183");

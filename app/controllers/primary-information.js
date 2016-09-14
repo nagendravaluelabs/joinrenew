@@ -97,12 +97,25 @@ export default Ember.Controller.extend({
                 }
                 primaryAddress[2]= addressArr;
               } else {
-                var string, stringToArray, delimiter, glue;
-                string = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
-                delimiter = ",";
-                glue = "<br />";
-                stringToArray = string.split(delimiter);
-                primaryAddress[0] = stringToArray.join(glue);
+                var linkedAddress, lACountry;
+                linkedAddress = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+                
+                primaryAddress[0]= Ember.getWithDefault(linkedAddress, "line1", "");
+                primaryAddress[1]= Ember.getWithDefault(linkedAddress, "line2", "");
+                lACountry = Ember.getWithDefault(linkedAddress, "country", "");
+                if (lACountry.toUpperCase() === "UNITED STATES" || lACountry.toUpperCase() === "CANADA" ){
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "state", "");
+                } else {
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = lACountry;
+                }
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(Ember.getWithDefault(linkedAddress, "zip", "") !== "") {
+                  addressArr += " "+Ember.getWithDefault(linkedAddress, "zip", "");
+                }
+                primaryAddress[2]= addressArr;
               }
             }
           } else {
