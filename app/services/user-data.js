@@ -210,7 +210,8 @@ export default Ember.Service.extend({
         installmentsInfo,
         InstallmentProgram,
         DonationInfo,
-        address_owner_key;
+        address_owner_key,
+        chaptersInfo;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
@@ -228,7 +229,6 @@ export default Ember.Service.extend({
     organizationInfo= {};
     installmentsInfo = {};
     DonationInfo = {};
-    
     /* Renew Details */
     membershipInfo.IsRenew = 1;
     membershipInfo.IndividualKey = Ember.getWithDefault(data,'userKey', "");
@@ -248,6 +248,28 @@ export default Ember.Service.extend({
     LicensedToPractice = (LicensedToPractice) ? 1 : 0;
     membershipInfo.LicensedToPractice = LicensedToPractice;
     membershipInfo.LiabilityCode = Ember.getWithDefault(data,'membershipInfo.LiabilityCode', 0);
+    
+    /* Chapter Dues */
+    chaptersInfo = Ember.getWithDefault(data,'invoice.supplementaldues', false);
+    if(chaptersInfo) {
+      duesInfo.Dues = {};
+      duesInfo.Dues.Due = [];
+      Ember.$.each(chaptersInfo, function(keyName, value){
+        var chapterDetails, chapterLength, totalAmount, sumOfDues;
+        sumOfDues = parseFloat(value.member)*parseFloat(membershipInfo.AIAMembers);
+        sumOfDues += parseFloat(value.nonmember)*parseFloat(membershipInfo.NonAIAMembers);
+        sumOfDues += parseFloat(value.technical)*parseFloat(membershipInfo.TechnicalStaff);
+        sumOfDues += parseFloat(value.associate)*parseFloat(membershipInfo.Associates);
+        sumOfDues += parseFloat(value.other)*parseFloat(membershipInfo.OtherStaff);
+        chapterLength = duesInfo.Dues.Due.length;
+        if(sumOfDues > 0) {
+          chapterDetails = {};
+          chapterDetails.ChapterKey = Ember.getWithDefault(data, "chapter."+keyName+".chapterkey", 0);
+          chapterDetails.TotalDueAmount = parseFloat(sumOfDues).toFixed(2);
+          duesInfo.Dues.Due[chapterLength] = chapterDetails;
+        }
+      });
+    }
     
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
@@ -288,7 +310,7 @@ export default Ember.Service.extend({
       DonationInfo.Donations = {};
       DonationInfo.Donations.Donation = {};
       DonationInfo.Donations.Donation.FundCode = "ArchiPac Contribution";
-      DonationInfo.Donations.Donation.Amount = 25.00;
+      DonationInfo.Donations.Donation.Amount = parseFloat(25.00).toFixed(2);
     }
     
     /* Installments */
@@ -305,7 +327,7 @@ export default Ember.Service.extend({
       InstallmentProgram = Ember.getWithDefault(InstallmentProgram,'0', {});
       
       installmentsInfo.Installments.InstallmentProgramKey = Ember.getWithDefault(InstallmentProgram,'ins_key', "");
-      installmentsInfo.Installments.InstallmentAdministrativeFee = Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "");
+      installmentsInfo.Installments.InstallmentAdministrativeFees = parseFloat(Ember.getWithDefault(InstallmentProgram,'ins_convenience_fee', "")).toFixed(2);
     }
     /* Membership Packages */
     membershipPackagesObj.MembershipPackages = {};
@@ -473,7 +495,7 @@ export default Ember.Service.extend({
         }
       }
     }
-    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
+    membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, duesInfo, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
     
     mappedJSON.input.membership = membershipInfo;
     
