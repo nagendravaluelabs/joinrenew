@@ -30,7 +30,62 @@
               {{#if primaryData.data.personal.organization.name}}
                 {{primaryData.data.personal.organization.name}}<br />
               {{/if}}
-              {{{nl2br (explodeImplode primaryData.data.personal.organization.linkedAddress ",")}}}
+              <!-- Address Line1 -->
+              {{#if primaryData.data.personal.organization.linkedAddress.line1}}
+                {{primaryData.data.personal.organization.linkedAddress.line1}}<br />
+              {{/if}}
+              <!-- Address Line2 -->
+              {{#if primaryData.data.personal.organization.linkedAddress.line2}}
+                {{primaryData.data.personal.organization.linkedAddress.line2}}<br />
+              {{/if}}
+              <!-- City -->
+              {{#if primaryData.data.personal.organization.linkedAddress.city}}
+                {{primaryData.data.personal.organization.linkedAddress.city}},
+              {{/if}}
+              <!-- State displayed only if country is united states / canada -->
+              {{#if 
+                (ifCond 
+                  (isEqualTo 
+                    (jsStrings 
+                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                    ) 
+                      "UNITED STATES"
+                    ) 
+                  (isEqualTo 
+                    (jsStrings 
+                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                    ) 
+                      "CANADA"
+                  ) 
+                  "||"
+                )
+              }}
+                {{#if primaryData.data.personal.organization.linkedAddress.state}}
+                  {{primaryData.data.personal.organization.linkedAddress.state}},
+                {{/if}}
+              {{/if}}
+              {{#unless 
+                (ifCond 
+                  (isEqualTo 
+                    (jsStrings 
+                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                    ) 
+                      "UNITED STATES"
+                    ) 
+                  (isEqualTo 
+                    (jsStrings 
+                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                    ) 
+                      "CANADA"
+                  ) 
+                  "||"
+                )
+              }}
+                {{primaryData.data.personal.organization.linkedAddress.country}}
+              {{/unless}}
+              {{primaryData.data.personal.organization.linkedAddress.zip}}
+              
+              
             {{/if}}
           {{else}}
             {{#if primaryData.data.personal.organizationInfo.addressLine1}}
