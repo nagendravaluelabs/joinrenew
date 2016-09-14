@@ -255,7 +255,7 @@ export default Ember.Service.extend({
       duesInfo.Dues = {};
       duesInfo.Dues.Due = [];
       Ember.$.each(chaptersInfo, function(keyName, value){
-        var chapterDetails, chapterLength, totalAmount, sumOfDues;
+        var chapterDetails, chapterLength, sumOfDues;
         sumOfDues = parseFloat(value.member)*parseFloat(membershipInfo.AIAMembers);
         sumOfDues += parseFloat(value.nonmember)*parseFloat(membershipInfo.NonAIAMembers);
         sumOfDues += parseFloat(value.technical)*parseFloat(membershipInfo.TechnicalStaff);
