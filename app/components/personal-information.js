@@ -512,7 +512,7 @@ export default Ember.Component.extend(rememberScroll, {
                     },
                     primary_work_zipcode: {
                       required: function () {
-                            return $("#create_org_country").val() === "bc4b70f8-280e-4bb0-b935-9f728c50e183";
+                            return $("#create_org_country").val().toLowerCase() === "bc4b70f8-280e-4bb0-b935-9f728c50e183" || $("#create_org_country").val().toLowerCase() === "be685760-5492-4ba3-b105-868e2010fa34";
                       },
                       alphanumeric:true,
                       maxlength:10
