@@ -541,7 +541,7 @@
     .extrainfo_box {
       .leftblock {
         float: left;
-        width: 55%;
+        width: 58%;
         @media (max-width: 767px) {
           float: none;
           width: 100%;
@@ -549,7 +549,7 @@
       }
       .rightblock {
         float: right;
-        width: 42%;
+        width: 38%;
         @media (max-width: 767px) {
           float: none;
           width: 100%;
@@ -561,9 +561,12 @@
           border-spacing: 1px;
           td:first-child {
             width: 30%;
-            padding-left: 8px;
+            padding-left: 25px;
             padding-right:4px;
             border-right: 1px #e1e1e1 solid;
+            @media (max-width: 767px) {
+              padding-left: 35px;
+            }
           }
           td{
             padding-left: 8px;
