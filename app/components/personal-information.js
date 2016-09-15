@@ -22,6 +22,10 @@ jQuery.validator.addMethod( "alphanumeric", function( value, element ) {
 	return this.optional( element ) || /^[a-z0-9\-\s]+$/i.test( value );
 }, "Special characters not allowed" );
 
+jQuery.validator.addMethod("url", function(value, element) { 
+	return  /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/.test(value);
+}, "Please enter a valid URL.");
+
 export default Ember.Component.extend(rememberScroll, {
     workShowState: false,
     homeShowState: false,
