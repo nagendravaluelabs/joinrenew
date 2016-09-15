@@ -255,7 +255,7 @@ export default Ember.Service.extend({
       duesInfo.Dues = {};
       duesInfo.Dues.Due = [];
       Ember.$.each(chaptersInfo, function(keyName, value){
-        var chapterDetails, chapterLength, sumOfDues;
+        var chapterDetails, chapterLength, sumOfDues, maxDueAmount;
         sumOfDues = parseFloat(value.member)*parseFloat(membershipInfo.AIAMembers);
         sumOfDues += parseFloat(value.nonmember)*parseFloat(membershipInfo.NonAIAMembers);
         sumOfDues += parseFloat(value.technical)*parseFloat(membershipInfo.TechnicalStaff);
@@ -263,6 +263,10 @@ export default Ember.Service.extend({
         sumOfDues += parseFloat(value.other)*parseFloat(membershipInfo.OtherStaff);
         chapterLength = duesInfo.Dues.Due.length;
         if(sumOfDues > 0) {
+          if(keyName === "state") {
+            maxDueAmount = Ember.getWithDefault(data, "invoice.supplementaldues."+keyName+".max", 0);
+            sumOfDues = (maxDueAmount > 0 && sumOfDues > maxDueAmount) ? maxDueAmount : sumOfDues;
+          }
           chapterDetails = {};
           chapterDetails.ChapterKey = Ember.getWithDefault(data, "chapter."+keyName+".chapterkey", 0);
           chapterDetails.TotalDueAmount = parseFloat(sumOfDues).toFixed(2);

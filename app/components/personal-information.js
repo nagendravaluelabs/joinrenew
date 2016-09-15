@@ -23,7 +23,7 @@ jQuery.validator.addMethod( "alphanumeric", function( value, element ) {
 }, "Special characters not allowed" );
 
 jQuery.validator.addMethod("url", function(value, element) { 
-	return  /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/.test(value);
+	return  this.optional( element ) || /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/.test(value);
 }, "Please enter a valid URL.");
 
 export default Ember.Component.extend(rememberScroll, {
