@@ -344,7 +344,12 @@
       margin-top: 90px;
     }
   }
-
+  .maxCapExceeded {
+    color: #fa4132;
+    font-size: 16px;
+    width: 66.5%;
+    line-height: 22px;
+  }
 }
 
 #main-content{
@@ -458,7 +463,7 @@
 }
 .option{
   &.archipac-label{
-      margin-bottom:0px;
+      float: left;
       span{
         color:#f4473a;
       }
@@ -538,7 +543,9 @@ span{
   float: right;
   text-align: right;
   width: auto;
-  margin-left: 15px;
+  span {
+    margin-right: 15px;
+  }
 }
 #suppdues_totalamount {
   display: block;
@@ -609,6 +616,23 @@ span{
             font-weight: bold !important;
         }
     }
+#error-container-new {
+        .error {
+            font-size: 16px ;
+            color: #FF0000 ;
+            font-weight: normal !important ;
+            cursor: pointer ;
+            margin-bottom:20px;
+            margin-left:3px;
+        }
+}    
+    .alert-danger{
+      .error{
+        display: block;
+        padding: 3px 0;
+        clear: both;
+      }
+    }
     
     .footer-btn-container {
         @media (max-width: 767px) {
@@ -632,6 +656,6 @@ span{
 }
 
 .form-item {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   margin-top: 2px;
 }

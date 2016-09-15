@@ -1,3 +1,4 @@
+{{title "Let' s get started | AIA"}}
 <div id="content-wrap">
   <h1 class="page-title">Let’s get started</h1>              
   <div class="content">
@@ -13,7 +14,7 @@
             </div>
             <div class="clearfix"></div>
             <p class="mail-renewal">
-              <a target="_blank" href="{{renewMailLink}}" style="{{dipslayFlag}}">>Or mail in your renewal</a>
+              <a target="_blank" href="{{renewMailLink}}">>Or mail in your renewal</a>
             </p> 
           </div>
         </form>
@@ -33,14 +34,20 @@
             <div class="chapter">
               <p>Contact your chapter:</p>
               <address class="text address-indent">
-                <p class="chapter-name"> {{address.chaptername}}</p>
+                {{#if (isEqualTo address.email 'zzinfocentral@aia.orgzz')}}
+                  <p class="chapter-name">The American Institute of Architects</p>
+                  {{else}}
+                  <p class="chapter-name">{{address.chaptername}}</p>
+                {{/if}}
                 <p>{{address.address1}}</p>
                 <p>{{address.city}}, {{address.state}} {{address.postalcode}}</p>
                 <p>{{address.phone}}</p>
                 <p>Email: <a target="_top" href="mailto:zzsteve@aialosangeles.orgzz" class="email">{{address.email}}</a></p>
-                <p class="chapter-indent">Or contact AIA national:</p>
-                <p>1 (800)242-3837 (Option 2)</p>
-                <p><a href="mailto:zzinfocentral@aia.orgzz" target="_top">zzinfocentral@aia.orgzz</a></p>
+                {{#if (isNotEqual address.email 'zzinfocentral@aia.orgzz')}}
+                  <p class="chapter-indent">Or contact AIA national:</p>
+                  <p>1 (800)242-3837 (Option 2)</p>
+                  <p><a href="mailto:zzinfocentral@aia.orgzz" target="_top">zzinfocentral@aia.orgzz</a></p>
+                {{/if}}
               </address>  
             </div>
           </div>

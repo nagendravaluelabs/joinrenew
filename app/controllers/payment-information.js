@@ -1,6 +1,6 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
-/*global $*/
-/*global Ember*/
+/*global $, moment*/
+import Ember from 'ember';
 $.validator.addMethod( "creditcardMonth", function() {
   var date = new Date ();
   var month = date.getMonth();
@@ -18,15 +18,36 @@ $.validator.addMethod( "creditcardMonth", function() {
 }, "Invalid expiration date." );
 
 export default Ember.Controller.extend({
-   primaryData: Ember.inject.service('user-data'),
+        primaryData: Ember.inject.service('user-data'),
+        genericData: Ember.inject.service('generic-data'),
         debitPayment: true,
         echeckPayment: false,
-        insallmentsPayment: false,
+        installmentsPayment: false,
         subTotal: 0,
         total :0,
         supplyTotal:0,
+        subTotalWithArchipac: 0,
+        supplyTotalWithArchipac: 0,
         installNumber:3,
         installment: 0,
+        paymentFailed: false,
+        maxInstallmentsProperty: function() {
+          var installmentKeys, resultInstallmentKeys, currentDate, startDate, cutOFFDate;
+          installmentKeys = this.getWithDefault("genericData.generic.installmentkeys", "", false);
+          resultInstallmentKeys = 0;
+          if(installmentKeys) {
+            installmentKeys.forEach(function(value){
+              currentDate = moment(moment().format("DD/MM/YYYY"),"DD/MM/YYYY");
+              startDate = moment(moment(value.startdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+              cutOFFDate = moment(moment(value.cutoffdate).format("DD/MM/YYYY"), "DD/MM/YYYY");
+              if(currentDate.isBetween(startDate, cutOFFDate) || currentDate.isSame(startDate) || currentDate.isSame(cutOFFDate)
+                ) {
+                  resultInstallmentKeys = value.ins_max_installments;
+                }
+            });
+          }
+          return resultInstallmentKeys;
+        }.property("genericData.generic.installmentkeys"),
         init: function () {
             "use strict";
             this.calculateInstallments(this.get("installNumber"));
@@ -45,10 +66,12 @@ export default Ember.Controller.extend({
         }.property(),
         subTotalObserves: function () {
           "use strict";
-          var primaryData = this.get("primaryData");
-          var subTotal = 0;
-          var total = 0;
-          var supplyTotal = 0;
+          var primaryData, subTotal, total, supplyTotal, archipacValue;
+          primaryData = this.get("primaryData");
+          subTotal = 0;
+          total = 0;
+          supplyTotal = 0;
+          archipacValue = 0;
           if (primaryData.data !== "undefined" && primaryData.data !== "") {
             $.map(primaryData.data.invoice.dues, function (payment) {
               subTotal += parseFloat(payment.due);          
@@ -59,32 +82,35 @@ export default Ember.Controller.extend({
               supplyTotal = parseFloat(subTotal) + parseFloat(primaryData.data.supplementalDuesTotal);
               total += parseFloat(primaryData.data.supplementalDuesTotal);
             }  
-
+            total = parseFloat(total);
             this.set("subTotal", parseFloat(subTotal, 2));
-            this.set("total", parseFloat(total, 2));
             this.set("supplyTotal", parseFloat(supplyTotal, 2));
+            archipacValue = (this.get("primaryData.data.paymentInfo.isArchiPAC")) ? 25 : 0;
+            this.set("total", parseFloat(total, 2));
+            //this.set("total", parseFloat(total+archipacValue, 2));
+            this.set("supplyTotalWithArchipac", parseFloat(supplyTotal+archipacValue, 2));
+            this.set("subTotalWithArchipac", parseFloat(subTotal+archipacValue, 2));
+            
             this.calculateInstallments(this.get("installNumber"));
           }
-        }.observes('primaryData.data'),
+        }.observes('primaryData.data', 'primaryData.data.paymentInfo.isArchiPAC'),       
         updatePaymentType: function(type) {
           "use strict";
           if (type === "Debit/Credit Card") {
             this.set("debitPayment", true);
             this.set("echeckPayment", false);
-            this.set("insallmentsPayment", false);
+            this.set("installmentsPayment", false);
           } else if(type === "Electronic check") {
             this.set("debitPayment", false);
             this.set("echeckPayment", true);
-            this.set("insallmentsPayment", false);
+            this.set("installmentsPayment", false);
           } else if(type === "EMI") {
             this.set("debitPayment", false);
             this.set("echeckPayment", false);
-            this.set("insallmentsPayment", true);
+            this.set("installmentsPayment", true);
           } 
         },
         validatePaymentInfo: function () {
-            
-            
             "use strict";
             var validate;
             validate = $("#form-card-payment").validate({
@@ -94,7 +120,8 @@ export default Ember.Controller.extend({
                     },
                     cardNumber: {
                       required: true,
-                      digits: true
+                      digits: true,
+                      creditcard: true
                     },
                     cardExpirationMonth: {
                       required: true,
@@ -119,7 +146,8 @@ export default Ember.Controller.extend({
                     cardName: "Please enter name on credit card",
                     cardNumber: {
                       required: "Card number is required",
-                      digits: "Please enter a valid credit card number"
+                      digits: "Please enter a valid credit card number",
+                      creditcard: "Please enter a valid credit card number"
                     },
                     cardExpirationMonth: {
                       required: "Expiration month is required"
@@ -148,15 +176,13 @@ export default Ember.Controller.extend({
                     }
                 }
             });
-            if(validate.form()) {
-               
-            } 
+            return validate.form();
         },
         
         validateInstallmentAgreeInfo: function () {
-        "use strict";
-        var validate;
-        validate = $("#install-agreement").validate({
+          "use strict";
+          var validate;
+          validate = $("#install-agreement").validate({
             rules:{
                 installment_iagree: {
                   required: true
@@ -178,10 +204,8 @@ export default Ember.Controller.extend({
                     }                        
                 }
             }
-            });
-          if(validate.form()) {
-            
-          } 
+          });
+          return validate.form();
         },
         calculateInstallmentsObserves: function() {
           "use strict";
@@ -194,8 +218,31 @@ export default Ember.Controller.extend({
           this.set('installNumber',value);
           var installNumber = value;
           installment = parseFloat(total/installNumber);
-          this.set("installment", parseFloat(installment, 2));
+          this.set("installment", parseFloat(installment.toFixed(2)));
         },
+        saveRenewData : function () {
+          var formattedSaveData, paymentSaveCallback, paymentError, self;
+          self = this;
+          formattedSaveData = self.get("primaryData").reMapJSON(self.get("primaryData").data);
+          paymentSaveCallback = self.get("primaryData").saveRenewInfoToNF(formattedSaveData);
+          paymentSaveCallback.then(function(response){
+            if(response.Success === "true" && response.InvoiceNumber !== "") {
+              localStorage.removeItem('aiaUserInfo');
+              self.transitionToRoute('complete');
+            } else {
+              paymentError = Ember.getWithDefault(response, "errormessage", false);
+              paymentError = (paymentError) ? paymentError : "There was a problem while processing your payment. To learn more, please contact us: 1-800-242-3837, option 2 or memberservices@aia.org. We regret any inconvenience.";
+              self.set("paymentFailed", paymentError);
+              $("html, body").animate({scrollTop: "100px"}, 1000);
+            }
+          });
+        },
+		resetPayments: function() {
+			this.set("paymentFailed", false);
+			this.set("installmentsPayment", false);
+			this.set("debitPayment", true);
+      
+		},
         actions: {
           install : function(value){
             "use strict";
@@ -212,67 +259,70 @@ export default Ember.Controller.extend({
           },
           callValidations: function() {
             "use strict";
-            this.validatePaymentInfo();
-            if(this.get("insallmentsPayment")){
-              this.validateInstallmentAgreeInfo();
+            var cardValidation, installmentsValidation;
+            installmentsValidation = !this.get("installmentsPayment");
+            cardValidation = this.validatePaymentInfo();
+            if(this.get("installmentsPayment")){
+              installmentsValidation = this.validateInstallmentAgreeInfo();
             }
-              
+            if(cardValidation && installmentsValidation) {
+                this.saveRenewData();
+            }
           },
           validatePaymentElectronicInfo: function () {
-                  "use strict";
-                  var validate;
-                  validate = $("#form-electronic-check").validate({
-                      rules:{
-                          accountName:{
-                             required: true
-                          },
-                          bankroutingNumber:{
-                             required: true,
-                             digits: true
-                          },
-                          accountNumber: {
-                             required: true,
-                             digits: true
-                          },
-                          check_iagree_terms:{
-                            required: true
-                          }
+              "use strict";
+              var validate;
+              validate = $("#form-electronic-check").validate({
+                  rules:{
+                      accountName:{
+                         required: true
                       },
-                      messages: {
-                          accountName:{
-                            required: "Please enter name on account",
-                            lettersonly: "Please enter a name of the Account Holder"
-                          },
-                          bankroutingNumber:{
-                            required: "Bank routing number is required",
-                            digits: "Please enter a valid routing number"
-                          },
-                          accountNumber:{
-                            required:"Account number is required",
-                            digits: "Please enter a valid account number"
-                          },
-                          check_iagree_terms:{
-                            required: "You must agree to the terms and conditions"
-                          }
+                      bankroutingNumber:{
+                         required: true,
+                         digits: true,
+                         minlength: 7
                       },
-                      errorPlacement: function (error, element) {
-                          if (element.hasClass("chosen-select")) {
-                              error.insertAfter();
-                          } else {
-                              if (element.hasClass("check_iagree_terms")) {                          
-                                error.insertAfter($(element).next("label"));
-                              }else {
-                                error.insertAfter(element);
-                              }                        
-                          }
+                      accountNumber: {
+                         required: true,
+                         digits: true
+                      },
+                      check_iagree_terms:{
+                        required: true
                       }
-                  });
-                  if(validate.form()) {
-                      
-                  } 
+                  },
+                  messages: {
+                      accountName:{
+                        required: "Please enter name on account",
+                        lettersonly: "Please enter a name of the Account Holder"
+                      },
+                      bankroutingNumber:{
+                        required: "Bank routing number is required",
+                        digits: "Please enter a valid routing number",
+                        minlength : "Please enter a valid routing number"
+                      },
+                      accountNumber:{
+                        required:"Account number is required",
+                        digits: "Please enter a valid account number"
+                      },
+                      check_iagree_terms:{
+                        required: "You must agree to the terms and conditions"
+                      }
+                  },
+                  errorPlacement: function (error, element) {
+                      if (element.hasClass("chosen-select")) {
+                          error.insertAfter();
+                      } else {
+                          if (element.hasClass("check_iagree_terms")) {                          
+                            error.insertAfter($(element).next("label"));
+                          }else {
+                            error.insertAfter(element);
+                          }                        
+                      }
+                  }
+              });
+              if(validate.form()) {
+                  this.saveRenewData();
               } 
+          } 
         }
-  
-  
-  
 });

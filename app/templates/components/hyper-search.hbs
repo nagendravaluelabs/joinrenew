@@ -1,0 +1,25 @@
+{{#if hasBlock}}
+  {{yield this}}
+{{else}}
+  {{one-way-input
+      class="hypersearch-input"
+      name="query"
+      type="text"
+      placeholder=placeholder
+      update=(action "search")
+      autocomplete="off"
+  }}
+
+  <ul class="hypersearch-results {{if results "visible" "hide" }}">
+    {{#each results as |result|}}
+      <li class="hypersearch-result">
+        <span {{action "selectResult" result on="click"}}>
+          {{#if (get result 'attributes.name')}}
+            {{get result 'attributes.name'}}, 
+          {{/if}}
+          {{get result 'attributes.address'}}
+        </span>
+      </li>
+    {{/each}}
+  </ul>  
+{{/if}}

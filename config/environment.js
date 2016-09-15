@@ -17,13 +17,16 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-
-    AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//54.197.6.159/netforum/web/getdata',
-    AIA_API_URL: 'https://american-institute-of-architects-dev.us-dev.janraincapture.com',
-    AIA_API_CLIENT_ID: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
-    AIA_API_SECRET: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
-
+    AIA_NEXT_YEAR: "2017",
+    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/",
+    AIA_API_CLIENT_ID: process.env.AIA_API_CLIENT_ID || 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
+    AIA_API_SECRET: process.env.AIA_API_SECRET || 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
   };
+
+  ENV.AIA_SAVE_URL= ENV.AIA_CORS+process.env.AIA_SAVE_URL || ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
+  ENV.AIA_DRUPAL_URL= ENV.AIA_CORS+process.env.AIA_DRUPAL_URL || ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
+  ENV.AIA_API_URL= ENV.AIA_CORS+'https://american-institute-of-architects-dev.us-dev.janraincapture.com';
+  ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -31,6 +34,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+//	 AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update.php';
+//	 AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
   }
 
   if (environment === 'test') {
@@ -45,8 +50,14 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'staging' || environment === 'production') {
+  if (environment === 'staging') {
+//	 AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewbkgewmdslx.devcloud.acquia-sites.com/renewjson/getdata';
+//	 AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewbkgewmdslx.devcloud.acquia-sites.com/renewjson/update.php';
+  }
+  if (environment === 'uat') {
 
+  }
+  if (environment === 'production') {
   }
 
   return ENV;

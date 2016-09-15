@@ -1,5 +1,4 @@
 {{renew-steps steps=model.steps}}
-
 <div class="row"> 
 	<div class="col-sm-9">
 	  <h1 class="page-title">Your membership invoice</h1>
@@ -10,6 +9,7 @@
     
 	  <div class="membership-dues-container">
       {{#if isRenewSummary}}
+        {{title "Membership invoice | AIA"}}
         <div class="common-form membership-dues-pages" id="contact-info-form">
           <div class="renew-suppdue">
             <h3 class="sign-up-subheading">{{duesData.data.membership.membershipyear}} dues</h3>
@@ -57,6 +57,7 @@
       {{/if}}
       <div class="clearfix"></div>
       {{#if isQuestionnarie}}
+        {{title "Supplemental Dues Questionnaire | AIA"}}
         <div class="renew-questionnaire  membership-dues-pages">
           <h3>Supplemental dues</h3>
           <div>
@@ -68,9 +69,7 @@
             <div id="edit-questionnaire" class="form-radios">
             
               <div class="form-item form-type-radio form-item-questionnaire">
-              
-                <input type="radio" id="edit-questionnaire-1" name="questionnaire" value="1"
-                class="form-radio" aria-required="true">
+                {{radio-button class="form-radio" id="edit-questionnaire-1" name="questionnaire" value="1" groupValue=(mut (get duesData.data.membershipInfo "LiabilityCode"))}}
                 
                 <label class="option" for="edit-questionnaire-1">
                   I am not a sole practitioner, and I do not own or manage an architecture firm.
@@ -80,8 +79,7 @@
               
               <div class="form-item form-type-radio form-item-questionnaire">
               
-                <input type="radio" id="edit-questionnaire-2" name="questionnaire" value="2"
-                class="form-radio">
+                {{radio-button class="form-radio" id="edit-questionnaire-2" name="questionnaire" value="2" groupValue=(mut (get duesData.data.membershipInfo "LiabilityCode"))}}
                 
                 <label class="option" for="edit-questionnaire-2">
                   I own or manage an architecture firm and designate another AIA member to pay the supplemental dues my firm owes.
@@ -99,8 +97,7 @@
                       <label for="questionnaire_membername">Member name
                         <span class="form-required" title="This field is required.">*</span>
                       </label>
-                      
-                      <input id="questionnaire_membername" type="text" name="questionnaire_membername" value="" size="60" maxlength="128" class="form-text required" aria-required="true">
+                      {{input type="text" classBinding=":form-text :required" id="questionnaire_membername" name="questionnaire_membername" value=(mut (get duesData.data.membershipInfo "SupplementalDuesName")) size="60" maxlength="128" disabled=personalInfo.personal.firstname}}
                       
                     </div>
                     
@@ -111,7 +108,7 @@
                         <span class="form-required" title="This field is required.">*</span>
                       </label>
                       
-                      <input id="questionnaire_memberid" type="text" name="questionnaire_memberid" value="" size="60" maxlength="128" class="form-text required" aria-required="true">
+                      {{input type="text" classBinding=":form-text :required" id="questionnaire_memberid" name="questionnaire_memberid" value=(mut (get duesData.data.membershipInfo "SupplementalDuesID")) size="60" maxlength="128" disabled=personalInfo.personal.firstname}}
                     </div>
                   
                   </form>
@@ -122,7 +119,7 @@
               
               <div class="form-item form-type-radio form-item-questionnaire">
               
-                <input type="radio" id="edit-questionnaire-3" name="questionnaire" value="3" class="form-radio">
+                {{radio-button class="form-radio" id="edit-questionnaire-3" name="questionnaire" value="3" groupValue=(mut (get duesData.data.membershipInfo "LiabilityCode"))}}
                 
                 <label class="option" for="edit-questionnaire-3">
                   I own or manage an architectural firm.
@@ -131,7 +128,7 @@
               </div>
               
               <div class="form-item form-type-radio form-item-questionnaire">
-                <input type="radio" id="edit-questionnaire-4" name="questionnaire" value="4" class="form-radio">
+                {{radio-button class="form-radio" id="edit-questionnaire-4" name="questionnaire" value="4" groupValue=(mut (get duesData.data.membershipInfo "LiabilityCode"))}}
                 
                 <label class="option" for="edit-questionnaire-4">
                   I am a sole practitioner.
@@ -149,7 +146,7 @@
       {{/if}}
       
       {{#if isTotalRenew}}
-        
+        {{title "Membership invoice | AIA"}}
         <form action="#" id="form-totalRenew" method="post">
         	
           <div class="total-no-renew-suppdue renew-container membership-dues-pages common-form">
@@ -162,12 +159,30 @@
             
             <table class="duestable">
               <tbody>
-                {{#each-in duesData.data.invoice.dues as |key dues|}}
+                <!-- {{#each-in duesData.data.invoice.dues as |key dues|}}
                   <tr>
                     <td>{{dues.chapter}}</td>
                     <td id="{{key}}dues" class="value">$ {{format-currency dues.due}}</td>
                   </tr>
-                {{/each-in}}
+                {{/each-in}} -->
+				 {{#if duesData.data.invoice.dues.national}}
+			   	 <tr>
+                  <td>{{duesData.data.invoice.dues.national.chapter}}</td>
+                  <td id="nationaldues" class="value">$ {{format-currency duesData.data.invoice.dues.national.due}}</td>
+                </tr>
+			    {{/if}}
+			    {{#if duesData.data.invoice.dues.state}}
+				 <tr>
+                  <td>{{duesData.data.invoice.dues.state.chapter}}</td>
+                  <td id="statedues" class="value">$ {{format-currency duesData.data.invoice.dues.state.due}}</td>
+                </tr>
+				{{/if}}
+				{{#if duesData.data.invoice.dues.local}}
+				 <tr>
+                  <td>{{duesData.data.invoice.dues.local.chapter}}</td>
+                  <td id="localdues" class="value">$ {{format-currency duesData.data.invoice.dues.local.due}}</td>
+                </tr>
+				{{/if}}      
                 <tr>
                   <td class="membership-dues-total">
                     {{duesData.data.membership.membershipyear}} individual dues total
@@ -178,13 +193,7 @@
                   <tr>
                     <td>Supplemental dues</td>
                     <td id="suppdues" class="value">$ {{format-currency supplementalDuesTotal}}</td>
-                  </tr> 
-                  <tr>
-                    <td><input type="checkbox" id="archipac-check" name="" value="1" class="form-checkbox required" checked>
-                    <label class="option archipac-label" for="archipac-check">
-                    <span>Archipac</span>, a political action committee of the AIA, donation</label></td>
-                    <td id="suppdues" class="value">$ 25.00</td>
-                  </tr>                  
+                  </tr>
                   <tr class="sum">
                     <td>Total due</td>
                     <td id="totaldue" class="value"><div id="the_grand_total">$ {{format-currency supplementalTotalDues}}</div></td>
@@ -192,16 +201,16 @@
                 {{/if}}
               </tbody>
             </table>
-            
-            <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
-            
-              <input type="checkbox" id="edit-licensed-architect" name="licensed_architect"
-              value="1" class="form-checkbox required">
-              <label class="option" for="edit-licensed-architect">
-                I attest that I am currently licensed to practice architecture in the U.S.          
-              </label>
-                
-            </div>
+            {{#if hasDuesCalculcator}}
+               <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
+               
+                 {{input type="checkbox" classBinding=":form-checkbox :required" id="edit-licensed-architect" name="licensed_architect" checked=(mut (get duesData.data.membershipInfo "LicensedToPractice"))}}
+                 <label class="option" for="edit-licensed-architect">
+                   I attest that I am currently licensed to practice architecture in the U.S.          
+                 </label>
+                   
+               </div>
+            {{/if}}
             
             <div class="clearfix"></div>
             
@@ -212,7 +221,7 @@
       {{/if}}
       
       {{#if isDuesCalculator}}
-      
+        {{title "Supplemental Dues Calculator | AIA"}}
         <div class="common-form renew-calculator membership-dues-pages renew-container">
         
           <h3>Supplemental dues calculator</h3>
@@ -223,7 +232,6 @@
           </p>
           
           <form action="#" id="dues-calculator" method="post">
-          
             <div id="accordion">
             	
               {{#each supplementalList as |supplemental|}}
@@ -237,15 +245,41 @@
                     <div class="form-item form-type-textfield form-item-text-fields">
                       <label for="{{supplemental.text}}_persons">#persons:</label>
                       {{#if supplemental.isRequired}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only required" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} title="You must enter at least one staff in the ‘AIA member architect’ category." />
+                        {{input 
+                          type="text" 
+                          classBinding=":form-text :numbers-only :no-special-char :required"
+                          id=(concat supplemental.id "_persons")
+                          name=(concat supplemental.id "_persons")
+                          value=(mut (get duesData.data.membershipInfo.persons (concat supplemental.id '_totals')))
+                          data-state-amount=(get duesData.data.invoice.supplementaldues.state supplemental.id)
+                          data-local-amount=(get duesData.data.invoice.supplementaldues.local supplemental.id)
+                          data-totals=(concat supplemental.id "_totals")
+                          title="You must enter at least one staff in the ‘AIA member architect’ category."
+                          key-up="calculateSum"
+                          size="2"
+                          min="1"
+                          maxlength="3"
+                        }}
                       {{else}}
-                        <input min="0" id="{{supplemental.id}}_persons" type="text" name="{{supplemental.id}}_persons" size="2" maxlength="3" class="form-text numbers-only" data-state-amount="{{get duesData.data.invoice.supplementaldues.state supplemental.id}}" data-local-amount="{{get duesData.data.invoice.supplementaldues.local supplemental.id}}" onkeyup={{action 'calculateSum'}} />
+                        {{input 
+                          type="text" 
+                          classBinding=":form-text :numbers-only :no-special-char"
+                          id=(concat supplemental.id "_persons")
+                          name=(concat supplemental.id "_persons")
+                          value=(mut (get duesData.data.membershipInfo.persons (concat supplemental.id '_totals')))
+                          data-state-amount=(get duesData.data.invoice.supplementaldues.state supplemental.id)
+                          data-local-amount=(get duesData.data.invoice.supplementaldues.local supplemental.id)
+                          data-totals=(concat supplemental.id "_totals")
+                          title="Please enter minimum 1 person."
+                          size="2"
+                          min="1"
+                          maxlength="3"
+                          key-up="calculateSum"
+                        }}
                       {{/if}}
                     </div>
                     <div class="totals padding-total-top">
-                      
-                      Total:
-                      <div class="totalnum" data-total="0">$ 0.00</div>
+                      <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}"><span>Total:</span>$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
                       
                     </div>
                     
@@ -255,15 +289,20 @@
                  
                 <div>
                   State:
-                  <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
-                  
-                  <span class="mobile-break"></span>
+                    {{#if duesData.data.invoice.supplementaldues.state}}
+                      <span class="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.state supplemental.id)}}</span>
+                      <span class="mobile-break"></span>
+                  {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                  {{/if}}
                   Local:
-                  <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
-                  
+                    {{#if duesData.data.invoice.supplementaldues.local}}
+                      <span class="membership-value" id="membership-value">$ {{format-currency (get duesData.data.invoice.supplementaldues.local supplemental.id)}}</span>
+                    {{else}}
+                      <span class="membership-value">$ 0.00</span>
+                    {{/if}}
                   <div class="totals">
-                    Total:
-                    <div class="totalnum" data-total="0">$ 0.00</div>
+                    <div class="totalnum" data-total="{{format-number (get duesData.data.membershipInfo.amount (concat supplemental.id '_totals'))}}"><span>Total:</span>$ {{format-currency (get duesData.data.membershipInfo.amount (concat supplemental.id "_totals"))}}</div>
                   </div>
                 </div>
               {{/each}}
@@ -279,9 +318,15 @@
           </div>
           
         </div>
-        
       {{/if}}
-      
+      <div id="error-container-new"></div>
+      {{#if isDuesCalculator}}
+        {{#if maxCapExceeded}}
+          <ul class="maxCapExceeded">
+            <li>Supplemental dues cannot exceed $ {{format-currency duesData.data.invoice.supplementaldues.state.max}}. This is the max amount you’ll be charged.</li>
+          </ul>
+        {{/if}}
+      {{/if}}
       <div class="button-container membership-button-container hidden-xs">
         {{#if isRenewSummary}}
           <div class="renew-btn-container r-btn-container">
@@ -307,7 +352,7 @@
             <a href="#" class="next form-submit" {{action "payNow"}}>Pay now</a>
           </div>
           <div class="clearfix"></div>
-          {{#if duesData.data.invoice.issupplementaldues}}
+          {{#if hasDuesCalculcator}}
           <div id="startoverbtn">
             <a href="#" class="previous-link membership-dues-prev" onclick={{action 'membershipduesPrev' preventDefault=true}}>&lt; Go back to previous page</a>
           </div>

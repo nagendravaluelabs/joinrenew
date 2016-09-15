@@ -1,10 +1,6 @@
-{{#ember-chosen name=(concat namePrefix '_country') id=(concat idPrefix '_country') class=(concat class ' form-select select-chosen') selectionDidChange=actionHooks}}
+{{#ember-chosen name=(concat namePrefix '_country') id=(concat idPrefix '_country') class=(concat class ' form-select select-chosen') selectionDidChange=actionHooks value=mutable chosenValueChanged=chosenValueChanged}}
   <option value="">Select</option>
   {{#each genericData.generic.country as |country|}}
-    {{#if (isEqualTo country.countrykey selected)}}
-      <option value="{{country.countrykey}}" selected>{{country.countrycode}}</option>
-    {{else}}
-      <option value="{{country.countrykey}}">{{country.countrycode}}</option>
-    {{/if}}
+    <option value="{{country.countrykey}}" selected={{isEqualTo (jsStrings country.countrykey 'upper') (jsStrings selected 'upper')}}>{{country.countrycode}}</option>
   {{/each}}
 {{/ember-chosen}}

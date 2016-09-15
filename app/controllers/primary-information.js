@@ -14,8 +14,9 @@ export default Ember.Controller.extend({
     }.observes('primaryData.data'),
     userDataFunc: function () {
       "use strict";
-      var primaryData, personalData, name, primaryAddress, userData;
+      var primaryData, personalData, name, primaryAddress, userData, addressArr;
       userData = [];
+      addressArr = [];
       primaryData = this.get("primaryData");
       if (primaryData.data !== "undefined" && primaryData.data !== "") {
         personalData = primaryData.data.personal;
@@ -55,19 +56,86 @@ export default Ember.Controller.extend({
           index += 1;
           userData[index] = {};
           primaryAddress=[];
-          if (personalData.address.primary === "home") {
-            primaryAddress[0]= personalData.address.home.line1;
-            primaryAddress[1]= personalData.address.home.line2;
-            primaryAddress[2]= personalData.address.home.city + ", " + personalData.address.home.state.value + ", " + personalData.address.home.country.value + ", " + personalData.address.home.zip;
+          if (personalData.address.primary === "office") {
+            if(!Ember.getWithDefault(personalData, "organization.isLinkedAccount", false) && !Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
+              if(typeof personalData.address.office !== "undefined") {
+                primaryAddress[0]= personalData.address.office.line1;
+                primaryAddress[1]= personalData.address.office.line2;
+                
+                if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
+                addressArr[addressArr.length] = personalData.address.office.city;
+                addressArr[addressArr.length] = personalData.address.office.state.value;
+                addressArr[addressArr.length] = personalData.address.office.country.value;
+                } else {
+                addressArr[addressArr.length] = personalData.address.office.city;
+                addressArr[addressArr.length] = personalData.address.office.country.value;
+                }  
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(personalData.address.office.zip !== "") {
+                  addressArr += " "+personalData.address.office.zip;
+                }
+                primaryAddress[2]= addressArr;
+              }
+            } else {
+              if(Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
+                primaryAddress[0]= personalData.organizationInfo.addressLine1;
+                primaryAddress[1]= personalData.organizationInfo.addressLine2;
+
+                if (personalData.organizationInfo.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.organizationInfo.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
+                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
+                  addressArr[addressArr.length] = personalData.organizationInfo.workState.value;
+                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                } else {
+                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
+                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                }
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(personalData.organizationInfo.PostalCode !== "") {
+                  addressArr += " "+personalData.organizationInfo.PostalCode;
+                }
+                primaryAddress[2]= addressArr;
+              } else {
+                var linkedAddress, lACountry;
+                linkedAddress = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
+                
+                primaryAddress[0]= Ember.getWithDefault(linkedAddress, "line1", "");
+                primaryAddress[1]= Ember.getWithDefault(linkedAddress, "line2", "");
+                lACountry = Ember.getWithDefault(linkedAddress, "country", "");
+                if (lACountry.toUpperCase() === "UNITED STATES" || lACountry.toUpperCase() === "CANADA" ){
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "state", "");
+                } else {
+                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                addressArr[addressArr.length] = lACountry;
+                }
+                addressArr = addressArr.filter(v=>v!=='');
+                addressArr = addressArr.join(", ");
+                if(Ember.getWithDefault(linkedAddress, "zip", "") !== "") {
+                  addressArr += " "+Ember.getWithDefault(linkedAddress, "zip", "");
+                }
+                primaryAddress[2]= addressArr;
+              }
+            }
           } else {
-            if(typeof personalData.address.office !== "undefined") {
-              primaryAddress[0]= personalData.address.office.line1;
-              primaryAddress[1]= personalData.address.office.line2;
-              primaryAddress[2]= personalData.address.office.city + ", " + personalData.address.office.state.value + ", " + personalData.address.office.country.value + ", " + personalData.address.office.zip;
-            } else if(typeof personalData.address.billing !== "undefined"){
-              primaryAddress[0]= personalData.address.billing.line1;
-              primaryAddress[1]= personalData.address.billing.line2;
-              primaryAddress[2]= personalData.address.billing.city + ", " + personalData.address.billing.state.value + ", " + personalData.address.billing.country.value + ", " + personalData.address.billing.zip;
+            if(typeof personalData.address.home !== "undefined") {
+              primaryAddress[0]= personalData.address.home.line1;
+              primaryAddress[1]= personalData.address.home.line2;
+              if (personalData.address.home.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.home.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34"){
+              addressArr[addressArr.length] = personalData.address.home.city;
+              addressArr[addressArr.length] = personalData.address.home.state.value;
+              addressArr[addressArr.length] = personalData.address.home.country.value;
+            } else {
+              addressArr[addressArr.length] = personalData.address.home.city;
+              addressArr[addressArr.length] = personalData.address.home.country.value;
+            }  
+            addressArr = addressArr.filter(v=>v!=='');
+            addressArr = addressArr.join(", ");
+            if(personalData.address.home.zip !== "") {
+              addressArr += " "+personalData.address.home.zip;
+            }
+            primaryAddress[2]= addressArr;
             }
           }
           
@@ -77,10 +145,23 @@ export default Ember.Controller.extend({
       }
     },
     actions: {
-        showPersonalInfo: function () {
+        showPersonalInfo: function (mode) {
             'use strict';
+            mode = (typeof mode !== undefined) ? mode : false;
             var value = this.get("editContactInfo");
             this.set("editContactInfo", !value);
+            /*if(mode) {
+                var localData = JSON.parse(localStorage.aiaUserInfo);
+                this.set("primaryData.data", localData);
+            }*/
+        },
+        
+        savePersonalInfo: function (data, isRedirect) {
+            isRedirect = (isRedirect === undefined) ? false : isRedirect;
+            this.get("primaryData").saveUserData(data);
+            if(isRedirect) {
+              this.transitionToRoute('membership-dues');              
+            }
         }
     }
 });

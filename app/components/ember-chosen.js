@@ -40,10 +40,11 @@ export default EmberChosenCli.extend({
                     }
                     selectedValue = currentValue;
                 } else {
-                    selectedValue = $(this).val();
+                    selectedValue = Ember.$(this).val();
                 }
                 _this.set('value', selectedValue);
                 _this.sendAction('selectionDidChange', selectedValue);
+                _this.sendAction('chosenValueChanged', selectedValue, _this);
             }).on('chosen:maxselected', function (e, chosen) {
                 _this.sendAction('chosenMaxSelected', e, chosen);
             });
