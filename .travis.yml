@@ -26,13 +26,19 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
+    tags: false
+    script: node_modules/.bin/ember deploy staging --activate --verbose
+    on:
+      branch: staging
+  - provider: script
+    skip_cleanup: true
+    tags: false
     script: node_modules/.bin/ember deploy development --activate --verbose
     on:
       branch: development
-
-after_deploy:
   - provider: script
     skip_cleanup: true
-    script: perl scripts/PullRequestMerge.pl
+    tags: false
+    script: node_modules/.bin/ember deploy production --activate --verbose
     on:
-      branch: development
+      branch: production
