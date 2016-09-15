@@ -26,16 +26,19 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
+    tags: false
     script: node_modules/.bin/ember deploy staging --activate --verbose
     on:
       branch: staging
   - provider: script
     skip_cleanup: true
+    tags: false
     script: node_modules/.bin/ember deploy development --activate --verbose
     on:
       branch: development
   - provider: script
     skip_cleanup: true
+    tags: false
     script: node_modules/.bin/ember deploy production --activate --verbose
     on:
       branch: production
