@@ -522,7 +522,7 @@ export default Ember.Service.extend({
       },
       body: saveRequestParams
     };
-    Ember.$('.ajax-spinner').show();
+    Ember.$('.payment-loader').show();
     return fetch(`${ENV.AIA_SAVE_URL}`, saveRequestData).then(response => {
       if(response.status === 200) {
         return response.json();        
@@ -530,7 +530,7 @@ export default Ember.Service.extend({
         return {};
       }
     }).then((json) => {
-      Ember.$('.ajax-spinner').hide();
+      Ember.$('.payment-loader').hide();
       return json;
     });
   },

@@ -72,7 +72,8 @@ select::-ms-expand {
   border-left: 0 !important;
   border-right: 0 !important;
 }
-.ajax-spinner {
+.ajax-spinner,
+.payment-loader {
   background: rgba(255, 255, 255, 0.9) url(../images/loader.gif) no-repeat center center;
   position: fixed;
   top: 0;
