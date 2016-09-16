@@ -240,10 +240,15 @@ export default Ember.Service.extend({
     membershipInfo.SupplementalDuesName = Ember.getWithDefault(data,'membershipInfo.SupplementalDuesName', ""); // Member Name
     membershipInfo.TotalEmployeesKey = ""; // Empty
     membershipInfo.NonAIAMembers = Ember.getWithDefault(data,'membershipInfo.persons.nonmember_totals', 0);
+    membershipInfo.NonAIAMembers = (membershipInfo.NonAIAMembers) ? membershipInfo.NonAIAMembers : 0;
     membershipInfo.AIAMembers = Ember.getWithDefault(data,'membershipInfo.persons.member_totals', 0);
+    membershipInfo.AIAMembers = (membershipInfo.AIAMembers) ? membershipInfo.AIAMembers : 0;
     membershipInfo.TechnicalStaff = Ember.getWithDefault(data,'membershipInfo.persons.technical_totals', 0);
+    membershipInfo.TechnicalStaff = (membershipInfo.TechnicalStaff) ? membershipInfo.TechnicalStaff : 0;
     membershipInfo.OtherStaff = Ember.getWithDefault(data,'membershipInfo.persons.other_totals', 0);
+    membershipInfo.OtherStaff = (membershipInfo.OtherStaff) ? membershipInfo.OtherStaff : 0;
     membershipInfo.Associates = Ember.getWithDefault(data,'membershipInfo.persons.associate_totals', 0);
+    membershipInfo.Associates = (membershipInfo.Associates) ? membershipInfo.Associates : 0;
     LicensedToPractice = Ember.getWithDefault(data,'membershipInfo.LicensedToPractice', false);
     LicensedToPractice = (LicensedToPractice) ? 1 : 0;
     membershipInfo.LicensedToPractice = LicensedToPractice;
@@ -517,7 +522,7 @@ export default Ember.Service.extend({
       },
       body: saveRequestParams
     };
-    Ember.$('.ajax-spinner').show();
+    Ember.$('.payment-loader').show();
     return fetch(`${ENV.AIA_SAVE_URL}`, saveRequestData).then(response => {
       if(response.status === 200) {
         return response.json();        
@@ -525,7 +530,7 @@ export default Ember.Service.extend({
         return {};
       }
     }).then((json) => {
-      Ember.$('.ajax-spinner').hide();
+      Ember.$('.payment-loader').hide();
       return json;
     });
   },

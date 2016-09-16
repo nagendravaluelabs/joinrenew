@@ -749,3 +749,14 @@ span{
   margin: 0;
   position: absolute;
 }
+
+.payment-loader{
+  p{
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    top: 68%;
+    width: 100%;
+    height: 100%;
+  }
+}

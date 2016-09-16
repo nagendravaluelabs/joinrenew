@@ -23,8 +23,9 @@ module.exports = function(environment) {
     AIA_API_SECRET: process.env.AIA_API_SECRET || 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
   };
 
-  ENV.AIA_SAVE_URL= ENV.AIA_CORS+process.env.AIA_SAVE_URL || ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
-  ENV.AIA_DRUPAL_URL= ENV.AIA_CORS+process.env.AIA_DRUPAL_URL || ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
+  ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
+  
+  ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
   ENV.AIA_API_URL= ENV.AIA_CORS+'https://american-institute-of-architects-dev.us-dev.janraincapture.com';
   ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
 
