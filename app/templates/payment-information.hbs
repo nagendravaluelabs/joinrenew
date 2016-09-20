@@ -22,7 +22,7 @@
             {{/if}}
               {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
                 {{#if primaryData.data.personal.address.home.state.value}}
-                  {{primaryData.data.personal.address.home.state.value}},
+                  {{primaryData.data.personal.address.home.state.value}},<br/>
                 {{/if}}
               {{/if}} 
           {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
@@ -67,6 +67,11 @@
                 {{#if primaryData.data.personal.organization.linkedAddress.state}}
                   {{primaryData.data.personal.organization.linkedAddress.state}},
                 {{/if}}
+                
+                {{primaryData.data.personal.organization.linkedAddress.zip}}<br/>  
+              {{primaryData.data.personal.organization.linkedAddress.country}}
+             
+              
               {{/if}}
               {{#unless 
                 (ifCond 
@@ -86,12 +91,16 @@
                 )
               }}
                 {{primaryData.data.personal.organization.linkedAddress.country}}
+                {{primaryData.data.personal.organization.linkedAddress.zip}}
               {{/unless}}
-              {{primaryData.data.personal.organization.linkedAddress.zip}}
-              
-              
+              {{else}}
+                {{primaryData.data.personal.organization.linkedAddress.zip}}<br/>  
+                {{primaryData.data.personal.organization.linkedAddress.country}}
             {{/if}}
           {{else}}
+            {{#if primaryData.data.personal.organization.name}}
+                {{primaryData.data.personal.organization.name}}<br />
+            {{/if}}
             {{#if primaryData.data.personal.organizationInfo.addressLine1}}
               {{primaryData.data.personal.organizationInfo.addressLine1}}<br />
             {{/if}}
@@ -101,25 +110,32 @@
             {{#if primaryData.data.personal.organizationInfo.locality}}
               {{primaryData.data.personal.organizationInfo.locality}},
             {{/if}}
-            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
+            
+            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")
+            }}
               {{#if primaryData.data.personal.organizationInfo.workState.value}}
                 {{primaryData.data.personal.organizationInfo.workState.value}},
               {{/if}}
+                {{primaryData.data.personal.organizationInfo.PostalCode}}<br/>
+                {{primaryData.data.personal.organizationInfo.country.value}}
+              {{else}}
+                {{primaryData.data.personal.organizationInfo.country.value}}
+                {{primaryData.data.personal.organizationInfo.PostalCode}}
             {{/if}} 
-            {{primaryData.data.personal.organizationInfo.country.value}}
-            {{primaryData.data.personal.organizationInfo.PostalCode}}
-          {{/if}}          
+            {{/if}}          
         {{else}}        
           {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
+            <li>{{primaryData.data.personal.organization.name}}</li>
             <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
             <li>{{primaryData.data.personal.address.office.line1}} {{primaryData.data.personal.address.office.line2}} {{primaryData.data.personal.address.office.line3}}</li>
             <li>{{primaryData.data.personal.address.office.city}},
               {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
                   {{#if primaryData.data.personal.address.office.state.value}}
-                    {{primaryData.data.personal.address.office.state.value}},
+                    {{primaryData.data.personal.address.office.state.value}},<br/>
                   {{/if}}
                 {{/if}}
-            {{primaryData.data.personal.address.office.country.value}}            {{primaryData.data.personal.address.office.zip}}</li>
+                {{primaryData.data.personal.address.office.country.value}}  </li>
+                {{primaryData.data.personal.address.office.zip}} 
           {{/if}}
         {{/if}}
       </ul>
@@ -131,9 +147,7 @@
         <div id="payment-accordion">
            <h3>
             AIA membership dues:
-		
             <!--<span class="membership">
-		
               <span class="membership-type">
                 <span class="membership-total">${{format-currency subTotal}}</span></span>
               </span>-->
@@ -160,7 +174,6 @@
                     <td><span class="right-space">$ {{format-currency primaryData.data.invoice.dues.local.due}}</span></td>
                   </tr>
                   {{/if}}
-                  
                 </tbody>
               </table>
             </div>
