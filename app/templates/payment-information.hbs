@@ -123,7 +123,7 @@
                 {{primaryData.data.personal.organizationInfo.PostalCode}}
             {{/if}} 
             {{/if}}          
-        {{else}}        
+        {{else}}
           {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
             <li>{{primaryData.data.personal.organization.name}}</li>
             <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
@@ -133,9 +133,12 @@
                   {{#if primaryData.data.personal.address.office.state.value}}
                     {{primaryData.data.personal.address.office.state.value}},<br/>
                   {{/if}}
-                {{/if}}
-                {{primaryData.data.personal.address.office.country.value}}  </li>
-                {{primaryData.data.personal.address.office.zip}} 
+              {{/if}}
+                  {{primaryData.data.personal.address.office.zip}} </li>
+                  {{primaryData.data.personal.address.office.country.value}}  
+              {{else}}
+                  {{primaryData.data.personal.address.office.country.value}}<br/>
+                  {{primaryData.data.personal.address.office.zip}} 
           {{/if}}
         {{/if}}
       </ul>
