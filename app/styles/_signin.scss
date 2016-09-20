@@ -179,7 +179,17 @@
         margin: 0 !important;
       }
     }
+    .capture_processing{
+      margin: 0 !important;
+      padding: 13px 10px 13px 30px !important;
+      background-image: url(https://d3hmp0045zy3cs.cloudfront.net/2.2.22/spinner.gif) !important;
+    }
 	}
+  #termsAgreement{
+    a:hover{
+      text-decoration: underline;
+     }
+  }
   .capture_footer{
     height: auto !important
   }
