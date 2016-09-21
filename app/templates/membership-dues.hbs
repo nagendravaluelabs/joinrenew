@@ -201,7 +201,19 @@
                 {{/if}}
               </tbody>
             </table>
-            {{#if hasDuesCalculcator}}
+            {{#if 
+              (ifCond 
+                (isEqualTo 
+                  duesData.data.membership.membershiptype 
+                  "Architect"
+                ) 
+                (isEqualTo 
+                  duesData.data.membership.membershiptype 
+                  "Architect Fellow"
+                ) 
+                "||"
+              )
+            }}
                <div class="form-item form-type-checkbox form-item-licensed-architect common-form">
                
                  {{input type="checkbox" classBinding=":form-checkbox :required" id="edit-licensed-architect" name="licensed_architect" checked=(mut (get duesData.data.membershipInfo "LicensedToPractice"))}}

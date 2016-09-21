@@ -16,9 +16,13 @@
         {{#if (isEqualTo model.page.title 'Join')}}
           <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
         {{else}}
-          {{#using-janrain as |enabled janrain|}}
-            <a href="#" {{action janrain.login}} id="edit-next" class="sign_in">Sign in to renew</a>
-          {{/using-janrain}}
+          {{#if auth.user}}
+            {{#link-to "renew-verify-membership" id="edit-next" class="sign_in"}}Renew{{/link-to}}
+          {{else}}
+            {{#using-janrain as |enabled janrain|}}
+              <a href="#" {{action janrain.login}} id="edit-next" class="sign_in">Sign in to renew</a>
+            {{/using-janrain}}
+          {{/if}}
         {{/if}}
       </div>
     </div>
