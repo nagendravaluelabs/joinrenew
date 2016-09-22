@@ -59,83 +59,96 @@ export default Ember.Controller.extend({
           if (personalData.address.primary === "office") {
             if(!Ember.getWithDefault(personalData, "organization.isLinkedAccount", false) && !Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
               if(typeof personalData.address.office !== "undefined") {
-                primaryAddress[0]= personalData.address.office.line1;
-                primaryAddress[1]= personalData.address.office.line2;
-                
+                primaryAddress[0]= personalData.organization.name;
+                primaryAddress[1]= personalData.address.office.line1;
+                primaryAddress[2]= personalData.address.office.line2;
+                primaryAddress[3]= personalData.address.office.line3;                
                 if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
-                addressArr[addressArr.length] = personalData.address.office.city;
-                addressArr[addressArr.length] = personalData.address.office.state.value;
-                addressArr[addressArr.length] = personalData.address.office.country.value;
+                  if(personalData.address.office.city) {
+                    var cityValue = personalData.address.office.city;
+                    if(personalData.address.office.state.value) {
+                      cityValue = cityValue+",";
+                    }
+                    addressArr[addressArr.length] = cityValue;
+                  }
+                  addressArr[addressArr.length] = personalData.address.office.state.value;
+                  addressArr[addressArr.length] = personalData.address.office.zip;
                 } else {
                 addressArr[addressArr.length] = personalData.address.office.city;
-                addressArr[addressArr.length] = personalData.address.office.country.value;
+                addressArr[addressArr.length] = personalData.address.office.zip;
                 }  
                 addressArr = addressArr.filter(v=>v!=='');
-                addressArr = addressArr.join(", ");
-                if(personalData.address.office.zip !== "") {
-                  addressArr += " "+personalData.address.office.zip;
-                }
-                primaryAddress[2]= addressArr;
+                addressArr = addressArr.join(" ");
+                primaryAddress[4]= addressArr;
+                primaryAddress[5]= personalData.address.office.country.value;
               }
             } else {
               if(Ember.getWithDefault(personalData, "organizationInfo.isNewOrganization", false)) {
-                primaryAddress[0]= personalData.organizationInfo.addressLine1;
-                primaryAddress[1]= personalData.organizationInfo.addressLine2;
+                primaryAddress[0]= personalData.organizationInfo.Name;
+                primaryAddress[1]= personalData.organizationInfo.addressLine1;
+                primaryAddress[2]= personalData.organizationInfo.addressLine2;
 
                 if (personalData.organizationInfo.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.organizationInfo.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
-                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
+                  if(Ember.getWithDefault(personalData, "organizationInfo.locality", false)) {
+                    addressArr[addressArr.length] = personalData.organizationInfo.locality+",";
+                  }
                   addressArr[addressArr.length] = personalData.organizationInfo.workState.value;
-                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                  addressArr[addressArr.length] = personalData.organizationInfo.PostalCode;
                 } else {
-                  addressArr[addressArr.length] = personalData.organizationInfo.locality;
-                  addressArr[addressArr.length] = personalData.organizationInfo.country.value;
+                  if(Ember.getWithDefault(personalData, "organizationInfo.locality", false)) {
+                    addressArr[addressArr.length] = personalData.organizationInfo.locality+",";
+                  }
+                  addressArr[addressArr.length] = personalData.organizationInfo.PostalCode;
                 }
                 addressArr = addressArr.filter(v=>v!=='');
-                addressArr = addressArr.join(", ");
-                if(personalData.organizationInfo.PostalCode !== "") {
-                  addressArr += " "+personalData.organizationInfo.PostalCode;
-                }
-                primaryAddress[2]= addressArr;
+                addressArr = addressArr.join(" ");
+                primaryAddress[3]= addressArr;
+                primaryAddress[4]= personalData.organizationInfo.country.value;
               } else {
                 var linkedAddress, lACountry;
                 linkedAddress = Ember.getWithDefault(personalData, "organization.linkedAddress", "");
-                
-                primaryAddress[0]= Ember.getWithDefault(linkedAddress, "line1", "");
-                primaryAddress[1]= Ember.getWithDefault(linkedAddress, "line2", "");
+                primaryAddress[0]= Ember.getWithDefault(linkedAddress, "name", "");
+                primaryAddress[1]= Ember.getWithDefault(linkedAddress, "line1", "");
+                primaryAddress[2]= Ember.getWithDefault(linkedAddress, "line2", "");
                 lACountry = Ember.getWithDefault(linkedAddress, "country", "");
                 if (lACountry.toUpperCase() === "UNITED STATES" || lACountry.toUpperCase() === "CANADA" ){
-                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
-                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "state", "");
+                  if(Ember.getWithDefault(linkedAddress, "city", false)) {
+                    var linkedCity = Ember.getWithDefault(linkedAddress, "city", "");
+                    if(Ember.getWithDefault(linkedAddress, "state", false)) {
+                      linkedCity = linkedCity+",";
+                    }
+                    addressArr[addressArr.length] = linkedCity;
+                  }
+                  addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "state", "");
+                  addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "zip", "");
                 } else {
-                addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
-                addressArr[addressArr.length] = lACountry;
+                  addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "city", "");
+                  addressArr[addressArr.length] = Ember.getWithDefault(linkedAddress, "zip", "");
                 }
                 addressArr = addressArr.filter(v=>v!=='');
-                addressArr = addressArr.join(", ");
-                if(Ember.getWithDefault(linkedAddress, "zip", "") !== "") {
-                  addressArr += " "+Ember.getWithDefault(linkedAddress, "zip", "");
-                }
-                primaryAddress[2]= addressArr;
+                addressArr = addressArr.join(" ");
+                primaryAddress[3]= addressArr;
+                primaryAddress[4]= lACountry;
               }
             }
           } else {
             if(typeof personalData.address.home !== "undefined") {
               primaryAddress[0]= personalData.address.home.line1;
               primaryAddress[1]= personalData.address.home.line2;
-              if (personalData.address.home.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.home.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34"){
-              addressArr[addressArr.length] = personalData.address.home.city;
-              addressArr[addressArr.length] = personalData.address.home.state.value;
-              addressArr[addressArr.length] = personalData.address.home.country.value;
-            } else {
-              addressArr[addressArr.length] = personalData.address.home.city;
-              addressArr[addressArr.length] = personalData.address.home.country.value;
-            }  
-            addressArr = addressArr.filter(v=>v!=='');
-            addressArr = addressArr.join(", ");
-            if(personalData.address.home.zip !== "") {
-              addressArr += " "+personalData.address.home.zip;
-            }
-            primaryAddress[2]= addressArr;
+              if (personalData.address.home.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.home.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34") {
+                if(Ember.getWithDefault(personalData, "address.home.city", false)) {
+                  addressArr[addressArr.length] = personalData.address.home.city+",";
+                }
+                addressArr[addressArr.length] = personalData.address.home.state.value;
+                addressArr[addressArr.length] = personalData.address.home.zip;
+              } else {
+                addressArr[addressArr.length] = personalData.address.home.city;
+                addressArr[addressArr.length] = personalData.address.home.zip;
+              }  
+              addressArr = addressArr.filter(v=>v!=='');
+              addressArr = addressArr.join(" ");
+              primaryAddress[2]= addressArr;
+              primaryAddress[3] = personalData.address.home.country.value;
             }
           }
           

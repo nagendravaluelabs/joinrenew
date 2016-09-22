@@ -13,132 +13,225 @@
     <h1 class="page-title">Payment information</h1>
     <div id="userprofileinfo">
       <ul class="no-style">
-        {{#if (isEqualTo primaryData.data.personal.address.primary "home")}}
-          <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
-          <li>{{primaryData.data.personal.address.home.line1}} {{primaryData.data.personal.address.home.line2}} {{primaryData.data.personal.address.home.line3}}</li>
+      
+        <!-- Check if user primary address is Home -->
+        {{#if 
+          (isEqualTo 
+            primaryData.data.personal.address.primary 
+            "home"
+          )
+        }}
+          <!-- Display Address Line1, Line2 & line3 -->
+          <li>{{primaryData.data.personal.address.home.line1}}</li> 
+          <li>{{primaryData.data.personal.address.home.line2}}</li> 
+          <li>{{primaryData.data.personal.address.home.line3}}</li>
           <li>
-            {{#if primaryData.data.personal.address.home.city}}
-              {{primaryData.data.personal.address.home.city}}, 
-            {{/if}}
-              {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.home.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                {{#if primaryData.data.personal.address.home.state.value}}
-                  {{primaryData.data.personal.address.home.state.value}},<br/>
-                {{/if}}
+                       
+            <!-- Display State only if country is "United States" or "Canada" -->
+            {{#if 
+              (ifCond 
+                (isEqualTo 
+                  (jsStrings 
+                    primaryData.data.personal.address.home.country.key 
+                    "upper"
+                  ) 
+                  "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                ) 
+                (isEqualTo 
+                  (jsStrings 
+                    primaryData.data.personal.address.home.country.key 
+                    "upper"
+                  ) 
+                  "BE685760-5492-4BA3-B105-868E2010FA34"
+                ) 
+                "||"
+              )
+            }}
+              <!-- Display user city information if exists -->
+              {{#if primaryData.data.personal.address.home.city}}
+                {{primaryData.data.personal.address.home.city}}, 
               {{/if}} 
-          {{primaryData.data.personal.address.home.country.value}} {{primaryData.data.personal.address.home.zip}}</li>
-        {{/if}}
-        
-        {{#if (ifCond primaryData.data.personal.organization.isLinkedAccount primaryData.data.personal.organizationInfo.isNewOrganization '||')}}
-          {{#if primaryData.data.personal.organization.isLinkedAccount}}
-            {{#if primaryData.data.personal.organization.linkedAddress}}
+              <!-- Display State if exists -->
+              {{#if primaryData.data.personal.address.home.state.value}}
+                {{primaryData.data.personal.address.home.state.value}}
+              {{/if}}
+            {{else}}
+              <!-- Display user city information if exists -->
+              {{#if primaryData.data.personal.address.home.city}}
+                {{primaryData.data.personal.address.home.city}}
+              {{/if}} 
+            {{/if}}
+            <!-- Display zipcode -->
+            {{primaryData.data.personal.address.home.zip}}<br />
+            <!-- Display country -->
+            {{primaryData.data.personal.address.home.country.value}}
+            
+          </li>
+        {{else}}        
+          <!-- Check if user has Linked Address / Created new organization -->
+          {{#if 
+            (ifCond 
+              primaryData.data.personal.organization.isLinkedAccount 
+              primaryData.data.personal.organizationInfo.isNewOrganization 
+              '||'
+            )
+          }}
+            <!-- Check if user has linked new organization -->
+            {{#if primaryData.data.personal.organization.isLinkedAccount}}
+              <!-- Check if user has linked organization address exists -->
+              {{#if primaryData.data.personal.organization.linkedAddress}}
+                <!-- Display Organization Name (If Exists) -->
+                {{#if primaryData.data.personal.organization.name}}
+                  {{primaryData.data.personal.organization.name}}<br />
+                {{/if}}
+                <!-- Address Line1 -->
+                {{#if primaryData.data.personal.organization.linkedAddress.line1}}
+                  {{primaryData.data.personal.organization.linkedAddress.line1}}<br />
+                {{/if}}
+                <!-- Address Line2 -->
+                {{#if primaryData.data.personal.organization.linkedAddress.line2}}
+                  {{primaryData.data.personal.organization.linkedAddress.line2}}<br />
+                {{/if}}                
+                <!-- State displayed only if country is united states / canada -->
+                {{#if 
+                  (ifCond 
+                    (isEqualTo 
+                      (jsStrings 
+                        primaryData.data.personal.organization.linkedAddress.country "upper"
+                      ) 
+                        "UNITED STATES"
+                      ) 
+                    (isEqualTo 
+                      (jsStrings 
+                        primaryData.data.personal.organization.linkedAddress.country "upper"
+                      ) 
+                        "CANADA"
+                    ) 
+                    "||"
+                  )
+                }}
+                  <!-- Display State for United States / Canada -->
+                  {{#if primaryData.data.personal.organization.linkedAddress.state}}
+                    <!-- City -->
+                    {{#if primaryData.data.personal.organization.linkedAddress.city}}
+                      {{primaryData.data.personal.organization.linkedAddress.city}},
+                    {{/if}}
+                    {{primaryData.data.personal.organization.linkedAddress.state}}
+                  {{else}}
+                    <!-- City -->
+                    {{#if primaryData.data.personal.organization.linkedAddress.city}}
+                      {{primaryData.data.personal.organization.linkedAddress.city}}
+                    {{/if}}
+                  {{/if}}
+                  <!-- Display Zipcode for United States / Canada -->
+                  {{primaryData.data.personal.organization.linkedAddress.zip}}<br/>  
+                  <!-- Display Country for United States / Canada -->
+                  {{primaryData.data.personal.organization.linkedAddress.country}}
+                {{else}}
+                  {{#if primaryData.data.personal.organization.linkedAddress.city}}
+                    {{primaryData.data.personal.organization.linkedAddress.city}}
+                  {{/if}}
+                  <!-- Display Zipcode except United States / Canada -->
+                  {{primaryData.data.personal.organization.linkedAddress.zip}}<br />
+                  <!-- Display Country except United States / Canada -->
+                  {{primaryData.data.personal.organization.linkedAddress.country}}
+                {{/if}}
+              {{/if}}
+            <!-- Check if user created new organization -->
+            {{else}}
+              <!-- Display organization name If Exists -->
               {{#if primaryData.data.personal.organization.name}}
-                {{primaryData.data.personal.organization.name}}<br />
+                  {{primaryData.data.personal.organization.name}}<br />
               {{/if}}
-              <!-- Address Line1 -->
-              {{#if primaryData.data.personal.organization.linkedAddress.line1}}
-                {{primaryData.data.personal.organization.linkedAddress.line1}}<br />
+              <!-- Display Address line1 If Exists -->
+              {{#if primaryData.data.personal.organizationInfo.addressLine1}}
+                {{primaryData.data.personal.organizationInfo.addressLine1}}<br />
               {{/if}}
-              <!-- Address Line2 -->
-              {{#if primaryData.data.personal.organization.linkedAddress.line2}}
-                {{primaryData.data.personal.organization.linkedAddress.line2}}<br />
+              <!-- Display Address line2 If Exists -->
+              {{#if primaryData.data.personal.organizationInfo.addressLine2}}
+                {{primaryData.data.personal.organizationInfo.addressLine2}}<br />
               {{/if}}
-              <!-- City -->
-              {{#if primaryData.data.personal.organization.linkedAddress.city}}
-                {{primaryData.data.personal.organization.linkedAddress.city}},
+              <!-- Display City If Exists -->
+              {{#if primaryData.data.personal.organizationInfo.locality}}
+                {{primaryData.data.personal.organizationInfo.locality}},
               {{/if}}
-              <!-- State displayed only if country is united states / canada -->
+              <!-- Display State, Zipcode & Country for United States & Canada -->
               {{#if 
                 (ifCond 
                   (isEqualTo 
                     (jsStrings 
-                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                      primaryData.data.personal.organizationInfo.country.key 
+                      "upper"
                     ) 
-                      "UNITED STATES"
-                    ) 
+                    "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                  ) 
                   (isEqualTo 
                     (jsStrings 
-                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                      primaryData.data.personal.organizationInfo.country.key 
+                      "upper"
                     ) 
-                      "CANADA"
+                    "BE685760-5492-4BA3-B105-868E2010FA34"
                   ) 
                   "||"
                 )
               }}
-                {{#if primaryData.data.personal.organization.linkedAddress.state}}
-                  {{primaryData.data.personal.organization.linkedAddress.state}},
+                <!-- Display State If Exists -->
+                {{#if primaryData.data.personal.organizationInfo.workState.value}}
+                  {{primaryData.data.personal.organizationInfo.workState.value}}
                 {{/if}}
-                
-                {{primaryData.data.personal.organization.linkedAddress.zip}}<br/>  
-              {{primaryData.data.personal.organization.linkedAddress.country}}
-             
-              
+                <!-- Display Zipcode -->
+                {{primaryData.data.personal.organizationInfo.PostalCode}}<br/>
+                <!-- Display Country -->
+                {{primaryData.data.personal.organizationInfo.country.value}}
+              {{else}}
+                {{primaryData.data.personal.organizationInfo.PostalCode}}<br />
+                {{primaryData.data.personal.organizationInfo.country.value}}
+              {{/if}}            
+            {{/if}}
+          <!-- End of Displaying Linked Address or Create New Organization -->
+          {{else}}
+            <!-- Check if user has default work address -->
+            {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
+              <li>{{primaryData.data.personal.organization.name}}</li>
+              <!--<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>-->
+              <li>{{primaryData.data.personal.address.office.line1}}</li>
+              <li>{{primaryData.data.personal.address.office.line2}}</li>
+              <li>{{primaryData.data.personal.address.office.line3}}</li>
+              <!-- Check if City Exists -->
+              {{#if primaryData.data.personal.address.office.city}}
+                {{primaryData.data.personal.address.office.city}},
               {{/if}}
-              {{#unless 
+              <!-- Check if user selected country is United States or canada -->
+              {{#if 
                 (ifCond 
                   (isEqualTo 
                     (jsStrings 
-                      primaryData.data.personal.organization.linkedAddress.country "upper"
+                      primaryData.data.personal.address.office.country.key "upper"
                     ) 
-                      "UNITED STATES"
-                    ) 
+                    "BC4B70F8-280E-4BB0-B935-9F728C50E183"
+                  )
                   (isEqualTo 
                     (jsStrings 
-                      primaryData.data.personal.organization.linkedAddress.country "upper"
-                    ) 
-                      "CANADA"
+                      primaryData.data.personal.address.office.country.key 
+                      "upper"
+                    )
+                    "BE685760-5492-4BA3-B105-868E2010FA34"
                   ) 
                   "||"
                 )
               }}
-                {{primaryData.data.personal.organization.linkedAddress.country}}
-                {{primaryData.data.personal.organization.linkedAddress.zip}}
-              {{/unless}}
+                <!-- Check if State Value Exists -->
+                {{#if primaryData.data.personal.address.office.state.value}}
+                  {{primaryData.data.personal.address.office.state.value}}
+                {{/if}}
+                {{primaryData.data.personal.address.office.zip}}<br />
+                {{primaryData.data.personal.address.office.country.value}}
               {{else}}
-                {{primaryData.data.personal.organization.linkedAddress.zip}}<br/>  
-                {{primaryData.data.personal.organization.linkedAddress.country}}
-            {{/if}}
-          {{else}}
-            {{#if primaryData.data.personal.organization.name}}
-                {{primaryData.data.personal.organization.name}}<br />
-            {{/if}}
-            {{#if primaryData.data.personal.organizationInfo.addressLine1}}
-              {{primaryData.data.personal.organizationInfo.addressLine1}}<br />
-            {{/if}}
-            {{#if primaryData.data.personal.organizationInfo.addressLine2}}
-              {{primaryData.data.personal.organizationInfo.addressLine2}}<br />
-            {{/if}}
-            {{#if primaryData.data.personal.organizationInfo.locality}}
-              {{primaryData.data.personal.organizationInfo.locality}},
-            {{/if}}
-            
-            {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.organizationInfo.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")
-            }}
-              {{#if primaryData.data.personal.organizationInfo.workState.value}}
-                {{primaryData.data.personal.organizationInfo.workState.value}},
+                {{primaryData.data.personal.address.office.country.value}}
+                {{primaryData.data.personal.address.office.zip}}
               {{/if}}
-                {{primaryData.data.personal.organizationInfo.PostalCode}}<br/>
-                {{primaryData.data.personal.organizationInfo.country.value}}
-              {{else}}
-                {{primaryData.data.personal.organizationInfo.country.value}}
-                {{primaryData.data.personal.organizationInfo.PostalCode}}
-            {{/if}} 
-            {{/if}}          
-        {{else}}
-          {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
-            <li>{{primaryData.data.personal.organization.name}}</li>
-            <li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>
-            <li>{{primaryData.data.personal.address.office.line1}} {{primaryData.data.personal.address.office.line2}} {{primaryData.data.personal.address.office.line3}}</li>
-            <li>{{primaryData.data.personal.address.office.city}},
-              {{#if (ifCond (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BC4B70F8-280E-4BB0-B935-9F728C50E183") (isEqualTo (jsStrings primaryData.data.personal.address.office.country.key "upper") "BE685760-5492-4BA3-B105-868E2010FA34") "||")}}
-                  {{#if primaryData.data.personal.address.office.state.value}}
-                    {{primaryData.data.personal.address.office.state.value}},<br/>
-                  {{/if}}
-              {{/if}}
-                  {{primaryData.data.personal.address.office.zip}} </li>
-                  {{primaryData.data.personal.address.office.country.value}}  
-              {{else}}
-                  {{primaryData.data.personal.address.office.country.value}}<br/>
-                  {{primaryData.data.personal.address.office.zip}} 
+              
+            {{/if}}
           {{/if}}
         {{/if}}
       </ul>
