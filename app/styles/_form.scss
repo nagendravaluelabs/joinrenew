@@ -401,7 +401,7 @@ ul{
     margin-top: -1px;
     width: 67%;
     max-height: 250px;
-    overflow-y: auto;
+    overflow-y: scroll;
     position: absolute;
     z-index: 9999;
     @media screen and (max-width: 1024px){
