@@ -609,7 +609,10 @@
         }
       } 
     }
-	.arc-don-amt {float:left; margin-bottom:27px;}
+	.arc-don-amt {
+    float:left; 
+    margin-bottom:10px;
+  }
   }
   .ui-dialog-titlebar {
     padding: 0 !important
