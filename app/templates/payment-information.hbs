@@ -496,7 +496,9 @@
       </div>
     </div>
   </div>
-  <span class="arc-don-amt">ArchiPAC donation cannot be paid as part of the payment plan.</span>
+   {{#if primaryData.data.paymentInfo.isArchiPAC}}
+      <span class="arc-don-amt">ArchiPAC donation cannot be paid as part of the payment plan.</span>
+   {{/if}}
 </div>
 
 <!-- Disclamer Start-->
