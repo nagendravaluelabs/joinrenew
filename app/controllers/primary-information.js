@@ -96,7 +96,7 @@ export default Ember.Controller.extend({
                   addressArr[addressArr.length] = personalData.organizationInfo.PostalCode;
                 } else {
                   if(Ember.getWithDefault(personalData, "organizationInfo.locality", false)) {
-                    addressArr[addressArr.length] = personalData.organizationInfo.locality+",";
+                    addressArr[addressArr.length] = personalData.organizationInfo.locality;
                   }
                   addressArr[addressArr.length] = personalData.organizationInfo.PostalCode;
                 }
