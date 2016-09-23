@@ -21,7 +21,13 @@
             "home"
           )
         }}
+          <li>
+            {{primaryData.data.personal.prefix}}
+            {{primaryData.data.personal.firstname}}
+            {{primaryData.data.personal.lastname}}
+          </li>
           <!-- Display Address Line1, Line2 & line3 -->
+          
           <li>{{primaryData.data.personal.address.home.line1}}</li> 
           <li>{{primaryData.data.personal.address.home.line2}}</li> 
           <li>{{primaryData.data.personal.address.home.line3}}</li>
@@ -80,6 +86,11 @@
             {{#if primaryData.data.personal.organization.isLinkedAccount}}
               <!-- Check if user has linked organization address exists -->
               {{#if primaryData.data.personal.organization.linkedAddress}}
+                <li>
+                  {{primaryData.data.personal.prefix}}
+                  {{primaryData.data.personal.firstname}}
+                  {{primaryData.data.personal.lastname}}
+                </li>
                 <!-- Display Organization Name (If Exists) -->
                 {{#if primaryData.data.personal.organization.name}}
                   {{primaryData.data.personal.organization.name}}<br />
@@ -139,6 +150,11 @@
               {{/if}}
             <!-- Check if user created new organization -->
             {{else}}
+              <li>
+                {{primaryData.data.personal.prefix}}
+                {{primaryData.data.personal.firstname}}
+                {{primaryData.data.personal.lastname}}
+              </li>
               <!-- Display organization name If Exists -->
               {{#if primaryData.data.personal.organization.name}}
                   {{primaryData.data.personal.organization.name}}<br />
