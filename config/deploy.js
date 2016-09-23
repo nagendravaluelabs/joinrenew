@@ -46,7 +46,24 @@ module.exports = function(deployTarget) {
     if (!process.env.AIA_API_SECRET) {
       process.env.AIA_API_SECRET = process.env.DEV_JANRAIN_API_CLIENT_SECRET;
     }
-
+    if (!process.env.AIA_APP_ID) {
+      process.env.AIA_APP_ID = process.env.DEV_JANRAIN_APP_ID;
+    }
+    if (!process.env.AIA_CAPTURE_SERVER) {
+      process.env.AIA_CAPTURE_SERVER = process.env.DEV_JANRAIN_API_URL;
+    }
+    if (!process.env.AIA_APP_URL) {
+      process.env.AIA_APP_URL = process.env.DEV_JANRAIN_APP_URL;
+    }
+    if (!process.env.AIA_HTTP_URL) {
+      process.env.AIA_HTTP_URL = process.env.DEV_JANRAIN_API_HTTP_URL;
+    }
+    if (!process.env.AIA_HTTPS_URL) {
+      process.env.AIA_HTTPS_URL = process.env.DEV_JANRAIN_API_HTTPS_URL;
+    }  
+    if (!process.env.AIA_FEDERATE_SERVER) {
+      process.env.AIA_FEDERATE_SERVER = process.env.DEV_JANRAIN_API_FEDERATE_SERVER;
+    }
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
     }
@@ -74,7 +91,24 @@ module.exports = function(deployTarget) {
     if (!process.env.AIA_API_SECRET) {
       process.env.AIA_API_SECRET = process.env.STAGING_JANRAIN_API_CLIENT_SECRET;
     }
-
+    if (!process.env.AIA_APP_ID) {
+      process.env.AIA_APP_ID = process.env.STAGING_JANRAIN_APP_ID;
+    }
+    if (!process.env.AIA_CAPTURE_SERVER) {
+      process.env.AIA_CAPTURE_SERVER = process.env.STAGING_JANRAIN_API_URL;
+    }
+    if (!process.env.AIA_APP_URL) {
+      process.env.AIA_APP_URL = process.env.STAGING_JANRAIN_APP_URL;
+    }
+    if (!process.env.AIA_HTTP_URL) {
+      process.env.AIA_HTTP_URL = process.env.STAGING_JANRAIN_API_HTTP_URL;
+    }
+    if (!process.env.AIA_HTTPS_URL) {
+      process.env.AIA_HTTPS_URL = process.env.STAGING_JANRAIN_API_HTTPS_URL;
+    }  
+    if (!process.env.AIA_FEDERATE_SERVER) {
+      process.env.AIA_FEDERATE_SERVER = process.env.STAGING_JANRAIN_API_FEDERATE_SERVER;
+    }
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
     }
