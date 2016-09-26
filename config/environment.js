@@ -29,7 +29,10 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/"
+    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/",
+    'ember-cli-gtm': {
+      appId: process.env.GTM_CODE || 'GTM-NDWGK2'
+    }
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
