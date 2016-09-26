@@ -67,6 +67,9 @@ module.exports = function(deployTarget) {
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
     }
+    if (!process.env.GTM_CODE) {
+      process.env.GTM_CODE = process.env.DEV_GTM_CODE;
+    }
   }
 
   if (deployTarget === 'staging') {
@@ -111,6 +114,9 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
+    }
+    if (!process.env.GTM_CODE) {
+      process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
     }
   }
 

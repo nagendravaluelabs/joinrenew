@@ -77,8 +77,8 @@ export default Ember.Service.extend(RouteRefresherMixin, {
     return this.postTokenRequest({
       grant_type: 'refresh_token',
       refresh_token: refresh_token,
-      client_id: 'jhxbmd679pv6j3hatb3yz7xdpgtauced',
-      client_secret: 'mx3zd27mcvdbkrmnr829cczcvnnr62dq'
+      client_id: ENV.AIA_API_CLIENT_ID,
+      client_secret: ENV.AIA_API_SECRET
     });
   },
 
