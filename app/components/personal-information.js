@@ -562,6 +562,7 @@ export default Ember.Component.extend(rememberScroll, {
         },
         selectedCompanyDetails: function(value) {
           Ember.$(".hypersearch-input").val('');
+          $(".primary-action-btn").removeClass("hidden");
           this.set('createOrganization', false);
           this.set("personalInfo.personal.organization.name", Ember.getWithDefault(value, "attributes.name", ""));
           this.set("personalInfo.personal.organization.key", Ember.getWithDefault(value, "id", ""));
