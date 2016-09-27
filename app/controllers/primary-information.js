@@ -66,7 +66,7 @@ export default Ember.Controller.extend({
                 if (personalData.address.office.country.key.toUpperCase() === "BC4B70F8-280E-4BB0-B935-9F728C50E183" || personalData.address.office.country.key.toUpperCase() === "BE685760-5492-4BA3-B105-868E2010FA34" ){
                   if(personalData.address.office.city) {
                     var cityValue = personalData.address.office.city;
-                    if(personalData.address.office.state.value) {
+                    if(personalData.address.office.state && personalData.address.office.state.value) {
                       cityValue = cityValue+",";
                     }
                     addressArr[addressArr.length] = cityValue;
