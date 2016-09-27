@@ -55,7 +55,7 @@
             }}
               <!-- Display user city information if exists -->
               {{#if primaryData.data.personal.address.home.city}}
-                {{primaryData.data.personal.address.home.city}}, 
+                {{primaryData.data.personal.address.home.city}}{{#if primaryData.data.personal.address.home.state.value}},{{/if}}
               {{/if}} 
               <!-- Display State if exists -->
               {{#if primaryData.data.personal.address.home.state.value}}
@@ -167,10 +167,6 @@
               {{#if primaryData.data.personal.organizationInfo.addressLine2}}
                 {{primaryData.data.personal.organizationInfo.addressLine2}}<br />
               {{/if}}
-              <!-- Display City If Exists -->
-              {{#if primaryData.data.personal.organizationInfo.locality}}
-                {{primaryData.data.personal.organizationInfo.locality}},
-              {{/if}}
               <!-- Display State, Zipcode & Country for United States & Canada -->
               {{#if 
                 (ifCond 
@@ -193,13 +189,24 @@
               }}
                 <!-- Display State If Exists -->
                 {{#if primaryData.data.personal.organizationInfo.workState.value}}
+                  <!-- Display City If Exists -->
+                  {{#if primaryData.data.personal.organizationInfo.locality}}
+                    {{primaryData.data.personal.organizationInfo.locality}},
+                  {{/if}}
                   {{primaryData.data.personal.organizationInfo.workState.value}}
+                {{else}}
+                  {{#if primaryData.data.personal.organizationInfo.locality}}
+                    {{primaryData.data.personal.organizationInfo.locality}}
+                  {{/if}}
                 {{/if}}
                 <!-- Display Zipcode -->
                 {{primaryData.data.personal.organizationInfo.PostalCode}}<br/>
                 <!-- Display Country -->
                 {{primaryData.data.personal.organizationInfo.country.value}}
               {{else}}
+                {{#if primaryData.data.personal.organizationInfo.locality}}
+                  {{primaryData.data.personal.organizationInfo.locality}}
+                {{/if}}
                 {{primaryData.data.personal.organizationInfo.PostalCode}}<br />
                 {{primaryData.data.personal.organizationInfo.country.value}}
               {{/if}}            
@@ -208,6 +215,11 @@
           {{else}}
             <!-- Check if user has default work address -->
             {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
+              <li>
+                {{primaryData.data.personal.prefix}}
+                {{primaryData.data.personal.firstname}}
+                {{primaryData.data.personal.lastname}}
+              </li>
               <li>{{primaryData.data.personal.organization.name}}</li>
               <!--<li>{{primaryData.data.personal.firstname}} {{primaryData.data.personal.lastname}}</li>-->
               <li>{{primaryData.data.personal.address.office.line1}}</li>
@@ -215,7 +227,7 @@
               <li>{{primaryData.data.personal.address.office.line3}}</li>
               <!-- Check if City Exists -->
               {{#if primaryData.data.personal.address.office.city}}
-                {{primaryData.data.personal.address.office.city}},
+                {{primaryData.data.personal.address.office.city}}{{#if primaryData.data.personal.address.office.state.value}},{{/if}}
               {{/if}}
               <!-- Check if user selected country is United States or canada -->
               {{#if 
