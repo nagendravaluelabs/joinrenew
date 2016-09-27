@@ -1,6 +1,6 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global Ember*/
-
+import ENV from '../config/environment';
 export default Ember.Controller.extend({
   addressData: Ember.inject.service('user-data'),
   init: function() {
