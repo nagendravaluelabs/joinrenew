@@ -19,13 +19,13 @@ export default Ember.Controller.extend({
         this.set("address", addressData.data.chapter.national);
       }		  
       if (typeof addressData.data.membership !== "undefined"){
-          this.set("renewMailLink","https://aia.hbp.com/assets/pdf/"+addressData.data.membership.memberid+".pdf");
+          this.set("renewMailLink",`${ENV.MAIL_IN_YOUR_RENEWAL_LINK}`+addressData.data.membership.memberid+".pdf");
 		  if (typeof addressData.data.membership.membershipstatus !== "undefined" && addressData.data.membership.membershipstatus !== 'Active')	 {
 			  this.set("dipslayFlag", "display:none");
 		  } 
       }  
-      this.set("changeMembershipLink", " http://aia.org");
-      this.set("changeChapterLink", " http://aia.org");
+      this.set("changeMembershipLink", `${ENV.ASSOCIATE_TO_ARCHITECT_FORM_LINK}`);
+      this.set("changeChapterLink", `${ENV.CHAPTER_TRANSFER_FORM_LINK}`);
     }	
   },
   addressObserver: function (){
