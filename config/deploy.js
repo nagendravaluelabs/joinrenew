@@ -67,6 +67,18 @@ module.exports = function(deployTarget) {
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
     }
+    if (!process.env.GTM_CODE) {
+      process.env.GTM_CODE = process.env.DEV_GTM_CODE;
+    }
+	if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+      process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.DEV_CHAPTER_TRANSFER_FORM_LINK;
+    }
+	if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+      process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.DEV_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
+    }
+	if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+      process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.DEV_MAIL_IN_YOUR_RENEWAL_LINK;
+    }
   }
 
   if (deployTarget === 'staging') {
@@ -111,6 +123,18 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.CORS_SERVER_URL;
+    }
+    if (!process.env.GTM_CODE) {
+      process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
+    }
+	if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+      process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.STAGING_CHAPTER_TRANSFER_FORM_LINK;
+    }
+	if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+      process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.STAGING_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
+    }
+	if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+      process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.STAGING_MAIL_IN_YOUR_RENEWAL_LINK;
     }
   }
 

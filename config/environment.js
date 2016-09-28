@@ -29,7 +29,13 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/"
+    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/",
+    'ember-cli-gtm': {
+      appId: process.env.GTM_CODE || 'GTM-NDWGK2'
+    },
+	MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK || 'https://aia.hbp.com/assets/pdf/',
+	ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK || 'http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf',
+	CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK || ' http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Transfer%20Form.pdf ',
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
