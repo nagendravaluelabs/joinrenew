@@ -143,20 +143,16 @@ export default Ember.Controller.extend(rememberScroll, {
                                     },
                                     letterswithbasicpunc: true
                                 },
-                                questionnaire_memberid: {
-                                    required: function () {
-                                        return $("#edit-questionnaire-2").is(":checked");
-                                    },
+                                 questionnaire_memberid: {
                                     digits: true
-                                }
+                                } 
                             },
                             messages: {
                                 questionnaire_membername: {
                                   required : "Member name is required",
                                   letterswithbasicpunc: "Please enter a valid member name"
                                 },
-                                questionnaire_memberid: {
-                                    required: "Member ID number is required",
+                                 questionnaire_memberid: {
                                     digits: "Please enter a valid member ID number"
                                 }
                             }
