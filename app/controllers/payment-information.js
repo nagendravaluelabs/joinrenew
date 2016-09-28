@@ -87,7 +87,7 @@ export default Ember.Controller.extend({
             this.set("supplyTotal", parseFloat(supplyTotal, 2));
             archipacValue = (this.get("primaryData.data.paymentInfo.isArchiPAC")) ? 25 : 0;
             this.set("total", parseFloat(total, 2));
-            //this.set("total", parseFloat(total+archipacValue, 2));
+            this.set("total", parseFloat(total+archipacValue, 2));
             this.set("supplyTotalWithArchipac", parseFloat(supplyTotal+archipacValue, 2));
             this.set("subTotalWithArchipac", parseFloat(subTotal+archipacValue, 2));
             

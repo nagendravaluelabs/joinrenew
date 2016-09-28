@@ -580,10 +580,16 @@
             <td class="price">$ {{format-currency subTotal}}</td>
             {{/if}}
           </tr>
+		  {{#if primaryData.data.paymentInfo.isArchiPAC }}
+		  <tr> 
+            <th scope="row">ArchiPAC Donation</th>
+            <td class="price">$ 25</td>
+          </tr>
+		  {{/if}}
           <tr> 
             <th scope="row">Administrative fees</th>
             <td class="price">$ 40.00</td>
-          </tr>
+          </tr>		  
           <tr>
             <th scope="row">Total</th>
             <td class="price">$ {{format-currency total}}</td>
@@ -606,6 +612,9 @@
                   {{#if (ifCond key 1 "==")}}
                     {{#if primaryData.data.paymentInfo.isArchiPAC}}
                       $ {{format-currency (mathOp installment 25 '+')}}
+					   {{#if primaryData.data.paymentInfo.isArchiPAC}}
+					     <span class="required" aria-required="true">*</span>
+					    {{/if}}
                     {{else}}
                       $ {{format-currency installment}}
                     {{/if}}
@@ -621,7 +630,7 @@
     </div>
   </div>
    {{#if primaryData.data.paymentInfo.isArchiPAC}}
-      <span class="arc-don-amt">ArchiPAC donation cannot be paid as part of the payment plan.</span>
+      <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation of $25 cannot be paid as part of the payment plan. Instead the $25 is collected as part of the first installment.</span>
    {{/if}}
 </div>
 
