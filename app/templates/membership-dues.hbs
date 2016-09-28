@@ -119,7 +119,7 @@
                   <form action="#" id="questionnaireUserform" method="post">
                   	
                     <span>AIA member responsible for dues</span>
-                    <span class="form-required" title="This field is required.">*</span>
+                   
                     
                     <div class="clearfix"></div>
                     
@@ -147,12 +147,11 @@
                     <div class="form-item form-type-textfield form-item-memberid">
                     
                       <label for="questionnaire_memberid">Member ID number
-                        <span class="form-required" title="This field is required.">*</span>
                       </label>
                       
                       {{input 
                         type="text" 
-                        classBinding=":form-text :required" 
+                        classBinding=":form-text :digits" 
                         id="questionnaire_memberid" 
                         name="questionnaire_memberid" 
                         value=(mut (get duesData.data.membershipInfo "SupplementalDuesID")) 
