@@ -1,21 +1,6 @@
 /*jslint white:true, devel:true, es6:true, this:true, browser:true */
 /*global $, moment*/
 import Ember from 'ember';
-$.validator.addMethod( "creditcardMonth", function() {
-  var date = new Date ();
-  var month = date.getMonth();
-  var year = date.getFullYear();
-  var cardExpirationYear = $("#cardExpirationYear").val();
-  var cardExpirationMonth = $("#cardExpirationMonth").val();
-  var selectedYear = parseInt(cardExpirationYear); 
-  var selectedMonth = parseInt(cardExpirationMonth);   
-  if(selectedMonth !== "") {
-    if (year === selectedYear && selectedMonth <= month){
-        return false;
-    }
-  }
-  return true;
-}, "Invalid expiration date." );
 
 export default Ember.Controller.extend({
         primaryData: Ember.inject.service('user-data'),
