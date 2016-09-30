@@ -70,6 +70,7 @@ export default Ember.Service.extend({
                       data.personal.phone.cell.value = "";
                     }
                     data.personal.address.primary = (data.personal.address.primary === "billing") ? "home" : data.personal.address.primary;
+                    data.personal.primaryAddress = data.personal.address.primary;
                     if(!Ember.getWithDefault(data,'personal.address.home', false)) {
                       data.personal.address.home = {};
                       data.personal.address.home.key = "";
@@ -280,6 +281,10 @@ export default Ember.Service.extend({
       });
     }
     
+    if(duesInfo.Dues.Due.length === 0) {
+      duesInfo = {};
+    }
+    
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
     paymentMode = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
@@ -451,7 +456,7 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) {
+        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || data.personal.primaryAddress === "home") {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
@@ -481,6 +486,7 @@ export default Ember.Service.extend({
             "Key" : data.personal.organization.key
           };
         } else {
+          organizationInfo.RelatedOrganizations = {};
           organizationInfo.RelatedOrganizations.RelatedOrganization = {
             "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
             "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
@@ -502,6 +508,36 @@ export default Ember.Service.extend({
             }
           };
         }
+      } else {
+        organizationInfo.RelatedOrganizations = {};
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
+          "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
+          "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
+          "OrganizationAddress": {
+            "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
+            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
+            "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
+            "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
+            "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
+            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState.value", ""),
+            "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
+            "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
+          },
+          "OrganizationPhone": {
+            "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+            "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
+            "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
+          }
+        };
+      }
+      //}
+    } else {
+      if(LicensedToPractice) {
+        organizationInfo.RelatedOrganizations = {};
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Key" : data.personal.organization.key
+        };
       }
     }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, duesInfo, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
