@@ -1,8 +1,6 @@
+/*global moment*/
 import Ember from 'ember';
-import ENV from '../config/environment';
-
-const { $, RSVP } = Ember;
-
+const { $ } = Ember;
 
 export function initialize(applicationInstance) {
   let creditcardMessage = "Invalid expiration date.";
@@ -41,7 +39,7 @@ export function initialize(applicationInstance) {
     
     selectedYear = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationYear", 0)); 
     selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));  
-    expiryDateObj = moment("02/"+selectedMonth+"/"+selectedYear, "DD/MM/YYYY");
+    expiryDateObj = moment("30/"+selectedMonth+"/"+selectedYear, "DD/MM/YYYY");
     if(expiryDateObj.isBefore(currentDateObj)) {
       return false;
     }
