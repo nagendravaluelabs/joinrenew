@@ -20,7 +20,8 @@ module.exports = function(environment) {
         AIA_HTTP_URL: process.env.AIA_HTTP_URL || "http://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
         AIA_HTTPS_URL: process.env.AIA_HTTPS_URL || "https://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
         AIA_FEDERATE_SERVER: process.env.AIA_FEDERATE_SERVER || "https://american-institute-of-architects-dev.us.janrainsso.com",
-        AIA_ENVIRONMENT: environment
+        AIA_ENVIRONMENT: environment,
+        AIA_JANRAIN_DOMAIN : "http://aia-joinrenew-dev.s3-website-us-east-1.amazonaws.com/"
       }
     },
 
@@ -42,7 +43,7 @@ module.exports = function(environment) {
   ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
   ENV.AIA_API_URL= ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
   ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
-  
+
   ENV.AIA_API_CLIENT_ID= ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
   ENV.AIA_API_SECRET= ENV.EmberENV.JANRAIN.AIA_API_SECRET;
   if (environment === 'development') {
