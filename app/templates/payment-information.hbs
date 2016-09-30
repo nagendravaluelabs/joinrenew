@@ -396,7 +396,7 @@
               <div id="firstinstallment">Total for first installment: 
               <span>
                 {{#if primaryData.data.paymentInfo.isArchiPAC}}
-                  $ {{format-currency (mathOp installment 25 '+')}} (This includes Archipac donation)
+                  $ {{format-currency (mathOp installment 25 '+')}} (This includes ArchiPAC donation)
                 {{else}}
                   $ {{format-currency installment}}
                 {{/if}}
@@ -582,8 +582,8 @@
           </tr>
 		  {{#if primaryData.data.paymentInfo.isArchiPAC }}
 		  <tr> 
-            <th scope="row">ArchiPAC Donation</th>
-            <td class="price">$ 25</td>
+            <th scope="row">ArchiPAC donation</th>
+            <td class="price">$ {{format-currency 25}}</td>
           </tr>
 		  {{/if}}
           <tr> 
@@ -630,7 +630,7 @@
     </div>
   </div>
    {{#if primaryData.data.paymentInfo.isArchiPAC}}
-      <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation of $25 cannot be paid as part of the payment plan. Instead the $25 is collected as part of the first installment.</span>
+      <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation will be included in the first installment.</span>
    {{/if}}
 </div>
 
