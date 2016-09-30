@@ -70,6 +70,7 @@ export default Ember.Service.extend({
                       data.personal.phone.cell.value = "";
                     }
                     data.personal.address.primary = (data.personal.address.primary === "billing") ? "home" : data.personal.address.primary;
+                    data.personal.primaryAddress = data.personal.address.primary;
                     if(!Ember.getWithDefault(data,'personal.address.home', false)) {
                       data.personal.address.home = {};
                       data.personal.address.home.key = "";
@@ -451,7 +452,7 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) {
+        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || data.personal.primaryAddress === "home") {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
@@ -502,6 +503,13 @@ export default Ember.Service.extend({
             }
           };
         }
+      }
+    } else {
+      if(LicensedToPractice) {
+        organizationInfo.RelatedOrganizations = {};
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Key" : data.personal.organization.key
+        };
       }
     }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, duesInfo, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
