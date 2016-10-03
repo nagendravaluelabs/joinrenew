@@ -281,6 +281,10 @@ export default Ember.Service.extend({
       });
     }
     
+    if(duesInfo.Dues.Due.length === 0) {
+      duesInfo = {};
+    }
+    
     /* Payment */
     paymentInfo.CardNumber = Ember.getWithDefault(data,'paymentInfo.CardNumber', "");
     paymentMode = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
@@ -482,6 +486,7 @@ export default Ember.Service.extend({
             "Key" : data.personal.organization.key
           };
         } else {
+          organizationInfo.RelatedOrganizations = {};
           organizationInfo.RelatedOrganizations.RelatedOrganization = {
             "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
             "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
@@ -503,7 +508,30 @@ export default Ember.Service.extend({
             }
           };
         }
+      } else {
+        organizationInfo.RelatedOrganizations = {};
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
+          "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
+          "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
+          "OrganizationAddress": {
+            "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
+            "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
+            "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
+            "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
+            "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
+            "State": Ember.getWithDefault(data.personal, "organizationInfo.workState.value", ""),
+            "PostalCode": Ember.getWithDefault(data.personal, "organizationInfo.PostalCode", ""),
+            "IsPrimary": (data.personal.address.primary === "office") ? 1 : 0
+          },
+          "OrganizationPhone": {
+            "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+            "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
+            "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
+          }
+        };
       }
+      //}
     } else {
       if(LicensedToPractice) {
         organizationInfo.RelatedOrganizations = {};
