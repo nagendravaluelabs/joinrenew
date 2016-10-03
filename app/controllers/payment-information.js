@@ -97,9 +97,8 @@ export default Ember.Controller.extend({
   },
   validatePaymentInfo: function () {
       "use strict";
-      var validate, self;
+      var self;
       self = this;
-     // $("#form-card-payment").removeData('validator');
       self.paymentValidate = $("#form-card-payment").validate({
           rules:{
               cardName: {
@@ -174,7 +173,6 @@ export default Ember.Controller.extend({
               primaryData = primaryData.data;
               let selectedYear = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationYear", 0)); 
               let selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));
-              let returnGroup = "";
               if((selectedYear && selectedMonth) || (!selectedYear && !selectedMonth)) {
                 error.insertAfter($(element).closest("li").find("#group-expiration-error"));
               } else {
@@ -189,7 +187,6 @@ export default Ember.Controller.extend({
       primaryData = primaryData.data;
       let selectedYear = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationYear", 0)); 
       let selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));
-      let returnGroup = "";
       if((selectedYear && selectedMonth) || (!selectedYear && !selectedMonth)) {
         self.paymentValidate.groups["cardExpirationMonth"] = "cardExpiry";
         self.paymentValidate.groups["cardExpirationYear"] = "cardExpiry";
@@ -265,14 +262,13 @@ export default Ember.Controller.extend({
     
   },
   actions: {
-    installmentsValidator: function(value, elementObj){
+    installmentsValidator: function(){
       var self = this;
       if(self.paymentValidate) {
         let primaryData = this.get("primaryData");
         primaryData = primaryData.data;
         let selectedYear = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationYear", 0)); 
         let selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));
-        let returnGroup = "";
         if((selectedYear && selectedMonth) || (!selectedYear && !selectedMonth)) {
           self.paymentValidate.groups["cardExpirationMonth"] = "cardExpiry";
           self.paymentValidate.groups["cardExpirationYear"] = "cardExpiry";
