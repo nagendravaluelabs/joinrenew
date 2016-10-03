@@ -449,7 +449,7 @@
                 </label>
                 <div class="cardExpiration clearfix">
                   <div class="cardExpirations">
-                    {{#x-select name="cardExpirationMonth" id="cardExpirationMonth" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationMonth"))}}
+                    {{#x-select name="cardExpirationMonth" id="cardExpirationMonth" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationMonth")) action="installmentsValidator"}}
                       {{#x-option value=""}}Month{{/x-option}}
                       {{#x-option value="1"}}Jan{{/x-option}}
                       {{#x-option value="2"}}Feb{{/x-option}}
@@ -466,7 +466,7 @@
                     {{/x-select}}
                   </div>
                   <div class="cardExpirations">
-                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationYear"))}}
+                    {{#x-select name="cardExpirationYear" id="cardExpirationYear" class="form-select" value=(mut (get primaryData.data.paymentInfo "ExpirationYear")) action="installmentsValidator"}}
                       {{#x-option value=""}}Year{{/x-option}}
                       {{#each (for currentYear maxYearList 1) as | year |}}
                         {{#x-option value=year}}{{year}}{{/x-option}}                  
@@ -474,6 +474,7 @@
                     {{/x-select}}
                   </div>
                 </div>
+                <div id="group-expiration-error"></div>
               </li>
               <li>
                 <div class="pull-left secure-code">
