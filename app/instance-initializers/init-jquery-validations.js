@@ -3,13 +3,13 @@ import Ember from 'ember';
 const { $ } = Ember;
 
 export function initialize(applicationInstance) {
-  let creditcardMessage = "Invalid expiration date.";
+  let creditcardMessage = "Invalid Card Expiry Date.";
   let creditcardMessageFn = function() {
     return creditcardMessage;
   };
   window.applicationInstanceObj = applicationInstance;
   $.validator.addMethod( "creditcardMonth", function() {
-    creditcardMessage = "Invalid expiration date.";
+    creditcardMessage = "Invalid Card Expiry Date.";
     let controllerObj = window.applicationInstanceObj.lookup('controller:payment-information');
     let primaryData = controllerObj.get("primaryData.data");
     var paymentType,
@@ -51,25 +51,26 @@ export function initialize(applicationInstance) {
     compareToObj = moment(daysInMonth+"/"+currentMonth+"/"+currentYear,"DD/MM/YYYY");
     
     selectedYear = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationYear", 0)); 
-    selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));  
-    expiryDaysInMonth = moment(selectedMonth+"/"+selectedYear, "MM/YYYY").daysInMonth();
-    expiryDateObj = moment(expiryDaysInMonth+"/"+selectedMonth+"/"+selectedYear, "DD/MM/YYYY");
-    if(expiryDateObj.isBefore(currentDateObj)) {
-      return false;
-    }
-    if(paymentType === "EMI"){
-      if(currentDateObj.isSameOrBefore(compareFromObj.april)&& currentDateObj.isSameOrAfter(compareFromObj.jan)){
-        compareToObj = moment("30/06/"+currentYear,"DD/MM/YYYY");
-        creditcardMessage = "The expiration date on card should be a minimum 06/"+currentYear+" to pay through installments.";
+    selectedMonth = parseInt(Ember.getWithDefault(primaryData, "paymentInfo.ExpirationMonth", 0));
+    if(selectedYear && selectedMonth) {
+      expiryDaysInMonth = moment(selectedMonth+"/"+selectedYear, "MM/YYYY").daysInMonth();
+      expiryDateObj = moment(expiryDaysInMonth+"/"+selectedMonth+"/"+selectedYear, "DD/MM/YYYY");
+      if(expiryDateObj.isBefore(currentDateObj)) {
+        return false;
       }
-      else if(currentDateObj.isSameOrBefore(compareFromObj.dec) && currentDateObj.isSameOrAfter(compareFromObj.oct)){
-        compareToObj = moment("30/06/"+(currentYear+1),"DD/MM/YYYY");
-        creditcardMessage = "The expiration date on card should be a minimum 06/"+(currentYear+1)+" to pay through installments.";
+      if(paymentType === "EMI"){
+        if(currentDateObj.isSameOrBefore(compareFromObj.april)&& currentDateObj.isSameOrAfter(compareFromObj.jan)){
+          compareToObj = moment("30/06/"+currentYear,"DD/MM/YYYY");
+          creditcardMessage = "The expiration date on card should be a minimum 06/"+currentYear+" to pay through installments.";
+        }
+        else if(currentDateObj.isSameOrBefore(compareFromObj.dec) && currentDateObj.isSameOrAfter(compareFromObj.oct)){
+          compareToObj = moment("30/06/"+(currentYear+1),"DD/MM/YYYY");
+          creditcardMessage = "The expiration date on card should be a minimum 06/"+(currentYear+1)+" to pay through installments.";
+        }
       }
-    }
-
-    if(!expiryDateObj.isSameOrAfter(compareToObj)) {
-      return false;
+      if(!expiryDateObj.isSameOrAfter(compareToObj)) {
+        return false;
+      }
     }
     return true;
   }, creditcardMessageFn);
