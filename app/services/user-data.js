@@ -279,10 +279,10 @@ export default Ember.Service.extend({
           duesInfo.Dues.Due[chapterLength] = chapterDetails;
         }
       });
-    }
     
-    if(duesInfo.Dues.Due.length === 0) {
-      duesInfo = {};
+      if(duesInfo.Dues.Due.length === 0) {
+        duesInfo = {};
+      }
     }
     
     /* Payment */
@@ -464,6 +464,9 @@ export default Ember.Service.extend({
           } else {
             isPrimary = 0;
             addressKey = "";
+          }
+          if(Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+            isPrimary = 0;
           }
           address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
           if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
