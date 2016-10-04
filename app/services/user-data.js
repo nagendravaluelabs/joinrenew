@@ -456,7 +456,7 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || data.personal.primaryAddress === "home") {
+        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || (data.personal.primaryAddress === "home" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
@@ -510,6 +510,9 @@ export default Ember.Service.extend({
               "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
             }
           };
+          if(Ember.getWithDefault(data.personal, "organizationInfo.country.value", "") === "UNITED STATES" || Ember.getWithDefault(data.personal, "organizationInfo.country.value", "") === "CANADA") {
+            organizationInfo.RelatedOrganizations.RelatedOrganization.OrganizationAddress.State = Ember.getWithDefault(data.personal, "organizationInfo.workState.value", "");
+          }
         }
       } else {
         organizationInfo.RelatedOrganizations = {};
