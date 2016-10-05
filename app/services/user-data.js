@@ -173,7 +173,7 @@ export default Ember.Service.extend({
     // Mastercard
     re = new RegExp("^5[1-5]");
     if (number.match(re) != null) {
-      return "master";
+      return "mastercard";
     }
 
     // AMEX
@@ -456,7 +456,7 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
       } else if(keyName === "office") {
-        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || (data.personal.primaryAddress === "home" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
+        if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
