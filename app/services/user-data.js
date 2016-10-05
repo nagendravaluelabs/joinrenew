@@ -173,7 +173,7 @@ export default Ember.Service.extend({
     // Mastercard
     re = new RegExp("^5[1-5]");
     if (number.match(re) != null) {
-      return "master";
+      return "mastercard";
     }
 
     // AMEX
