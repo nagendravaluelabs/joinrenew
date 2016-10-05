@@ -12,16 +12,15 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
       JANRAIN: {
-        AIA_API_CLIENT_ID: process.env.AIA_API_CLIENT_ID || "jhxbmd679pv6j3hatb3yz7xdpgtauced",
-        AIA_API_SECRET: process.env.AIA_API_SECRET || "mx3zd27mcvdbkrmnr829cczcvnnr62dq",
-        AIA_APP_ID: process.env.AIA_APP_ID || "6u2cx5favu7vq3tgc892r67rey",
-        AIA_CAPTURE_SERVER: process.env.AIA_CAPTURE_SERVER || "https://american-institute-of-architects-dev.us-dev.janraincapture.com",
-        AIA_APP_URL: process.env.AIA_APP_URL || "https://american-institute-of-architects-dev.rpxnow.com",
-        AIA_HTTP_URL: process.env.AIA_HTTP_URL || "http://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
-        AIA_HTTPS_URL: process.env.AIA_HTTPS_URL || "https://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
-        AIA_FEDERATE_SERVER: process.env.AIA_FEDERATE_SERVER || "https://american-institute-of-architects-dev.us.janrainsso.com",
-        AIA_ENVIRONMENT: environment,
-        AIA_JANRAIN_DOMAIN : "http://aia-joinrenew-dev.s3-website-us-east-1.amazonaws.com/"
+        AIA_API_CLIENT_ID: process.env.AIA_API_CLIENT_ID,
+        AIA_API_SECRET: process.env.AIA_API_SECRET,
+        AIA_APP_ID: process.env.AIA_APP_ID,
+        AIA_CAPTURE_SERVER: process.env.AIA_CAPTURE_SERVER,
+        AIA_APP_URL: process.env.AIA_APP_URL,
+        AIA_HTTP_URL: process.env.AIA_HTTP_URL,
+        AIA_HTTPS_URL: process.env.AIA_HTTPS_URL,
+        AIA_FEDERATE_SERVER: process.env.AIA_FEDERATE_SERVER,
+        AIA_ENVIRONMENT: environment
       }
     },
 
@@ -30,32 +29,49 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: process.env.AIA_CORS || "//52.1.198.224/",
+    AIA_CORS: process.env.AIA_CORS,
     'ember-cli-gtm': {
-      appId: process.env.GTM_CODE || 'GTM-NDWGK2'
+      appId: process.env.GTM_CODE
     },
-	MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK || 'https://aia.hbp.com/assets/pdf/',
-	ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK || 'http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf',
-	CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK || ' http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Transfer%20Form.pdf ',
+    MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK,
+    ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK,
+    CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK,
   };
 
-  ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update';
-  ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : ENV.AIA_CORS+'http://kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
+  ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
+  ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : process.env.AIA_DRUPAL_URL;
   ENV.AIA_API_URL= ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
   ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
 
   ENV.AIA_API_CLIENT_ID= ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
   ENV.AIA_API_SECRET= ENV.EmberENV.JANRAIN.AIA_API_SECRET;
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
-//	 AIA_SAVE_URL: process.env.AIA_SAVE_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/update.php';
-//	 AIA_DRUPAL_URL: process.env.AIA_DRUPAL_URL || '//kbsjoinrenewsu7uhssau2.devcloud.acquia-sites.com/renewjson/getdata';
-  }
 
+  }
+  if (environment === 'local') {
+    ENV.EmberENV.JANRAIN = {
+      AIA_API_CLIENT_ID: "jhxbmd679pv6j3hatb3yz7xdpgtauced",
+      AIA_API_SECRET: "mx3zd27mcvdbkrmnr829cczcvnnr62dq",
+      AIA_APP_ID: "6u2cx5favu7vq3tgc892r67rey",
+      AIA_CAPTURE_SERVER: "https://american-institute-of-architects-dev.us-dev.janraincapture.com",
+      AIA_APP_URL: "https://american-institute-of-architects-dev.rpxnow.com",
+      AIA_HTTP_URL: "http://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
+      AIA_HTTPS_URL: "https://d29usylhdk1xyu.cloudfront.net/load/american-institute-of-architects-dev",
+      AIA_FEDERATE_SERVER: "https://american-institute-of-architects-dev.us.janrainsso.com",
+      AIA_ENVIRONMENT: "local"
+    };
+    ENV.AIA_CORS = "//52.1.198.224/";
+    ENV['ember-cli-gtm'].appId = "GTM-NDWGK2";
+    ENV.MAIL_IN_YOUR_RENEWAL_LINK = "https://aia.hbp.com/assets/pdf/";
+    ENV.ASSOCIATE_TO_ARCHITECT_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf ";
+    ENV.CHAPTER_TRANSFER_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Transfer%20Form.pdf";
+    ENV.AIA_SAVE_URL = ENV.AIA_CORS+"http://aiad8dev.prod.acquia-sites.com/renewjson/update";
+    ENV.AIA_DRUPAL_URL = ENV.AIA_CORS+"http://aiad8dev.prod.acquia-sites.com/renewjson/getdata";
+    ENV.AIA_API_URL = ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
+    ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
+    ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
+    ENV.AIA_API_SECRET = ENV.EmberENV.JANRAIN.AIA_API_SECRET;
+  }
   if (environment === 'test') {
     // Testem prefers this...
     ENV.baseURL = '/';
@@ -66,6 +82,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+
   }
 
   if (environment === 'staging') {
