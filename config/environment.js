@@ -48,17 +48,7 @@ module.exports = function(environment) {
   if (environment === 'development') {
 
   }
-  if (environment === 'test' || environment === 'local') {
-    // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
-
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
-
-    ENV.APP.rootElement = '#ember-testing';
-    
+  if (environment === 'local') {
     ENV.EmberENV.JANRAIN = {
       AIA_API_CLIENT_ID: "jhxbmd679pv6j3hatb3yz7xdpgtauced",
       AIA_API_SECRET: "mx3zd27mcvdbkrmnr829cczcvnnr62dq",
@@ -81,6 +71,19 @@ module.exports = function(environment) {
     ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
     ENV.AIA_API_SECRET = ENV.EmberENV.JANRAIN.AIA_API_SECRET;
+  }
+  if (environment === 'test') {
+    // Testem prefers this...
+    ENV.baseURL = '/';
+    ENV.locationType = 'none';
+
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+    ENV.APP.rootElement = '#ember-testing';
+    
+    
   }
 
   if (environment === 'staging') {
