@@ -42,7 +42,7 @@ module.exports = function(environment) {
   ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : process.env.AIA_DRUPAL_URL;
   ENV.AIA_API_URL= ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
   ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
-  
+
   ENV.AIA_API_CLIENT_ID= ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
   ENV.AIA_API_SECRET= ENV.EmberENV.JANRAIN.AIA_API_SECRET;
   if (environment === 'development') {
@@ -82,8 +82,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-    
-    
+
+
   }
 
   if (environment === 'staging') {
