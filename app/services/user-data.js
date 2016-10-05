@@ -290,7 +290,7 @@ export default Ember.Service.extend({
     paymentMode = Ember.getWithDefault(data,'paymentInfo.paymentType', "");
     paymentType = paymentMode;
     if(paymentMode==="Electronic check") {
-      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.echeck', "");
+      paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.electronic_check', "");
     } else {
       paymentType = this.getCardType(paymentInfo.CardNumber);
       paymentType = Ember.getWithDefault(genericData,'paymenttypekeys.'+paymentType, "");
