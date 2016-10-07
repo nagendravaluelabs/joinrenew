@@ -539,11 +539,13 @@ export default Ember.Service.extend({
       }
       //}
     } else {
-      if(parseInt(Ember.getWithDefault(data,'invoice.issupplementaldues', 0)) === 1) {
-        organizationInfo.RelatedOrganizations = {};
-        organizationInfo.RelatedOrganizations.RelatedOrganization = {
-          "Key" : data.personal.organization.key
-        };
+      if(parseInt(Ember.getWithDefault(data,'invoice.issupplementaldues', 0)) === 1 && membershipInfo.LiabilityCode) {
+        if(Ember.getWithDefault(data,'personal.organization.key', false)) {
+          organizationInfo.RelatedOrganizations = {};
+          organizationInfo.RelatedOrganizations.RelatedOrganization = {
+            "Key" : data.personal.organization.key
+          };
+        }
       }
     }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, duesInfo, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
