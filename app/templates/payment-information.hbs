@@ -637,7 +637,7 @@
   </div>  
 	<div class="clearfix"></div>
    {{#if primaryData.data.paymentInfo.isArchiPAC}}
-     <div id="firstinstallment" class="arc-amt-installment text-center">Total's payment: $ {{format-currency (mathOp installment 25 '+')}}<span class="required" aria-required="true">*</span></div>
+     <div id="firstinstallment" class="arc-amt-installment text-center">Today's payment: $ {{format-currency (mathOp installment 25 '+')}}<span class="required" aria-required="true">*</span></div>
      <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation of $25 will be included in the first payment and cannot be paid in installments.</span>
    {{/if}}
 </div>
