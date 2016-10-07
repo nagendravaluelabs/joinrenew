@@ -396,7 +396,7 @@
               <div id="firstinstallment">Total for first installment: 
               <span>
                 {{#if primaryData.data.paymentInfo.isArchiPAC}}
-                  $ {{format-currency (mathOp installment 25 '+')}} (This includes ArchiPAC donation)
+                  $ {{format-currency (mathOp installment 25 '+')}} (Your credit/debit card will be debited with the first dues installment amount of $ {{format-currency  installment}} plus the ArchiPAC donation of $25.)
                 {{else}}
                   $ {{format-currency installment}}
                 {{/if}}
@@ -602,7 +602,12 @@
         </tbody>
       </table>
     </div>
-    <div class="rightblock">Installments
+    <div class="rightblock">	    
+		{{#if primaryData.data.paymentInfo.isArchiPAC}}
+        Dues Installments
+        {{else}}
+        Installments
+		{{/if}}			
       <div id="payment_tbl">
         <table id="installment_payment_sum_list">
           <tbody>
@@ -612,9 +617,9 @@
                 <td class="install_payment">
                   {{#if (ifCond key 1 "==")}}
                     {{#if primaryData.data.paymentInfo.isArchiPAC}}
-                      $ {{format-currency (mathOp installment 25 '+')}}
+                      $ {{format-currency installment}}
 					   {{#if primaryData.data.paymentInfo.isArchiPAC}}
-					     <span class="required" aria-required="true">*</span>
+					     <!--<span class="required" aria-required="true">*</span>-->
 					    {{/if}}
                     {{else}}
                       $ {{format-currency installment}}
@@ -629,9 +634,11 @@
         </table>
       </div>
     </div>
-  </div>
+  </div>  
+	<div class="clearfix"></div>
    {{#if primaryData.data.paymentInfo.isArchiPAC}}
-      <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation will be included in the first installment.</span>
+     <div id="firstinstallment" class="arc-amt-installment text-center">Total's payment: $ {{format-currency (mathOp installment 25 '+')}}<span class="required" aria-required="true">*</span></div>
+     <span class="arc-don-amt"><span class="required" aria-required="true">*</span>ArchiPAC donation of $25 will be included in the first payment and cannot be paid in installments.</span>
    {{/if}}
 </div>
 
