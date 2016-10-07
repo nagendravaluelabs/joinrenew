@@ -234,8 +234,8 @@ export default Ember.Controller.extend({
     var installment;
     this.set('installNumber',value);
     var installNumber = value;		  
-    var totalForArchpacCal = this.get("primaryData.data.paymentInfo.isArchiPAC") ? parseFloat(total-25) : parseFloat(total);
-    installment = parseFloat(totalForArchpacCal/installNumber);
+    //var totalForArchpacCal = this.get("primaryData.data.paymentInfo.isArchiPAC") ? parseFloat(total-25) : parseFloat(total);
+    installment = parseFloat(total/installNumber);
     this.set("installment", parseFloat(installment.toFixed(2)));
   },
   saveRenewData : function () {
