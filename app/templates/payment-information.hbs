@@ -580,13 +580,7 @@
             {{else}}
             <td class="price">$ {{format-currency subTotal}}</td>
             {{/if}}
-          </tr>
-		  {{#if primaryData.data.paymentInfo.isArchiPAC }}
-		  <tr> 
-            <th scope="row">ArchiPAC donation</th>
-            <td class="price">$ {{format-currency 25}}</td>
-          </tr>
-		  {{/if}}
+          </tr>		  
           <tr> 
             <th scope="row">Administrative fees</th>
             <td class="price">$ 40.00</td>
@@ -602,12 +596,7 @@
         </tbody>
       </table>
     </div>
-    <div class="rightblock">	    
-		{{#if primaryData.data.paymentInfo.isArchiPAC}}
-        Dues Installments
-        {{else}}
-        Installments
-		{{/if}}			
+    <div class="rightblock"> Dues Installments        			
       <div id="payment_tbl">
         <table id="installment_payment_sum_list">
           <tbody>
