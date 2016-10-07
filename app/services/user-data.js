@@ -469,9 +469,9 @@ export default Ember.Service.extend({
             isPrimary = 0;
           }
           address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
-          if(address_owner_key !== "" && address_owner_key !== membershipInfo.IndividualKey) {
+          if((address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase()) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
             addressInfo.Addresses.Address[addressLength] = {};
-            if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+            if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && (address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase())) {
               addressInfo.Addresses.Address[addressLength].CompanyKey = data.personal.organization.key;
             }
             addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
@@ -539,13 +539,11 @@ export default Ember.Service.extend({
       }
       //}
     } else {
-      if(parseInt(Ember.getWithDefault(data,'invoice.issupplementaldues', 0)) === 1 && membershipInfo.LiabilityCode) {
-        if(Ember.getWithDefault(data,'personal.organization.key', false)) {
-          organizationInfo.RelatedOrganizations = {};
-          organizationInfo.RelatedOrganizations.RelatedOrganization = {
-            "Key" : data.personal.organization.key
-          };
-        }
+      if(Ember.getWithDefault(data,'personal.organization.key', false)) {
+        organizationInfo.RelatedOrganizations = {};
+        organizationInfo.RelatedOrganizations.RelatedOrganization = {
+          "Key" : data.personal.organization.key
+        };
       }
     }
     membershipInfo = Object.assign(membershipInfo, membershipPackagesObj, duesInfo, paymentInfo, DonationInfo, installmentsInfo, otherInfo, personalInfo, phonesInfo, addressInfo, organizationInfo);
