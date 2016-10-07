@@ -322,7 +322,7 @@ label {
     border: 0 none;
     border-radius: 0;
     color: $button-color !important;
-    font-family: $font-light;
+    font-family: $font-light !important;
     font-size: $button-font-size;
     margin-bottom: 3px;
     padding: $button-padding;
