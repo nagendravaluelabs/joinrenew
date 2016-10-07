@@ -4,6 +4,6 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-htmlbars": "^1.0.1"
+    "ember-cli-htmlbars": "^1.1.0"
   }
 }

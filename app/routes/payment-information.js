@@ -15,7 +15,7 @@ export default Ember.Route.extend({
             active: false,
             heightStyle: "content"
         });
-       $("#payment-accordion h3:eq(0)").trigger('click');
+        $("#payment-accordion h3:eq(0)").trigger('click');
         $('#paymentplan_extrainfo').dialog({
           modal: true,
           autoOpen: false,
