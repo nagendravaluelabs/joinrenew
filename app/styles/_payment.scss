@@ -538,6 +538,7 @@
     min-height: 94px; 
     max-height: none; 
     height: auto;
+	overflow: hidden;
     .extrainfo_box {
       .leftblock {
         float: left;
@@ -610,9 +611,15 @@
       } 
     }
 	.arc-don-amt {
-    float:left; 
-    margin-bottom:10px;
-  }
+		float:left; 
+		margin-bottom:10px;
+	}
+	.arc-amt-installment {
+		font-size: 24px;
+		font-size: 2.4rem;
+		color: #FF0000;
+		margin: 10px 0;
+	}
   }
   .ui-dialog-titlebar {
     padding: 0 !important
