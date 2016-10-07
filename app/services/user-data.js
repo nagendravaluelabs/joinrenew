@@ -539,7 +539,7 @@ export default Ember.Service.extend({
       }
       //}
     } else {
-      if(LicensedToPractice) {
+      if(parseInt(Ember.getWithDefault(data,'invoice.issupplementaldues', 0)) === 1) {
         organizationInfo.RelatedOrganizations = {};
         organizationInfo.RelatedOrganizations.RelatedOrganization = {
           "Key" : data.personal.organization.key
