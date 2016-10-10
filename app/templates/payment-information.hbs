@@ -393,12 +393,12 @@
                 <label for="select-installments">installments</label>
               </div>
               {{/if}}
-              <div id="firstinstallment">Total for first installment: 
+              <div id="firstinstallment">Total for first 
               <span>
                 {{#if primaryData.data.paymentInfo.isArchiPAC}}
-                  $ {{format-currency (mathOp installment 25 '+')}} (Your credit/debit card will be debited with the first dues installment amount of $ {{format-currency  installment}} plus the ArchiPAC donation of $25.)
+                  payment: $ {{format-currency (mathOp installment 25 '+')}} (Your credit/debit card will be debited with the first dues installment amount of $ {{format-currency  installment}} plus the ArchiPAC donation of $25.)
                 {{else}}
-                  $ {{format-currency installment}}
+                  installment: $ {{format-currency installment}}
                 {{/if}}
               </span>
               <span id="paymentplan_info_but">
