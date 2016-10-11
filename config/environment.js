@@ -50,8 +50,8 @@ module.exports = function(environment) {
   }
   if (environment === 'local') {
     ENV.EmberENV.JANRAIN = {
-      AIA_API_CLIENT_ID: "6tckqu9wenqesa2fkk5ukhuewudupvyv",
-      AIA_API_SECRET: "gtcqvnnz2f4mdvukhvy2t32smdwj4wbs",
+      AIA_API_CLIENT_ID: "jhxbmd679pv6j3hatb3yz7xdpgtauced",
+      AIA_API_SECRET: "mx3zd27mcvdbkrmnr829cczcvnnr62dq",
       AIA_APP_ID: "6u2cx5favu7vq3tgc892r67rey",
       AIA_CAPTURE_SERVER: "https://american-institute-of-architects-dev.us-dev.janraincapture.com",
       AIA_APP_URL: "https://american-institute-of-architects-dev.rpxnow.com",
