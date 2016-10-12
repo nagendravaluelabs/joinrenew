@@ -465,18 +465,32 @@ export default Ember.Service.extend({
             isPrimary = 0;
             addressKey = "";
           }
-          if(Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
-            isPrimary = 0;
-          }
           address_owner_key = Ember.getWithDefault(data.personal, "address.office.address_owner_key", "");
-          if((address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase()) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
+          if(!Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false) && address_owner_key !== "" && address_owner_key.toLowerCase() === membershipInfo.IndividualKey.toLowerCase()) {
             addressInfo.Addresses.Address[addressLength] = {};
-            if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && (address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase())) {
-              addressInfo.Addresses.Address[addressLength].CompanyKey = data.personal.organization.key;
-            }
             addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
             addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
             addressInfo.Addresses.Address[addressLength].Key = addressKey;
+            addressInfo.Addresses.Address[addressLength].Country = Ember.getWithDefault(addressObj, "country.value", "");
+            addressInfo.Addresses.Address[addressLength].State = Ember.getWithDefault(addressObj, "state.value", "");
+            addressInfo.Addresses.Address[addressLength].Line1 = Ember.getWithDefault(addressObj, "line1", "");
+            addressInfo.Addresses.Address[addressLength].Line2 = Ember.getWithDefault(addressObj, "line2", "");
+            addressInfo.Addresses.Address[addressLength].Line3 = Ember.getWithDefault(addressObj, "line3", "");
+            addressInfo.Addresses.Address[addressLength].City = Ember.getWithDefault(addressObj, "city", "");
+            addressInfo.Addresses.Address[addressLength].PostalCode = Ember.getWithDefault(addressObj, "zip", "");
+          } else {
+            if(Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
+              isPrimary = 0;
+            }
+            if((address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase()) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
+              addressInfo.Addresses.Address[addressLength] = {};
+              if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && (address_owner_key !== "" && address_owner_key.toLowerCase() !== membershipInfo.IndividualKey.toLowerCase())) {
+                addressInfo.Addresses.Address[addressLength].CompanyKey = data.personal.organization.key;
+              }
+              addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
+              addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
+              addressInfo.Addresses.Address[addressLength].Key = addressKey;
+            }
           }
         }
       }
