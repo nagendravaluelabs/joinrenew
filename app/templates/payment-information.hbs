@@ -398,7 +398,7 @@
                 {{#if primaryData.data.paymentInfo.isArchiPAC}}
                   payment: $ {{format-currency (mathOp installment 25 '+')}} (Your credit/debit card will be debited with the first dues installment amount of $ {{format-currency  installment}} plus the ArchiPAC donation of $25.)
                 {{else}}
-                  installment: $ {{format-currency installment}}
+                  installment: $ {{format-currency installment}} 
                 {{/if}}
               </span>
               <span id="paymentplan_info_but">
