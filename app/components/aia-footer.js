@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     "route": false
   },
   {
-    "text": "800-242-3837",
+    "text": "(800) AIA-3837",
     "route": false
   },
   {
