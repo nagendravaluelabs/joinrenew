@@ -86,7 +86,7 @@
       }
     }
     .renew-disclaimer {
-      background: #e3e3e4;
+      background: #efefef;
       font: 14px/1.5 'Architype-Light',sans-serif;
       color: #333333;
       padding-top: 1px;
@@ -95,6 +95,12 @@
       }
       h4 {
         font: 14px/1 'Architype-Bold',sans-serif;
+        margin-bottom: 30px;
+        
+      }
+      p {
+        font-size:15px;
+        line-height: 20px;
       }
       .row{ 
         margin-top:45px;
@@ -102,7 +108,6 @@
       .disclaimer-txt{
         margin-left: 4px;
         margin-top: 40px;
-        color: #aaa;
       }
     }
   }
