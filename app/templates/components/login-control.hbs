@@ -1,4 +1,5 @@
 <ul class="nav navbar-nav navbar-right">
+  <li><a href="http://www.aia.org/">Home</a></li>
   {{#if auth.user}}
     <li><a href="#" {{action "logout"}}>Sign out</a></li>
   {{else}}
@@ -6,4 +7,5 @@
       <li><a href="#" {{action janrain.login}}>Sign in</a></li>
     {{/using-janrain}}
   {{/if}}
+  <li><a href="http://www.aia.org/join/">Join now</a></li>
 </ul>

@@ -11,8 +11,8 @@ export default Ember.Route.extend({
     "use strict";
     return Ember.RSVP.hash({
       page: {
-        "body": "<h2>88,000 members, <br> 260 chapters, <br> 1 you.</h2><p>Your vision is unique.  Your work is distinctive. Your career path is your own. We're excited to see where you're going &#8212; and we can help you get there.</p>",
-        "field_aia_image": "images/haley-gipe2_0.jpg",
+        "body": "<h2>Nearly 88,000 members, <br> over 250 chapters, <br> 1 you.</h2><p>Your vision is unique.  Your work is distinctive. Your career path is your own. We're excited to see where you're going &#8212; and we can help you get there.</p>",
+        "field_aia_image": "images/devanne-pena2_0.png",
         "title": "Renew"
       },
       benefits: {}

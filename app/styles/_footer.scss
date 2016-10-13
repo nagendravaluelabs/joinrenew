@@ -1,10 +1,10 @@
 #footer-block {
-  padding: 40px 0 63px 0;
-  background:#e3e3e4;
+  padding: 40px 0 0 0;
+  background:#efefef;
   font: 14px/1.5 'Architype-Light',sans-serif;
   color: #333333;
   .list-horizontal {
-    margin: 0;
+    margin: 0 0 50px 0;
     li {
       &+li{
         &:before {
@@ -20,7 +20,7 @@
 @media (max-width: 767px) {
   #footer-block  {
     text-align: center;
-    padding: 40px 0;
+    padding: 40px 0 0 0;
   }
 }
 @media (max-width: 500px) {
