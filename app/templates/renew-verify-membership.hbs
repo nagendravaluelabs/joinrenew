@@ -34,7 +34,13 @@
             <div class="chapter">
               <p>Contact your chapter:</p>
               <address class="text address-indent">
-                {{#if (isEqualTo address.email 'zzinfocentral@aia.orgzz')}}
+                {{#if 
+                  (ifCond 
+                    (isEqualTo address.email 'zzinfocentral@aia.orgzz')
+                    (isEqualTo address.email 'infocentral@aia.org')
+                    "||"
+                  )
+                }}
                   <p class="chapter-name">The American Institute of Architects</p>
                   {{else}}
                   <p class="chapter-name">{{address.chaptername}}</p>
@@ -42,11 +48,17 @@
                 <p>{{address.address1}}</p>
                 <p>{{address.city}}, {{address.state}} {{address.postalcode}}</p>
                 <p>{{address.phone}}</p>
-                <p>Email: <a target="_top" href="mailto:zzsteve@aialosangeles.orgzz" class="email">{{address.email}}</a></p>
-                {{#if (isNotEqual address.email 'zzinfocentral@aia.orgzz')}}
+                <p>Email: <a target="_top" href="mailto:{{address.email}}" class="email">{{address.email}}</a></p>
+                {{#if 
+                  (ifCond 
+                    (isNotEqual address.email 'zzinfocentral@aia.orgzz')
+                    (isNotEqual address.email 'zzinfocentral@aia.orgzz')
+                    "||"
+                  )
+                }}
                   <p class="chapter-indent">Or contact AIA national:</p>
                   <p>1 (800)242-3837 (Option 2)</p>
-                  <p><a href="mailto:zzinfocentral@aia.orgzz" target="_top">zzinfocentral@aia.orgzz</a></p>
+                  <p><a href="mailto:infocentral@aia.org" target="_top">infocentral@aia.org</a></p>
                 {{/if}}
               </address>  
             </div>

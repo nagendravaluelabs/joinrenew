@@ -760,7 +760,7 @@
                 }}
                   <option value="">Select</option>
                   {{#each companyType as |type|}}
-                    <option value="{{type}}" selected="{{if (isEqualTo organizationInfo.companyType type) 'selected' '' }}">{{type}}</option>                
+                    <option value="{{jsStrings type 'decodeEntities'}}" selected="{{if (isEqualTo organizationInfo.companyType type) 'selected' '' }}">{{jsStrings type 'decodeEntities'}}</option>                
                   {{/each}}
                 {{/ember-chosen}}
               </li>
