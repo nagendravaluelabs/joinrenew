@@ -35,7 +35,6 @@ export default Service.extend(RouteRefresherMixin, {
     authReqData = {
       method: "POST",
       headers: {
-        "Authorization": "Basic "+ btoa(ENV.AIA_API_CLIENT_ID+":"+ENV.AIA_API_SECRET),
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body: authParams
@@ -48,9 +47,7 @@ export default Service.extend(RouteRefresherMixin, {
             tokenParams = {
               "redirect_uri": "http://aiadev2.prod.acquia-sites.com/janrain_capture/oauth",
               "code": authorization.authorizationCode,
-              "grant_type": "authorization_code",
-              "client_id": ENV.AIA_API_CLIENT_ID,
-              "client_secret": ENV.AIA_API_SECRET
+              "grant_type": "authorization_code"
             };
             tokenParams = $.param( tokenParams );
             tokenReqData = {
