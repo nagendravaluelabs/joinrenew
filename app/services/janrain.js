@@ -27,7 +27,7 @@ export default Service.extend(RouteRefresherMixin, {
     $('.ajax-spinner').show();
     janrainProfileData = JSON.parse(janrainProfileData);
     authParams = {
-      "redirect_uri": "http://aiadev2.prod.acquia-sites.com/janrain_capture/oauth",
+      "redirect_uri": ENV.AIA_BASEURL+"oauth",
       "type_name": "user",
       "uuid": janrainProfileData.uuid
     };
@@ -45,7 +45,7 @@ export default Service.extend(RouteRefresherMixin, {
         return response.json().then(function(authorization){
           if(typeof authorization.authorizationCode !== undefined) {
             tokenParams = {
-              "redirect_uri": "http://aiadev2.prod.acquia-sites.com/janrain_capture/oauth",
+              "redirect_uri": ENV.AIA_BASEURL+"oauth",
               "code": authorization.authorizationCode,
               "grant_type": "authorization_code"
             };

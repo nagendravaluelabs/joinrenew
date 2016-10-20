@@ -13,7 +13,6 @@ module.exports = function(environment) {
       },
       JANRAIN: {
         AIA_API_CLIENT_ID: process.env.AIA_API_CLIENT_ID,
-        AIA_API_SECRET: process.env.AIA_API_SECRET,
         AIA_APP_ID: process.env.AIA_APP_ID,
         AIA_CAPTURE_SERVER: process.env.AIA_CAPTURE_SERVER,
         AIA_APP_URL: process.env.AIA_APP_URL,
@@ -36,22 +35,21 @@ module.exports = function(environment) {
     MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK,
     ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK,
     CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK,
+    AIA_BASEURL: process.env.BASE_URL
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
   ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : process.env.AIA_DRUPAL_URL;
   ENV.AIA_API_URL= ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
-  ENV.AIA_EMPLOYMENT_LOOKUP_URL= ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
+  ENV.AIA_EMPLOYMENT_LOOKUP_URL= process.env.AIA_EMPLOYMENT_LOOKUP_URL ? ENV.AIA_CORS+process.env.AIA_EMPLOYMENT_LOOKUP_URL : process.env.AIA_EMPLOYMENT_LOOKUP_URL;
 
   ENV.AIA_API_CLIENT_ID= ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
-  ENV.AIA_API_SECRET= ENV.EmberENV.JANRAIN.AIA_API_SECRET;
   if (environment === 'development') {
 
   }
   if (environment === 'local') {
     ENV.EmberENV.JANRAIN = {
       AIA_API_CLIENT_ID: "jhxbmd679pv6j3hatb3yz7xdpgtauced",
-      AIA_API_SECRET: "mx3zd27mcvdbkrmnr829cczcvnnr62dq",
       AIA_APP_ID: "6u2cx5favu7vq3tgc892r67rey",
       AIA_CAPTURE_SERVER: "https://american-institute-of-architects-dev.us-dev.janraincapture.com",
       AIA_APP_URL: "https://american-institute-of-architects-dev.rpxnow.com",
@@ -70,7 +68,7 @@ module.exports = function(environment) {
     ENV.AIA_API_URL = ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
     ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
-    ENV.AIA_API_SECRET = ENV.EmberENV.JANRAIN.AIA_API_SECRET;
+    ENV.AIA_BASEURL = "http://vcap.me/social-login/";
   }
   if (environment === 'test') {
     // Testem prefers this...

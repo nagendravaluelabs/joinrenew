@@ -43,9 +43,6 @@ module.exports = function(deployTarget) {
     if (!process.env.AIA_API_CLIENT_ID) {
       process.env.AIA_API_CLIENT_ID = process.env.DEV_JANRAIN_API_CLIENT_ID;
     }
-    if (!process.env.AIA_API_SECRET) {
-      process.env.AIA_API_SECRET = process.env.DEV_JANRAIN_API_CLIENT_SECRET;
-    }
     if (!process.env.AIA_APP_ID) {
       process.env.AIA_APP_ID = process.env.DEV_JANRAIN_APP_ID;
     }
@@ -70,14 +67,17 @@ module.exports = function(deployTarget) {
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.DEV_GTM_CODE;
     }
-	if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+    if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
       process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.DEV_CHAPTER_TRANSFER_FORM_LINK;
     }
-	if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+    if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
       process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.DEV_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
     }
-	if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+    if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
       process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.DEV_MAIL_IN_YOUR_RENEWAL_LINK;
+    }
+    if (!process.env.BASE_URL) {
+      process.env.BASE_URL = process.env.DEV_BASE_URL;
     }
   }
 
@@ -99,9 +99,6 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.AIA_API_CLIENT_ID) {
       process.env.AIA_API_CLIENT_ID = process.env.STAGING_JANRAIN_API_CLIENT_ID;
-    }
-    if (!process.env.AIA_API_SECRET) {
-      process.env.AIA_API_SECRET = process.env.STAGING_JANRAIN_API_CLIENT_SECRET;
     }
     if (!process.env.AIA_APP_ID) {
       process.env.AIA_APP_ID = process.env.STAGING_JANRAIN_APP_ID;
@@ -127,14 +124,17 @@ module.exports = function(deployTarget) {
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
     }
-	if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+    if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
       process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.STAGING_CHAPTER_TRANSFER_FORM_LINK;
     }
-	if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+    if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
       process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.STAGING_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
     }
-	if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+    if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
       process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.STAGING_MAIL_IN_YOUR_RENEWAL_LINK;
+    }
+    if (!process.env.BASE_URL) {
+      process.env.BASE_URL = process.env.STG_BASE_URL;
     }
   }
 
@@ -156,9 +156,6 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.AIA_API_CLIENT_ID) {
       process.env.AIA_API_CLIENT_ID = process.env.PROD_JANRAIN_API_CLIENT_ID;
-    }
-    if (!process.env.AIA_API_SECRET) {
-      process.env.AIA_API_SECRET = process.env.PROD_JANRAIN_API_CLIENT_SECRET;
     }
     if (!process.env.AIA_APP_ID) {
       process.env.AIA_APP_ID = process.env.PROD_JANRAIN_APP_ID;
@@ -184,16 +181,18 @@ module.exports = function(deployTarget) {
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
     }
-  if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+    if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
       process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.STAGING_CHAPTER_TRANSFER_FORM_LINK;
     }
-  if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+    if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
       process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.STAGING_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
     }
-  if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+    if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
       process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.STAGING_MAIL_IN_YOUR_RENEWAL_LINK;
     }
-
+    if (!process.env.BASE_URL) {
+      process.env.BASE_URL = process.env.PROD_BASE_URL;
+    }
   }
 
   // Note: if you need to build some configuration asynchronously, you can return

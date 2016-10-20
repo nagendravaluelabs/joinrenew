@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
             if(authCode) {
               $('.ajax-spinner').show();
               tokenParams = {
-                "redirect_uri": "http://localhost:4200/renew/?url_type=forgot",
+                "redirect_uri": ENV.AIA_BASEURL+"?url_type=forgot",
                 "code": authCode,
                 "grant_type": "authorization_code"
               };
