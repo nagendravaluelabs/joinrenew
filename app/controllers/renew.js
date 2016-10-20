@@ -19,9 +19,7 @@ export default Ember.Controller.extend({
               tokenParams = {
                 "redirect_uri": "http://localhost:4200/renew/?url_type=forgot",
                 "code": authCode,
-                "grant_type": "authorization_code",
-                "client_id": ENV.AIA_API_CLIENT_ID,
-                "client_secret": ENV.AIA_API_SECRET
+                "grant_type": "authorization_code"
               };
               tokenParams = $.param( tokenParams );
               tokenReqData = {
