@@ -11,8 +11,7 @@ module.exports = function(defaults) {
     },
     babel: {
       compact: false
-    },
-    storeConfigInMeta: false
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
