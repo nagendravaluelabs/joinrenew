@@ -35,7 +35,8 @@ module.exports = function(environment) {
     MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK,
     ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK,
     CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK,
-    AIA_BASEURL: process.env.BASE_URL
+    AIA_BASEURL: process.env.BASE_URL,
+    sessionTimeout: process.env.SESSION_TIMEOUT
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
@@ -69,6 +70,7 @@ module.exports = function(environment) {
     ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
     ENV.AIA_BASEURL = "http://vcap.me/social-login/";
+    ENV.sessionTimeout = 20;
   }
   if (environment === 'test') {
     // Testem prefers this...

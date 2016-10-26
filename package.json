@@ -63,7 +63,8 @@
   },
   "ember-addon": {
     "paths": [
-      "lib/janrain"
+      "lib/janrain",
+      "lib/session"
     ]
   }
 }

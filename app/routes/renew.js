@@ -6,6 +6,10 @@ export default Ember.Route.extend({
     "use strict";
     this.controllerFor("application").set("model.class","no-sidebars page-renew");
   },
+	setupController: function(controller) {
+		this._super.apply(this, arguments);
+		controller.updateController();
+	},
   model(){
     "use strict";
     return Ember.RSVP.hash({
