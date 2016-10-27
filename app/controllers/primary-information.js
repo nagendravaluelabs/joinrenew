@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
       primaryData = this.get("primaryData");
       if (primaryData.data !== "undefined" && primaryData.data !== "") {
         personalData = primaryData.data.personal;
-        name = personalData.prefix + " " + personalData.firstname + " " + personalData.middlename + " " + personalData.lastname + " " + personalData.suffix;
+        name = personalData.prefix + " " + personalData.firstname + " " + personalData.middle + " " + personalData.lastname + " " + personalData.suffix;
         var index = userData.length;
         userData[index] = {};
         userData[index] = {"title": "", "value": name, "class": "full-name"};

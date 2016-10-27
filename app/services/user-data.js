@@ -42,6 +42,7 @@ export default Ember.Service.extend({
                     data.membershipInfo = {};
                     data.membershipInfo.persons = {};
                     data.membershipInfo.amount = {};
+                    data.personal.middle = data.personal.middlename
                     if(!Ember.getWithDefault(data,'personal.phone', false)) {
                       data.personal.phone = {};
                     }
@@ -363,7 +364,7 @@ export default Ember.Service.extend({
     /* Personal Information */
     personalInfo.Prefix = Ember.getWithDefault(data,'personal.prefix', "");
     personalInfo.FirstName = Ember.getWithDefault(data,'personal.firstname', "");
-    personalInfo.MiddleInitial = Ember.getWithDefault(data,'personal.middlename', "");
+    personalInfo.MiddleInitial = Ember.getWithDefault(data,'personal.middle', "");
     personalInfo.LastName = Ember.getWithDefault(data,'personal.lastname', "");
     personalInfo.Suffix = Ember.getWithDefault(data,'personal.suffix', "");
     personalInfo.Email = captureProfileData.email;
