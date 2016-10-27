@@ -62,7 +62,7 @@ module.exports = function(deployTarget) {
       process.env.AIA_FEDERATE_SERVER = process.env.DEV_JANRAIN_API_FEDERATE_SERVER;
     }
     if (!process.env.AIA_CORS) {
-      process.env.AIA_CORS = process.env.CORS_SERVER_URL;
+      process.env.AIA_CORS = process.env.DEV_CORS_SERVER_URL;
     }
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.DEV_GTM_CODE;
@@ -122,7 +122,7 @@ module.exports = function(deployTarget) {
       process.env.AIA_FEDERATE_SERVER = process.env.STAGING_JANRAIN_API_FEDERATE_SERVER;
     }
     if (!process.env.AIA_CORS) {
-      process.env.AIA_CORS = process.env.CORS_SERVER_URL;
+      process.env.AIA_CORS = process.env.STG_CORS_SERVER_URL;
     }
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
