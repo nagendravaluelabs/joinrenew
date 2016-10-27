@@ -42,7 +42,7 @@ export default Ember.Service.extend({
                     data.membershipInfo = {};
                     data.membershipInfo.persons = {};
                     data.membershipInfo.amount = {};
-                    data.personal.middle = data.personal.middlename
+                    data.personal.middle = data.personal.middlename;
                     if(!Ember.getWithDefault(data,'personal.phone', false)) {
                       data.personal.phone = {};
                     }
