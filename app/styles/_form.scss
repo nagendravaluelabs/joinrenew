@@ -435,3 +435,53 @@ ul{
   background-image: url(../images/throbber-active.gif);
   background-position: 100% center; /* LTR */
 }
+
+.session-timeout-dialog {
+  border-radius: 0;
+  border-color: #CCC;
+  .ui-dialog-content {
+    padding: 0 !important;
+  }
+  .ui-dialog-titlebar {
+    display: none;
+  }
+  #sessionTimer_info {
+    min-height: auto !important;
+  }
+  .aia-alert {
+    z-index: 9999;
+    padding:5px;
+    .aia-alert-inner {
+      background:#fff;
+      padding: 10px;
+      position: relative;
+      .close-btn-txt {
+        float:right;
+        color:#000;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+      }
+      p {
+        padding-top: 10px;
+      }
+      .btn-alert {
+        font-size: 16px;
+      }
+      .no-btn-alert {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+.alert-timeout {
+  background-image: url(../images/message-24-ok.png);
+  background-repeat:no-repeat; 
+  background-position: 10px 50%;
+  padding-left: 50px;
+}
+.userStatusHidden {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}

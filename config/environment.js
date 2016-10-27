@@ -28,14 +28,15 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: process.env.AIA_CORS,
+    AIA_CORS: (process.env.AIA_CORS) ? process.env.AIA_CORS : "",
     'ember-cli-gtm': {
       appId: process.env.GTM_CODE
     },
     MAIL_IN_YOUR_RENEWAL_LINK: process.env.MAIL_IN_YOUR_RENEWAL_LINK,
     ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK,
     CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK,
-    AIA_BASEURL: process.env.BASE_URL
+    AIA_BASEURL: process.env.BASE_URL,
+    sessionTimeout: process.env.SESSION_TIMEOUT
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
@@ -58,7 +59,7 @@ module.exports = function(environment) {
       AIA_FEDERATE_SERVER: "https://american-institute-of-architects-dev.us.janrainsso.com",
       AIA_ENVIRONMENT: "local"
     };
-    ENV.AIA_CORS = "//52.1.198.224/";
+    ENV.AIA_CORS = "//52.205.167.145/";
     ENV['ember-cli-gtm'].appId = "GTM-NDWGK2";
     ENV.MAIL_IN_YOUR_RENEWAL_LINK = "https://aia.hbp.com/assets/pdf/";
     ENV.ASSOCIATE_TO_ARCHITECT_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf ";
@@ -69,6 +70,7 @@ module.exports = function(environment) {
     ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
     ENV.AIA_BASEURL = "http://vcap.me/social-login/";
+    ENV.sessionTimeout = 20;
   }
   if (environment === 'test') {
     // Testem prefers this...

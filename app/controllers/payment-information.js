@@ -102,7 +102,8 @@ export default Ember.Controller.extend({
       self.paymentValidate = $("#form-card-payment").validate({
           rules:{
               cardName: {
-                required: true
+                required: true,
+                EcardNameValidate: true
               },
               cardNumber: {
                 required: true,
@@ -130,7 +131,9 @@ export default Ember.Controller.extend({
               }
           },
           messages: {
-              cardName: "Please enter name on credit card",
+              cardName: {
+                required: "First and last name on card are required"
+              },
               cardNumber: {
                 required: "Card number is required",
                 digits: "Please enter a valid credit card number",
@@ -313,7 +316,8 @@ export default Ember.Controller.extend({
         validate = $("#form-electronic-check").validate({
             rules:{
                 accountName:{
-                   required: true
+                   required: true,
+                   EcardNameValidate: true
                 },
                 bankroutingNumber:{
                    required: true,
@@ -330,7 +334,7 @@ export default Ember.Controller.extend({
             },
             messages: {
                 accountName:{
-                  required: "Please enter name on account",
+                  required: "First and last name on account are required",
                   lettersonly: "Please enter a name of the Account Holder"
                 },
                 bankroutingNumber:{
