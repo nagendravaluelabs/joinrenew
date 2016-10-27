@@ -1,6 +1,10 @@
 <div class="renew-page">
   <div class="renew-container">
-
+    {{#if isForceLoggedOut}}
+      <div class="alert alert-success alert-timeout">
+        Due to inactivity, you have been logged out for security reasons. Please log back to continue with your Renewal. We regret any inconvenience.
+      </div>
+    {{/if}}
     <div class="hidden-xs hidden-sm{{ternary (isEqualTo model.page.title 'Join') ' col-lg-8' ' col-lg-7'}} col-md-7">
       <div class="landing-page-image">
         <img src="{{{model.page.field_aia_image}}}" alt="{{model.page.title}}" class="img-responsive" />

@@ -74,6 +74,9 @@ export function initialize(applicationInstance) {
     }
     return true;
   }, creditcardMessageFn);
+  $.validator.addMethod( "EcardNameValidate", function( value, element ) {
+    return this.optional( element ) || /^[^$<>\ ]+\s+[^$<>]+?([^$<>])*[^\ ]$/g.test( value );
+  }, "Both the first and last name on card are required" );
 }
 
 export default {

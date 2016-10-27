@@ -7,6 +7,15 @@ export default Ember.Controller.extend({
     queryParams: ['url_type', 'code'],
     code: null,
     url_type: null,
+    isForceLoggedOut: false,
+    updateController: function() {
+      if(localStorage.isForceLogout) {
+        this.set("isForceLoggedOut", true);
+        localStorage.removeItem('isForceLogout');
+      } else {
+        this.set("isForceLoggedOut", false);
+      }
+    },
     init: function() {
       this._super.apply(this, arguments);
       if(!localStorage.janrainCaptureToken) {

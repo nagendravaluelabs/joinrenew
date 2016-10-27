@@ -1,0 +1,11 @@
+<div id="sessionTimer_info">
+  <div class="aia-alert">
+    <div class="aia-alert-inner">
+      <a href="#" class="close-btn-txt" {{action "closeSessionDialogue" preventDefault=true}}>Close</a>
+      <strong>AIA Alert</strong>
+      <p>Your Session is about  to expire. Do you want to reset it?</p>
+      <a class="btn-alert" href="#" {{action "closeSessionDialogue" preventDefault=true}}>Yes > </a> <a class="btn-alert no-btn-alert" href="#" {{action "forceLogout" preventDefault=true}}>No > </a>
+    </div>
+  </div>
+</div>
+<div class="userStatusHidden">{{status}}</div>
