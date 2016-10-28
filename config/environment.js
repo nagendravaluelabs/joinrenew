@@ -28,7 +28,7 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: process.env.AIA_CORS,
+    AIA_CORS: (process.env.AIA_CORS) ? process.env.AIA_CORS : "",
     'ember-cli-gtm': {
       appId: process.env.GTM_CODE
     },
@@ -58,7 +58,7 @@ module.exports = function(environment) {
       AIA_FEDERATE_SERVER: "https://american-institute-of-architects-dev.us.janrainsso.com",
       AIA_ENVIRONMENT: "local"
     };
-    ENV.AIA_CORS = "//52.1.198.224/";
+    ENV.AIA_CORS = "//52.205.167.145/";
     ENV['ember-cli-gtm'].appId = "GTM-NDWGK2";
     ENV.MAIL_IN_YOUR_RENEWAL_LINK = "https://aia.hbp.com/assets/pdf/";
     ENV.ASSOCIATE_TO_ARCHITECT_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf ";
