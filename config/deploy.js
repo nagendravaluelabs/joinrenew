@@ -144,6 +144,66 @@ module.exports = function(deployTarget) {
     }
   }
 
+  if (deployTarget === 'testing') {
+    ENV.build.environment = 'testing';
+    ENV['s3-index'].bucket = 'aia-joinrenew-test';
+    ENV['s3'].bucket = 'aia-joinrenew-test';
+    if (!process.env.AIA_DRUPAL_URL) {
+      process.env.AIA_DRUPAL_URL = process.env.STAGING_DRUPAL_URL;
+    }
+    if (!process.env.AIA_SAVE_URL) {
+      process.env.AIA_SAVE_URL = process.env.STAGING_SAVE_URL;
+    }
+    if (!process.env.AIA_EMPLOYMENT_LOOKUP_URL) {
+      process.env.AIA_EMPLOYMENT_LOOKUP_URL = process.env.STAGING_EMPLOYMENT_LOOKUP_URL;
+    }
+    if (!process.env.AIA_API_URL) {
+      process.env.AIA_API_URL = process.env.STAGING_JANRAIN_API_URL;
+    }
+    if (!process.env.AIA_API_CLIENT_ID) {
+      process.env.AIA_API_CLIENT_ID = process.env.STAGING_JANRAIN_API_CLIENT_ID;
+    }
+    if (!process.env.AIA_APP_ID) {
+      process.env.AIA_APP_ID = process.env.STAGING_JANRAIN_APP_ID;
+    }
+    if (!process.env.AIA_CAPTURE_SERVER) {
+      process.env.AIA_CAPTURE_SERVER = process.env.STAGING_JANRAIN_API_URL;
+    }
+    if (!process.env.AIA_APP_URL) {
+      process.env.AIA_APP_URL = process.env.STAGING_JANRAIN_APP_URL;
+    }
+    if (!process.env.AIA_HTTP_URL) {
+      process.env.AIA_HTTP_URL = process.env.STAGING_JANRAIN_API_HTTP_URL;
+    }
+    if (!process.env.AIA_HTTPS_URL) {
+      process.env.AIA_HTTPS_URL = process.env.STAGING_JANRAIN_API_HTTPS_URL;
+    }
+    if (!process.env.AIA_FEDERATE_SERVER) {
+      process.env.AIA_FEDERATE_SERVER = process.env.STAGING_JANRAIN_API_FEDERATE_SERVER;
+    }
+    if (!process.env.AIA_CORS) {
+      process.env.AIA_CORS = process.env.STG_CORS_SERVER_URL;
+    }
+    if (!process.env.GTM_CODE) {
+      process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
+    }
+    if (!process.env.CHAPTER_TRANSFER_FORM_LINK) {
+      process.env.CHAPTER_TRANSFER_FORM_LINK = process.env.STAGING_CHAPTER_TRANSFER_FORM_LINK;
+    }
+    if (!process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK) {
+      process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK = process.env.STAGING_ASSOCIATE_TO_ARCHITECT_FORM_LINK;
+    }
+    if (!process.env.MAIL_IN_YOUR_RENEWAL_LINK) {
+      process.env.MAIL_IN_YOUR_RENEWAL_LINK = process.env.STAGING_MAIL_IN_YOUR_RENEWAL_LINK;
+    }
+    if (!process.env.BASE_URL) {
+      process.env.BASE_URL = process.env.STG_BASE_URL;
+    }
+    if (!process.env.SESSION_TIMEOUT) {
+      process.env.SESSION_TIMEOUT = process.env.SESSION_TIMEOUT;
+    }
+  }
+
   if (deployTarget === 'production') {
     ENV.build.environment = 'production';
     ENV['s3-index'].bucket = 'aia-joinrenew-prod';
