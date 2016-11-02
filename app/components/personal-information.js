@@ -301,12 +301,26 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       contact_mobile_country: {
                           required: function () {
-                              return $("#primary_number_mobile").is(":checked");
+                              //return $("#primary_number_mobile").is(":checked");
+                              if($("#primary_number_mobile").is(":checked")){
+                                return true;
+                              } else if($("#contact_mobile_country").val() !== "" || ($("#mobile_number").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
                           }
                       },
                       contact_work_country: {
                           required: function () {
-                              return $("#primary_number_work").is(":checked");
+                              //return $("#primary_number_work").is(":checked");
+                              if($("#primary_number_work").is(":checked")){
+                                return true;
+                              } else if($("#contact_work_country").val() !== "" || ($("#work_number").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
                           }
                       },
                       home_number: {
@@ -316,7 +330,14 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       mobile_number: {
                           required: function () {
-                              return $("#primary_number_mobile").is(":checked");
+                              //return $("#primary_number_mobile").is(":checked");
+                              if($("#primary_number_mobile").is(":checked")){
+                                return true;
+                              } else if($("#contact_mobile_country").val() !== "" || ($("#mobile_number").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
                           },
                           digits: true,
                           maxlength: 15
@@ -324,7 +345,14 @@ export default Ember.Component.extend(rememberScroll, {
                       },
                       work_number: {
                           required: function () {
-                              return $("#primary_number_work").is(":checked");
+                              //return $("#primary_number_work").is(":checked");
+                              if($("#primary_number_work").is(":checked")){
+                                return true;
+                              } else if($("#contact_work_country").val() !== "" || ($("#work_number").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
                           },
                           digits: true,
                           maxlength: 15
