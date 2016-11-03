@@ -10,28 +10,33 @@ export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
   janrain: inject(),
   authState: "",
+  sessionState: true,
   userNotifier: function() {
     this.notifyPropertyChange("user");
   },
   _refreshOnWakeFromSleep() {
-    let lastTime = (new Date()).getTime();
+    
+      let lastTime = (new Date()).getTime();
 
-    let oldSleepInterval = this.get('sleepInterval');
-    if (oldSleepInterval) {
-      clearInterval(oldSleepInterval);
-    }
-    let sleepInterval = setInterval(() => {
-      let currentTime = (new Date()).getTime();
-      if (currentTime > (lastTime + SLEEP_POLL_INTERVAL * 2)) {  // ignore small delays
-        // Probably just woke up!
-        let user = this.get('user');
-        Ember.run(() => {
-          this.refresh(user.refresh_token);
-        });
+      let oldSleepInterval = this.get('sleepInterval');
+      if (oldSleepInterval) {
+        clearInterval(oldSleepInterval);
       }
-      lastTime = currentTime;
-    }, SLEEP_POLL_INTERVAL);
-    this.set('sleepInterval', sleepInterval);
+      let sleepInterval = setInterval(() => {
+        let currentTime = (new Date()).getTime();
+        if (currentTime > (lastTime + SLEEP_POLL_INTERVAL * 2)) {  // ignore small delays
+          // Probably just woke up!
+          let user = this.get('user');
+          Ember.run(() => {
+            if(this.get("sessionState")) {
+              this.refresh(user.refresh_token);
+            }
+          });
+        }
+        lastTime = currentTime;
+      }, SLEEP_POLL_INTERVAL);
+      this.set('sleepInterval', sleepInterval);
+    
   },
   
   postTokenRequest(body) {
