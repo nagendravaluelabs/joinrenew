@@ -363,7 +363,7 @@
                         title=(if supplemental.isRequired "You must enter at least one staff in the ‘AIA member architect’ category." "Please enter minimum 1 person.")
                         key-up="calculateSum"
                         size="2"
-                        min="1"
+                        min=(if supplemental.isRequired 1 0)
                         maxlength="3"
                       }}
                     </div>
