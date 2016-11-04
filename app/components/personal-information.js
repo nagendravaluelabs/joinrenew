@@ -394,7 +394,7 @@ export default Ember.Component.extend(rememberScroll, {
                       prefix: "Prefix is required",
                       firstname: {
                           required: "First name is required",
-                          letterswithbasicpunc: "Special characters not allowed for first name"
+                          letterswithbasicpunc: "Special characters not allowed for First name"
                       },
                       middlename: {
                           letterswithbasicpunc: "Please enter a single letter for your middle initial"
@@ -483,8 +483,8 @@ export default Ember.Component.extend(rememberScroll, {
               self.set("organizationInfo.Website", "");
               self.set("organizationInfo.companyType", "");
               self.set("organizationInfo.orgPhone", "");
-              self.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
-              self.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              //self.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+              //self.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
               
               self.set("organizationInfo.addressLine1", "");
               self.set("organizationInfo.addressLine2", "");
@@ -533,8 +533,24 @@ export default Ember.Component.extend(rememberScroll, {
                         }
                     },
                     org_company_phone: {
-                        digits: true
-                        
+                        digits: true,
+                        required: function(){
+                           if($("#create_org_code__country").val() !== "" || ($("#org_company_phone").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
+                        }
+                    },
+                    create_org_code__country:{
+                        required: function(){
+                           if($("#create_org_code__country").val() !== "" || ($("#org_company_phone").val() !== "")){
+                                return true;
+                              } else{
+                              return false;
+                              }
+                        }
+                      
                     },
                     primary_work_zipcode: {
                       required: function () {
@@ -548,6 +564,7 @@ export default Ember.Component.extend(rememberScroll, {
                     organization_name: "Organization Name is required",
                     company_type: "Company Type is required",
                     create_org_country: "Country is required",
+                    create_org_code__country: "Country code is required",
                     org_company_address1: "Address line1 is required",
                     org_locality: "City is required",
                     work_administrative_state: {
@@ -560,7 +577,14 @@ export default Ember.Component.extend(rememberScroll, {
                       }
                     },
                     org_company_phone: {
-                        digits: "Please enter a valid Company phone number"
+                        digits: "Please enter a valid Company phone number",
+                        required : function(){
+                          if($("#org_company_phone").val() === ""){
+                                return "Company Phone is required";
+                              } else{
+                              return " feild is required";
+                              }
+                        }
                     },
                     primary_work_zipcode:{
                       required : "Zip code is required",
@@ -599,8 +623,8 @@ export default Ember.Component.extend(rememberScroll, {
           this.set("organizationInfo.Website", "");
           this.set("organizationInfo.companyType", "");
           this.set("organizationInfo.orgPhone", "");
-          this.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
-          this.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          //this.set("organizationInfo.country.key", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
+          //this.set("organizationInfo.countryCode", "bc4b70f8-280e-4bb0-b935-9f728c50e183");
           
           this.set("organizationInfo.addressLine1", "");
           this.set("organizationInfo.addressLine2", "");
