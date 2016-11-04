@@ -394,7 +394,7 @@ export default Ember.Component.extend(rememberScroll, {
                       prefix: "Prefix is required",
                       firstname: {
                           required: "First name is required",
-                          letterswithbasicpunc: "Special characters not allowed for First name"
+                          letterswithbasicpunc: "Special characters not allowed for first name"
                       },
                       middlename: {
                           letterswithbasicpunc: "Please enter a single letter for your middle initial"

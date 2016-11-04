@@ -10,6 +10,13 @@ export default Ember.Controller.extend({
     },
     userDataObserver: function () {
       "use strict";
+      var middleName = this.get('primaryData.data.personal.middle');
+      if(middleName) {
+        this.set('primaryData.data.personal.middle', middleName.toUpperCase());
+      }
+      }.observes('primaryData.data.personal.middle'),
+    middleName: function () {
+      "use strict";
       this.userDataFunc();
     }.observes('primaryData.data'),
     userDataFunc: function () {
