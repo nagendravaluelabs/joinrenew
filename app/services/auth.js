@@ -1,11 +1,10 @@
-/*global $*/
 import Ember from 'ember';
 import ENV from '../config/environment';
 import fetch from 'ember-network/fetch';
 import inject from 'ember-service/inject';
 import moment from 'moment';
 import RouteRefresherMixin from '../mixins/route-refresher';
-import { encode, contentType } from '../lib/url-encoded';
+import { encode } from '../lib/url-encoded';
 const SLEEP_POLL_INTERVAL = 60 * 1000;
 const client_id = 'aia_web';
 export default Ember.Service.extend(RouteRefresherMixin, {
