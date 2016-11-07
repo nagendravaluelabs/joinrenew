@@ -82,6 +82,9 @@ module.exports = function(deployTarget) {
     if (!process.env.SESSION_TIMEOUT) {
       process.env.SESSION_TIMEOUT = process.env.SESSION_TIMEOUT;
     }
+    if (!process.env.AIA_REST_URL) {
+      process.env.AIA_REST_URL = process.env.DEV_REST_URL;
+    }
   }
 
   if (deployTarget === 'staging') {
@@ -141,6 +144,9 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.SESSION_TIMEOUT) {
       process.env.SESSION_TIMEOUT = process.env.SESSION_TIMEOUT;
+    }
+    if (!process.env.AIA_REST_URL) {
+      process.env.AIA_REST_URL = process.env.STG_REST_URL;
     }
   }
 
@@ -202,6 +208,9 @@ module.exports = function(deployTarget) {
     if (!process.env.SESSION_TIMEOUT) {
       process.env.SESSION_TIMEOUT = process.env.SESSION_TIMEOUT;
     }
+    if (!process.env.AIA_REST_URL) {
+      process.env.AIA_REST_URL = process.env.STG_REST_URL;
+    }
   }
 
   if (deployTarget === 'production') {
@@ -261,6 +270,9 @@ module.exports = function(deployTarget) {
     }
     if (!process.env.SESSION_TIMEOUT) {
       process.env.SESSION_TIMEOUT = process.env.SESSION_TIMEOUT;
+    }
+    if (!process.env.AIA_REST_URL) {
+      process.env.AIA_REST_URL = process.env.PROD_REST_URL;
     }
   }
 
