@@ -36,7 +36,8 @@ module.exports = function(environment) {
     ASSOCIATE_TO_ARCHITECT_FORM_LINK: process.env.ASSOCIATE_TO_ARCHITECT_FORM_LINK,
     CHAPTER_TRANSFER_FORM_LINK: process.env.CHAPTER_TRANSFER_FORM_LINK,
     AIA_BASEURL: process.env.BASE_URL,
-    sessionTimeout: process.env.SESSION_TIMEOUT
+    sessionTimeout: process.env.SESSION_TIMEOUT,
+    AIA_REST_URL: process.env.AIA_REST_URL
   };
 
   ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
@@ -71,6 +72,7 @@ module.exports = function(environment) {
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
     ENV.AIA_BASEURL = "http://vcap.me/social-login/";
     ENV.sessionTimeout = 20;
+    ENV.AIA_REST_URL = "//aiad8dev.prod.acquia-sites.com";
   }
   if (environment === 'test') {
     // Testem prefers this...

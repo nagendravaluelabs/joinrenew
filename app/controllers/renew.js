@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
-import fetch from 'ember-network/fetch';
-const {$} = Ember;
+//import ENV from '../config/environment';
+//import fetch from 'ember-network/fetch';
+//const {$} = Ember;
 
 export default Ember.Controller.extend({
     queryParams: ['url_type', 'code'],
@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
     },
     init: function() {
       this._super.apply(this, arguments);
-      if(!localStorage.janrainCaptureToken) {
+      /*if(!localStorage.janrainCaptureToken) {
         Ember.run.schedule("afterRender", this, function () {
           if(this.get("url_type") && this.get("url_type") === "forgot") {
             var authCode, tokenParams, tokenReqData;
@@ -63,6 +63,6 @@ export default Ember.Controller.extend({
             }
           }
         });
-      }
+      }*/
     },
 });
