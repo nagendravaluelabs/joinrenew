@@ -1,11 +1,12 @@
-/*global $*/
 import Ember from 'ember';
 import ENV from '../config/environment';
 import fetch from 'ember-network/fetch';
 import inject from 'ember-service/inject';
 import moment from 'moment';
 import RouteRefresherMixin from '../mixins/route-refresher';
+import { encode } from '../lib/url-encoded';
 const SLEEP_POLL_INTERVAL = 60 * 1000;
+const client_id = 'aia_web';
 export default Ember.Service.extend(RouteRefresherMixin, {
   userData: inject(),
   janrain: inject(),
@@ -47,9 +48,9 @@ export default Ember.Service.extend(RouteRefresherMixin, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: $.param( body )
+      body: encode(body)
     };
-    return fetch(`${ENV.AIA_API_URL}/oauth/token`, tokenReqData).then(response => {
+    return fetch(`${ENV.AIA_REST_URL}/oauth2/token`, tokenReqData).then(response => {
       switch (response.status) {
       case 200:
         return response.json().then(json => {
@@ -81,37 +82,18 @@ export default Ember.Service.extend(RouteRefresherMixin, {
   refresh(refresh_token) {
     return this.postTokenRequest({
       grant_type: 'refresh_token',
+      client_id,
       refresh_token: refresh_token
     });
   },
 
   verify(token) {
-    var fetchParams, fetchData;
-    fetchParams = {
-      type_name: "user",
-      attributes: '["nfIndividualKey"]',
-      max_results: 1
-    };
-    fetchParams = $.param( fetchParams );
-    fetchData = {
-      method: "POST",
-      headers: {
-        "Authorization": "OAuth "+token,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: fetchParams
-    };
-    return fetch(`${ENV.AIA_API_URL}/entity`, fetchData).then(response => {
+    return fetch(`${ENV.AIA_REST_URL}/oauth2/tokens/${token}`).then(response => {
       if(response.status === 200) {
         return response.json().then(function(json) {
-          if(json.stat === "ok") {
-            if(typeof json.result !== undefined && typeof json.result.nfIndividualKey !== undefined && json.result.nfIndividualKey!== null) {
-              return json;
-            } else {
-              return "invalid-user";
-            }
-          } else if(json.stat === "error") {
-            return ;
+          console.log(json);
+          if(json.user_uuid) {
+            return json;
           } else {
             return "invalid-user";
           }
