@@ -91,7 +91,6 @@ export default Ember.Service.extend(RouteRefresherMixin, {
     return fetch(`${ENV.AIA_REST_URL}/oauth2/tokens/${token}`).then(response => {
       if(response.status === 200) {
         return response.json().then(function(json) {
-          console.log(json);
           if(json.user_uuid) {
             return json;
           } else {
