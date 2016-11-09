@@ -40,6 +40,7 @@ deploy:
       branch: development
   - provider: script
     skip_cleanup: true
+    tags: true
     script: node_modules/.bin/ember deploy production --activate --verbose
     on:
       branch: production
