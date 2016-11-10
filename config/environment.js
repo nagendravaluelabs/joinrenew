@@ -28,7 +28,7 @@ module.exports = function(environment) {
       // when it is created
     },
     AIA_NEXT_YEAR: "2017",
-    AIA_CORS: (process.env.AIA_CORS) ? process.env.AIA_CORS : "",
+    //AIA_CORS: (process.env.AIA_CORS) ? process.env.AIA_CORS : "",
     'ember-cli-gtm': {
       appId: process.env.GTM_CODE
     },
@@ -40,10 +40,10 @@ module.exports = function(environment) {
     AIA_REST_URL: process.env.AIA_REST_URL
   };
 
-  ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? ENV.AIA_CORS+process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
-  ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? ENV.AIA_CORS+process.env.AIA_DRUPAL_URL : process.env.AIA_DRUPAL_URL;
-  ENV.AIA_API_URL= ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
-  ENV.AIA_EMPLOYMENT_LOOKUP_URL= process.env.AIA_EMPLOYMENT_LOOKUP_URL ? ENV.AIA_CORS+process.env.AIA_EMPLOYMENT_LOOKUP_URL : process.env.AIA_EMPLOYMENT_LOOKUP_URL;
+  ENV.AIA_SAVE_URL= process.env.AIA_SAVE_URL ? process.env.AIA_SAVE_URL : process.env.AIA_SAVE_URL;
+  ENV.AIA_DRUPAL_URL= (process.env.AIA_DRUPAL_URL) ? process.env.AIA_DRUPAL_URL : process.env.AIA_DRUPAL_URL;
+  ENV.AIA_API_URL= ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
+  ENV.AIA_EMPLOYMENT_LOOKUP_URL= process.env.AIA_EMPLOYMENT_LOOKUP_URL ? process.env.AIA_EMPLOYMENT_LOOKUP_URL : process.env.AIA_EMPLOYMENT_LOOKUP_URL;
 
   ENV.AIA_API_CLIENT_ID= ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
   if (environment === 'development') {
@@ -60,15 +60,16 @@ module.exports = function(environment) {
       AIA_FEDERATE_SERVER: "https://american-institute-of-architects-dev.us.janrainsso.com",
       AIA_ENVIRONMENT: "local"
     };
-    ENV.AIA_CORS = "//52.205.167.145/";
+    //ENV.AIA_CORS = "//52.205.167.145/";
+	
     ENV['ember-cli-gtm'].appId = "GTM-NDWGK2";
     ENV.MAIL_IN_YOUR_RENEWAL_LINK = "https://aia.hbp.com/assets/pdf/";
     ENV.ASSOCIATE_TO_ARCHITECT_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Associate%20to%20Architect%20Form.pdf ";
     ENV.CHAPTER_TRANSFER_FORM_LINK = "http://aiad8.prod.acquia-sites.com/sites/default/files/2016-09/2016%20Transfer%20Form.pdf";
-    ENV.AIA_SAVE_URL = ENV.AIA_CORS+"http://aiad8dev.prod.acquia-sites.com/renewjson/update";
-    ENV.AIA_DRUPAL_URL = ENV.AIA_CORS+"http://aiad8dev.prod.acquia-sites.com/renewjson/getdata";
-    ENV.AIA_API_URL = ENV.AIA_CORS+ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
-    ENV.AIA_EMPLOYMENT_LOOKUP_URL = ENV.AIA_CORS+'http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
+    ENV.AIA_SAVE_URL = "http://aiad8dev.prod.acquia-sites.com/renewjson/update";
+    ENV.AIA_DRUPAL_URL = "http://aiad8dev.prod.acquia-sites.com/renewjson/getdata";
+    ENV.AIA_API_URL = ENV.EmberENV.JANRAIN.AIA_CAPTURE_SERVER;
+    ENV.AIA_EMPLOYMENT_LOOKUP_URL ='http://aia-recommend-staging.us-east-1.elasticbeanstalk.com/organizations';
     ENV.AIA_API_CLIENT_ID = ENV.EmberENV.JANRAIN.AIA_API_CLIENT_ID;
     ENV.AIA_BASEURL = "http://vcap.me/social-login/";
     ENV.sessionTimeout = 20;
