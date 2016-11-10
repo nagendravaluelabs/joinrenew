@@ -30,24 +30,17 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-  +	tags: true
     script: node_modules/.bin/ember deploy staging --activate --verbose
     on:
       branch: staging
   - provider: script
     skip_cleanup: true
-  +	tags: true
     script: node_modules/.bin/ember deploy development --activate --verbose
     on:
       branch: development
   - provider: script
     skip_cleanup: true
-    script: node_modules/.bin/ember deploy testing --activate --verbose
-    on:
-      branch: testing
-  - provider: script
-    skip_cleanup: true
-  +	tags: true
+    tags: true
     script: node_modules/.bin/ember deploy production --activate --verbose
     on:
       branch: production
