@@ -394,7 +394,12 @@ export default Ember.Service.extend({
         phoneKey = phoneObj.key;
         number = phoneObj.value;
         countryKey = phoneObj.country;
-        deleteVal = ((defaultPhoneObj.value !== "" && phoneObj.value === "") || (defaultPhoneObj.country !== "" && phoneObj.country === "")) ? 1 : 0;
+        deleteVal = 0;
+        if((defaultPhoneObj.value !== "" && phoneObj.value === "") || (defaultPhoneObj.country !== "" && phoneObj.country === "")){
+          number = defaultPhoneObj.value;
+          countryKey = defaultPhoneObj.country;
+          deleteVal = 1;
+        }
       } else {
         isPrimary = 0;
         phoneKey = "";
