@@ -426,7 +426,6 @@ export default Ember.Service.extend({
           Line3Val,
           CityName,
           PostalCodeName,
-          deleteVal,
           defaultAddressObj;
       value=value;
       addressLength = addressInfo.Addresses.Address.length;
