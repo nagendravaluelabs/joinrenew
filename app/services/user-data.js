@@ -440,7 +440,7 @@ export default Ember.Service.extend({
           defaultAddressObj = Ember.getWithDefault(userInitialData.personal.address, keyName, "");
           isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
           addressKey = addressObj.key;
-          countryName = addressObj.country.value;
+          countryName = Ember.getWithDefault(addressObj.country, "value", "");
           stateName = addressObj.state.value;
           Line1Val = addressObj.line1;
           Line2Val = addressObj.line2;
@@ -458,7 +458,27 @@ export default Ember.Service.extend({
           CityName = "";
           PostalCodeName = "";
         }
+        
         addressInfo.Addresses.Address[addressLength] = {};
+        
+        if(countryName === "" && Line1Val === "" && Line2Val === "" && Line3Val === "" && CityName === "" && PostalCodeName === "") {
+          defaultAddressObj = Ember.getWithDefault(userInitialData.personal.address, keyName, "");
+          addressKey = defaultAddressObj.key;
+          countryName = defaultAddressObj.country.value;
+          stateName = defaultAddressObj.state.value;
+          Line1Val = defaultAddressObj.line1;
+          Line2Val = defaultAddressObj.line2;
+          Line3Val = defaultAddressObj.line3;
+          CityName = defaultAddressObj.city;
+          PostalCodeName = defaultAddressObj.zip;
+          if(countryName === "" && Line1Val === "" && Line2Val === "" && Line3Val === "" && CityName === "" && PostalCodeName === "") {
+            addressInfo.Addresses.Address[addressLength].Delete = 0;
+          } else {
+            addressInfo.Addresses.Address[addressLength].Delete = 1;
+          }
+        } else {
+          addressInfo.Addresses.Address[addressLength].Delete = 0;
+        }
         addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
         addressInfo.Addresses.Address[addressLength].Key = addressKey;
         addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
@@ -470,7 +490,6 @@ export default Ember.Service.extend({
         addressInfo.Addresses.Address[addressLength].Line3 = Line3Val;
         addressInfo.Addresses.Address[addressLength].City = CityName;
         addressInfo.Addresses.Address[addressLength].PostalCode = PostalCodeName;
-        addressInfo.Addresses.Address[addressLength].Delete = 0;
       } else if(keyName === "office") {
         if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
