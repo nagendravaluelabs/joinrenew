@@ -12,7 +12,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       page: {
         "body": "<h2>Nearly 88,000 members, <br> over 250 chapters, <br> 1 you.</h2><p>Your vision is unique.  Your work is distinctive. Your career path is your own. We're excited to see where you're going&#8212;and we can help you get there.</p>",
-        "field_aia_image": "images/devanne-pena2_0.png",
+        "field_aia_image": "images/ForrestHuismanAssocAIA@2x.jpg",
         "title": "Renew"
       },
       benefits: {}
