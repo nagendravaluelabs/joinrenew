@@ -21,6 +21,9 @@ module.exports = function(deployTarget) {
       region: 'us-east-1',
       bucket: 'aia-joinrenew-stg',
     },
+    'revision-data': {
+      type: 'git-commit'
+    }
 
   };
 
