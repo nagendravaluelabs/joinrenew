@@ -103,7 +103,8 @@ export default Ember.Controller.extend({
           rules:{
               cardName: {
                 required: true,
-                EcardNameValidate: true
+                EcardNameValidate: true,
+                letterswithbasicpunc: true
               },
               cardNumber: {
                 required: true,
@@ -132,7 +133,8 @@ export default Ember.Controller.extend({
           },
           messages: {
               cardName: {
-                required: "First and last name on card are required"
+                required: "First and last name on card are required",
+                letterswithbasicpunc: "Please enter a name of the card holder"
               },
               cardNumber: {
                 required: "Card number is required",
@@ -317,7 +319,8 @@ export default Ember.Controller.extend({
             rules:{
                 accountName:{
                    required: true,
-                   EcardNameValidate: true
+                   EcardNameValidate: true,
+                   letterswithbasicpunc: true
                 },
                 bankroutingNumber:{
                    required: true,
@@ -335,7 +338,7 @@ export default Ember.Controller.extend({
             messages: {
                 accountName:{
                   required: "First and last name on account are required",
-                  lettersonly: "Please enter a name of the Account Holder"
+                  letterswithbasicpunc: "Please enter a name of the account holder"
                 },
                 bankroutingNumber:{
                   required: "Bank routing number is required",

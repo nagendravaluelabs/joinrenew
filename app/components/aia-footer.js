@@ -17,6 +17,6 @@ export default Ember.Component.extend({
   },
   {
     "text": "Privacy",
-    "route": "http://www.aia.org/about_privacy/index.htm"
+    "route": "https://www.aia.org/pages/22691-privacy-policy"
   }]
 });
