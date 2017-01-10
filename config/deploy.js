@@ -129,7 +129,7 @@ module.exports = function(deployTarget) {
     }
    /* if (!process.env.AIA_CORS) {
       process.env.AIA_CORS = process.env.STG_CORS_SERVER_URL;
-    }*/)
+    }*/
     if (!process.env.GTM_CODE) {
       process.env.GTM_CODE = process.env.STAGING_GTM_CODE;
     }
