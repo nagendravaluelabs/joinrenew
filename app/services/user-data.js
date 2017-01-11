@@ -42,7 +42,6 @@ export default Ember.Service.extend({
                     data.membershipInfo = {};
                     data.membershipInfo.persons = {};
                     data.membershipInfo.amount = {};
-                    data.personal.middle = data.personal.middlename;
                     if(!Ember.getWithDefault(data,'personal.phone', false)) {
                       data.personal.phone = {};
                     }
@@ -126,6 +125,7 @@ export default Ember.Service.extend({
                     data.paymentInfo.isArchiPAC = true;
                     self.set("data", data);
                     localStorage.aiaUserInfo = JSON.stringify(data);
+                    localStorage.aiaUserInfoVerify = JSON.stringify(data);
                     self.get("auth").userNotifier();
                   } else {
                     error = "invalid-invoice";
@@ -213,8 +213,10 @@ export default Ember.Service.extend({
         InstallmentProgram,
         DonationInfo,
         address_owner_key,
-        chaptersInfo;
+        chaptersInfo,
+        userInitialData;
     captureProfileData = JSON.parse(localStorage.janrainCaptureProfileData);
+    userInitialData = JSON.parse(localStorage.aiaUserInfoVerify);
     genericData = this.get("genericData").generic;
     mappedJSON = {};
     mappedJSON.action = "completeRenewTransaction";
@@ -364,7 +366,7 @@ export default Ember.Service.extend({
     /* Personal Information */
     personalInfo.Prefix = Ember.getWithDefault(data,'personal.prefix', "");
     personalInfo.FirstName = Ember.getWithDefault(data,'personal.firstname', "");
-    personalInfo.MiddleInitial = Ember.getWithDefault(data,'personal.middle', "");
+    personalInfo.MiddleInitial = Ember.getWithDefault(data,'personal.middlename', "");
     personalInfo.LastName = Ember.getWithDefault(data,'personal.lastname', "");
     personalInfo.Suffix = Ember.getWithDefault(data,'personal.suffix', "");
     personalInfo.Email = captureProfileData.email;
@@ -380,21 +382,30 @@ export default Ember.Service.extend({
           phoneKey,
           number,
           countryKey,
-          phoneObj;
+          phoneObj,
+          deleteVal,
+          defaultPhoneObj;
       value = value;
       phoneLength = phonesInfo.Phones.PhoneNumber.length;
       if(Ember.getWithDefault(data.personal.phone, keyName, false) !== false) {
         phoneObj = Ember.getWithDefault(data.personal.phone, keyName, "");
+        defaultPhoneObj = Ember.getWithDefault(userInitialData.personal.phone, keyName, "");
         isPrimary = (data.personal.phone.primary === keyName) ? 1 : 0;
         phoneKey = phoneObj.key;
         number = phoneObj.value;
         countryKey = phoneObj.country;
-        
+        deleteVal = 0;
+        if((defaultPhoneObj.value !== "" && phoneObj.value === "") || (defaultPhoneObj.country !== "" && phoneObj.country === "")){
+          number = defaultPhoneObj.value;
+          countryKey = defaultPhoneObj.country;
+          deleteVal = 1;
+        }
       } else {
         isPrimary = 0;
         phoneKey = "";
         number = "";
         countryKey = "";
+        deleteVal = 0;
       }
       phonesInfo.Phones.PhoneNumber[phoneLength] = {};
       phonesInfo.Phones.PhoneNumber[phoneLength].IsPrimary = isPrimary;
@@ -402,6 +413,7 @@ export default Ember.Service.extend({
       phonesInfo.Phones.PhoneNumber[phoneLength].TypeKey = Ember.getWithDefault(genericData.phonetypekeys, keyName, "");
       phonesInfo.Phones.PhoneNumber[phoneLength].Number = number;
       phonesInfo.Phones.PhoneNumber[phoneLength].CountryKey = countryKey;
+      phonesInfo.Phones.PhoneNumber[phoneLength].Delete = deleteVal;
     });
     
     addressInfo.Addresses = {};
@@ -418,15 +430,17 @@ export default Ember.Service.extend({
           Line2Val,
           Line3Val,
           CityName,
-          PostalCodeName;
+          PostalCodeName,
+          defaultAddressObj;
       value=value;
       addressLength = addressInfo.Addresses.Address.length;
       if(keyName === "home") {
         if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
           addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
+          defaultAddressObj = Ember.getWithDefault(userInitialData.personal.address, keyName, "");
           isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
           addressKey = addressObj.key;
-          countryName = addressObj.country.value;
+          countryName = Ember.getWithDefault(addressObj.country, "value", "");
           stateName = addressObj.state.value;
           Line1Val = addressObj.line1;
           Line2Val = addressObj.line2;
@@ -444,7 +458,27 @@ export default Ember.Service.extend({
           CityName = "";
           PostalCodeName = "";
         }
+        
         addressInfo.Addresses.Address[addressLength] = {};
+        
+        if(countryName === "" && Line1Val === "" && Line2Val === "" && Line3Val === "" && CityName === "" && PostalCodeName === "") {
+          defaultAddressObj = Ember.getWithDefault(userInitialData.personal.address, keyName, "");
+          addressKey = defaultAddressObj.key;
+          countryName = defaultAddressObj.country.value;
+          stateName = defaultAddressObj.state.value;
+          Line1Val = defaultAddressObj.line1;
+          Line2Val = defaultAddressObj.line2;
+          Line3Val = defaultAddressObj.line3;
+          CityName = defaultAddressObj.city;
+          PostalCodeName = defaultAddressObj.zip;
+          if(countryName === "" && Line1Val === "" && Line2Val === "" && Line3Val === "" && CityName === "" && PostalCodeName === "") {
+            addressInfo.Addresses.Address[addressLength].Delete = 0;
+          } else {
+            addressInfo.Addresses.Address[addressLength].Delete = 1;
+          }
+        } else {
+          addressInfo.Addresses.Address[addressLength].Delete = 0;
+        }
         addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
         addressInfo.Addresses.Address[addressLength].Key = addressKey;
         addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
@@ -460,6 +494,7 @@ export default Ember.Service.extend({
         if((!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false) && Ember.getWithDefault(data.personal, "organization.isLinkedAccount", false)) || (data.personal.primaryAddress === "home" && data.personal.address.primary === "office" && !Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false))) {
           if(Ember.getWithDefault(data.personal.address, keyName, false) !== false) {
             addressObj = Ember.getWithDefault(data.personal.address, keyName, "");
+            defaultAddressObj = Ember.getWithDefault(userInitialData.personal.address, keyName, "");
             isPrimary = (data.personal.address.primary === keyName) ? 1 : 0;
             addressKey = addressObj.key;
           } else {
@@ -479,6 +514,7 @@ export default Ember.Service.extend({
             addressInfo.Addresses.Address[addressLength].Line3 = Ember.getWithDefault(addressObj, "line3", "");
             addressInfo.Addresses.Address[addressLength].City = Ember.getWithDefault(addressObj, "city", "");
             addressInfo.Addresses.Address[addressLength].PostalCode = Ember.getWithDefault(addressObj, "zip", "");
+            addressInfo.Addresses.Address[addressLength].Delete = 0;
           } else {
             if(Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
               isPrimary = 0;
@@ -491,6 +527,7 @@ export default Ember.Service.extend({
               addressInfo.Addresses.Address[addressLength].TypeKey = Ember.getWithDefault(genericData.addresstypekeys, keyName, "");
               addressInfo.Addresses.Address[addressLength].IsPrimary = isPrimary;
               addressInfo.Addresses.Address[addressLength].Key = addressKey;
+              addressInfo.Addresses.Address[addressLength].Delete = 0;
             }
           }
         }
@@ -501,17 +538,20 @@ export default Ember.Service.extend({
         organizationInfo.RelatedOrganizations = {};
         if(!Ember.getWithDefault(data.personal, "organizationInfo.isNewOrganization", false)) {
           organizationInfo.RelatedOrganizations.RelatedOrganization = {
-            "Key" : data.personal.organization.key
+            "Key" : data.personal.organization.key,
+            "Delete": 0
           };
         } else {
           organizationInfo.RelatedOrganizations = {};
           organizationInfo.RelatedOrganizations.RelatedOrganization = {
             "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
             "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
+            "Delete": 0,
             "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
             "OrganizationAddress": {
               "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
               "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
+              "Delete": 0,
               "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
               "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
               "City": Ember.getWithDefault(data.personal, "organizationInfo.locality", ""),
@@ -521,6 +561,7 @@ export default Ember.Service.extend({
             },
             "OrganizationPhone": {
               "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+              "Delete": 0,
               "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
               "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
             }
@@ -535,8 +576,10 @@ export default Ember.Service.extend({
           "Name": Ember.getWithDefault(data.personal, "organizationInfo.Name", ""),
           "Type": Ember.getWithDefault(data.personal, "organizationInfo.companyType", ""),
           "Website": Ember.getWithDefault(data.personal, "organizationInfo.Website", ""),
+          "Delete": 0,
           "OrganizationAddress": {
             "TypeKey": Ember.getWithDefault(genericData.addresstypekeys, "office", ""),
+            "Delete": 0,
             "Country": Ember.getWithDefault(data.personal, "organizationInfo.country.value", ""),
             "Line1": Ember.getWithDefault(data.personal, "organizationInfo.addressLine1", ""),
             "Line2": Ember.getWithDefault(data.personal, "organizationInfo.addressLine2", ""),
@@ -547,6 +590,7 @@ export default Ember.Service.extend({
           },
           "OrganizationPhone": {
             "IsPrimary": (data.personal.phone.primary === "cell") ? 1 : 0,
+            "Delete": 0,
             "TypeKey": Ember.getWithDefault(genericData.phonetypekeys, "cell", ""),
             "Number": Ember.getWithDefault(data.personal, "organizationInfo.orgPhone", "")
           }
@@ -557,7 +601,8 @@ export default Ember.Service.extend({
       if(Ember.getWithDefault(data,'personal.organization.key', false)) {
         organizationInfo.RelatedOrganizations = {};
         organizationInfo.RelatedOrganizations.RelatedOrganization = {
-          "Key" : data.personal.organization.key
+          "Key" : data.personal.organization.key,
+          "Delete": 0
         };
       }
     }
