@@ -217,7 +217,7 @@
           <!-- End of Displaying Linked Address or Create New Organization -->
           {{else}}
             <!-- Check if user has default work address -->
-            {{#if (eq primaryData.data.personal.address.primary "office")}}
+            {{#if (isEqualTo primaryData.data.personal.address.primary "office")}}
               <li>
                 {{primaryData.data.personal.prefix}}
                 {{primaryData.data.personal.firstname}}

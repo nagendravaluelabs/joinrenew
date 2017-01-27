@@ -5,19 +5,19 @@
         Due to inactivity, you have been logged out for security reasons. Please log back to continue with your Renewal. We regret any inconvenience.
       </div>
     {{/if}}
-    <div class="hidden-xs hidden-sm {{if (eq model.page.title 'Join') 'col-lg-8' 'col-lg-7'}} col-md-7">
+    <div class="hidden-xs hidden-sm{{ternary (isEqualTo model.page.title 'Join') ' col-lg-8' ' col-lg-7'}} col-md-7">
       <div class="landing-page-image">
         <img src="{{{model.page.field_aia_image}}}" alt="{{model.page.title}}" class="img-responsive" />
       </div>
     </div>
-    <div class="right-view {{if (eq model.page.title 'Join') 'col-lg-4' 'col-lg-5'}} col-md-5">
+    <div class="right-view{{ternary (isEqualTo model.page.title 'Join') ' col-lg-4' ' col-lg-5'}} col-md-5">
       <div id="landingPage-body">
         {{{model.page.body}}}
         <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
       <div class="hidden-xs hidden-sm link-to-button edit-next">
-        {{#if (eq model.page.title 'Join')}}
+        {{#if (isEqualTo model.page.title 'Join')}}
           <a href="select-member-type.html" class="sign_in capture_modal_open">Join us</a>
         {{else}}
           {{#if auth.user}}
