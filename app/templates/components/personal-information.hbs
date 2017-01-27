@@ -1,4 +1,4 @@
-<div class="common-form personal-contact locate-chapter-dues {{if (not editContactInfo) 'hidden' }}" id="personal-contact">
+<div class="common-form personal-contact locate-chapter-dues{{ternary (isEqualTo editContactInfo false) ' hidden' ''}}" id="personal-contact">
   <form action="/" id="personal-contact-form">
     <!--Personal contact information-->
     <div class="all-info separator clearfix">
