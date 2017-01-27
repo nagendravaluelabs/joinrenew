@@ -4,7 +4,7 @@
   <div class="col-sm-9">
     <h1 class="page-title">Personal and contact info</h1>
     <h3 class="verify-subheading">Please verify your information</h3>
-    <ul class="read-block{{ternary (isEqualTo editContactInfo true) ' hidden' ''}}" id="read-only">
+    <ul class="read-block {{if editContactInfo 'hidden'}}" id="read-only">
       {{#each userData as |info|}}
         {{#if (isNotEqual info.title 'address')}}
           <li class="{{info.class}}">
