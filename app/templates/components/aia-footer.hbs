@@ -7,7 +7,7 @@
           {{#each list as |item|}}
             <li>
               {{#if item.route}}
-                <a href="{{item.route}}" target="{{if (isEqualTo item.text 'Privacy') '_blank' '_top'}}">{{{item.text}}}</a>
+                <a href="{{item.route}}" target="{{if (eq item.text 'Privacy') '_blank' '_top'}}">{{{item.text}}}</a>
               {{else}}
                 {{{item.text}}}
               {{/if}}
