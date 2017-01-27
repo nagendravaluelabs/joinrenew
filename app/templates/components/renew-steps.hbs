@@ -19,7 +19,7 @@
         <li class="steps">
           <p class="step-text">
             {{#each steps as |step|}}
-              {{#if (eq step.status 'step-active')}}
+              {{#if (isEqualTo step.status 'step-active')}}
                 {{step.title}}
               {{/if}}
             {{/each}}
