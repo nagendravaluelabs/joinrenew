@@ -580,7 +580,7 @@ export default Ember.Component.extend(rememberScroll, {
                         digits: "Please enter a valid Company phone number",
                         required : function(){
                           if($("#org_company_phone").val() === ""){
-                                return "Company Phone is required";
+                                return "Company phone is required";
                               } else{
                               return " feild is required";
                               }
