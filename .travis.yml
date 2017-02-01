@@ -9,6 +9,7 @@ dist: trusty
 cache:
   directories:
     - node_modules
+    - $HOME/.yarn-cache
 
 before_install:
   - npm config set spin false
@@ -17,8 +18,9 @@ before_install:
 
 
 install:
+  - npm install -g yarn
   - npm install -g bower
-  - npm install
+  - yarn install
   - bower install
 
 before_script:
