@@ -1,0 +1,13 @@
+{
+  "name": "gtm",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-user-activity": "^0.4.0",
+    "ember-cli-htmlbars": "^1.1.0"
+  },
+  "ember-addon": {
+    "after": "ember-user-activity"
+  }
+}
